@@ -2,7 +2,6 @@ package main
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 )
 
@@ -14,7 +13,6 @@ type User struct {
 func main() {
 	http.HandleFunc("POST /login", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		fmt.Println("entre eh")
 
 		var user User
 
