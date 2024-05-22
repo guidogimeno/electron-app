@@ -10,7 +10,7 @@ async function get(path, req) {
 }
 
 async function put(path, req) {
-    return fetch(methods.GET, path, req)
+    return fetch(methods.PUT, path, req)
 }
 
 async function post(path, req) {
@@ -18,19 +18,18 @@ async function post(path, req) {
 }
 
 async function del(path, req) {
-    return fetch(methods.GET, path, req)
+    return fetch(methods.DELETE, path, req)
 }
 
 async function fetch(method, path, req) {
-    const req = {
+    const request = {
         path: path,
         method: method,
-        headers: req.headers,
-        body: req.body
+		...req
     }
 
     console.log("SERVICE: req", req)
-    const result = await window["http"].fetch(req)
+    const result = await window["http"].fetch(request)
     console.log("SERVICE: result", result)
     return result
 }
