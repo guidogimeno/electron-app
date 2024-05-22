@@ -1,11 +1,6 @@
 const { app, BrowserWindow } = require("electron/main")
-const electronReload = require("electron-reload")
 const path = require("node:path")
 require("./fetch.js")
-
-electronReload(__dirname, {
-    electron: path.join(__dirname, "node_modules", ".bin", "electron")
-})
 
 const createWindow = () => {
     const win = new BrowserWindow({

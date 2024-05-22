@@ -1,5 +1,10 @@
 const { contextBridge, ipcRenderer } = require("electron")
 
-contextBridge.exposeInMainWorld("electronAPI", {
-    fetch: () => ipcRenderer.invoke("make-post-request", "http://localhost:3000/logueate"),
+contextBridge.exposeInMainWorld("http", {
+    fetch: async (req) => {
+        console.log("BROWSER: req", req)
+        const result = ipcRenderer.invoke("http", req)
+        console.log("BROWSER: result", result)
+        return result
+    }
 })

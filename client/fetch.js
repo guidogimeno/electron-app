@@ -1,28 +1,26 @@
-const { net, ipcMain} = require("electron")
+const { net, ipcMain } = require("electron")
 
-ipcMain.handle('make-post-request', (callback) => {
-    fetchPost()
+ipcMain.handle("http", async (_, req) => {
+    console.log("MAIN: req", req)
+    const result = await fetch(req)
+    console.log("MAIN: result", result)
+    return result
 })
 
-async function fetchPost() {
-    const request = net.request({
-        method: "POST",
-        url: "http://localhost:3000/logueate",
-        protocol: "http:",
+async function fetch(req) {
+    const res = await net.fetch("http://localhost:3000" + req.path, { 
+        method: req.method,
+        headers: {
+            "Content-Type": "application/json",
+            ...req.headers
+        },
+        body: JSON.stringify(req.body)
     })
-    request.setHeader("Content-Type", "application/json");
-    request.write(JSON.stringify({
-        username: "admin",
-        password: "admin"
-    }), "utf-8")
-    request.end()
 
-    request.on("response", (response) => {
-        console.log(`STATUS: ${response.statusCode}`);
-        console.log(`HEADERS: ${JSON.stringify(response.headers)}`);
-
-        response.on("data", (chunk) => {
-            console.log(`BODY: ${chunk}`)
-        });
-    })
+    if (res.ok) {
+        const body = await res.json()
+        return { status: res.status, body: body }
+    } else {
+        return { status: res.status, body: null }
+    }
 }
