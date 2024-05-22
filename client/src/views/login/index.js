@@ -1,6 +1,6 @@
 const React = require("react")
 const { useState } = require("react")
-const { login } = require("../../services")
+const { login } = require("../../services/login")
 
 const Login = () => {
     const [formData, setFormData] = useState({ username: "", password: "" })

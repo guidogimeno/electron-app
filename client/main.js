@@ -1,6 +1,6 @@
 const { app, BrowserWindow } = require("electron/main")
 const path = require("node:path")
-require("./fetch.js")
+require("./ipc/http")
 
 const createWindow = () => {
     const win = new BrowserWindow({

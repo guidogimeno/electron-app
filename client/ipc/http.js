@@ -1,10 +1,10 @@
 const { net, ipcMain } = require("electron")
 
-ipcMain.handle("http", async (_, req) => {
+ipcMain.handle("fetch", async (_, req) => {
     console.log("MAIN: req", req)
-    const result = await fetch(req)
-    console.log("MAIN: result", result)
-    return result
+    const res = await fetch(req)
+    console.log("MAIN: res", res)
+    return res
 })
 
 async function fetch(req) {
@@ -17,10 +17,15 @@ async function fetch(req) {
         body: JSON.stringify(req.body)
     })
 
-    if (res.ok) {
-        const body = await res.json()
-        return { status: res.status, body: body }
-    } else {
-        return { status: res.status, body: null }
-    }
+    if (!res.ok) {
+    	return { status: res.status, data: null }
+	}
+
+	try {
+		const data = await res.json()
+		return { status: res.status, data: data }
+	} catch (error) {
+		return { status: res.status, data: null }
+	}
+
 }
