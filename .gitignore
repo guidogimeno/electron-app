@@ -4,5 +4,5 @@ build/
 out/
 
 .venv/
-database.db
+.database.db
 __pycache__/
