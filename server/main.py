@@ -24,10 +24,10 @@ def signup():
 
     try:
         db.create_user(data)
+        return jsonify(data), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-    return jsonify(data), 201
 
 if __name__ == "__main__":
     app.run(debug=True)
