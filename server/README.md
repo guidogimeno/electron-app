@@ -20,7 +20,7 @@ python -m venv .venv
 
 Abrirlo con
 ```
-source my_env/bin/activate
+source .venv/bin/activate
 ```
 
 ### Instalar las dependencias
