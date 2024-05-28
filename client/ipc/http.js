@@ -17,10 +17,6 @@ async function fetch(req) {
 		body: JSON.stringify(req.body)
 	})
 
-	if (!res.ok) {
-		return { status: res.status, data: null }
-	}
-
 	try {
 		const data = await res.json()
 		return { status: res.status, data: data }
