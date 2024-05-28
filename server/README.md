@@ -36,6 +36,9 @@ pip install -r requirements.txt
 pip uninstall -r requirements.txt
 ```
 
+## Crear la estructura de la base de datos
+Ejecutar el archivo **migrations/migrate.sh** para crear la base y las tablas.
+
 ## Para levantar el proyecto
 ```
 python3 main.py
