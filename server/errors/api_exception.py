@@ -12,6 +12,10 @@ class BadRequest(ApiException):
     def __init__(self, error):
         super().__init__(400, error)
 
+class Unauthorized(ApiException):
+    def __init__(self, error):
+        super().__init__(401, error)
+
 class InternalServerError(ApiException):
     def __init__(self, error):
         super().__init__(500, error)

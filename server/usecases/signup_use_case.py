@@ -16,7 +16,7 @@ class SignUpUseCase:
             log_error(f"User: {user.username} already exists")
             raise BadRequest(ErrorType.USER_ALREADY_EXISTS)
 
-        self.db.create_user(user)
+        self.db.save_user(user)
 
     def _hash_password(self, password):
         return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
