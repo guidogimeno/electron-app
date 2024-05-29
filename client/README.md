@@ -37,3 +37,7 @@ npm run dev
 ```
 npm run make
 ```
+
+## Arquitectura de Electron
+![image](https://github.com/guidogimeno/electron-app/assets/36056989/0a92ba05-8719-416e-998d-0965a7f80e88)
+
