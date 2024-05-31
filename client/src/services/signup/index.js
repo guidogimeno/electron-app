@@ -1,8 +1,8 @@
 import { post } from "../../services/index.js"
 
-async function login(user) {
+async function signup(user) {
 	try {
-		const res = await post("/login", { body: user })
+		const res = await post("/signup", { body: user })
 		return res
 	} catch (error) {
 		console.log(error)
@@ -10,5 +10,6 @@ async function login(user) {
 }
 
 export {
-	login
+	signup
 }
+

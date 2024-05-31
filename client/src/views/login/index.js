@@ -1,5 +1,6 @@
 import React from "react"
 import { useState } from "react"
+import { Link } from "react-router-dom"
 import { login } from "../../services/login/index.js"
 
 function Login() {
@@ -41,6 +42,9 @@ function Login() {
                 </label>
                 <input type="submit" value="Submit" />
             </form>
+            <button>
+                <Link to="/">SignUp</Link>
+            </button>
         </div>
     )
 }
