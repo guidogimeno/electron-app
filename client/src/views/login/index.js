@@ -2,7 +2,7 @@ import React from "react"
 import { useState } from "react"
 import { login } from "../../services/login/index.js"
 
-const Login = () => {
+function Login() {
     const [formData, setFormData] = useState({ username: "", password: "" })
 
     function handleChange(event) {
