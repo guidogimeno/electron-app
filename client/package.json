@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Tutorial de Electron",
   "main": "main.js",
+  "type": "module",
   "scripts": {
     "dev": "electron . --no-sandbox",
     "start": "electron-forge start",
