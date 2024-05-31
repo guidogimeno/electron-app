@@ -1,6 +1,6 @@
-const React = require("react")
-const { createRoot }  = require("react-dom/client")
-const Login = require("./views/login")
+import React from "react"
+import { createRoot } from "react-dom/client"
+import Login from "./views/login/index.js"
 
 const container = document.getElementById("root")
 const root = createRoot(container)

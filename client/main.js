@@ -1,6 +1,10 @@
-const { app, BrowserWindow } = require("electron/main")
-const path = require("node:path")
-require("./ipc/http")
+import { app, BrowserWindow } from "electron/main"
+import path from "node:path"
+import { fileURLToPath } from "url"
+import "./ipc/http.js"
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -32,3 +36,4 @@ app.on("window-all-closed", () => {
         app.quit()
     }
 })
+

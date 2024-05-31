@@ -1,6 +1,6 @@
-const React = require("react")
-const { useState } = require("react")
-const { login } = require("../../services/login")
+import React from "react"
+import { useState } from "react"
+import { login } from "../../services/login/index.js"
 
 const Login = () => {
     const [formData, setFormData] = useState({ username: "", password: "" })
@@ -45,5 +45,5 @@ const Login = () => {
     )
 }
 
-module.exports = Login
+export default Login
 

@@ -1,8 +1,7 @@
-from operator import is_
 from flask import Flask, request, jsonify
 from functools import wraps
 
-from errors.api_exception import ApiException, BadRequest, Unauthorized
+from errors.api_exception import ApiException, BadRequest
 from errors.error_types import ErrorType
 from usecases.login_use_case import LogInUseCase
 from usecases.signup_use_case import SignUpUseCase
@@ -74,3 +73,4 @@ def _decode_user(data):
         log_error(f"Error parsing user: {str(e)}")
         ex = BadRequest(ErrorType.PARSE_USER_ERROR)
         return jsonify(ex.to_dict()), ex.status
+

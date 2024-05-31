@@ -34,7 +34,7 @@ async function fetch(method, path, req) {
     return result
 }
 
-module.exports = {
+export {
     get,
     post,
     put,

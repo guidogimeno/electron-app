@@ -1,4 +1,4 @@
-const { net, ipcMain } = require("electron")
+import { net, ipcMain } from "electron"
 
 ipcMain.handle("fetch", async (_, req) => {
 	console.log("MAIN: req", req)

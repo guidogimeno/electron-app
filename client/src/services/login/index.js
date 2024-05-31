@@ -1,4 +1,4 @@
-const { post } = require("../../services")
+import { post } from "../../services/index.js"
 
 async function login(user) {
 	try {
@@ -10,6 +10,6 @@ async function login(user) {
 	}
 }
 
-module.exports = {
+export {
 	login
 }
