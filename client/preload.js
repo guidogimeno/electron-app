@@ -7,3 +7,12 @@ contextBridge.exposeInMainWorld("http", {
     }
 })
 
+contextBridge.exposeInMainWorld("store", {
+    getStoreValue: async (key) => {
+        return ipcRenderer.invoke("getStoreValue", key)
+    },
+    setStoreValue: async (key, value) => {
+        return ipcRenderer.invoke("setStoreValue", key, value)
+    }
+})
+

@@ -1,7 +1,7 @@
 import { app, BrowserWindow } from "electron/main"
 import path from "node:path"
 import { fileURLToPath } from "url"
-import "./ipc/http.js"
+import "./ipc/index.js"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
