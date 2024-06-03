@@ -2,6 +2,7 @@ import React from "react"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { login } from "../../services/login/index.js"
+import { setStoreValue } from "../../store/index.js"
 
 function Login() {
     const [formData, setFormData] = useState({ username: "", password: "" })
@@ -13,9 +14,15 @@ function Login() {
         })
     }
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault()
-        login(formData)
+        try {
+            const res = await login(formData)
+            console.log(res)
+            setStoreValue("token", res.token)
+        } catch (error) {
+            console.log(error)
+        }
     } 
 
     return (

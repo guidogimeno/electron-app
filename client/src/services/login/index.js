@@ -6,6 +6,7 @@ async function login(user) {
 		return res
 	} catch (error) {
 		console.log(error)
+        throw error
 	}
 }
 
