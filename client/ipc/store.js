@@ -15,6 +15,6 @@ ipcMain.handle("getStoreValue", (_, key) => {
 })
 
 ipcMain.handle("setStoreValue", (_, key, value) => {
-    return store.set(key, value)
+    store.set(key, value)
 })
 

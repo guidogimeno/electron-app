@@ -3,9 +3,12 @@ import { post } from "../../services/index.js"
 async function signup(user) {
 	try {
 		const res = await post("/signup", { body: user })
-		return res
+        if (res.status !== 201) {
+            throw CustomError(res.message)
+        }
+		return res.data
 	} catch (error) {
-		console.log(error)
+        throw CustomError(error.message)
 	}
 }
 

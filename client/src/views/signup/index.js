@@ -1,10 +1,14 @@
 import React from "react"
 import { useState } from "react"
-import { Link } from "react-router-dom"
 import { signup } from "../../services/signup/index.js"
+import { useNavigate } from "react-router-dom"
+
 
 function SignUp() {
     const [formData, setFormData] = useState({ username: "", password: "" })
+    const [inlineMessage, setInlineMessage] = useState("")
+
+    const navigate = useNavigate()
 
     function handleChange(event) {
         setFormData({
@@ -13,14 +17,20 @@ function SignUp() {
         })
     }
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault()
-        signup(formData)
+        try {
+            await signup(formData)
+            navigate("/login")
+        } catch (error) {
+            setInlineMessage("Failed to sign up. Please try again")
+        }
     } 
 
     return (
         <div>
             <h1>Sign Up</h1>
+            <p className="inline-message">{inlineMessage}</p>
             <form onSubmit={handleSubmit}>
                 <label>
                     <p>Username</p>
@@ -42,9 +52,6 @@ function SignUp() {
                 </label>
                 <input type="submit" value="Submit" />
             </form>
-            <button>
-                <Link to="/login">Login</Link>
-            </button>
         </div>
     )
 }

@@ -1,2 +1,7 @@
+/* Components */
 @import "./components/header/styles.css";
+
+/* Views */
+@import "./views/signup/styles.css";
+@import "./views/login/styles.css";
 

@@ -3,9 +3,13 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { login } from "../../services/login/index.js"
 import { setStoreValue } from "../../store/index.js"
+import { useNavigate } from "react-router-dom"
 
 function Login() {
     const [formData, setFormData] = useState({ username: "", password: "" })
+    const [inlineMessage, setInlineMessage] = useState("")
+
+    const navigate = useNavigate()
 
     function handleChange(event) {
         setFormData({
@@ -18,16 +22,17 @@ function Login() {
         event.preventDefault()
         try {
             const res = await login(formData)
-            console.log(res)
-            setStoreValue("token", res.token)
+            await setStoreValue("token", res.token)
+            navigate("/")
         } catch (error) {
-            console.log(error)
+            setInlineMessage("Failed to login. Please try again")
         }
     } 
 
     return (
         <div>
             <h1>Login</h1>
+            <p className="inline-message">{inlineMessage}</p>
             <form onSubmit={handleSubmit}>
                 <label>
                     <p>Username</p>
@@ -49,8 +54,10 @@ function Login() {
                 </label>
                 <input type="submit" value="Submit" />
             </form>
+
+            <p>Don't have an account?</p>
             <button>
-                <Link to="/">SignUp</Link>
+                <Link to="/signup">SignUp</Link>
             </button>
         </div>
     )
