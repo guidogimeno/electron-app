@@ -2,10 +2,11 @@ import React from "react"
 import { useState } from "react"
 import { signup } from "../../services/signup/index.js"
 import { useNavigate } from "react-router-dom"
+import Page from "../../components/page/index.js"
 
 
 function SignUp() {
-    const [formData, setFormData] = useState({ username: "", password: "" })
+    const [formData, setFormData] = useState({ username: "", password: "", email: "" })
     const [inlineMessage, setInlineMessage] = useState("")
 
     const navigate = useNavigate()
@@ -25,35 +26,51 @@ function SignUp() {
         } catch (error) {
             setInlineMessage("Failed to sign up. Please try again")
         }
-    } 
+    }
 
     return (
-        <div>
-            <h1>Sign Up</h1>
-            <p className="inline-message">{inlineMessage}</p>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    <p>Username</p>
+        <Page>
+            <div className="signup-container">
+                <h1 className="signup-title">Sign Up</h1>
+                {inlineMessage && <p className="inline-message">{inlineMessage}</p>}
+                <form className="signup-form" onSubmit={handleSubmit}>
+                    <label htmlFor="username">Username</label>
                     <input
                         type="text"
+                        id="username"
                         name="username"
-                        value={formData.name}
+                        value={formData.username}
                         onChange={handleChange}
+                        className="signup-input"
+                        required
                     />
-                </label>
-                <label>
-                    <p>Password</p>
+                    <label htmlFor="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        className="signup-input"
+                        required
+                    />
+                    <label htmlFor="password">Password</label>
                     <input
                         type="password"
+                        id="password"
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
+                        className="signup-input"
+                        required
                     />
-                </label>
-                <input type="submit" value="Submit" />
-            </form>
-        </div>
-    )
+                    <button type="submit" className="signup-button">
+                        Sign Up
+                    </button>
+                </form>
+            </div>
+        </Page>
+    );
 }
 
 export default SignUp

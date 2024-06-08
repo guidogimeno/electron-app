@@ -14,7 +14,8 @@ class MySqlite:
         with sqlite3.connect(self.database_file) as conn:
             cursor = conn.cursor()
             cursor.execute(
-                "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT)")
+                "CREATE TABLE IF NOT EXISTS users (username TEXT, password TEXT)"
+            )
             conn.commit()
 
     def get_user(self, username):
@@ -22,7 +23,9 @@ class MySqlite:
             with sqlite3.connect(self.database_file) as conn:
                 cursor = conn.cursor()
                 cursor.execute(
-                    "SELECT id, username, password FROM users WHERE username = ?", (username,))
+                    "SELECT id, username, password FROM users WHERE username = ?", (
+                        username,)
+                )
                 data = cursor.fetchone()
             if data:
                 return User(*data)

@@ -1,0 +1,20 @@
+/* Components */
+@import "../components/header/styles.css";
+
+/* Views */
+@import "../views/signup/styles.css";
+@import "../views/login/styles.css";
+
+/* Palette */
+@import "./palette.css";
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    /* Light gray background */
+}

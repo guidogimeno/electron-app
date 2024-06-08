@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import { login } from "../../services/login/index.js"
 import { setStoreValue } from "../../store/index.js"
 import { useNavigate } from "react-router-dom"
+import Page from "../../components/page/index.js"
 
 function Login() {
     const [formData, setFormData] = useState({ username: "", password: "" })
@@ -27,39 +28,50 @@ function Login() {
         } catch (error) {
             setInlineMessage("Failed to login. Please try again")
         }
-    } 
+    }
 
     return (
-        <div>
-            <h1>Login</h1>
-            <p className="inline-message">{inlineMessage}</p>
-            <form onSubmit={handleSubmit}>
-                <label>
-                    <p>Username</p>
+        <Page>
+            <div className="login-container">
+                <h1 classNam="login-title">Login</h1>
+                <p className="inline-message">{inlineMessage}</p>
+                <form className="login-form" onSubmit={handleSubmit}>
+                    <label htmlFor="username">Username</label>
                     <input
-                        type="text"
+                        id="username"
                         name="username"
+                        type="text"
                         value={formData.name}
                         onChange={handleChange}
+                        className="login-input"
+                        required
                     />
-                </label>
-                <label>
-                    <p>Password</p>
-                    <input
-                        type="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                    />
-                </label>
-                <input type="submit" value="Submit" />
-            </form>
-
-            <p>Don't have an account?</p>
-            <button>
-                <Link to="/signup">SignUp</Link>
-            </button>
-        </div>
+                    <label>
+                        <p>Password</p>
+                        <input
+                            id="password"
+                            name="password"
+                            type="text"
+                            value={formData.password}
+                            onChange={handleChange}
+                            className="login-input"
+                            required
+                        />
+                    </label>
+                    <button type="submit" className="login-button">
+                        Login
+                    </button>
+                </form>
+                <div className="login-links">
+                    <Link to="/" className="login-link">
+                        Forgot password?
+                    </Link>
+                    <Link to="/signup" className="login-link">
+                        SignUp
+                    </Link>
+                </div>
+            </div>
+        </Page>
     )
 }
 
