@@ -11,5 +11,3 @@ if __name__ == "__main__":
     server.run("localhost", 3000)
 
     db.close()
-    
-
