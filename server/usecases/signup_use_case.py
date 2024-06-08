@@ -1,8 +1,9 @@
 import bcrypt
 
-from errors.api_exception import BadRequest 
+from errors.api_exception import BadRequest
 from errors.error_types import ErrorType
 from logger.logger import log_error
+
 
 class SignUpUseCase:
     def __init__(self, db):
@@ -20,4 +21,3 @@ class SignUpUseCase:
 
     def _hash_password(self, password):
         return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
-        

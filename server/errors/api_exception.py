@@ -6,15 +6,18 @@ class ApiException(Exception):
         super().__init__(self.message)
 
     def to_dict(self):
-        return { "code": self.code, "message": self.message }
+        return {"code": self.code, "message": self.message}
+
 
 class BadRequest(ApiException):
     def __init__(self, error):
         super().__init__(400, error)
 
+
 class Unauthorized(ApiException):
     def __init__(self, error):
         super().__init__(401, error)
+
 
 class InternalServerError(ApiException):
     def __init__(self, error):

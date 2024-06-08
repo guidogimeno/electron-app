@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class ErrorType(Enum):
     USER_NOT_FOUND = (1, "User not found")
     USER_ALREADY_EXISTS = (2, "User already exists")

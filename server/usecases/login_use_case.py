@@ -6,6 +6,7 @@ from errors.error_types import ErrorType
 from logger.logger import log_error
 from datetime import datetime, timezone
 
+
 class LogInUseCase:
     def __init__(self, db):
         self.db = db
@@ -31,12 +32,11 @@ class LogInUseCase:
     def validate_token(self, token):
         user_id = token[:token.index(".")]
         session = self.db.get_user_session(user_id)
-        if (session is None or 
-            session.token != token or 
-            session.expires_at < self._nowutc()):
+        if (session is None or
+            session.token != token or
+                session.expires_at < self._nowutc()):
             log_error(f"Invalid token: {token} for user {user_id}")
             raise BadRequest(ErrorType.UNAUTHORIZED)
-
 
     def _create_token(self, user_id):
         timestamp = self._nowutc().strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -55,4 +55,3 @@ class LogInUseCase:
             second=now.second
         )
         return dt
-
