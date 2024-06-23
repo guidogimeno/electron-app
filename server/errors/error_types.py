@@ -7,5 +7,5 @@ class ErrorType(Enum):
     INVALID_USER_CREDENTIALS = (3, "Invalid user credentials")
     DB_ERROR = (4, "Error executing query to the db")
     PARSE_USER_ERROR = (5, "Error parsing user")
-    MISSING_AUTH_TOKEN = (7, "Missing auth token")
     UNAUTHORIZED = (6, "Unauthorized")
+    MISSING_AUTH_TOKEN = (7, "Missing auth token")

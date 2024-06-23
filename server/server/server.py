@@ -67,7 +67,6 @@ class Server:
 def _decode_user(data):
     try:
         return User(
-            id=0,
             username=data["username"],
             password=data["password"]
         )

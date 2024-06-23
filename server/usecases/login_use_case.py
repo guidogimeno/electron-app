@@ -1,10 +1,10 @@
 import bcrypt
-import secrets
+import jwt
 
 from errors.api_exception import BadRequest
 from errors.error_types import ErrorType
 from logger.logger import log_error
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 
 class LogInUseCase:
@@ -22,26 +22,36 @@ class LogInUseCase:
             log_error(f"Invalid password for user: {user.username}")
             raise BadRequest(ErrorType.INVALID_USER_CREDENTIALS)
 
-        token = self._create_token(db_user.id)
-        self.db.save_token(db_user.id, token)
-        return token
+        return self._create_token(db_user.username)
 
     def _check_password(self, password, hashed_password):
         return bcrypt.checkpw(password.encode("utf-8"), hashed_password)
 
     def validate_token(self, token):
-        user_id = token[:token.index(".")]
-        session = self.db.get_user_session(user_id)
-        if (session is None or
-            session.token != token or
-                session.expires_at < self._nowutc()):
-            log_error(f"Invalid token: {token} for user {user_id}")
+        try:
+            jwt.decode(
+                token,
+                "secret",
+                algorithms=["HS256"],
+                options={"require": ["exp"]}
+            )
+        except jwt.ExpiredSignatureError:
+            log_error("Token expired")
+            raise BadRequest(ErrorType.UNAUTHORIZED)
+        except Exception as e:
+            log_error(f"Invalid token, error: {str(e)}")
             raise BadRequest(ErrorType.UNAUTHORIZED)
 
-    def _create_token(self, user_id):
-        timestamp = self._nowutc().strftime("%Y-%m-%dT%H:%M:%SZ")
-        random_part = secrets.token_urlsafe(32)
-        token = f"{user_id}.{timestamp}.{random_part}"
+    def _create_token(self, username):
+        # TODO: usar env variable para secreto y para algoritmo
+        token = jwt.encode(
+            {
+                "username": username,
+                "exp": datetime.now(timezone.utc) + timedelta(hours=12)
+            },
+            "secret",
+            algorithm="HS256"
+        )
         return token
 
     def _nowutc(self):

@@ -3,15 +3,6 @@ CREATE TABLE IF NOT EXISTS users (
     username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    is_active BOOLEAN DEFAULT TRUE,
-    expires_at DATETIME DEFAULT NULL
-);
-
-CREATE TABLE IF NOT EXISTS user_sessions (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    token TEXT UNIQUE NOT NULL,
-    user_id INTEGER UNIQUE NOT NULL,
-    expires_at DATETIME DEFAULT (DATETIME('now', '+12 hours')),
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    is_active BOOLEAN DEFAULT TRUE
 );
 
