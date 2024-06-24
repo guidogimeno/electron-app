@@ -3,6 +3,8 @@
 
 /* Components */
 @import "../components/header/styles.css";
+@import "../components/page/styles.css";
+@import "../components/sidebar/styles.css";
 
 /* Views */
 @import "../views/signup/styles.css";
@@ -24,6 +26,12 @@ body {
     font-family: sans-serif;
     min-height: 100dvh;
     background-color: var(--light-gray);
+}
+
+#root {
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
 }
 
 input,
@@ -65,4 +73,3 @@ svg {
         transition: none;
     }
 }
-

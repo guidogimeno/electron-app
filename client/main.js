@@ -2,6 +2,7 @@ import { app, BrowserWindow } from "electron/main"
 import path from "node:path"
 import { fileURLToPath } from "url"
 import "./ipc/index.js"
+import { net } from "electron"
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -17,7 +18,7 @@ const createWindow = () => {
             preload: path.join(__dirname, "preload.js")
         }
     })
-
+    
     win.loadFile("index.html")
 }
 

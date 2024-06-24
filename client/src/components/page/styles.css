@@ -1,0 +1,16 @@
+main {
+    display: flex;
+    flex-direction: row;
+
+    height: 100%;
+    padding-top: 1rem;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+    width: 100%;
+}
+

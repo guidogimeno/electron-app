@@ -4,11 +4,11 @@ async function signup(user) {
 	try {
 		const res = await post("/signup", { body: user })
         if (res.status !== 201) {
-            throw CustomError(res.message)
+            throw new CustomError(res.message)
         }
 		return res.data
 	} catch (error) {
-        throw CustomError(error.message)
+        throw new CustomError(error.message)
 	}
 }
 

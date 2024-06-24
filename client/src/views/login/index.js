@@ -31,44 +31,44 @@ function Login() {
     }
 
     return (
-        <Page>
+        <Page hiddeSidebar >
             <div className="login-container">
-                <h1 classNam="login-title">Login</h1>
-                <p className="inline-message">{inlineMessage}</p>
-                <form className="login-form" onSubmit={handleSubmit}>
-                    <label htmlFor="username">Username</label>
-                    <input
-                        id="username"
-                        name="username"
-                        type="text"
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="login-input"
-                        required
-                    />
-                    <label>
-                        <p>Password</p>
+                <div className="login-content">
+                    <h1 className="login-title">Login</h1>
+                    <p className="inline-message">{inlineMessage}</p>
+                    <form className="login-form" onSubmit={handleSubmit}>
+                        <label htmlFor="username">Username</label>
+                        <input
+                            id="username"
+                            name="username"
+                            type="text"
+                            value={formData.name}
+                            onChange={handleChange}
+                            className="login-input"
+                            required
+                        />
+                        <label htmlFor="password">Password</label>
                         <input
                             id="password"
                             name="password"
-                            type="text"
+                            type="password"
                             value={formData.password}
                             onChange={handleChange}
                             className="login-input"
                             required
                         />
-                    </label>
-                    <button type="submit" className="login-button">
-                        Login
-                    </button>
-                </form>
-                <div className="login-links">
-                    <Link to="/" className="login-link">
-                        Forgot password?
-                    </Link>
-                    <Link to="/signup" className="login-link">
-                        SignUp
-                    </Link>
+                        <button type="submit" className="login-button">
+                            Login
+                        </button>
+                    </form>
+                    <div className="login-links">
+                        <Link to="/" className="login-link">
+                            Forgot password?
+                        </Link>
+                        <Link to="/signup" className="login-link">
+                            SignUp
+                        </Link>
+                    </div>
                 </div>
             </div>
         </Page>

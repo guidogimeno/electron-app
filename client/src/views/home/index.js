@@ -5,9 +5,13 @@ import { Link } from "react-router-dom"
 function Home() {
     return (
         <Page>
-            <div>Home</div>
-            <Link to="/login" >Login</Link>
-            <Link to="/signup" >Signup</Link>
+            {isLoading ? <span> loading ... </span> :
+                <>
+                    <div>Home</div>
+                    <Link to="/login" >Login</Link>
+                    <Link to="/signup" >Signup</Link>
+                </>
+            }
         </Page>
     )
 }

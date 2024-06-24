@@ -29,45 +29,47 @@ function SignUp() {
     }
 
     return (
-        <Page>
+        <Page hiddeSidebar >
             <div className="signup-container">
-                <h1 className="signup-title">Sign Up</h1>
-                {inlineMessage && <p className="inline-message">{inlineMessage}</p>}
-                <form className="signup-form" onSubmit={handleSubmit}>
-                    <label htmlFor="username">Username</label>
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        value={formData.username}
-                        onChange={handleChange}
-                        className="signup-input"
-                        required
-                    />
-                    <label htmlFor="email">Email</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="signup-input"
-                        required
-                    />
-                    <label htmlFor="password">Password</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        className="signup-input"
-                        required
-                    />
-                    <button type="submit" className="signup-button">
-                        Sign Up
-                    </button>
-                </form>
+                <div className="signup-content">
+                    <h1 className="signup-title">Sign Up</h1>
+                    {inlineMessage && <p className="inline-message">{inlineMessage}</p>}
+                    <form className="signup-form" onSubmit={handleSubmit}>
+                        <label htmlFor="username">Username</label>
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            value={formData.username}
+                            onChange={handleChange}
+                            className="signup-input"
+                            required
+                        />
+                        <label htmlFor="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            className="signup-input"
+                            required
+                        />
+                        <label htmlFor="password">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            className="signup-input"
+                            required
+                        />
+                        <button type="submit" className="signup-button">
+                            Sign Up
+                        </button>
+                    </form>
+                </div>
             </div>
         </Page>
     );
