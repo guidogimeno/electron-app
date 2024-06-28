@@ -3,6 +3,8 @@ import Page from "../../components/page/index.js"
 import { Link } from "react-router-dom"
 
 function Home() {
+    const isLoading = false;
+
     return (
         <Page>
             {isLoading ? <span> loading ... </span> :
