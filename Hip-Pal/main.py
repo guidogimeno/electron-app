@@ -3,13 +3,16 @@ import pydicom
 import numpy as np
 import cv2
 import matplotlib.pyplot as plt
-import DeteccionCabezaFemur.cabeza_femur as cabeza_femur
+import AngulosSectorAcetabular.DeteccionCabezaFemur.cabeza_femur as cabeza_femur
 import AngulosSectorAcetabular.angulos_Sector_Actabular as angulos_Sector_Actabular
 import ProcesamientoDicom.procesar as procesar
 
 
 
 def main():
+    #Definimos el tipo de angulo a calcular
+    #angulo="SectorAcetabular" ##Puede ser SectorAcetabular o CentroBorde
+
     #Declara variables necesarias para encontrar los maximos circulos de cada femur.
     max_radio_derecho = 0
     imagen_centroide_derecho = None
@@ -27,25 +30,26 @@ def main():
 
 
     #Levanta la carpeta con los Dicoms.
-    carpeta_dicom = r".\Tomografias\Tomografias3"
+    carpeta_dicom = r".\Tomografias\Tomografias2"
     archivos_dicom = [os.path.join(carpeta_dicom, archivo) for archivo in os.listdir(carpeta_dicom) if archivo.endswith('.dcm')]
-
 
     #Itera por cada archivo .dcm
     for ruta_archivo_dicom in archivos_dicom:
         try:
             #Toma el corte y detecta ambas cabezas de femur.
-            cabeza_femur_derecho,cabeza_femur_izquierdo, imagen, nombre_archivo, imagen_hueso_limpia, imagen_hueso_desenfocada = procesar.procesar_archivo(ruta_archivo_dicom)
+            corte_original, nombre_archivo, corte_sin_ruido, corte_limpio_desenfocado = procesar.procesar_archivo(ruta_archivo_dicom)
             
+            cabeza_femur_derecho,cabeza_femur_izquierdo=cabeza_femur.detectarPosibleCabeza(corte_limpio_desenfocado)
+
             #Logica para guardar el mayor circulo izquierdo.
             if cabeza_femur_izquierdo is not None:
                 x,y,r=cabeza_femur_izquierdo
                 if r > max_radio_izquierdo:
                     max_radio_izquierdo=r
-                    imagen_centroide_izquierdo = imagen
+                    imagen_centroide_izquierdo = corte_original
                     nombre_imagen_centroide_izquierdo = nombre_archivo
-                    imagen_original_centroide_izquierdo = imagen
-                    corte_HU200_centroide_izquierdo = imagen_hueso_limpia
+                    imagen_original_centroide_izquierdo = corte_original
+                    corte_HU200_centroide_izquierdo = corte_sin_ruido
                     #corte_derecho_desenfocado = imagen_hueso_desenfocada
                     circulos_izquierdo_max_radio = x,y,r
                     #circulos_derecho_max_radio = x + imagen_hueso_desenfocada.shape[1] // 2,y,r
@@ -55,16 +59,16 @@ def main():
 
                 x,y,r=cabeza_femur_derecho
                 #Correccion dado que cortamos la imagen en 2 para detectar los circulos.
-                x,y,r = x + imagen_hueso_desenfocada.shape[1] // 2, y, r
+                x,y,r = x + corte_limpio_desenfocado.shape[1] // 2, y, r
 
                 #Si el radio del circulo actual es mayor al historico me lo guardo.
                 if r > max_radio_derecho:
                     max_radio_derecho = r
-                    imagen_centroide_derecho = imagen
+                    imagen_centroide_derecho = corte_original
                     nombre_imagen_centroide_derecho = nombre_archivo
-                    imagen_original_centroide_derecho = imagen
-                    corte_HU200_centroide_derecho = imagen_hueso_limpia
-                    corte_derecho_desenfocado = imagen_hueso_desenfocada
+                    imagen_original_centroide_derecho = corte_original
+                    corte_HU200_centroide_derecho = corte_sin_ruido
+                    corte_derecho_desenfocado = corte_limpio_desenfocado
                     circulos_derecho_max_radio = x,y,r
 
         except Exception as e:
