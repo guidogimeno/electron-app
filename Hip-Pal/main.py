@@ -9,7 +9,7 @@ import ProcesamientoDicom.procesar as procesar
 
 def main():
     #Definimos el tipo de angulo a calcular
-    #angulo="SectorAcetabular" ##Puede ser SectorAcetabular o CentroBorde
+    tipo_angulo="SectorAcetabular" ##Puede ser SectorAcetabular o CentroBorde
 
     #Declara variables necesarias para encontrar los maximos circulos de cada femur.
     max_radio_derecho = 0
@@ -18,13 +18,13 @@ def main():
     imagen_original_centroide_derecho = None
     corte_HU200_centroide_derecho = None
     circulos_derecho_max_radio = None
-    imagen_aasa_izquierdo = None
+
 
     circulos_izquierdo_max_radio=None
     max_radio_izquierdo=0
     imagen_centroide_izquierdo= None
     nombre_imagen_centroide_izquierdo=None
-    imagen_aasa_derecho=None
+
 
 
     #Levanta la carpeta con los Dicoms.
@@ -72,50 +72,10 @@ def main():
         except Exception as e:
             print(f"Error procesando {ruta_archivo_dicom}: {e}")
 
-    ### Aca calcula los Angulos Sector Acetabular ####
-    if imagen_centroide_izquierdo is not None:
-        imagen_aasa_izquierdo=angulos_Sector_Actabular.detectar(imagen_centroide_izquierdo,nombre_imagen_centroide_izquierdo,corte_HU200_centroide_izquierdo,circulos_izquierdo_max_radio,circulos_derecho_max_radio,"izquierdo",max_radio_izquierdo)
-    else:
-        print("No se encontro la cabeza del femur izquierdo en ningún archivo.")
+    if(tipo_angulo=="SectorAcetabular"):
+        angulos_Sector_Actabular.calcular_Angulos_Sector_Acetabular(imagen_centroide_izquierdo,nombre_imagen_centroide_izquierdo,corte_HU200_centroide_izquierdo,imagen_centroide_derecho,imagen_original_centroide_derecho,nombre_imagen_centroide_derecho,corte_HU200_centroide_derecho,circulos_izquierdo_max_radio,circulos_derecho_max_radio,max_radio_izquierdo,max_radio_derecho)
 
-
-    if imagen_centroide_derecho is not None:
-            imagen_aasa_derecho=angulos_Sector_Actabular.detectar(imagen_original_centroide_derecho,nombre_imagen_centroide_derecho,corte_HU200_centroide_derecho,circulos_derecho_max_radio,circulos_izquierdo_max_radio,"derecho",max_radio_derecho)
-
-    else:
-        print("No se encontro la cabeza del femur derecho en ningún archivo.")
-
-
-    #Fusiono ambas mitades para componer una sola imagen con ambos centroides.
-    imagen_izquierda= imagen_aasa_izquierdo.shape[1] // 2
-    mitad_imagen_izquierda = imagen_aasa_izquierdo[:,:imagen_izquierda]
-    imagen_derecha= imagen_aasa_derecho.shape[1] // 2
-    mitad_imagen_derecha = imagen_aasa_derecho[:,imagen_derecha:]
-    imagen_con_centroides = np.hstack((mitad_imagen_izquierda, mitad_imagen_derecha))
-
-
-
-    ##Muestro imagenes.
-    plt.figure(figsize=(20, 5))
-
-    plt.subplot(1, 4, 1)
-    plt.title(nombre_imagen_centroide_izquierdo)
-    plt.imshow(imagen_aasa_izquierdo, cmap='gray')
-    plt.axis('off')
-
-    plt.subplot(1, 4, 2)
-    plt.title('Angulos Sector Acetabular')
-    plt.imshow(imagen_con_centroides, cmap='gray')
-    plt.axis('off')
-
-
-
-    plt.subplot(1, 4, 3)
-    plt.title(nombre_imagen_centroide_derecho)
-    plt.imshow(imagen_aasa_derecho, cmap='gray')
-    plt.axis('off')
-
-    plt.show()
+    
 
 
 if __name__ == "__main__":

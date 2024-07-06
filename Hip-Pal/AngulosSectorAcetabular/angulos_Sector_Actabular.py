@@ -1,10 +1,11 @@
 import cv2
+from matplotlib import pyplot as plt
 import numpy as np
 import AngulosSectorAcetabular.aasa as aasa
 import AngulosSectorAcetabular.pasa as pasa
 
 
-def detectar(imagen,nombre_imagen,corte_HU,circulo1,circulo2,lado,radio):
+def detectar(imagen,corte_HU,circulo1,circulo2,lado,radio):
             imagen_8bit = cv2.convertScaleAbs(corte_HU)
             imagen_hueso = cv2.cvtColor(imagen_8bit, cv2.COLOR_GRAY2BGR)
             x,y,r = circulo1
@@ -57,4 +58,54 @@ def detectar(imagen,nombre_imagen,corte_HU,circulo1,circulo2,lado,radio):
             print("Angulo PASA: " + str(abs(angulo_pasa)) + "°")
             print("Angulo HASA: " + str(angulo_hasa) + "°")
             print("----------------------------------------------------------------")
+
+
+
+
+
+
             return imagen_resultado
+
+
+def calcular_Angulos_Sector_Acetabular(imagen_centroide_izquierdo,nombre_imagen_centroide_izquierdo,corte_HU200_centroide_izquierdo,imagen_centroide_derecho,imagen_original_centroide_derecho,nombre_imagen_centroide_derecho,corte_HU200_centroide_derecho,circulos_izquierdo_max_radio,circulos_derecho_max_radio,max_radio_izquierdo,max_radio_derecho):
+          ### Aca calcula los Angulos Sector Acetabular ####
+    if imagen_centroide_izquierdo is not None:
+        imagen_aasa_izquierdo=detectar(imagen_centroide_izquierdo,corte_HU200_centroide_izquierdo,circulos_izquierdo_max_radio,circulos_derecho_max_radio,"izquierdo",max_radio_izquierdo)
+    else:
+        print("No se encontro la cabeza del femur izquierdo en ningún archivo.")
+
+
+    if imagen_centroide_derecho is not None:
+            imagen_aasa_derecho=detectar(imagen_original_centroide_derecho,corte_HU200_centroide_derecho,circulos_derecho_max_radio,circulos_izquierdo_max_radio,"derecho",max_radio_derecho)
+
+    else:
+        print("No se encontro la cabeza del femur derecho en ningún archivo.")
+
+
+    #Fusiono ambas mitades para componer una sola imagen con ambos centroides.
+    imagen_izquierda= imagen_aasa_izquierdo.shape[1] // 2
+    mitad_imagen_izquierda = imagen_aasa_izquierdo[:,:imagen_izquierda]
+    imagen_derecha= imagen_aasa_derecho.shape[1] // 2
+    mitad_imagen_derecha = imagen_aasa_derecho[:,imagen_derecha:]
+    imagen_con_centroides = np.hstack((mitad_imagen_izquierda, mitad_imagen_derecha))
+
+
+    ##Muestro imagenes.
+    plt.figure(figsize=(20, 5))
+
+    plt.subplot(1, 4, 1)
+    plt.title(nombre_imagen_centroide_izquierdo)
+    plt.imshow(imagen_aasa_izquierdo, cmap='gray')
+    plt.axis('off')
+
+    plt.subplot(1, 4, 2)
+    plt.title('Angulos Sector Acetabular')
+    plt.imshow(imagen_con_centroides, cmap='gray')
+    plt.axis('off')
+
+    plt.subplot(1, 4, 3)
+    plt.title(nombre_imagen_centroide_derecho)
+    plt.imshow(imagen_aasa_derecho, cmap='gray')
+    plt.axis('off')
+
+    plt.show()
