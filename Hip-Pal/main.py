@@ -1,9 +1,7 @@
 import os
-import pydicom
 import numpy as np
-import cv2
 import matplotlib.pyplot as plt
-import AngulosSectorAcetabular.DeteccionCabezaFemur.cabeza_femur as cabeza_femur
+import DeteccionCabezaFemur.cabeza_femur as cabeza_femur
 import AngulosSectorAcetabular.angulos_Sector_Actabular as angulos_Sector_Actabular
 import ProcesamientoDicom.procesar as procesar
 
@@ -30,7 +28,7 @@ def main():
 
 
     #Levanta la carpeta con los Dicoms.
-    carpeta_dicom = r".\Tomografias\Tomografias2"
+    carpeta_dicom = r".\Tomografias\Tomografias1"
     archivos_dicom = [os.path.join(carpeta_dicom, archivo) for archivo in os.listdir(carpeta_dicom) if archivo.endswith('.dcm')]
 
     #Itera por cada archivo .dcm
