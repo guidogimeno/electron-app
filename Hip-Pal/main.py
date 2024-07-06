@@ -5,47 +5,7 @@ import cv2
 import matplotlib.pyplot as plt
 import DeteccionCabezaFemur.cabeza_femur as cabeza_femur
 import AngulosSectorAcetabular.angulos_Sector_Actabular as angulos_Sector_Actabular
-
-
-#Aca es donde se aplican los filtros a cada corte. Blur, HU>200, etc....
-def procesar_archivo_dicom(ruta_archivo_dicom):
-
-    #Procesa un archivo DICOM y devuelve información relevante sobre los círculos encontrados.
-    corte = pydicom.dcmread(ruta_archivo_dicom)
-    imagen = corte.pixel_array
-    nombre_archivo = os.path.basename(corte.filename)
-
-    rescale_intercept = corte.RescaleIntercept if 'RescaleIntercept' in corte else 0
-    rescale_slope = corte.RescaleSlope if 'RescaleSlope' in corte else 1
-    imagen_hu = imagen * rescale_slope + rescale_intercept
-
-    #Con esto limpio la imagen en base a unidades Hounsfield.
-    umbral_hueso = 220  # Umbral HU para hueso
-    imagen_hueso = np.where(imagen_hu >= umbral_hueso, 255, 0).astype(np.uint8)
-
-    #Con esto borro ruido de puntos  blancos.
-    num_labels, labels, stats, centroids = cv2.connectedComponentsWithStats(imagen_hueso, connectivity=8)
-    min_size = 500
-    imagen_hueso_limpia = np.zeros_like(imagen_hueso)
-    for i in range(1, num_labels):
-        if stats[i, cv2.CC_STAT_AREA] >= min_size:
-            imagen_hueso_limpia[labels == i] = 255
-
-    #Aplico desenfoques necesarios para detectar circulos
-    #imagen_hueso_desenfocada = cv2.medianBlur(imagen_hueso_limpia, 1)
-    #imagen_hueso_desenfocada = cv2.GaussianBlur(imagen_hueso_limpia, (5,5),0)
-    imagen_hueso_desenfocada = cv2.bilateralFilter(imagen_hueso_limpia,10,8000,2)
-    
-    #Parto la imagen en 2 para evaluar femur derecho e izquierdo por separado.
-    mitad_imagen= imagen_hueso_desenfocada.shape[1] // 2
-    mitad_imagen_derecha = imagen_hueso_desenfocada[:, mitad_imagen:]
-    mitad_imagen_izquierda = imagen_hueso_desenfocada[:,:mitad_imagen]
-    
-    #Detecto cada femur en la imagen por separado.
-    cabeza_femur_derecho =cabeza_femur.identificar(mitad_imagen_derecha)
-    cabeza_femur_izquierdo =cabeza_femur.identificar(mitad_imagen_izquierda)
-
-    return cabeza_femur_derecho,cabeza_femur_izquierdo, imagen, nombre_archivo, imagen_hueso_limpia, imagen_hueso_desenfocada
+import ProcesamientoDicom.procesar as procesar
 
 
 
@@ -67,7 +27,7 @@ def main():
 
 
     #Levanta la carpeta con los Dicoms.
-    carpeta_dicom = r".\Tomografias\Tomografias2"
+    carpeta_dicom = r".\Tomografias\Tomografias3"
     archivos_dicom = [os.path.join(carpeta_dicom, archivo) for archivo in os.listdir(carpeta_dicom) if archivo.endswith('.dcm')]
 
 
@@ -75,7 +35,7 @@ def main():
     for ruta_archivo_dicom in archivos_dicom:
         try:
             #Toma el corte y detecta ambas cabezas de femur.
-            cabeza_femur_derecho,cabeza_femur_izquierdo, imagen, nombre_archivo, imagen_hueso_limpia, imagen_hueso_desenfocada = procesar_archivo_dicom(ruta_archivo_dicom)
+            cabeza_femur_derecho,cabeza_femur_izquierdo, imagen, nombre_archivo, imagen_hueso_limpia, imagen_hueso_desenfocada = procesar.procesar_archivo(ruta_archivo_dicom)
             
             #Logica para guardar el mayor circulo izquierdo.
             if cabeza_femur_izquierdo is not None:
