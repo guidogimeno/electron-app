@@ -3,48 +3,48 @@ from matplotlib import pyplot as plt
 import numpy as np
 import AngulosSectorAcetabular.aasa as aasa
 import AngulosSectorAcetabular.pasa as pasa
+import ProcesamientoDicom.ruido as ruido
+
+def calcular(imagen,corte_HU,circulo1,circulo2,lado,radio):
 
 
-def detectar(imagen,corte_HU,circulo1,circulo2,lado,radio):
-            imagen_8bit = cv2.convertScaleAbs(corte_HU)
-            imagen_hueso = cv2.cvtColor(imagen_8bit, cv2.COLOR_GRAY2BGR)
             x,y,r = circulo1
             x_izq,y_izq,_ = circulo2
 
-            # Crear una máscara del mismo tamaño que la imagen y llenarla de ceros (negro)
-            mask = np.zeros(imagen_hueso.shape[:2], dtype=np.uint8)
-            
-            # Dibujar un círculo blanco (valor 255) en la máscara en la posición del círculo detectado
-            cv2.circle(mask, (x, y), r, 255, -1)
-            
-            # Invertir la máscara para que el círculo sea negro y el resto sea blanco
-            mask_inv = cv2.bitwise_not(mask)
-            
-            # Aplicar la máscara invertida a la imagen original
-            imagen_resultado = cv2.bitwise_and(imagen_hueso, imagen_hueso, mask=mask_inv)
-            
+            #La convierto a blanco y negro y limpio puntos aislados.
+            imagen_hueso_blanco_negro=ruido.limpiar(corte_HU)
+
+                ##Si cambio a TRUE puedo ver como queda la imagen desenfocada.
+            if(True):
+                plt.figure(figsize=(20, 5))
+
+                plt.subplot(1, 4, 2)
+                plt.title('Angulos Sector Acetabular')
+                plt.imshow(imagen_hueso_blanco_negro, cmap='gray')
+                plt.axis('off')
+                plt.show()
 
 
             # Dibuja la nueva línea con el ángulo deseado (por ejemplo, 90 grados)
-            x_final_aasa,y_final_aasa,angulo_aasa = aasa.detectar(imagen_resultado, x, y, x_izq, y_izq,radio,lado)
-            x_final_pasa,y_final_pasa,angulo_pasa = pasa.detectar(imagen_resultado, x, y, x_izq, y_izq,radio,lado)
+            x_final_aasa,y_final_aasa,angulo_aasa = aasa.detectar(imagen_hueso_blanco_negro, x, y, x_izq, y_izq,radio,lado)
+            x_final_pasa,y_final_pasa,angulo_pasa = pasa.detectar(imagen_hueso_blanco_negro, x, y, x_izq, y_izq,radio,lado)
             angulo_hasa = abs(angulo_aasa)+abs(angulo_pasa)
 
-            #imagen_original_centroide= cv2.convertScaleAbs(imagen_resultado)
-            #imagen_original_centroide = cv2.cvtColor(imagen_original_centroide, cv2.COLOR_GRAY2BGR)
+            imagen_8bit = cv2.convertScaleAbs(corte_HU)
+            imagen_hueso = cv2.cvtColor(imagen_8bit, cv2.COLOR_GRAY2BGR)
 
             #Dibuja circulo del femur.
-            cv2.circle(imagen_resultado, (x, y), r, (255,0, 0), 1)
+            cv2.circle(imagen_hueso, (x, y), r, (255,0, 0), 1)
             #Dibuja Centroide
-            cv2.circle(imagen_resultado, (x, y), 2, (255,0, 0), -1)
+            cv2.circle(imagen_hueso, (x, y), 2, (255,0, 0), -1)
             #Dibuja centroide opuesto
-            cv2.circle(imagen_resultado, (x_izq, y_izq), 2, (255, 0, 0), -1)
+            cv2.circle(imagen_hueso, (x_izq, y_izq), 2, (255, 0, 0), -1)
             # Dibuja la línea horizontal
-            cv2.line(imagen_resultado, (x, y), (x_izq, y_izq), (255, 0, 0), 2)  
+            cv2.line(imagen_hueso, (x, y), (x_izq, y_izq), (255, 0, 0), 2)  
              # Dibujar la nueva línea que hace contacto con acetabulo superior (aasa)
-            cv2.line(imagen_resultado, (x, y), (x_final_aasa, y_final_aasa), (0, 255, 0), 1)  # Línea verde
+            cv2.line(imagen_hueso, (x, y), (x_final_aasa, y_final_aasa), (0, 255, 0), 1)  # Línea verde
              # Dibujar la nueva línea que hace contacto con acetabulo inferior (pasa)
-            cv2.line(imagen_resultado, (x, y), (x_final_pasa, y_final_pasa), (0, 255,0), 1)  # Línea verde
+            cv2.line(imagen_hueso, (x, y), (x_final_pasa, y_final_pasa), (0, 255,0), 1)  # Línea verde
 
             print("")   
             print("Se imprimen los datos del lado: "+lado)
@@ -60,23 +60,19 @@ def detectar(imagen,corte_HU,circulo1,circulo2,lado,radio):
             print("----------------------------------------------------------------")
 
 
-
-
-
-
-            return imagen_resultado
+            return imagen_hueso
 
 
 def calcular_Angulos_Sector_Acetabular(imagen_centroide_izquierdo,nombre_imagen_centroide_izquierdo,corte_HU200_centroide_izquierdo,imagen_centroide_derecho,imagen_original_centroide_derecho,nombre_imagen_centroide_derecho,corte_HU200_centroide_derecho,circulos_izquierdo_max_radio,circulos_derecho_max_radio,max_radio_izquierdo,max_radio_derecho):
           ### Aca calcula los Angulos Sector Acetabular ####
     if imagen_centroide_izquierdo is not None:
-        imagen_aasa_izquierdo=detectar(imagen_centroide_izquierdo,corte_HU200_centroide_izquierdo,circulos_izquierdo_max_radio,circulos_derecho_max_radio,"izquierdo",max_radio_izquierdo)
+        imagen_aasa_izquierdo=calcular(imagen_centroide_izquierdo,corte_HU200_centroide_izquierdo,circulos_izquierdo_max_radio,circulos_derecho_max_radio,"izquierdo",max_radio_izquierdo)
     else:
         print("No se encontro la cabeza del femur izquierdo en ningún archivo.")
 
 
     if imagen_centroide_derecho is not None:
-            imagen_aasa_derecho=detectar(imagen_original_centroide_derecho,corte_HU200_centroide_derecho,circulos_derecho_max_radio,circulos_izquierdo_max_radio,"derecho",max_radio_derecho)
+            imagen_aasa_derecho=calcular(imagen_original_centroide_derecho,corte_HU200_centroide_derecho,circulos_derecho_max_radio,circulos_izquierdo_max_radio,"derecho",max_radio_derecho)
 
     else:
         print("No se encontro la cabeza del femur derecho en ningún archivo.")

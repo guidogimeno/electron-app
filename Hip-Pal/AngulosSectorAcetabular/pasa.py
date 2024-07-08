@@ -35,7 +35,7 @@ def detectar(imagen_HU, x1_centroide, y1_centroide, x2_centroide_opuesto, y2_cen
 
         # Detección de píxel blanco
         hay_pixel_blanco = False
-        for t in np.linspace((radio+2) / longitud_linea, 1, max(abs(x_final - x1_centroide), abs(y_final - y1_centroide))):
+        for t in np.linspace((radio+5) / longitud_linea, 1, max(abs(x_final - x1_centroide), abs(y_final - y1_centroide))):
             x = int(x1_centroide + t * (x_final - x1_centroide))
             y = int(y1_centroide + t * (y_final - y1_centroide))
             if imagen2[y, x] != 0:

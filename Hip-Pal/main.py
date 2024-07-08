@@ -24,7 +24,7 @@ def main():
     max_radio_izquierdo=0
     imagen_centroide_izquierdo= None
     nombre_imagen_centroide_izquierdo=None
-
+    contadorDetecciones=0
 
 
     #Levanta la carpeta con los Dicoms.
@@ -54,7 +54,7 @@ def main():
 
             #Lógica para guardar el mayor circulo derecho.
             if cabeza_femur_derecho is not None:
-
+                contadorDetecciones+=1
                 x,y,r=cabeza_femur_derecho
                 #Correccion dado que cortamos la imagen en 2 para detectar los circulos.
                 x,y,r = x + corte_limpio_desenfocado.shape[1] // 2, y, r
@@ -74,8 +74,8 @@ def main():
 
     if(tipo_angulo=="SectorAcetabular"):
         angulos_Sector_Actabular.calcular_Angulos_Sector_Acetabular(imagen_centroide_izquierdo,nombre_imagen_centroide_izquierdo,corte_HU200_centroide_izquierdo,imagen_centroide_derecho,imagen_original_centroide_derecho,nombre_imagen_centroide_derecho,corte_HU200_centroide_derecho,circulos_izquierdo_max_radio,circulos_derecho_max_radio,max_radio_izquierdo,max_radio_derecho)
+        print("Total de cortes donde Detecto Femur Derecho: " + str(contadorDetecciones))
 
-    
 
 
 if __name__ == "__main__":
