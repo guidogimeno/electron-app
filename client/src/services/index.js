@@ -1,3 +1,5 @@
+import { getStoreValue } from "../store/index.js"
+
 const methods = {
     POST: "POST",
     GET: "GET",
@@ -22,9 +24,17 @@ async function del(path, req) {
 }
 
 async function fetch(method, path, req) {
+    let token = ""
+    try {
+        token = await getStoreValue("token")
+    } catch (error) {
+        console.log("SERVICE: failed fetching token from store", error)
+    }
+
     const request = {
         path: path,
         method: method,
+        headers: {"x-auth-token": token},
 		...req
     }
 
