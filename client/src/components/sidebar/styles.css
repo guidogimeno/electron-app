@@ -5,4 +5,28 @@
     height: 100%;
     gap: 10px;
     padding: 0 30px;
+    min-width: 180px;
+    width: 25%;
+    max-width: 250px;
+}
+
+.sidebar-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    color: var(--black);
+    background-color: transparent;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+
+    &.selected {
+        color: var(--light-gray);
+        background-color: var(--blue);
+    }
+}
+
+.sidebar-button:hover {
+    color: var(--light-gray);
+    background-color: var(--blue);
 }

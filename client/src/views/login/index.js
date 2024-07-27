@@ -31,7 +31,7 @@ function Login() {
     }
 
     return (
-        <Page hiddeSidebar >
+        <Page hiddeSidebar>
             <div className="login-container">
                 <div className="login-content">
                     <h1 className="login-title">Login</h1>

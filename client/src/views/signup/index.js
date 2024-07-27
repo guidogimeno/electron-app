@@ -4,7 +4,6 @@ import { signup } from "../../services/signup/index.js"
 import { useNavigate } from "react-router-dom"
 import Page from "../../components/page/index.js"
 
-
 function SignUp() {
     const [formData, setFormData] = useState({ username: "", password: "", email: "" })
     const [inlineMessage, setInlineMessage] = useState("")
