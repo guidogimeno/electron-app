@@ -19,14 +19,15 @@
     text-align: left;
     text-decoration: none;
     cursor: pointer;
-
-    &.selected {
-        color: var(--light-gray);
-        background-color: var(--blue);
-    }
 }
 
 .sidebar-button:hover {
     color: var(--light-gray);
-    background-color: var(--blue);
+    background-color: var(--medium-gray);
+}
+
+/* Abajo del hover para que no pise el estilo */
+.sidebar-button.selected {
+    color: var(--light-gray);
+    background-color: var(--dark-blue);
 }
