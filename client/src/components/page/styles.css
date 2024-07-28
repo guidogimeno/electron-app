@@ -3,7 +3,6 @@ main {
     flex-direction: row;
 
     height: 100%;
-    padding-top: 1rem;
 }
 
 .content {
@@ -12,5 +11,5 @@ main {
 
     height: 100%;
     width: 100%;
+    padding: 30px 60px;
 }
-

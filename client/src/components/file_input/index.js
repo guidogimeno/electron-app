@@ -30,27 +30,29 @@ const FileInput = ({ onFileDrop }) => {
     }
 
     return (
-        <div
-            className="dropzone"
-            ref={dropRef}
-            onDragOver={handleDragOver}
-            onDragLeave={handleDragLeave}
-            onDrop={handleDrop}
-        >
-            <input
-                type="file"
-                style={{ display: "none" }}
-                onChange={(e) => onFileDrop(e.target.files)}
-                ref={fileInputRef}
-            />
-            <button className="select-file" onClick={triggerFileInput}>
-                {isDragging ?
-                    <p className="p1">Drop files to upload them</p> :
-                    <div>
-                        <p className="p1">Drop files here</p>
-                        <p className="p2">or just click here</p>
-                    </div>}
-            </button>
+        <div className="dropzone-container">
+            <div
+                className="dropzone"
+                ref={dropRef}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
+            >
+                <input
+                    type="file"
+                    style={{ display: "none" }}
+                    onChange={(e) => onFileDrop(e.target.files)}
+                    ref={fileInputRef}
+                />
+                <button className="select-file" onClick={triggerFileInput}>
+                    {isDragging ?
+                        <p className="p1">Drop files to upload them</p> :
+                        <div>
+                            <p className="p1">Drop files here</p>
+                            <p className="p2">or just click here</p>
+                        </div>}
+                </button>
+            </div>
         </div>
     )
 }

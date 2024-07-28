@@ -1,16 +1,23 @@
-.dropzone {
-  width: 100%;
-  height: 100%;
-  border: 2px dashed var(--medium-gray);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+.dropzone-container {
+    width: 100%;
+    height: 100%;
+    padding: 60px;
+}
 
-  &.dragging {
-    border-color: var(--medium-gray);
-  }
+.dropzone {
+    width: 100%;
+    height: 100%;
+    border: 2px dashed var(--medium-gray);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &.dragging {
+        border-color: var(--medium-gray);
+    }
 }
 
 .select-file {
