@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link, useLocation } from 'react-router-dom'
 
+// TODO: Le faltan los iconos
 const links = [
-    { label: "+New", to: "/analyze" },
+    { label: "+ New", to: "/analyze" },
     { label: "Home", to: "/" },
     { label: "Analysis", to: "/analysis" },
     { label: "Shared with me", to: "/shared" },
