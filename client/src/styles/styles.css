@@ -6,6 +6,8 @@
 @import "../components/page/styles.css";
 @import "../components/sidebar/styles.css";
 @import "../components/file_input/styles.css";
+@import "../components/spinner/styles.css";
+@import "../components/notification/sytles.css";
 
 /* Views */
 @import "../views/signup/styles.css";
