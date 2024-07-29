@@ -16,3 +16,9 @@ contextBridge.exposeInMainWorld("store", {
     }
 })
 
+contextBridge.exposeInMainWorld("fs", {
+    writeFile: (key) => {
+        return ipcRenderer.invoke("writeFile", key)
+    }
+})
+

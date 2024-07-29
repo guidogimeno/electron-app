@@ -6,7 +6,7 @@ import "./ipc/index.js"
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const createWindow = () => {
+function createWindow() {
     const win = new BrowserWindow({
         width: 800,
         height: 600,

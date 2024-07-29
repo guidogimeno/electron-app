@@ -15,6 +15,8 @@ function NewAnalysis() {
         console.log("file path", files[0].path)
 
         // TODO: Validar tamanio y tipo de archivo
+        const foo = window["fs"].writeFile("aver si llega esto")
+        console.log("es una promesa o que es esto?", foo)
     }
 
     return (
