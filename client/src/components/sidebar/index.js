@@ -1,14 +1,12 @@
 import React from "react"
 import { Link, useLocation } from "react-router-dom"
 import CirclePlusSvg from "../../assets/circle_plus_svg.js"
-import HomeSvg from "../../assets/home_svg.js"
 import TrashSvg from "../../assets/trash_svg.js"
 import FolderSvg from "../../assets/folder_svg.js"
 import UsersSvg from "../../assets/users_svg.js"
 
 const links = [
-    { label: "Home", to: "/", icon: <HomeSvg /> },
-    { label: "My Hips", to: "/analysis", icon: <FolderSvg /> },
+    { label: "My Hips", to: "/my_hips", icon: <FolderSvg /> },
     { label: "Shared with me", to: "/shared", icon: <UsersSvg /> },
     { label: "Trash", to: "/trash", icon: <TrashSvg /> }
 ]

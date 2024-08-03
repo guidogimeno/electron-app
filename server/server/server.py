@@ -8,6 +8,8 @@ from usecases.signup_use_case import SignUpUseCase
 from domain.user import User
 from logger.logger import log_error
 
+AUTH_HEADER = "x-auth-token"
+
 
 class Server:
     def __init__(self, db):
@@ -20,7 +22,7 @@ class Server:
     def is_authorized(self, func):
         @wraps(func)
         def decorated(*args, **kwargs):
-            token = request.headers.get("x-auth-token")
+            token = request.headers.get(AUTH_HEADER)
             if token is None:
                 ex = BadRequest(ErrorType.MISSING_AUTH_TOKEN)
                 return jsonify(ex.to_dict()), ex.status
@@ -55,10 +57,15 @@ class Server:
             except ApiException as e:
                 return jsonify(e.to_dict()), e.status
 
-        @self.app.route("/resource", methods=["GET"])
+        @self.app.route("/user", methods=["GET"])
         @self.is_authorized
-        def resource():
-            return jsonify({"message": "Hello, World!"}), 200
+        def get_user():
+            token = request.headers.get(AUTH_HEADER)
+            try:
+                user = self.login_use_case.get_user(token)
+                return jsonify(user.to_dict()), 200
+            except ApiException as e:
+                return jsonify(e.to_dict()), e.status
 
     def run(self, host, port):
         self.app.run(debug=True, host=host, port=port)

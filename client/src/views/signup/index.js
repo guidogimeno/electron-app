@@ -1,5 +1,6 @@
 import React from "react"
 import { useState } from "react"
+import { Link } from "react-router-dom"
 import { signup } from "../../services/signup/index.js"
 import { useNavigate } from "react-router-dom"
 import Page from "../../components/page/index.js"
@@ -68,6 +69,11 @@ function SignUp() {
                             Sign Up
                         </button>
                     </form>
+                    <div className="signup-links">
+                        <Link to="/login" className="login-link">
+                            Log In
+                        </Link>
+                    </div>
                 </div>
             </div>
         </Page>

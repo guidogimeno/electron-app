@@ -42,7 +42,7 @@
         background-color: var(--yellow);
     }
 
-    &.danger {
+    &.failure {
         background-color: var(--red);
     }
 

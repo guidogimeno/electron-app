@@ -3,8 +3,9 @@ import jwt
 
 from errors.api_exception import BadRequest
 from errors.error_types import ErrorType
-from logger.logger import log_error
+from logger.logger import log_error, log_info
 from datetime import datetime, timezone, timedelta
+from domain.user import User
 
 
 class LogInUseCase:
@@ -27,20 +28,28 @@ class LogInUseCase:
     def _check_password(self, password, hashed_password):
         return bcrypt.checkpw(password.encode("utf-8"), hashed_password)
 
+    def get_user(self, token):
+        decoded_user = self._decode_token(token)
+        username = decoded_user.get("username")
+        return User(username, "*****")
+
     def validate_token(self, token):
         try:
-            jwt.decode(
-                token,
-                "secret",
-                algorithms=["HS256"],
-                options={"require": ["exp"]}
-            )
+            self._decode_token(token)
         except jwt.ExpiredSignatureError:
             log_error("Token expired")
             raise BadRequest(ErrorType.UNAUTHORIZED)
         except Exception as e:
             log_error(f"Invalid token, error: {str(e)}")
             raise BadRequest(ErrorType.UNAUTHORIZED)
+
+    def _decode_token(self, token):
+        return jwt.decode(
+            token,
+            "secret",
+            algorithms=["HS256"],
+            options={"require": ["exp"]}
+        )
 
     def _create_token(self, username):
         # TODO: usar env variable para secreto y para algoritmo

@@ -12,7 +12,7 @@
 /* Views */
 @import "../views/signup/styles.css";
 @import "../views/login/styles.css";
-@import "../views/new_analysis/styles.css";
+@import "../views/my_hips/index.js";
 
 /* CSS RESET */
 * {

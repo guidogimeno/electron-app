@@ -24,7 +24,7 @@ function Login() {
         try {
             const res = await login(formData)
             await setStoreValue("token", res.token)
-            navigate("/")
+            navigate("/my_hips")
         } catch (error) {
             setInlineMessage("Failed to login. Please try again")
         }
@@ -62,7 +62,7 @@ function Login() {
                         </button>
                     </form>
                     <div className="login-links">
-                        <Link to="/" className="login-link">
+                        <Link to="/my_hips" className="login-link">
                             Forgot password?
                         </Link>
                         <Link to="/signup" className="login-link">

@@ -23,7 +23,26 @@ function useNotifications() {
         })
     }
 
-    return [notifications, showNotification]
+    function showSuccess(message) {
+        showNotification(message, "success")
+    }
+
+    function showFailure(message) {
+        console.log("a ver esto de aca")
+        showNotification(message, "failure")
+    }
+
+
+    function showInfo(message) {
+        showNotification(message, "info")
+    }
+
+
+    function showWarning(message) {
+        showNotification(message, "warning")
+    }
+
+    return { notifications, showSuccess, showFailure, showInfo, showWarning }
 }
 
 const GlobalContext = createContext()

@@ -12,7 +12,7 @@ const data = [
     { id: 4, name: "Niqui puto", description: "esta es la super descripcion", date: "2024-07-01" },
 ]
 
-function Home() {
+function MyHips() {
     const context = useContext(GlobalContext)
 
     const [tableData, setTableData] = useState(data)
@@ -52,5 +52,5 @@ function Home() {
     )
 }
 
-export default Home
+export default MyHips
 

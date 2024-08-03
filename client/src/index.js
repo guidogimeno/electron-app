@@ -1,29 +1,44 @@
-import React from "react"
+import React, { useContext, useState } from "react"
 import { HashRouter, Routes, Route } from "react-router-dom"
 import { createRoot } from "react-dom/client"
-import Home from "./views/home/index.js"
 import Login from "./views/login/index.js"
+import Landing from "./views/landing/index.js"
 import SignUp from "./views/signup/index.js"
 import NewAnalysis from "./views/new_analysis/index.js"
-import Analysis from "./views/analysis/index.js"
 import { GlobalContext, useNotifications } from "./context/index.js"
+import MyHips from "./views/my_hips/index.js"
 
 const container = document.getElementById("root")
 const root = createRoot(container)
 
-
 function App() {
-    const [notifications, showNotification] = useNotifications()
+    const [user, setUser] = useState({ name: "" })
+    const {
+        notifications,
+        showSuccess,
+        showFailure,
+        showInfo,
+        showWarning
+    } = useNotifications()
 
     return (
-        <GlobalContext.Provider value={{ notifications, showNotification }}>
+        <GlobalContext.Provider value={{
+            notifications,
+            showSuccess,
+            showFailure,
+            showInfo,
+            showWarning,
+
+            user,
+            setUser
+        }}>
             <HashRouter>
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={<Landing />} />
+                    <Route path="/my_hips" element={<MyHips />} />
                     <Route path="/analyze" element={<NewAnalysis />} />
-                    <Route path="/analysis" element={<Analysis />} />
-                    <Route path="/shared" element={<Home />} />
-                    <Route path="/trash" element={<Home />} />
+                    <Route path="/shared" element={<MyHips />} />
+                    <Route path="/trash" element={<MyHips />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
                 </Routes>
