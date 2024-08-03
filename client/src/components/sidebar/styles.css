@@ -3,12 +3,38 @@
     flex-direction: column;
 
     height: 100%;
-    gap: 10px;
     padding: 30px 30px;
     min-width: 180px;
     width: 25%;
     max-width: 250px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.primary-button {
+    height: 4.5rem;
+    max-width: 6rem;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: var(--white);
+    font-weight: bold;
+    background-color: var(--dark-gray);
+    text-align: left;
+    align-content: center;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.primary-button:hover {
+    background-color: var(--medium-gray);
+}
+
+.sidebar-secondary-buttons {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+    padding-top: 24px;
 }
 
 .sidebar-button {

@@ -12,6 +12,7 @@
 /* Views */
 @import "../views/signup/styles.css";
 @import "../views/login/styles.css";
+@import "../views/new_analysis/styles.css";
 
 /* CSS RESET */
 * {
@@ -76,3 +77,4 @@ svg {
         transition: none;
     }
 }
+

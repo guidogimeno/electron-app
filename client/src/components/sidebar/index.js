@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom'
 
 // TODO: Le faltan los iconos
 const links = [
-    { label: "+ New", to: "/analyze" },
     { label: "Home", to: "/" },
     { label: "Analysis", to: "/analysis" },
     { label: "Shared with me", to: "/shared" },
@@ -15,17 +14,22 @@ function Sidebar() {
 
     return (
         <div className="sidebar">
-            {
-                links.map(button => {
-                    return <Link
-                        key={button.label}
-                        to={button.to}
-                        className={`sidebar-button ${pathname === button.to ? "selected" : ""} `}
-                    >
-                        {button.label}
-                    </Link>
-                })
-            }
+            <Link to="/analyze" className="primary-button">
+                + New
+            </Link>
+            <div className="sidebar-secondary-buttons">
+                {
+                    links.map(button => {
+                        return <Link
+                            key={button.label}
+                            to={button.to}
+                            className={`sidebar-button ${pathname === button.to ? "selected" : ""} `}
+                        >
+                            {button.label}
+                        </Link>
+                    })
+                }
+            </div>
         </div >
     )
 }
