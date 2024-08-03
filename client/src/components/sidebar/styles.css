@@ -11,8 +11,11 @@
 }
 
 .primary-button {
-    height: 4.5rem;
-    max-width: 6rem;
+    display: flex;
+    gap: 6px;
+    align-items: center;
+
+    height: 4rem;
     border: none;
     padding: 10px 20px;
     border-radius: 20px;
@@ -38,6 +41,10 @@
 }
 
 .sidebar-button {
+    display: flex;
+    gap: 6px;
+    align-items: flex-end;
+
     border: none;
     padding: 10px 20px;
     border-radius: 20px;
