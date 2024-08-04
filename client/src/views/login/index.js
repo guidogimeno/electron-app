@@ -13,10 +13,10 @@ function Login() {
     const navigate = useNavigate()
 
     function handleChange(event) {
-        setFormData({
-            ...formData,
+        setFormData(prevData => ({
+            ...prevData,
             [event.target.name]: event.target.value
-        })
+        }))
     }
 
     async function handleSubmit(event) {
