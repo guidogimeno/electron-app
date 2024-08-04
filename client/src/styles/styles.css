@@ -3,6 +3,7 @@
 
 /* Components */
 @import "../components/header/styles.css";
+@import "../components/confirmation_modal/styles.css";
 @import "../components/page/styles.css";
 @import "../components/sidebar/styles.css";
 @import "../components/file_input/styles.css";

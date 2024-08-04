@@ -35,10 +35,6 @@ function MyHips() {
         setTableData(filteredItems)
     }
 
-    function handleClick() {
-        context.showNotification("hello world", "warning")
-    }
-
     return (
         <Page>
             {false ? <Spinner /> :

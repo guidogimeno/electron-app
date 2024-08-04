@@ -3,6 +3,7 @@ import Page from "../../components/page/index.js"
 import { getUser } from "../../services/login/index.js"
 import { useNavigate } from "react-router-dom"
 import { GlobalContext } from "../../context/index.js"
+import Spinner from "../../components/spinner/index.js"
 
 function Landing() {
     const navigate = useNavigate()
@@ -24,7 +25,7 @@ function Landing() {
 
     return (
         <Page hiddeSidebar>
-
+            <Spinner/>
         </Page>
     )
 }

@@ -1,10 +1,11 @@
 import React, { useContext } from "react"
 import { GlobalContext } from "../../context/index.js"
+import { createPortal } from "react-dom"
 
 function Notification() {
     const context = useContext(GlobalContext)
 
-    return (
+    return createPortal(
         <div className="notification-container">
             {
                 context.notifications.map(notification => {
@@ -16,7 +17,8 @@ function Notification() {
                     )
                 })
             }
-        </div>
+        </div>,
+        document.getElementById("portal")
     )
 }
 
