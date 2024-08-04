@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react"
 import Page from "../../components/page/index.js"
+import { useNavigate } from "react-router-dom"
 import FileInput from "../../components/file_input/index.js"
 import { saveReport } from "../../fs/reports/index.js"
 import { generateId } from "../../utils/index.js"
@@ -13,6 +14,8 @@ const STATE = {
 
 function NewAnalysis() {
     const context = useContext(GlobalContext)
+    const navigate = useNavigate()
+
     const [formData, setFormData] = useState({ foo: "", bar: "" })
     const [report, setReport] = useState(null)
     const [state, setState] = useState(STATE.start)
@@ -105,8 +108,7 @@ function NewAnalysis() {
             return
         }
 
-        // mandarlo a ver el reporte
-        // navigateTo("/hy-hips/:id")
+        navigate(`/my_hips/${report.id}`)
     }
 
     return (

@@ -7,6 +7,7 @@ import SignUp from "./views/signup/index.js"
 import NewAnalysis from "./views/new_analysis/index.js"
 import { GlobalContext, useNotifications } from "./context/index.js"
 import MyHips from "./views/my_hips/index.js"
+import Hip from "./views/hip/index.js"
 
 const container = document.getElementById("root")
 const root = createRoot(container)
@@ -36,6 +37,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Landing />} />
                     <Route path="/my_hips" element={<MyHips />} />
+                    <Route path="/my_hips/:id" element={<Hip />} />
                     <Route path="/analyze" element={<NewAnalysis />} />
                     <Route path="/shared" element={<MyHips />} />
                     <Route path="/trash" element={<MyHips />} />
