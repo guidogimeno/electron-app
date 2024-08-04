@@ -9,6 +9,7 @@ import { getReports, removeReport } from "../../fs/reports/index.js"
 function MyHips() {
     const context = useContext(GlobalContext)
 
+    const [reports, setReports] = useState([])
     const [tableData, setTableData] = useState([])
 
     useEffect(() => {
@@ -18,6 +19,7 @@ function MyHips() {
     async function fetchReports() {
         try {
             const reports = await getReports()
+            setReports(reports)
             setTableData(reports)
         } catch (error) {
             context.showFailure(error.message)
@@ -26,11 +28,11 @@ function MyHips() {
 
     function handleSearch(value) {
         if (!value) {
-            setTableData(data)
+            setTableData(reports)
             return
         }
 
-        const filteredItems = data.filter((item) => {
+        const filteredItems = reports.filter((item) => {
             return Object.values(item).some((field) => {
                 if (typeof field !== "string") {
                     return false
@@ -45,6 +47,7 @@ function MyHips() {
     async function handleDelete(id) {
         try {
             await removeReport(id)
+            setReports(prevData => prevData.filter(report => report.id != id))
             setTableData(prevData => prevData.filter(report => report.id != id))
         } catch (error) {
             context.showFailure(error.message)
