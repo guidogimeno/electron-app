@@ -1,10 +1,11 @@
 import React from "react"
+import SearchSvg from "../../assets/search_svg.js"
 
 function Search(props) {
 
     return (
         <div className="search-container">
-            <span>icono de lupa</span>
+            <SearchSvg />
             <input
                 type="text"
                 placeholder="Search in Hip Pal"
