@@ -2,23 +2,44 @@ import { app, ipcMain } from "electron"
 import fs from "fs"
 import path from "node:path"
 
-// La informacion se guarda en ~/.config/[package.json -> name]
+const REPORTS_PATH = path.join(app.getPath("userData"), "reports")
 
-ipcMain.handle("mkdir", (_, reportName) => {
-    const reportDir = path.join(app.getPath("userData"), "reports", reportName)
-    console.log("Estoy por guardar este reporte aca", reportDir)
-    fs.mkdirSync(reportDir, { recursive: true })
+ipcMain.handle("mkdir", (_, dirName) => {
+    const dirPath = path.join(REPORTS_PATH, dirName)
+    fs.mkdirSync(dirPath, { recursive: true })
 })
 
 ipcMain.handle("writeFile", (_, filePath, file) => {
-    console.log("file name and content", filePath, file)
-    const fileDir = path.join(app.getPath("userData"), "reports", filePath)
+    const fileDir = path.join(REPORTS_PATH, filePath)
     fs.writeFileSync(fileDir, file, (err) => {
         if (err) {
-            console.log("Failed to save file")
+            console.log("Failed to save file", err)
             throw err
         }
-        console.log("File created successfully!")
     })
 })
+
+ipcMain.handle("readFiles", async (_, filePath) => {
+    const reportPaths = await fs.promises.readdir(REPORTS_PATH);
+
+    const promises = []
+    for (const reportPath of reportPaths) {
+        promises.push(readFile(`${reportPath}/${filePath}`))
+    }
+
+    return Promise.all(promises);
+})
+
+ipcMain.handle("readFile", async (_, filePath) => {
+    return readFile(filePath)
+})
+
+ipcMain.handle("deleteDir", async (_, dirPath) => {
+    const dir = path.join(REPORTS_PATH, dirPath)
+    fs.rmSync(dir, { recursive: true, force: true })
+})
+
+function readFile(filePath) {
+    return fs.promises.readFile(`${REPORTS_PATH}/${filePath}`, "utf8")
+}
 

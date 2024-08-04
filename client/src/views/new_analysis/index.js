@@ -6,6 +6,7 @@ import { saveReport } from "../../fs/reports/index.js"
 import { generateId } from "../../utils/index.js"
 import { GlobalContext } from "../../context/index.js"
 import CustomError from "../../services/errors/index.js"
+import Spinner from "../../components/spinner/index.js"
 
 const STATE = {
     start: 0,
@@ -111,42 +112,42 @@ function NewAnalysis() {
         navigate(`/my_hips/${report.id}`)
     }
 
+    if (state === STATE.start) {
+        return (
+            <Page>
+                <FileInput onFileDrop={handleFiles} />
+            </Page>
+        )
+    }
+
     return (
         <Page>
-            {state === STATE.in_progress ?
-                <div>
-                    <button onClick={handleCancel}>Cancel</button>
-                    <form>
-                        <label>Foo</label>
-                        <input
-                            id="foo"
-                            name="foo"
-                            type="text"
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                        />
-                        <label>Bar</label>
-                        <input
-                            id="bar"
-                            name="bar"
-                            type="text"
-                            value={formData.name}
-                            onChange={handleChange}
-                            required
-                        />
-                        {!isAnalyzing ?
-                            <button type="submit" onClick={handleSubmit}>
-                                Submit and go to report
-                            </button>
-                            : null}
-                    </form>
-                </div>
-                :
-                <>
-                    <FileInput onFileDrop={handleFiles} />
-                </>
-            }
+            <form>
+                <label>Foo</label>
+                <input
+                    id="foo"
+                    name="foo"
+                    type="text"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                />
+                <label>Bar</label>
+                <input
+                    id="bar"
+                    name="bar"
+                    type="text"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                />
+                <button onClick={handleCancel}>Cancel</button>
+                {isAnalyzing ? <Spinner /> :
+                    <button type="submit" onClick={handleSubmit}>
+                        Submit and go to report
+                    </button>
+                }
+            </form>
         </Page >
     )
 }

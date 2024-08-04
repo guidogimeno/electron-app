@@ -1,21 +1,28 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import Page from "../../components/page/index.js"
 import Spinner from "../../components/spinner/index.js"
 import { GlobalContext } from "../../context/index.js"
 import Table from "../../components/table/index.js"
 import Search from "../../components/search/index.js"
-
-const data = [
-    { id: 1, name: "Hola", description: "esta es la super descripcion", date: "2024-07-01" },
-    { id: 2, name: "Saraza", description: "esta es la super descripcion", date: "2024-07-01" },
-    { id: 3, name: "Mundo", description: "esta es la super descripcion", date: "2024-07-01" },
-    { id: 4, name: "Niqui puto", description: "esta es la super descripcion", date: "2024-07-01" },
-]
+import { getReports, removeReport } from "../../fs/reports/index.js"
 
 function MyHips() {
     const context = useContext(GlobalContext)
 
-    const [tableData, setTableData] = useState(data)
+    const [tableData, setTableData] = useState([])
+
+    useEffect(() => {
+        fetchReports()
+    }, [])
+
+    async function fetchReports() {
+        try {
+            const reports = await getReports()
+            setTableData(reports)
+        } catch (error) {
+            context.showFailure(error.message)
+        }
+    }
 
     function handleSearch(value) {
         if (!value) {
@@ -35,13 +42,22 @@ function MyHips() {
         setTableData(filteredItems)
     }
 
+    async function handleDelete(id) {
+        try {
+            await removeReport(id)
+            setTableData(prevData => prevData.filter(report => report.id != id))
+        } catch (error) {
+            context.showFailure(error.message)
+        }
+    }
+
     return (
         <Page>
             {false ? <Spinner /> :
                 <>
                     <h1>Welcome to HipPal!</h1>
                     <Search onChange={handleSearch} />
-                    <Table data={tableData} />
+                    <Table data={tableData} handleDelete={handleDelete} />
                 </>
             }
         </Page>

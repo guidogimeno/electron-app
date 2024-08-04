@@ -20,8 +20,17 @@ contextBridge.exposeInMainWorld("fs", {
     writeFile: (filePath, file) => {
         return ipcRenderer.invoke("writeFile", filePath, file)
     },
-    mkdir: (reportName) => {
-        return ipcRenderer.invoke("mkdir", reportName)
+    mkdir: (dirName) => {
+        return ipcRenderer.invoke("mkdir", dirName)
+    },
+    readFile: (filePath) => {
+        return ipcRenderer.invoke("readFile", filePath)
+    },
+    readFiles: (filePath) => {
+        return ipcRenderer.invoke("readFiles", filePath)
+    },
+    deleteDir: (dirPath) => {
+        return ipcRenderer.invoke("deleteDir", dirPath)
     }
 })
 

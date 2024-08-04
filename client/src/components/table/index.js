@@ -7,6 +7,7 @@ function Table(props) {
     const data = props.data
 
     const [open, setOpen] = useState(false)
+    const [candidate, setCandidate] = useState(null)
 
     return (
         <>
@@ -22,18 +23,29 @@ function Table(props) {
                     {data.map(item => (
                         <tr key={item.id}>
                             <td className="name-td">
-                                <Link to="/analyze">
+                                <Link to={`/my_hips/${item.id}`}>
                                     {item.name}
                                 </Link>
                             </td>
                             <td>{item.description}</td>
                             <td>{item.date}</td>
-                            <td className="trash-td"><TrashSvg onClick={() => setOpen(true)} /></td>
+                            <td className="trash-td">
+                                <TrashSvg onClick={() => {
+                                    setCandidate(item.id)
+                                    setOpen(true)
+                                }} />
+                            </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-            <ConfirmationModal open={open} onCancel={() => setOpen(false)} onConfirmation={() => console.log("confirmaron")} >
+            <ConfirmationModal
+                open={open}
+                onCancel={() => setOpen(false)}
+                onConfirmation={() => {
+                    props.handleDelete(candidate)
+                    setOpen(false)
+                }} >
                 Are you sure you want to delete this report?
             </ConfirmationModal>
         </>

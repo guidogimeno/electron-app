@@ -6,8 +6,23 @@ async function writeFile(filePath, file) {
     return window["fs"].writeFile(filePath, file)
 }
 
+async function readFiles(filePath) {
+    return window["fs"].readFiles(filePath)
+}
+
+async function readFile(filePath) {
+    return window["fs"].readFile(filePath)
+}
+
+async function deleteDir(dirPath) {
+    return window["fs"].deleteDir(dirPath)
+}
+
 export {
     mkdir,
-    writeFile
+    writeFile,
+    readFile,
+    readFiles,
+    deleteDir
 }
 
