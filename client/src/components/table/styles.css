@@ -1,0 +1,12 @@
+td {
+    text-align: center;
+}
+
+.trash-td>* {
+    cursor: pointer;
+}
+
+.name-td {
+    text-align: left;
+}
+

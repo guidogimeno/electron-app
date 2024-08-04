@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import TrashSvg from "../../assets/trash_svg.js"
 import ConfirmationModal from "../confirmation_modal/index.js"
+import { Link } from "react-router-dom"
 
 function Table(props) {
     const data = props.data
@@ -20,15 +21,21 @@ function Table(props) {
                 <tbody>
                     {data.map(item => (
                         <tr key={item.id}>
-                            <td>{item.name}</td>
+                            <td className="name-td">
+                                <Link to="/analyze">
+                                    {item.name}
+                                </Link>
+                            </td>
                             <td>{item.description}</td>
                             <td>{item.date}</td>
-                            <td><TrashSvg onClick={() => setOpen(true)} /></td>
+                            <td className="trash-td"><TrashSvg onClick={() => setOpen(true)} /></td>
                         </tr>
                     ))}
                 </tbody>
             </table>
-            <ConfirmationModal open={open} onClose={() => setOpen(false)} />
+            <ConfirmationModal open={open} onCancel={() => setOpen(false)} onConfirmation={() => console.log("confirmaron")} >
+                Are you sure you want to delete this report?
+            </ConfirmationModal>
         </>
     )
 }

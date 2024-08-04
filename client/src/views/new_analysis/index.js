@@ -1,9 +1,13 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import Page from "../../components/page/index.js"
 import FileInput from "../../components/file_input/index.js"
 import Spinner from "../../components/spinner/index.js"
+import { saveReport } from "../../fs/reports/index.js"
+import { generateId } from "../../utils/index.js"
+import { GlobalContext } from "../../context/index.js"
 
 function NewAnalysis() {
+    const context = useContext(GlobalContext)
     const [isLoading, setIsLoading] = useState(false)
     const [image, setImage] = useState("")
 
@@ -20,10 +24,20 @@ function NewAnalysis() {
 
         // TODO: Validar tamanio y tipo de archivo
         // const foo = window["fs"].writeFile("aver si llega esto")
-        // setTimeout(() => {
-        //     setImage("src/assets/logo.png")
-        //     setIsLoading(false)
-        // }, 2000)
+        try {
+            setImage("src/assets/logo.png")
+            setIsLoading(false)
+            const report = {
+                id: generateId(),
+                name: files[0].name,
+                images: [],
+                content: "este es el super contenido"
+            }
+
+            await saveReport(report)
+        } catch (error) {
+            context.showFailure(error.message)
+        }
     }
 
     return (

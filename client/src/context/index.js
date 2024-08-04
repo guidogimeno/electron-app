@@ -28,7 +28,6 @@ function useNotifications() {
     }
 
     function showFailure(message) {
-        console.log("a ver esto de aca")
         showNotification(message, "failure")
     }
 

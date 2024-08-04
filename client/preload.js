@@ -17,8 +17,11 @@ contextBridge.exposeInMainWorld("store", {
 })
 
 contextBridge.exposeInMainWorld("fs", {
-    writeFile: (key) => {
-        return ipcRenderer.invoke("writeFile", key)
+    writeFile: (filePath, file) => {
+        return ipcRenderer.invoke("writeFile", filePath, file)
+    },
+    mkdir: (reportName) => {
+        return ipcRenderer.invoke("mkdir", reportName)
     }
 })
 
