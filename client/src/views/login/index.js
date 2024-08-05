@@ -24,7 +24,7 @@ function Login() {
         try {
             const res = await login(formData)
             await setStoreValue("token", res.token)
-            navigate("/my_hips")
+            navigate("/")
         } catch (error) {
             setInlineMessage("Failed to login. Please try again")
         }

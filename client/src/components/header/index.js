@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import UserSvg from "../../assets/user_svg.js"
 import { GlobalContext } from "../../context/index.js"
+import { setStoreValue } from "../../store/index.js"
 
 const logo = <img src="src/assets/logo-hippal.jpeg" ></img>
 
 function Header() {
+    const navigate = useNavigate()
     const context = useContext(GlobalContext)
     const username = context.user.name
 
@@ -34,11 +36,31 @@ function Header() {
             <div className="user" >
                 <UserSvg onClick={() => setOpen(prev => !prev)} />
                 <p>{username}</p>
-                <div className={`user-popup ${open ? "active" : "inactive"}`} popupRef={popupRef}>
-                    <p>{username}</p>
-                    <button onClick={() => console.log("profile")}>My Profile</button>
-                    <button onClick={() => console.log("edit")}>Edit Profile</button>
-                    <button onClick={() => console.log("logout")}>Logout</button>
+                <div className={`user-popup ${open ? "active" : "inactive"}`} ref={popupRef}>
+                    {
+                        username ?
+                            <>
+                                <p>{username}</p>
+                                <button onClick={() => console.log("profile")}>My Profile</button>
+                                <button onClick={() => console.log("edit")}>Edit Profile</button>
+                                <button onClick={async () => {
+                                    await setStoreValue("token", "")
+                                    context.setUser({ name: "" })
+                                    navigate("/login")
+                                }}>
+                                    Logout
+                                </button>
+                            </>
+                            :
+                            <>
+                                <button onClick={() => navigate("/login")}>
+                                    Login
+                                </button>
+                                <button onClick={() => navigate("/signup")}>
+                                    Sign Up
+                                </button>
+                            </>
+                    }
                 </div>
             </div>
         </header>

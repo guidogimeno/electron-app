@@ -39,10 +39,9 @@ function App() {
                     <Route path="/my_hips" element={<MyHips />} />
                     <Route path="/my_hips/:id" element={<Hip />} />
                     <Route path="/analyze" element={<NewAnalysis />} />
-                    <Route path="/shared" element={<MyHips />} />
-                    <Route path="/trash" element={<MyHips />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
+                    <Route path="/profile" element={<div />} />
                 </Routes>
             </HashRouter>
         </GlobalContext.Provider>
