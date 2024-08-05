@@ -21,9 +21,12 @@ header {
 }
 
 .user {
+    position: relative;
+
     display: flex;
     flex-direction: column;
     align-items: center;
+
     cursor: pointer;
 }
 
@@ -34,4 +37,35 @@ header {
 
 .user span {
     font-weight: bold;
+}
+
+.user-popup.active {
+    visibility: visible;
+    transition: 0.1s ease;
+}
+
+.user-popup.inactive {
+    visibility: hidden;
+    transition: 0.1s ease;
+}
+
+.user-popup {
+    position: absolute;
+    top: 100%;
+    right: 100%;
+
+    z-index: 50;
+
+    display: flex;
+    flex-direction: column;
+
+    width: 150px;
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: var(--medium-gray);
+    cursor: auto;
+
+    button {
+        cursor: pointer;
+    }
 }
