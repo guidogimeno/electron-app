@@ -22,7 +22,7 @@ function SignUp() {
         event.preventDefault()
         try {
             await signup(formData)
-            navigate("/login")
+            navigate("/")
         } catch (error) {
             setInlineMessage("Failed to sign up. Please try again")
         }
