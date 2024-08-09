@@ -1,7 +1,7 @@
-import { post, put } from "../../services/index.js"
+import { post, put, del } from "../../services/index.js"
 import CustomError from "../errors/index.js"
 
-async function signup(user) {
+async function createUser(user) {
     try {
         const res = await post("/user", { body: user })
         if (res.status !== 201) {
@@ -25,8 +25,22 @@ async function updateUser(user) {
     }
 }
 
+async function deleteUser() {
+    try {
+        const res = await del("/user")
+        if (res.status !== 200) {
+            throw new CustomError("failed to delete user")
+        }
+        return res.data
+    } catch (error) {
+        throw new CustomError(error.message)
+    }
+}
+
+
 export {
-    signup,
-    updateUser
+    createUser,
+    updateUser,
+    deleteUser
 }
 

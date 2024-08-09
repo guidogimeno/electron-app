@@ -99,8 +99,8 @@ class Server:
         @self.is_authorized
         def delete_user(user_id):
             try:
-                user = self.users_service.delete_user(user_id)
-                return jsonify(user.to_dict()), 200
+                self.users_service.delete_user(user_id)
+                return {}, 200
             except ApiException as e:
                 return jsonify(e.to_dict()), e.status
 

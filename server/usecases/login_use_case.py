@@ -17,6 +17,9 @@ class LogInUseCase:
         if db_user is None:
             log_error(f"User: {user.username} not found")
             raise BadRequest(ErrorType.USER_NOT_FOUND)
+        if not db_user.is_active:
+            log_error(f"User: {user.username} not active")
+            raise BadRequest(ErrorType.USER_NOT_ACTIVE)
 
         is_valid = self._check_password(user.password, db_user.password)
         if not is_valid:

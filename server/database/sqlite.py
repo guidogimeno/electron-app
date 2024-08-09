@@ -93,7 +93,7 @@ class MySqlite:
             with sqlite3.connect(self.database_file) as conn:
                 cursor = conn.cursor()
                 cursor.execute(
-                    "UPDATE users SET is_active = false WHERE username = ?",
+                    "UPDATE users SET is_active = false WHERE id = ?",
                     (user_id,)
                 )
                 conn.commit()

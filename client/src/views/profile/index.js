@@ -1,10 +1,13 @@
 import React, { useContext, useState } from "react"
 import Page from "../../components/page/index.js"
 import { GlobalContext } from "../../context/index.js"
-import { updateUser } from "../../services/signup/index.js"
+import { updateUser, deleteUser } from "../../services/users/index.js"
+import { useNavigate } from "react-router-dom"
+import { setStoreValue } from "../../store/index.js"
 
 function Profile() {
     const context = useContext(GlobalContext)
+    const navigate = useNavigate()
 
     const [isEditing, setIsEditing] = useState(false)
     const [formData, setFormData] = useState({
@@ -38,6 +41,17 @@ function Profile() {
         })
     }
 
+    async function handleDelete() {
+        try {
+            await deleteUser()
+            await setStoreValue("token", "")
+            context.setUser({ username: "", email: "" })
+            navigate("/login")
+        } catch (error) {
+            context.showFailure("failed to delete user")
+        }
+    }
+
     return (
         <Page>
             <form onSubmit={handleSubmit}>
@@ -66,6 +80,9 @@ function Profile() {
                         <button type="submit">Submit</button>
                         <button type="button" onClick={handleCancelClick}>
                             Cancel
+                        </button>
+                        <button type="button" onClick={handleDelete}>
+                            Delete user
                         </button>
                     </>
                 ) : (

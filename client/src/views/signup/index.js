@@ -1,13 +1,11 @@
-import React, { useContext } from "react"
+import React  from "react"
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { signup } from "../../services/signup/index.js"
+import { createUser } from "../../services/users/index.js"
 import { useNavigate } from "react-router-dom"
 import Page from "../../components/page/index.js"
-import { GlobalContext } from "../../context/index.js"
 
 function SignUp() {
-    const context = useContext(GlobalContext)
     const [formData, setFormData] = useState({ username: "", password: "", email: "" })
     const [inlineMessage, setInlineMessage] = useState("")
 
@@ -23,7 +21,7 @@ function SignUp() {
     async function handleSubmit(event) {
         event.preventDefault()
         try {
-            await signup(formData)
+            await createUser(formData)
             navigate("/")
         } catch (error) {
             setInlineMessage("Failed to sign up. Please try again")
