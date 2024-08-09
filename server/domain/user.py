@@ -1,10 +1,17 @@
+from dataclasses import dataclass
+
+
+@dataclass
 class User:
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
+    id: int = 0
+    username: str = ""
+    password: str = ""
+    email: str = ""
+    is_active: bool = True
 
     def to_dict(self):
         return {
             "username": self.username,
-            "password": self.password
+            "password": "*****",
+            "email": self.email
         }

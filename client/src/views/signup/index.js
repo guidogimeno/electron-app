@@ -1,11 +1,13 @@
-import React from "react"
+import React, { useContext } from "react"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { signup } from "../../services/signup/index.js"
 import { useNavigate } from "react-router-dom"
 import Page from "../../components/page/index.js"
+import { GlobalContext } from "../../context/index.js"
 
 function SignUp() {
+    const context = useContext(GlobalContext)
     const [formData, setFormData] = useState({ username: "", password: "", email: "" })
     const [inlineMessage, setInlineMessage] = useState("")
 
@@ -45,22 +47,22 @@ function SignUp() {
                             className="signup-input"
                             required
                         />
-                        <label htmlFor="email">Email</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleChange}
-                            className="signup-input"
-                            required
-                        />
                         <label htmlFor="password">Password</label>
                         <input
                             type="password"
                             id="password"
                             name="password"
                             value={formData.password}
+                            onChange={handleChange}
+                            className="signup-input"
+                            required
+                        />
+                        <label htmlFor="email">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={formData.email}
                             onChange={handleChange}
                             className="signup-input"
                             required

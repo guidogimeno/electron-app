@@ -1,11 +1,10 @@
 import bcrypt
 import jwt
 
-from errors.api_exception import BadRequest
+from errors.api_exception import BadRequest, Unauthorized
 from errors.error_types import ErrorType
 from logger.logger import log_error, log_info
 from datetime import datetime, timezone, timedelta
-from domain.user import User
 
 
 class LogInUseCase:
@@ -13,7 +12,8 @@ class LogInUseCase:
         self.db = db
 
     def login(self, user):
-        db_user = self.db.get_user(user.username)
+        log_info(f"user que me llega: {user}")
+        db_user = self.db.get_user_by_name(user.username)
         if db_user is None:
             log_error(f"User: {user.username} not found")
             raise BadRequest(ErrorType.USER_NOT_FOUND)
@@ -23,25 +23,20 @@ class LogInUseCase:
             log_error(f"Invalid password for user: {user.username}")
             raise BadRequest(ErrorType.INVALID_USER_CREDENTIALS)
 
-        return self._create_token(db_user.username)
+        return self._create_token(db_user.id)
 
     def _check_password(self, password, hashed_password):
         return bcrypt.checkpw(password.encode("utf-8"), hashed_password)
 
-    def get_user(self, token):
-        decoded_user = self._decode_token(token)
-        username = decoded_user.get("username")
-        return User(username, "*****")
-
     def validate_token(self, token):
         try:
-            self._decode_token(token)
+            return self._decode_token(token)
         except jwt.ExpiredSignatureError:
             log_error("Token expired")
-            raise BadRequest(ErrorType.UNAUTHORIZED)
+            raise Unauthorized(ErrorType.UNAUTHORIZED)
         except Exception as e:
             log_error(f"Invalid token, error: {str(e)}")
-            raise BadRequest(ErrorType.UNAUTHORIZED)
+            raise Unauthorized(ErrorType.UNAUTHORIZED)
 
     def _decode_token(self, token):
         return jwt.decode(
@@ -51,11 +46,11 @@ class LogInUseCase:
             options={"require": ["exp"]}
         )
 
-    def _create_token(self, username):
+    def _create_token(self, user_id):
         # TODO: usar env variable para secreto y para algoritmo
         token = jwt.encode(
             {
-                "username": username,
+                "user_id": user_id,
                 "exp": datetime.now(timezone.utc) + timedelta(hours=12)
             },
             "secret",

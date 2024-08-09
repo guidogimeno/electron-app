@@ -9,7 +9,7 @@ const logo = <img src="src/assets/logo-hippal.jpeg" ></img>
 function Header() {
     const navigate = useNavigate()
     const context = useContext(GlobalContext)
-    const username = context.user.name
+    const username = context.user.username
 
     const [open, setOpen] = useState(false)
 
@@ -41,11 +41,10 @@ function Header() {
                         username ?
                             <>
                                 <p>{username}</p>
-                                <button onClick={() => console.log("profile")}>My Profile</button>
-                                <button onClick={() => console.log("edit")}>Edit Profile</button>
+                                <Link to="/profile">My Profile</Link>
                                 <button onClick={async () => {
                                     await setStoreValue("token", "")
-                                    context.setUser({ name: "" })
+                                    context.setUser({ name: "", email: "" })
                                     navigate("/login")
                                 }}>
                                     Logout

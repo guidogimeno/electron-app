@@ -8,12 +8,13 @@ import NewAnalysis from "./views/new_analysis/index.js"
 import { GlobalContext, useNotifications } from "./context/index.js"
 import MyHips from "./views/my_hips/index.js"
 import Hip from "./views/hip/index.js"
+import Profile from "./views/profile/index.js"
 
 const container = document.getElementById("root")
 const root = createRoot(container)
 
 function App() {
-    const [user, setUser] = useState({ name: "" })
+    const [user, setUser] = useState({ username: "", email: "" })
     const {
         notifications,
         showSuccess,
@@ -41,7 +42,7 @@ function App() {
                     <Route path="/analyze" element={<NewAnalysis />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/signup" element={<SignUp />} />
-                    <Route path="/profile" element={<div />} />
+                    <Route path="/profile" element={<Profile />} />
                 </Routes>
             </HashRouter>
         </GlobalContext.Provider>

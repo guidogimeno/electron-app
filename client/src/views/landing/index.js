@@ -16,7 +16,7 @@ function Landing() {
     async function fetchUser() {
         try {
             const user = await getUser()
-            context.setUser({ name: user.username })
+            context.setUser({ username: user.username, email: user.email })
             navigate("/my_hips")
         } catch (error) {
             navigate("/login")
@@ -25,7 +25,7 @@ function Landing() {
 
     return (
         <Page hiddeSidebar>
-            <Spinner/>
+            <Spinner />
         </Page>
     )
 }
