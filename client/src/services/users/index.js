@@ -27,7 +27,19 @@ async function createUser(user) {
 
 async function updateUser(user) {
     try {
-        const res = await put("/user", { body: user })
+        const body = {
+            first_name: user.firstName,
+            last_name: user.lastName,
+            email: user.email,
+            password: user.password,
+            job_title: user.jobTitle,
+            academic_title: user.academicTitle,
+            country: user.country,
+            state: user.state,
+            city: user.city,
+            institution: user.institution
+        }
+        const res = await put("/user", { body: body })
         if (res.status !== 200) {
             throw new CustomError("failed to update user")
         }

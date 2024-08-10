@@ -110,7 +110,7 @@ class MySqlite:
                     country = ?,
                     state = ?,
                     city = ?,
-                    institution = ?,
+                    institution = ?
                     WHERE id = ?""",
                     (
                         user.first_name,

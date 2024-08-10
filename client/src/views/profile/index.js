@@ -10,17 +10,11 @@ function Profile() {
     const navigate = useNavigate()
 
     const [isEditing, setIsEditing] = useState(false)
-    const [formData, setFormData] = useState({
-        username: context.user.username,
-        email: context.user.email
-    })
+    const [formData, setFormData] = useState({ ...context.user, password: "******" })
 
     function handleCancelClick() {
         setIsEditing(false)
-        setFormData({
-            username: context.user.username,
-            email: context.user.email
-        })
+        setFormData({ ...context.user, password: "******" })
     }
 
     async function handleSubmit(event) {
@@ -45,7 +39,7 @@ function Profile() {
         try {
             await deleteUser()
             await setStoreValue("token", "")
-            context.setUser({ username: "", email: "" })
+            context.setUser(null)
             navigate("/login")
         } catch (error) {
             context.showFailure("failed to delete user")
@@ -55,26 +49,96 @@ function Profile() {
     return (
         <Page>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Name:</label>
-                    <input
-                        type="text"
-                        name="username"
-                        value={formData.username}
-                        readOnly={!isEditing}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <label>Email:</label>
-                    <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        readOnly={!isEditing}
-                        onChange={handleChange}
-                    />
-                </div>
+                <label htmlFor="firstName">First Name</label>
+                <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    value={formData.firstName}
+                    onChange={handleChange}
+                    readOnly={!isEditing}
+                />
+                <label htmlFor="lastName">Last Name</label>
+                <input
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    value={formData.lastName}
+                    onChange={handleChange}
+                    readOnly={!isEditing}
+                />
+                <label htmlFor="email">Email</label>
+                <input
+                    type="text"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    readOnly={!isEditing}
+                />
+                <label htmlFor="password">Password</label>
+                <input
+                    type="text"
+                    id="password"
+                    name="password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    readOnly={!isEditing}
+                />
+                <label htmlFor="jobTitle">Job Title</label>
+                <input
+                    type="text"
+                    id="jobTitle"
+                    name="jobTitle"
+                    value={formData.jobTitle}
+                    onChange={handleChange}
+                    readOnly={!isEditing}
+                />
+                <label htmlFor="academicTitle">Academic Title</label>
+                <input
+                    type="text"
+                    id="academicTitle"
+                    name="academicTitle"
+                    value={formData.academicTitle}
+                    onChange={handleChange}
+                    readOnly={!isEditing}
+                />
+                <label htmlFor="country">Country</label>
+                <input
+                    type="text"
+                    id="country"
+                    name="country"
+                    value={formData.country}
+                    onChange={handleChange}
+                    readOnly={!isEditing}
+                />
+                <label htmlFor="state">State</label>
+                <input
+                    type="text"
+                    id="state"
+                    name="state"
+                    value={formData.state}
+                    onChange={handleChange}
+                    readOnly={!isEditing}
+                />
+                <label htmlFor="city">City</label>
+                <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    value={formData.city}
+                    onChange={handleChange}
+                    readOnly={!isEditing}
+                />
+                <label htmlFor="institution">Institution</label>
+                <input
+                    type="text"
+                    id="institution"
+                    name="institution"
+                    value={formData.institution}
+                    onChange={handleChange}
+                    readOnly={!isEditing}
+                />
                 {isEditing ? (
                     <>
                         <button type="submit">Submit</button>
