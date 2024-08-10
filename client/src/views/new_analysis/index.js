@@ -14,6 +14,9 @@ const STATE = {
     in_progress: 1
 }
 
+// Los numeros tambien son strings por defecto, null no se puede
+// porque son inputs con valores "controlados". En el back 
+// despues se castean a Ints.
 const emptyForm = {
     sex: "female",
     age: "",

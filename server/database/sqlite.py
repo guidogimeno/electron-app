@@ -146,6 +146,59 @@ class MySqlite:
                       user_id}, error: {str(e)}")
             raise InternalServerError(ErrorType.DB_ERROR)
 
-    def close(self):
-        with sqlite3.connect(self.database_file) as conn:
-            conn.close()
+    def save_metric(self, metric):
+        try:
+            with sqlite3.connect(self.database_file) as conn:
+                cursor = conn.cursor()
+                cursor.execute(
+                    """INSERT INTO metrics (
+                        sex,
+                        age,
+                        country,
+                        pain_level,
+                        site_of_pain,
+                        mos_since_symp,
+                        sport,
+                        sport_level,
+                        flexion,
+                        extension,
+                        internal_rotation,
+                        external_rotation,
+                        craig_test,
+                        fadir,
+                        faber,
+                        log_roll,
+                        ab_heer
+                    )
+                    VALUES (
+                        ? ,? ,? ,? ,? ,? ,? ,? ,? ,
+                        ? ,? ,? ,? ,? ,? ,? ,?
+                    )""",
+                    (
+                        metric.sex,
+                        metric.age,
+                        metric.country,
+                        metric.pain_level,
+                        metric.site_of_pain,
+                        metric.mos_since_symp,
+                        metric.sport,
+                        metric.sport_level,
+                        metric.flexion,
+                        metric.extension,
+                        metric.internal_rotation,
+                        metric.external_rotation,
+                        metric.craig_test,
+                        metric.fadir,
+                        metric.faber,
+                        metric.log_roll,
+                        metric.ab_heer
+                    )
+                )
+                conn.commit()
+        except Exception as e:
+            log_error(f"DB: failed to save metric, error: {str(e)}")
+            raise InternalServerError(ErrorType.DB_ERROR)
+
+        def close(self):
+            with sqlite3.connect(self.database_file) as conn:
+                conn.close()

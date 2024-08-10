@@ -7,6 +7,7 @@ from usecases.login_use_case import LogInUseCase
 from usecases.metrics_use_case import MetricsUseCase
 from usecases.users_service import SignUpUseCase
 from domain.user import User
+from domain.metric import Metric
 from logger.logger import log_error
 
 AUTH_HEADER = "x-auth-token"
@@ -118,8 +119,32 @@ class Server:
         def track_metrics(user_id):
             data = request.get_json()
             try:
-                self.metrics_use_case.track(data)
-                return {}, 201
+                metric = Metric(
+                    sex=data["sex"],
+                    age=data["age"],
+                    country=data["country"],
+                    pain_level=data["pain_level"],
+                    site_of_pain=data["site_of_pain"],
+                    mos_since_symp=data["mos_since_symp"],
+                    sport=data["sport"],
+                    sport_level=data["sport_level"],
+                    flexion=data["flexion"],
+                    extension=data["extension"],
+                    internal_rotation=data["internal_rotation"],
+                    external_rotation=data["external_rotation"],
+                    craig_test=data["craig_test"],
+                    fadir=data["fadir"],
+                    faber=data["faber"],
+                    log_roll=data["log_roll"],
+                    ab_heer=data["ab_heer"],
+                )
+            except Exception as e:
+                log_error(f"Error parsing metric: {str(e)}")
+                ex = BadRequest(ErrorType.PARSE_METRIC_ERROR)
+                return jsonify(ex.to_dict()), ex.status
+            try:
+                self.metrics_use_case.track(metric)
+                return jsonify(metric.to_dict()), 201
             except ApiException as e:
                 return jsonify(e.to_dict()), e.status
 

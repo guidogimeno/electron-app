@@ -3,7 +3,6 @@ from dataclasses import dataclass
 
 @dataclass
 class Metric:
-    id: int
     sex: str
     age: int
     country: str
