@@ -32,5 +32,6 @@ CREATE TABLE IF NOT EXISTS metrics (
     fadir TEXT NOT NULL,
     faber TEXT NOT NULL,
     log_roll TEXT NOT NULL,
-    ab_heer TEXT NOT NULL
+    ab_heer TEXT NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );

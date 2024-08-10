@@ -7,5 +7,5 @@ class MetricsUseCase:
         assert metric is not None, "metric is empty"
         self.db.save_metric(metric)
 
-    def search(self, offset, limit, params):
-        assert False, "not implemented"
+    def get_all(self):
+        return self.db.get_all_metrics()

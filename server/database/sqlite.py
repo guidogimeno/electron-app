@@ -1,4 +1,6 @@
 import sqlite3
+import csv
+import io
 
 from domain.user import User
 from errors.api_exception import InternalServerError
@@ -197,6 +199,31 @@ class MySqlite:
                 conn.commit()
         except Exception as e:
             log_error(f"DB: failed to save metric, error: {str(e)}")
+            raise InternalServerError(ErrorType.DB_ERROR)
+
+    def get_all_metrics(self):
+        try:
+            with sqlite3.connect(self.database_file) as conn:
+                cursor = conn.cursor()
+                cursor.execute("SELECT * FROM metrics")
+                conn.commit()
+
+                data = cursor.fetchmany(1000)
+                if not data:
+                    return None
+
+                columns = [description[0]
+                           for description in cursor.description]
+
+                csv_buffer = io.StringIO()
+                csv_writer = csv.writer(csv_buffer)
+                csv_writer.writerow(columns)
+                csv_writer.writerows(data)
+
+                return csv_buffer.getvalue()
+
+        except Exception as e:
+            log_error(f"DB: failed to get all metrics, error: {str(e)}")
             raise InternalServerError(ErrorType.DB_ERROR)
 
         def close(self):

@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 from functools import wraps
 
 from errors.api_exception import ApiException, BadRequest
@@ -138,24 +138,25 @@ class Server:
                     log_roll=data["log_roll"],
                     ab_heer=data["ab_heer"],
                 )
+                try:
+                    self.metrics_use_case.track(metric)
+                    return jsonify(metric.to_dict()), 201
+                except ApiException as e:
+                    return jsonify(e.to_dict()), e.status
             except Exception as e:
                 log_error(f"Error parsing metric: {str(e)}")
                 ex = BadRequest(ErrorType.PARSE_METRIC_ERROR)
                 return jsonify(ex.to_dict()), ex.status
-            try:
-                self.metrics_use_case.track(metric)
-                return jsonify(metric.to_dict()), 201
-            except ApiException as e:
-                return jsonify(e.to_dict()), e.status
 
         @self.app.route("/metrics", methods=["GET"])
         @self.is_authorized
-        def search_metrics():
-            _ = request.get_json()
-            # offset, limit, parametro de busqueda
+        def download_metrics(_):
             try:
-                self.metrics_use_case.search()
-                return {}, 200
+                csv_metrics = self.metrics_use_case.get_all()
+                response = make_response(csv_metrics)
+                response.headers["Content-Type"] = "text/csv"
+                response.headers["Content-Disposition"] = "attachment; filename=metrics.csv"
+                return response, 201
             except ApiException as e:
                 return jsonify(e.to_dict()), e.status
 
