@@ -3,7 +3,19 @@ import CustomError from "../errors/index.js"
 
 async function createUser(user) {
     try {
-        const res = await post("/user", { body: user })
+        const body = {
+            first_name: user.firstName,
+            last_name: user.lastName,
+            email: user.email,
+            password: user.password,
+            job_title: user.jobTitle,
+            academic_title: user.academicTitle,
+            country: user.country,
+            state: user.state,
+            city: user.city,
+            institution: user.institution
+        }
+        const res = await post("/user", { body: body })
         if (res.status !== 201) {
             throw new CustomError("failed to signup")
         }

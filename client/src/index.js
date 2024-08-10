@@ -14,7 +14,7 @@ const container = document.getElementById("root")
 const root = createRoot(container)
 
 function App() {
-    const [user, setUser] = useState({ username: "", email: "" })
+    const [user, setUser] = useState(null)
     const {
         notifications,
         showSuccess,

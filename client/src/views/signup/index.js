@@ -1,4 +1,4 @@
-import React  from "react"
+import React from "react"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { createUser } from "../../services/users/index.js"
@@ -6,7 +6,18 @@ import { useNavigate } from "react-router-dom"
 import Page from "../../components/page/index.js"
 
 function SignUp() {
-    const [formData, setFormData] = useState({ username: "", password: "", email: "" })
+    const [formData, setFormData] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        jobTitle: "",
+        academicTitle: "",
+        country: "",
+        state: "",
+        city: "",
+        institution: ""
+    })
     const [inlineMessage, setInlineMessage] = useState("")
 
     const navigate = useNavigate()
@@ -35,12 +46,22 @@ function SignUp() {
                     <h1 className="signup-title">Sign Up</h1>
                     {inlineMessage && <p className="inline-message">{inlineMessage}</p>}
                     <form className="signup-form" onSubmit={handleSubmit}>
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="firstName">First Name</label>
                         <input
                             type="text"
-                            id="username"
-                            name="username"
-                            value={formData.username}
+                            id="firstName"
+                            name="firstName"
+                            value={formData.firstName}
+                            onChange={handleChange}
+                            className="signup-input"
+                            required
+                        />
+                        <label htmlFor="lastName">Last Name</label>
+                        <input
+                            type="text"
+                            id="lastName"
+                            name="lastName"
+                            value={formData.lastName}
                             onChange={handleChange}
                             className="signup-input"
                             required
@@ -61,6 +82,66 @@ function SignUp() {
                             id="email"
                             name="email"
                             value={formData.email}
+                            onChange={handleChange}
+                            className="signup-input"
+                            required
+                        />
+                        <label htmlFor="jobTitle">Job Title</label>
+                        <input
+                            type="text"
+                            id="jobTitle"
+                            name="jobTitle"
+                            value={formData.jobTitle}
+                            onChange={handleChange}
+                            className="signup-input"
+                            required
+                        />
+                        <label htmlFor="academicTitle">Academic Title</label>
+                        <input
+                            type="text"
+                            id="academicTitle"
+                            name="academicTitle"
+                            value={formData.academicTitle}
+                            onChange={handleChange}
+                            className="signup-input"
+                            required
+                        />
+                        <label htmlFor="country">Country</label>
+                        <input
+                            type="text"
+                            id="country"
+                            name="country"
+                            value={formData.country}
+                            onChange={handleChange}
+                            className="signup-input"
+                            required
+                        />
+                        <label htmlFor="state">State</label>
+                        <input
+                            type="text"
+                            id="state"
+                            name="state"
+                            value={formData.state}
+                            onChange={handleChange}
+                            className="signup-input"
+                            required
+                        />
+                        <label htmlFor="city">City</label>
+                        <input
+                            type="text"
+                            id="city"
+                            name="city"
+                            value={formData.city}
+                            onChange={handleChange}
+                            className="signup-input"
+                            required
+                        />
+                        <label htmlFor="institution">Institution</label>
+                        <input
+                            type="text"
+                            id="institution"
+                            name="institution"
+                            value={formData.institution}
                             onChange={handleChange}
                             className="signup-input"
                             required

@@ -1,5 +1,5 @@
 /* Palette */
-@import "./palette.css";
+@import "./variables.css";
 
 /* Components */
 @import "../components/header/styles.css";
@@ -14,7 +14,7 @@
 /* Views */
 @import "../views/signup/styles.css";
 @import "../views/login/styles.css";
-@import "../views/my_hips/index.js";
+@import "../views/hip/styles.css";
 
 /* CSS RESET */
 * {
@@ -29,7 +29,7 @@
 }
 
 body {
-    font-family: sans-serif;
+    font-family: var(--ff);
     min-height: 100dvh;
     background-color: var(--light-gray);
 }
@@ -79,4 +79,3 @@ svg {
         transition: none;
     }
 }
-

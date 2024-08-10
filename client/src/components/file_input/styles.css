@@ -1,7 +1,7 @@
 .dropzone-container {
     width: 100%;
     height: 100%;
-    padding: 60px;
+    padding: var(--spacing-xxxl);
 }
 
 .dropzone {
@@ -29,14 +29,13 @@
 }
 
 .p1 {
-    font-size: 18px;
-    font-weight: 550;
+    font: var(--big);
     text-align: center;
     color: var(--medium-gray);
 }
 
 .p2 {
-    font-size: 14px;
+    font: var(--p);
     text-align: center;
     color: var(--medium-gray);
 }

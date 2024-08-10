@@ -3,7 +3,11 @@ import CustomError from "../errors/index.js"
 
 async function login(user) {
     try {
-        const res = await post("/login", { body: user })
+        const body = {
+            email: user.email,
+            password: user.password
+        }
+        const res = await post("/login", { body: body })
         if (res.status !== 200) {
             throw new CustomError("failed to login")
         }
@@ -19,7 +23,17 @@ async function getUser() {
         if (res.status !== 200) {
             throw new CustomError("failed to fetch user")
         }
-        return res.data
+        return {
+            firstName: res.data.first_name,
+            lastName: res.data.lastName,
+            email: res.data.email,
+            jobTitle: res.data.job_title,
+            academicTitle: res.data.academic_title,
+            country: res.data.country,
+            state: res.data.state,
+            city: res.data.city,
+            institution: res.data.institution
+        }
     } catch (error) {
         throw new CustomError(error.message)
     }

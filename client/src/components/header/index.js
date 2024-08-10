@@ -9,7 +9,6 @@ const logo = <img src="src/assets/logo-hippal.jpeg" ></img>
 function Header() {
     const navigate = useNavigate()
     const context = useContext(GlobalContext)
-    const username = context.user.username
 
     const [open, setOpen] = useState(false)
 
@@ -31,20 +30,20 @@ function Header() {
     return (
         <header>
             <div className="logo">
-                {username ? <Link to="/my_hips">{logo}</Link> : logo}
+                {context.user ? <Link to="/my_hips">{logo}</Link> : logo}
             </div>
             <div className="user" >
                 <UserSvg onClick={() => setOpen(prev => !prev)} />
-                <p>{username}</p>
+                {context.user ? <p>{context.user.firstName}</p> : null}
                 <div className={`user-popup ${open ? "active" : "inactive"}`} ref={popupRef}>
                     {
-                        username ?
+                        context.user ?
                             <>
-                                <p>{username}</p>
+                                <p>{context.user.firstName}</p>
                                 <Link to="/profile">My Profile</Link>
                                 <button onClick={async () => {
                                     await setStoreValue("token", "")
-                                    context.setUser({ name: "", email: "" })
+                                    context.setUser(null)
                                     navigate("/login")
                                 }}>
                                     Logout

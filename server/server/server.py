@@ -7,7 +7,7 @@ from usecases.login_use_case import LogInUseCase
 from usecases.metrics_use_case import MetricsUseCase
 from usecases.users_service import SignUpUseCase
 from domain.user import User
-from logger.logger import log_error, log_info
+from logger.logger import log_error
 
 AUTH_HEADER = "x-auth-token"
 
@@ -116,7 +116,6 @@ class Server:
         @self.app.route("/metrics", methods=["POST"])
         @self.is_authorized
         def track_metrics(user_id):
-            log_info("llegue aca")
             data = request.get_json()
             try:
                 self.metrics_use_case.track(data)

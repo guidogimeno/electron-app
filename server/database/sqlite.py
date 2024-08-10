@@ -11,7 +11,7 @@ class MySqlite:
         self.database_file = "./.database.db"
 
     def get_user(self, user_id):
-        return self._get_user_by("user_id", user_id)
+        return self._get_user_by("id", user_id)
 
     def get_user_by_email(self, email):
         return self._get_user_by("email", email)
@@ -22,6 +22,7 @@ class MySqlite:
                 cursor = conn.cursor()
                 cursor.execute(
                     f"""SELECT
+                    id,
                     first_name,
                     last_name,
                     job_title,
@@ -34,23 +35,24 @@ class MySqlite:
                     institution,
                     is_active
                     FROM users
-                    WHERE {id} = ?""",
+                    WHERE {field} = ?""",
                     (value,)
                 )
                 data = cursor.fetchone()
             if data:
                 return User(
-                    first_name=data[0],
-                    last_name=data[1],
-                    job_title=data[2],
-                    password=data[3],
-                    academic_title=data[4],
-                    email=data[5],
-                    country=data[6],
-                    state=data[7],
-                    city=data[8],
-                    institution=data[9],
-                    is_active=data[10],
+                    id=data[0],
+                    first_name=data[1],
+                    last_name=data[2],
+                    job_title=data[3],
+                    password=data[4],
+                    academic_title=data[5],
+                    email=data[6],
+                    country=data[7],
+                    state=data[8],
+                    city=data[9],
+                    institution=data[10],
+                    is_active=data[11],
                 )
             return None
         except Exception as e:
@@ -74,7 +76,7 @@ class MySqlite:
                     state,
                     city,
                     institution)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                     (
                         user.first_name,
                         user.last_name,

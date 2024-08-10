@@ -3,7 +3,7 @@
     flex-direction: column;
 
     height: 100%;
-    padding: 30px 30px;
+    padding: var(--spacing-xl) var(--spacing-xl);
     min-width: 180px;
     width: 25%;
     max-width: 250px;
@@ -12,15 +12,15 @@
 
 .primary-button {
     display: flex;
-    gap: 6px;
+    gap: var(--spacing-xs);
     align-items: center;
 
     height: 4rem;
     border: none;
-    padding: 10px 20px;
+    padding: var(--spacing-sm) var(--spacing-lg);
     border-radius: 20px;
     color: var(--white);
-    font-weight: bold;
+    font: var(--big);
     background-color: var(--dark-gray);
     text-align: left;
     align-content: center;
@@ -36,17 +36,17 @@
     display: flex;
     flex-direction: column;
 
-    gap: 12px;
-    padding-top: 24px;
+    gap: var(--spacing-sm);
+    padding-top: var(--spacing-lg);
 }
 
 .sidebar-button {
     display: flex;
-    gap: 6px;
+    gap: var(--spacing-xs);
     align-items: flex-end;
 
     border: none;
-    padding: 10px 20px;
+    padding: var(--spacing-sm) var(--spacing-lg);
     border-radius: 20px;
     color: var(--black);
     background-color: transparent;

@@ -5,23 +5,23 @@
 
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    gap: var(--spacing-xs);
 
     width: 0;
 }
 
 .notification {
     position: relative;
-    z-index: 9999;
+    z-index: var(--z-index-notification);
 
     width: 350px;
     height: 60px;
     min-height: 60px;
     color: var(--light-gray);
-    font-weight: 500;
+    font: var(--small);
     border-radius: 5px;
     align-content: center;
-    padding: 10px 20px;
+    padding: var(--spacing-sm) var(--spacing-lg);
 
     overflow: hidden;
     text-overflow: ellipsis;
@@ -55,7 +55,7 @@
 
     p {
         text-transform: capitalize;
-        font-weight: bold;
+        font: var(--p);
     }
 }
 

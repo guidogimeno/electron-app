@@ -16,7 +16,7 @@ function Landing() {
     async function fetchUser() {
         try {
             const user = await getUser()
-            context.setUser({ username: user.username, email: user.email })
+            context.setUser(user)
             navigate("/my_hips")
         } catch (error) {
             navigate("/login")

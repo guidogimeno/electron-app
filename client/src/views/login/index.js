@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom"
 import Page from "../../components/page/index.js"
 
 function Login() {
-    const [formData, setFormData] = useState({ username: "", password: "" })
+    const [formData, setFormData] = useState({ email: "", password: "" })
     const [inlineMessage, setInlineMessage] = useState("")
 
     const navigate = useNavigate()
@@ -37,12 +37,12 @@ function Login() {
                     <h1 className="login-title">Login</h1>
                     <p className="inline-message">{inlineMessage}</p>
                     <form className="login-form" onSubmit={handleSubmit}>
-                        <label htmlFor="username">Username</label>
+                        <label htmlFor="email">Email</label>
                         <input
-                            id="username"
-                            name="username"
+                            id="email"
+                            name="email"
                             type="text"
-                            value={formData.name}
+                            value={formData.email}
                             onChange={handleChange}
                             className="login-input"
                             required
