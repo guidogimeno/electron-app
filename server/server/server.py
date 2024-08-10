@@ -4,9 +4,10 @@ from functools import wraps
 from errors.api_exception import ApiException, BadRequest
 from errors.error_types import ErrorType
 from usecases.login_use_case import LogInUseCase
+from usecases.metrics_use_case import MetricsUseCase
 from usecases.users_service import SignUpUseCase
 from domain.user import User
-from logger.logger import log_error
+from logger.logger import log_error, log_info
 
 AUTH_HEADER = "x-auth-token"
 
@@ -17,6 +18,7 @@ class Server:
         self.db = db
         self.login_use_case = LogInUseCase(db)
         self.users_service = SignUpUseCase(db)
+        self.metrics_use_case = MetricsUseCase(db)
         self.register_routes()
 
     def is_authorized(self, func):
@@ -42,7 +44,7 @@ class Server:
             data = request.get_json()
             try:
                 user = User(
-                    username=data["username"],
+                    email=data["email"],
                     password=data["password"]
                 )
             except Exception as e:
@@ -61,9 +63,16 @@ class Server:
             data = request.get_json()
             try:
                 user = User(
-                    username=data["username"],
+                    first_name=data["first_name"],
+                    last_name=data["last_name"],
+                    email=data["email"],
                     password=data["password"],
-                    email=data["email"]
+                    job_title=data["job_title"],
+                    academic_title=data["academic_title"],
+                    country=data["country"],
+                    state=data["state"],
+                    city=data["city"],
+                    institution=data["institution"],
                 )
             except Exception as e:
                 log_error(f"Error parsing user: {str(e)}")
@@ -100,6 +109,28 @@ class Server:
         def delete_user(user_id):
             try:
                 self.users_service.delete_user(user_id)
+                return {}, 200
+            except ApiException as e:
+                return jsonify(e.to_dict()), e.status
+
+        @self.app.route("/metrics", methods=["POST"])
+        @self.is_authorized
+        def track_metrics(user_id):
+            log_info("llegue aca")
+            data = request.get_json()
+            try:
+                self.metrics_use_case.track(data)
+                return {}, 201
+            except ApiException as e:
+                return jsonify(e.to_dict()), e.status
+
+        @self.app.route("/metrics", methods=["GET"])
+        @self.is_authorized
+        def search_metrics():
+            _ = request.get_json()
+            # offset, limit, parametro de busqueda
+            try:
+                self.metrics_use_case.search()
                 return {}, 200
             except ApiException as e:
                 return jsonify(e.to_dict()), e.status

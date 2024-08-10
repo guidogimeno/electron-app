@@ -6,6 +6,7 @@ import { saveReport } from "../../fs/reports/index.js"
 import { generateId } from "../../utils/index.js"
 import { GlobalContext } from "../../context/index.js"
 import CustomError from "../../services/errors/index.js"
+import { track } from "../../services/metrics/index.js"
 import Spinner from "../../components/spinner/index.js"
 
 const STATE = {
@@ -80,10 +81,8 @@ function NewAnalysis() {
         }
     }
 
-    function sendMetrics() {
-        // mandar la info al backend, no hace falta guardarla en el reporte local
-        // service.sendReportData(formData)
-        console.log("enviando datos al backend...")
+    async function sendMetrics() {
+        await track(formData)
     }
 
     async function handleSubmit(event) {
@@ -97,9 +96,9 @@ function NewAnalysis() {
         }
 
         try {
-            sendMetrics()
+            await sendMetrics()
         } catch (error) {
-            console.log("Failed to send metrics", error)
+            console.error("Failed to send metrics", error)
         }
 
         try {

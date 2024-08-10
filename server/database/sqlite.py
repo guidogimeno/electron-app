@@ -10,52 +10,52 @@ class MySqlite:
     def __init__(self):
         self.database_file = "./.database.db"
 
-    def get_user_by_name(self, username):
-        try:
-            with sqlite3.connect(self.database_file) as conn:
-                cursor = conn.cursor()
-                cursor.execute(
-                    """SELECT id, username, password, email, is_active
-                    FROM users WHERE username = ?""",
-                    (username,)
-                )
-                data = cursor.fetchone()
-            if data:
-                return User(
-                    id=data[0],
-                    username=data[1],
-                    password=data[2],
-                    email=data[3],
-                    is_active=data[4]
-                )
-            return None
-        except Exception as e:
-            log_error(f"DB: failed to get user by name: {
-                      username}, error: {str(e)}")
-            raise InternalServerError(ErrorType.DB_ERROR)
-
     def get_user(self, user_id):
+        return self._get_user_by("user_id", user_id)
+
+    def get_user_by_email(self, email):
+        return self._get_user_by("email", email)
+
+    def _get_user_by(self, field, value):
         try:
             with sqlite3.connect(self.database_file) as conn:
                 cursor = conn.cursor()
                 cursor.execute(
-                    """SELECT id, username, password, email, is_active
-                    FROM users WHERE id = ?""",
-                    (user_id,)
+                    f"""SELECT
+                    first_name,
+                    last_name,
+                    job_title,
+                    password,
+                    academic_title,
+                    email,
+                    country,
+                    state,
+                    city,
+                    institution,
+                    is_active
+                    FROM users
+                    WHERE {id} = ?""",
+                    (value,)
                 )
                 data = cursor.fetchone()
             if data:
                 return User(
-                    id=data[0],
-                    username=data[1],
-                    password=data[2],
-                    email=data[3],
-                    is_active=data[4]
+                    first_name=data[0],
+                    last_name=data[1],
+                    job_title=data[2],
+                    password=data[3],
+                    academic_title=data[4],
+                    email=data[5],
+                    country=data[6],
+                    state=data[7],
+                    city=data[8],
+                    institution=data[9],
+                    is_active=data[10],
                 )
             return None
         except Exception as e:
-            log_error(f"DB: failed to get user by id: {
-                      user_id}, error: {str(e)}")
+            log_error(f"DB: failed to get user by {field}: {
+                      value}, error: {str(e)}")
             raise InternalServerError(ErrorType.DB_ERROR)
 
     def save_user(self, user):
@@ -63,14 +63,34 @@ class MySqlite:
             with sqlite3.connect(self.database_file) as conn:
                 cursor = conn.cursor()
                 cursor.execute(
-                    """INSERT INTO users (username, password, email)
-                    VALUES (?, ?, ?)""",
-                    (user.username, user.password, user.email)
+                    """INSERT INTO users (
+                    first_name,
+                    last_name,
+                    job_title,
+                    password,
+                    academic_title,
+                    email,
+                    country,
+                    state,
+                    city,
+                    institution)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                    (
+                        user.first_name,
+                        user.last_name,
+                        user.job_title,
+                        user.password,
+                        user.academic_title,
+                        user.email,
+                        user.country,
+                        user.state,
+                        user.city,
+                        user.institution,
+                    )
                 )
                 conn.commit()
         except Exception as e:
-            log_error(f"DB: failed to save user {
-                      user.username}, error: {str(e)}")
+            log_error(f"DB: failed to save user {user.email}, error: {str(e)}")
             raise InternalServerError(ErrorType.DB_ERROR)
 
     def update_user(self, user_id, user):
@@ -78,14 +98,36 @@ class MySqlite:
             with sqlite3.connect(self.database_file) as conn:
                 cursor = conn.cursor()
                 cursor.execute(
-                    """UPDATE users SET username = ?, email = ?, password = ?
+                    """UPDATE users SET
+                    first_name = ?,
+                    last_name = ?,
+                    job_title = ?,
+                    password = ?,
+                    academic_title = ?,
+                    email = ?,
+                    country = ?,
+                    state = ?,
+                    city = ?,
+                    institution = ?,
                     WHERE id = ?""",
-                    (user.username, user.email, user.password, user_id)
+                    (
+                        user.first_name,
+                        user.last_name,
+                        user.job_title,
+                        user.password,
+                        user.academic_title,
+                        user.email,
+                        user.country,
+                        user.state,
+                        user.city,
+                        user.institution,
+                        user_id
+                    )
                 )
                 conn.commit()
         except Exception as e:
             log_error(f"DB: failed to update user {
-                      user.username}, error: {str(e)}")
+                      user.email}, error: {str(e)}")
             raise InternalServerError(ErrorType.DB_ERROR)
 
     def delete_user(self, user_id):

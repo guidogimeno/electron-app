@@ -3,7 +3,7 @@ import jwt
 
 from errors.api_exception import BadRequest, Unauthorized
 from errors.error_types import ErrorType
-from logger.logger import log_error, log_info
+from logger.logger import log_error
 from datetime import datetime, timezone, timedelta
 
 
@@ -12,18 +12,17 @@ class LogInUseCase:
         self.db = db
 
     def login(self, user):
-        log_info(f"user que me llega: {user}")
-        db_user = self.db.get_user_by_name(user.username)
+        db_user = self.db.get_user_by_email(user.email)
         if db_user is None:
-            log_error(f"User: {user.username} not found")
+            log_error(f"User: {user.email} not found")
             raise BadRequest(ErrorType.USER_NOT_FOUND)
         if not db_user.is_active:
-            log_error(f"User: {user.username} not active")
+            log_error(f"User: {user.email} not active")
             raise BadRequest(ErrorType.USER_NOT_ACTIVE)
 
         is_valid = self._check_password(user.password, db_user.password)
         if not is_valid:
-            log_error(f"Invalid password for user: {user.username}")
+            log_error(f"Invalid password for user: {user.email}")
             raise BadRequest(ErrorType.INVALID_USER_CREDENTIALS)
 
         return self._create_token(db_user.id)
