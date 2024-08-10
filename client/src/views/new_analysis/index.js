@@ -14,11 +14,31 @@ const STATE = {
     in_progress: 1
 }
 
+const emptyForm = {
+    sex: "female",
+    age: "",
+    country: "argentina",
+    painLevel: "no_data",
+    siteOfPain: "no_data",
+    mosSinceSymp: "",
+    sport: "no_data",
+    sportLevel: "no_data",
+    flexion: "",
+    extension: "",
+    internalRotation: "",
+    externalRotation: "",
+    craigTest: "",
+    fadir: "do_not_know",
+    faber: "do_not_know",
+    logRoll: "do_not_know",
+    abHeer: "do_not_know",
+}
+
 function NewAnalysis() {
     const context = useContext(GlobalContext)
     const navigate = useNavigate()
 
-    const [formData, setFormData] = useState({ foo: "", bar: "" })
+    const [formData, setFormData] = useState(emptyForm)
     const [report, setReport] = useState(null)
     const [state, setState] = useState(STATE.start)
     const [isAnalyzing, setIsAnalyzing] = useState(false)
@@ -39,12 +59,6 @@ function NewAnalysis() {
         console.log("file size", files[0].size)
         console.log("file type", files[0].type)
         console.log("file path", files[0].path)
-        // 0. validar tamanio y tipo de archivo
-        // 1. mostrar el formulario que tienen que llenar
-        // 2. armar reporte en background, sumar una barra de progreso estaria bueno
-        // 3. dar opcion de ver el reporte
-        // 4. para ver, llevarlo a otra vista.
-        // si toca New, tiene que volver a la pantalla inicial del New
 
         setState(STATE.in_progress)
         setIsAnalyzing(true)
@@ -66,23 +80,18 @@ function NewAnalysis() {
     }
 
     function handleCancel() {
-        setFormData({ foo: "", bar: "" })
+        setFormData(emptyForm)
         setIsAnalyzing(false)
         // TODO: interrumpir proceso de generacion de reporte
         setState(STATE.start)
     }
 
     function validateForm() {
-        if (formData.foo.length < 3) {
-            throw new CustomError("foo tiene que tener mas de 3 caracteres")
+        for (const key of Object.keys(formData)) {
+            if (String(formData[key]).length == 0) {
+                throw new CustomError(`The ${key} field cannot be empty`)
+            }
         }
-        if (formData.bar.length < 3) {
-            throw new CustomError("bar tiene que tener mas de 3 caracteres")
-        }
-    }
-
-    async function sendMetrics() {
-        await track(formData)
     }
 
     async function handleSubmit(event) {
@@ -96,12 +105,13 @@ function NewAnalysis() {
         }
 
         try {
-            await sendMetrics()
+            await track(formData)
         } catch (error) {
             console.error("Failed to send metrics", error)
         }
 
         try {
+            console.log("Este es el form data", formData)
             await saveReport(report)
         } catch (error) {
             context.showFailure(error.message)
@@ -121,25 +131,248 @@ function NewAnalysis() {
 
     return (
         <Page>
-            <form>
-                <label>Foo</label>
-                <input
-                    id="foo"
-                    name="foo"
-                    type="text"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                />
-                <label>Bar</label>
-                <input
-                    id="bar"
-                    name="bar"
-                    type="text"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                />
+            <h1>
+                Please complete the following questions with accurate data. Help us to improve the IA model to suggest more accurate diagnoses and further functionalities. Your collaboration is vital (all information must be anonymous).
+            </h1>
+            <form id="metrics-form">
+                <div>
+                    <h2>Personal Information</h2>
+                    <label htmlFor="sex">Sex</label>
+                    <select
+                        id="sex"
+                        name="sex"
+                        form="metrics-form"
+                        value={formData.sex}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value="female">Female</option>
+                        <option value="male">Male</option>
+                    </select>
+                    <label htmlFor="age">Age</label>
+                    <input
+                        id="age"
+                        name="age"
+                        type="number"
+                        value={formData.age}
+                        onChange={handleChange}
+                        required
+                    />
+                    <label htmlFor="country">Country of origin</label>
+                    <select
+                        id="country"
+                        name="country"
+                        form="metrics-form"
+                        value={formData.country}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value="argentina">Argentina</option>
+                    </select>
+                    <label htmlFor="painLevel">Pain</label>
+                    <select
+                        id="painLevel"
+                        name="painLevel"
+                        form="metrics-form"
+                        value={formData.painLevel}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value="no_data">N/D</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                    <label htmlFor="siteOfPain">Site of pain</label>
+                    <select
+                        id="siteOfPain"
+                        name="siteOfPain"
+                        form="metrics-form"
+                        value={formData.siteOfPain}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value="no_data">N/D</option>
+                        <option value="groin">Groin</option>
+                        <option value="buttock">Buttock</option>
+                        <option value="lateral">Lateral</option>
+                        <option value="thigh">Thigh</option>
+                        <option value="c_shapedPain">"C"-shaped pain</option>
+                        <option value="lumbar">Lumbar</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <label htmlFor="mosSinceSymp">Months since symptoms</label>
+                    <input
+                        id="mosSinceSymp"
+                        name="mosSinceSymp"
+                        type="number"
+                        value={formData.mosSinceSymp}
+                        onChange={handleChange}
+                        required
+                    />
+                    <label htmlFor="sport">Sport</label>
+                    <select
+                        id="sport"
+                        name="sport"
+                        form="metrics-form"
+                        value={formData.sport}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value="no_data">N/D</option>
+                        <option value="soccer">Soccer</option>
+                        <option value="field_hockey">Field Hockey</option>
+                        <option value="tennis">Tennis</option>
+                        <option value="volleyball">Volleyball</option>
+                        <option value="table_tennis">Table Tennis</option>
+                        <option value="basketball">Basketball</option>
+                        <option value="baseball">Baseball</option>
+                        <option value="rugby">Rugby</option>
+                        <option value="golf">Golf</option>
+                        <option value="badminton">Badminton</option>
+                        <option value="football">Football</option>
+                        <option value="boxing">Boxing</option>
+                        <option value="athletics">Athletics</option>
+                        <option value="swimming">Swimming</option>
+                        <option value="cycling">Cycling</option>
+                        <option value="handball">Handball</option>
+                        <option value="skiing">Skiing</option>
+                        <option value="gymnastics">Gymnastics</option>
+                        <option value="martial_arts">Martial Arts</option>
+                        <option value="other">Other</option>
+                    </select>
+                    <label htmlFor="sportLevel">Sport level</label>
+                    <select
+                        id="sportLevel"
+                        name="sportLevel"
+                        form="metrics-form"
+                        value={formData.sportLevel}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value="no_data">N/D</option>
+                        <option value="recreational">Recreational</option>
+                        <option value="amateur">Amateur</option>
+                        <option value="professional">Professional</option>
+                    </select>
+                </div>
+                <div>
+                    <h2>Physical Examination</h2>
+                    <div>
+                        <h3>Range of motion</h3>
+                        <label htmlFor="flexion">Flexion</label>
+                        <input
+                            id="flexion"
+                            name="flexion"
+                            type="number"
+                            value={formData.flexion}
+                            onChange={handleChange}
+                            required
+                        />
+                        <label htmlFor="extension">Extension</label>
+                        <input
+                            id="extension"
+                            name="extension"
+                            type="number"
+                            value={formData.extension}
+                            onChange={handleChange}
+                            required
+                        />
+                        <label htmlFor="internalRotation">Internal rotation (at 90° hip flexion)</label>
+                        <input
+                            id="internalRotation"
+                            name="internalRotation"
+                            type="number"
+                            value={formData.internalRotation}
+                            onChange={handleChange}
+                            required
+                        />
+                        <label htmlFor="externalRotation">External rotation (at 90° hip flexion)</label>
+                        <input
+                            id="externalRotation"
+                            name="externalRotation"
+                            type="number"
+                            value={formData.externalRotation}
+                            onChange={handleChange}
+                            required
+                        />
+                        <label htmlFor="craigTest">Craig test</label>
+                        <input
+                            id="craigTest"
+                            name="craigTest"
+                            type="number"
+                            value={formData.craigTest}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <h3>Tests</h3>
+                        <label htmlFor="fadir">Fadir</label>
+                        <select
+                            id="fadir"
+                            name="fadir"
+                            form="metrics-form"
+                            value={formData.fadir}
+                            onChange={handleChange}
+                            required
+                        >
+                            <option value="positive">Positive</option>
+                            <option value="negative">Negative</option>
+                            <option value="not_evaluated">Not evaluated</option>
+                            <option value="do_not_know">Do not know</option>
+                        </select>
+                        <label htmlFor="faber">Faber</label>
+                        <select
+                            id="faber"
+                            name="faber"
+                            form="metrics-form"
+                            value={formData.faber}
+                            onChange={handleChange}
+                            required
+                        >
+                            <option value="positive">Positive</option>
+                            <option value="negative">Negative</option>
+                            <option value="not_evaluated">Not evaluated</option>
+                            <option value="do_not_know">Do not know</option>
+                        </select>
+                        <label htmlFor="logRoll">Log Roll</label>
+                        <select
+                            id="logRoll"
+                            name="logRoll"
+                            form="metrics-form"
+                            value={formData.logRoll}
+                            onChange={handleChange}
+                            required
+                        >
+                            <option value="positive">Positive</option>
+                            <option value="negative">Negative</option>
+                            <option value="not_evaluated">Not evaluated</option>
+                            <option value="do_not_know">Do not know</option>
+                        </select>
+                        <label htmlFor="abHeer">AB Heer</label>
+                        <select
+                            id="abHeer"
+                            name="abHeer"
+                            form="metrics-form"
+                            value={formData.abHeer}
+                            onChange={handleChange}
+                            required
+                        >
+                            <option value="positive">Positive</option>
+                            <option value="negative">Negative</option>
+                            <option value="not_evaluated">Not evaluated</option>
+                            <option value="do_not_know">Do not know</option>
+                        </select>
+                    </div>
+                </div>
                 <button onClick={handleCancel}>Cancel</button>
                 {isAnalyzing ? <Spinner /> :
                     <button type="submit" onClick={handleSubmit}>

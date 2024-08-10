@@ -8,7 +8,7 @@ function useNotifications() {
         addNotification({ id: notificationId, message, type })
         setTimeout(() => {
             removeNotification(notificationId)
-        }, 3000)
+        }, 5000)
     }
 
     function addNotification(notification) {
