@@ -5,7 +5,7 @@ function Search(props) {
 
     return (
         <div className="search-container">
-            <SearchSvg />
+            <SearchSvg className="search-icon" />
             <input
                 type="text"
                 placeholder="Search in Hip Pal"

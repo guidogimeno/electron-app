@@ -17,6 +17,7 @@ function Table(props) {
                         <th>Name</th>
                         <th>Description</th>
                         <th>Date</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>

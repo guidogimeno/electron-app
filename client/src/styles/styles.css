@@ -10,11 +10,13 @@
 @import "../components/file_input/styles.css";
 @import "../components/spinner/styles.css";
 @import "../components/notification/sytles.css";
+@import "../components/search/styles.css";
 
 /* Views */
 @import "../views/signup/styles.css";
 @import "../views/login/styles.css";
 @import "../views/hip/styles.css";
+@import "../views/my_hips/styles.css";
 
 /* CSS RESET */
 * {
