@@ -4,7 +4,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, .2);
+    background-color: rgba(0, 0, 0, 0.2);
     z-index: var(--z-index-modal);
 }
 
@@ -14,7 +14,64 @@
     left: 50%;
     z-index: var(--z-index-modal);
     transform: translate(-50%, -50%);
-    background-color: var(--red);
-    padding: var(--spacing-xxxl);
-    border-radius: 5px;
+
+    background-color: var(--light-gray);
+    color: var(--black);
+
+    padding: var(--spacing-lg);
+    height: 14rem;
+    width: 32rem;
+    border-radius: 0.5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.modal-actions {
+    display: flex;
+    flex-flow: row-reverse;
+    gap: var(--spacing-md);
+
+    button {
+        background-color: var(--blue);
+        color: var(--white);
+        padding: var(--spacing-sm) var(--spacing-lg);
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        font: var(--p);
+    }
+
+    button:last-child {
+        background-color: transparent;
+        color: var(--blue);
+    }
+}
+
+.modal-content {
+    align-content: center;
+    text-align: center;
+    font: var(--p);
+}
+
+.modal-close {
+    display: flex;
+    justify-content: space-between;
+    font: var(--big);
+
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+
+        border: none;
+        border-radius: 50%;
+        height: 1.5rem;
+        width: 1.5rem;
+        background-color: var(--blue);
+        color: var(--white);
+        font: var(--p);
+    }
 }

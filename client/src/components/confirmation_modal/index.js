@@ -8,10 +8,17 @@ function ConfirmationModal({ open, onCancel, onConfirmation, children }) {
         <>
             <div className="modal-overlay" />
             <div className="modal">
-                {children}
-                <button onClick={onCancel}>x</button>
-                <button onClick={onConfirmation}>Confirm</button>
-                <button onClick={onCancel}>Cancel</button>
+                <div className="modal-close">
+                    <h4>Confirmation</h4>
+                    <button onClick={onCancel}>x</button>
+                </div>
+                <div className="modal-content">
+                    {children}
+                </div>
+                <div className="modal-actions">
+                    <button onClick={onConfirmation}>Confirm</button>
+                    <button onClick={onCancel}>Cancel</button>
+                </div >
             </div >
         </>
         ,
