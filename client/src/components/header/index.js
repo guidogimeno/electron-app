@@ -39,9 +39,9 @@ function Header() {
                     {
                         context.user ?
                             <>
-                                <p>{context.user.firstName}</p>
-                                <Link to="/profile">My Profile</Link>
-                                <button onClick={async () => {
+                                <h4>Hi {context.user.firstName}!</h4>
+                                <Link className="user-button-container" to="/profile">My Profile</Link>
+                                <button className="user-button-container" onClick={async () => {
                                     await setStoreValue("token", "")
                                     context.setUser(null)
                                     navigate("/login")
@@ -51,10 +51,10 @@ function Header() {
                             </>
                             :
                             <>
-                                <button onClick={() => navigate("/login")}>
+                                <button className="user-button-container" onClick={() => navigate("/login")}>
                                     Login
                                 </button>
-                                <button onClick={() => navigate("/signup")}>
+                                <button className="user-button-container" onClick={() => navigate("/signup")}>
                                     Sign Up
                                 </button>
                             </>

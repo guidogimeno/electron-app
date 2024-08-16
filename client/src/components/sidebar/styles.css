@@ -47,7 +47,7 @@
 
     border: none;
     padding: var(--spacing-sm) var(--spacing-lg);
-    border-radius: 20px;
+    border-radius: 1.5rem;
     color: var(--black);
     background-color: transparent;
     text-align: left;
