@@ -12,7 +12,7 @@ function Sidebar() {
 
     return (
         <div className="sidebar">
-            <Link to="/analyze" className="primary-button">
+            <Link to="/analyze" className="sidebar-new-button">
                 <CirclePlusSvg />
                 New
             </Link>

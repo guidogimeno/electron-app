@@ -37,27 +37,27 @@ function Login() {
                     <h1 className="login-title">Login</h1>
                     <p className="inline-message">{inlineMessage}</p>
                     <form className="login-form" onSubmit={handleSubmit}>
-                        <label htmlFor="email">Email</label>
                         <input
                             id="email"
                             name="email"
                             type="text"
                             value={formData.email}
                             onChange={handleChange}
-                            className="login-input"
+                            className="input"
+                            placeholder="Email"
                             required
                         />
-                        <label htmlFor="password">Password</label>
                         <input
                             id="password"
                             name="password"
                             type="password"
                             value={formData.password}
                             onChange={handleChange}
-                            className="login-input"
+                            className="input"
+                            placeholder="Password"
                             required
                         />
-                        <button type="submit" className="login-button">
+                        <button type="submit" className="primary-button">
                             Login
                         </button>
                     </form>

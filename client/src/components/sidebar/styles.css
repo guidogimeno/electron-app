@@ -10,7 +10,7 @@
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.primary-button {
+.sidebar-new-button {
     display: flex;
     gap: var(--spacing-xs);
     align-items: center;
@@ -28,7 +28,7 @@
     cursor: pointer;
 }
 
-.primary-button:hover {
+.sidebar-new-button:hover {
     background-color: var(--medium-gray);
 }
 

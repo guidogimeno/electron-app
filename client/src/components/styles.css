@@ -1,0 +1,48 @@
+.input {
+    padding: var(--spacing-sm);
+    border: 1px solid var(--medium-gray);
+    border-radius: 0.5rem;
+    font: var(--p);
+    outline: none;
+    width: 20rem;
+    max-width: 20rem;
+}
+
+.primary-button {
+    background-color: var(--blue);
+    color: var(--white);
+    font: var(--p);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    justify-content: center;
+}
+
+.primary-button:hover {
+    background-color: var(--dark-blue);
+}
+
+.tertiary-button {
+    background-color: transparent;
+    color: var(--blue);
+    font: var(--p);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    justify-content: center;
+}
+
+.danger-button {
+    background-color: var(--red);
+    color: var(--white);
+    font: var(--p);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    justify-content: center;
+}

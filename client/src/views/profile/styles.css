@@ -1,0 +1,34 @@
+.profile-container {
+    h1 {
+        font: var(--h2);
+        text-align: left;
+    }
+}
+
+.profile-container>form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    justify-content: space-between;
+    padding: var(--spacing-lg) 0;
+
+    .inputs-container {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        gap: var(--spacing-xl);
+        max-width: 70rem;
+    }
+}
+
+.label-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: var(--spacing-sm);
+    width: 28rem;
+
+    label {
+        align-content: center;
+    }
+}

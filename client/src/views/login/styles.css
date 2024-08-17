@@ -12,7 +12,7 @@
     flex-direction: column;
     align-items: center;
 
-    width: 250px;
+    width: 18rem;
 }
 
 .login-title {
@@ -24,30 +24,17 @@
 .login-form {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md);
-    width: 250px;
+    gap: var(--spacing-xl);
+    width: 20rem;
 }
 
 .login-input {
     padding: var(--spacing-sm);
     border: 1px solid var(--medium-gray);
-    border-radius: 0.5rem;
+    border-radius: 0.25rem;
     font: var(--p);
     outline: none;
-}
-
-.login-button {
-    background-color: var(--blue);
-    color: var(--white);
-    padding: var(--spacing-sm) var(--spacing-lg);
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease-in-out;
-}
-
-.login-button:hover {
-    background-color: var(--dark-blue);
+    height: 2.5rem;
 }
 
 .inline-message {

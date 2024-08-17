@@ -2,6 +2,7 @@
 @import "./variables.css";
 
 /* Components */
+@import "../components/styles.css";
 @import "../components/header/styles.css";
 @import "../components/table/styles.css";
 @import "../components/confirmation_modal/styles.css";
@@ -17,6 +18,7 @@
 @import "../views/login/styles.css";
 @import "../views/hip/styles.css";
 @import "../views/my_hips/styles.css";
+@import "../views/profile/styles.css";
 
 /* CSS RESET */
 * {

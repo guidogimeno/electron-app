@@ -25,7 +25,7 @@ async function getUser() {
         }
         return {
             firstName: res.data.first_name,
-            lastName: res.data.lastName,
+            lastName: res.data.last_name,
             email: res.data.email,
             jobTitle: res.data.job_title,
             academicTitle: res.data.academic_title,
