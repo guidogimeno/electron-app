@@ -1,12 +1,15 @@
 .sidebar {
+    position: fixed;
+    left: 0;
+    height: 100%;
+    width: 25%;
+    min-width: 180px;
+    max-width: 250px;
+
     display: flex;
     flex-direction: column;
 
-    height: 100%;
     padding: var(--spacing-xl) var(--spacing-xl);
-    min-width: 180px;
-    width: 25%;
-    max-width: 250px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 

@@ -1,4 +1,10 @@
 header {
+    position: fixed;
+
+    height: 8rem;
+    width: 100%;
+    z-index: var(--z-index-medium);
+
     display: flex;
     justify-content: space-between;
     align-items: center;

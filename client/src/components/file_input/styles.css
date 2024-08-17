@@ -29,13 +29,13 @@
 }
 
 .p1 {
-    font: var(--big);
+    font: var(--h3);
     text-align: center;
     color: var(--medium-gray);
 }
 
 .p2 {
-    font: var(--p);
+    font: var(--h4);
     text-align: center;
     color: var(--medium-gray);
 }

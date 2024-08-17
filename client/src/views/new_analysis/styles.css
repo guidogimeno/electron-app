@@ -1,1 +1,63 @@
+.metrics-form-container {
+    h1 {
+        font: var(--h3);
+        text-align: left;
+    }
 
+    h2 {
+        font: var(--small);
+        text-align: left;
+    }
+
+    h3 {
+        font: var(--h4);
+        text-align: left;
+    }
+
+    h4 {
+        font: var(--big);
+        text-align: left;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-lg);
+    }
+
+    .sections-container {
+        display: flex;
+        flex-direction: row;
+        gap: var(--spacing-md);
+    }
+
+    .label-select {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .label-input {
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    section {
+        position: relative;
+
+        display: flex;
+        flex-direction: column;
+        gap: var(--spacing-md);
+
+        border: 1px solid var(--medium-gray);
+        border-radius: 1rem;
+        padding: var(--spacing-xxl) var(--spacing-md);
+
+        h3 {
+            position: absolute;
+            background-color: var(--light-gray);
+            top: -1.25rem;
+        }
+    }
+}

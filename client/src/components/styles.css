@@ -4,6 +4,7 @@
     border-radius: 0.5rem;
     font: var(--p);
     outline: none;
+    height: 3rem;
     width: 20rem;
     max-width: 20rem;
 }
@@ -18,6 +19,7 @@
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
     justify-content: center;
+    height: 3rem;
 }
 
 .primary-button:hover {
@@ -33,6 +35,7 @@
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
     justify-content: center;
+    height: 3rem;
 }
 
 .danger-button {
@@ -45,4 +48,24 @@
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
     justify-content: center;
+    height: 3rem;
+}
+
+.select {
+    padding: var(--spacing-sm);
+    border: 1px solid var(--medium-gray);
+    border-radius: .5rem;
+    font: var(--p);
+    height: 3rem;
+    width: 20rem;
+    max-width: 20rem;
+    cursor: pointer;
+    outline: none;
+    background-color: var(--white);
+}
+
+select option {
+    cursor: pointer;
+    padding: .5rem 0;
+    font: var(--p);
 }

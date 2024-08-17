@@ -19,6 +19,7 @@
 @import "../views/hip/styles.css";
 @import "../views/my_hips/styles.css";
 @import "../views/profile/styles.css";
+@import "../views/new_analysis/styles.css";
 
 /* CSS RESET */
 * {

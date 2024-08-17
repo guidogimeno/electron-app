@@ -8,7 +8,7 @@
 .profile-container>form {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-md);
+    gap: var(--spacing-lg);
     justify-content: space-between;
     padding: var(--spacing-lg) 0;
 
@@ -19,16 +19,16 @@
         gap: var(--spacing-xl);
         max-width: 70rem;
     }
-}
 
-.label-input {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: var(--spacing-sm);
-    width: 28rem;
+    .label-input {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        gap: var(--spacing-sm);
+        width: 28rem;
 
-    label {
-        align-content: center;
+        label {
+            align-content: center;
+        }
     }
 }
