@@ -41,8 +41,9 @@ h4 {
     height: 50px;
 }
 
-.user span {
+.user p {
     font: var(--p);
+    text-transform: capitalize;
 }
 
 .user-popup.active {
@@ -76,7 +77,6 @@ h4 {
 }
 
 .user-button-container {
-    padding: var(--spacing-sm) var(--spacing-lg);
     border: 1px solid var(--dark-gray);
     background-color: var(--dark-gray);
     color: var(--white);
@@ -85,9 +85,6 @@ h4 {
     text-align: center;
     cursor: pointer;
     text-decoration: none;
-
-    height: 100%;
-    width: 100%;
 }
 
 .user-button-container:hover {
