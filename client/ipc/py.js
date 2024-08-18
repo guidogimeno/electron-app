@@ -1,15 +1,15 @@
-import { ipcMain } from "electron"
+import { app, ipcMain } from "electron"
 import { spawn } from "child_process"
 
 ipcMain.handle("pyscript", async () => {
-    const python = spawn("python3", ["/home/ggimeno/Documents/electron-app/hola.py"]);
+    const python = spawn("python3", [`${app.getAppPath()}/../scripts/script_path_TC.py`]);
     try {
         console.log("ejecutando script")
         python.stdout.on("data", (result) => {
             console.log("stdout", result.toString())
         })
         python.stderr.on("data", (result) => {
-            console.log("stderr", result)
+            console.log("stderr", result.toString())
         })
         python.on("close", (result) => {
             console.log("close", result)
