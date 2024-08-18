@@ -9,7 +9,8 @@ function Page(props) {
             <Header />
             <main>
                 {props.hiddeSidebar ? null : <Sidebar initialState={props.initialState} />}
-                <div className="content">
+
+                <div className={`content ${props.hiddeSidebar ? "" : "content--with-sidebar"}`}>
                     {props.children}
                     <Notification />
                 </div>
