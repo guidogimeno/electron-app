@@ -8,6 +8,7 @@ import { GlobalContext } from "../../context/index.js"
 import CustomError from "../../services/errors/index.js"
 import { track } from "../../services/metrics/index.js"
 import Spinner from "../../components/spinner/index.js"
+import { executePyScript } from "../../pyscripts/index.js"
 
 const STATE = {
     start: 0,
@@ -67,7 +68,7 @@ function NewAnalysis() {
         setIsAnalyzing(true)
         try {
             // simulo la creacion
-            await new Promise(r => setTimeout(r, 1000));
+            await executePyScript()
             const generatedReport = {
                 id: generateId(),
                 name: files[0].name,
