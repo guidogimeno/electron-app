@@ -5,7 +5,7 @@
     }
 
     h2 {
-        font: var(--small);
+        font: var(--p);
         text-align: left;
     }
 
@@ -16,31 +16,37 @@
 
     h4 {
         font: var(--big);
+        color: var(--dark-blue);
+        font-weight: bold;
+        text-decoration: underline;
         text-align: left;
     }
 
     form {
         display: flex;
         flex-direction: column;
-        gap: var(--spacing-lg);
+        align-items: center;
+        gap: var(--spacing-md);
+        padding: var(--spacing-xl);
     }
 
     .sections-container {
         display: flex;
         flex-direction: row;
-        gap: var(--spacing-md);
+        width: 55rem;
+        justify-content: space-between;
     }
 
     .label-select {
         display: flex;
         flex-direction: column;
-        gap: var(--spacing-sm);
+        gap: var(--spacing-xxs);
     }
 
     .label-input {
         display: flex;
         flex-direction: column;
-        gap: var(--spacing-sm);
+        gap: var(--spacing-xxs);
     }
 
     section {
@@ -52,7 +58,8 @@
 
         border: 1px solid var(--medium-gray);
         border-radius: 1rem;
-        padding: var(--spacing-xxl) var(--spacing-md);
+        padding: var(--spacing-xxl);
+        box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
 
         h3 {
             position: absolute;
