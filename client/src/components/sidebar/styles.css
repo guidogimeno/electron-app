@@ -4,7 +4,7 @@
 
     height: 100%;
     width: 15rem;
-    z-index: var(--z-index-medium);
+    z-index: var(--z-index-sidebar);
 
     display: flex;
     flex-direction: column;

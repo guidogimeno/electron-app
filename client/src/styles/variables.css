@@ -33,7 +33,8 @@
 
     /* Z Index */
     --z-index-base: 0;
-    --z-index-medium: 1;
+    --z-index-sidebar: 1;
+    --z-index-header: 2;
     --z-index-modal: 300;
     --z-index-tooltip: 400;
     --z-index-notification: 500;
