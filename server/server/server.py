@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, make_response
+from flask import request, jsonify, make_response
 from functools import wraps
 
 from errors.api_exception import ApiException, BadRequest
@@ -14,8 +14,8 @@ AUTH_HEADER = "x-auth-token"
 
 
 class Server:
-    def __init__(self, db):
-        self.app = Flask(__name__)
+    def __init__(self, app, db):
+        self.app = app
         self.db = db
         self.login_use_case = LogInUseCase(db)
         self.users_service = SignUpUseCase(db)
