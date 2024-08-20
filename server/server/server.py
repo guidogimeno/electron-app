@@ -3,8 +3,8 @@ from functools import wraps
 
 from errors.api_exception import ApiException, BadRequest
 from errors.error_types import ErrorType
-from usecases.login_use_case import LogInUseCase
 from usecases.metrics_use_case import MetricsUseCase
+from usecases.login_use_case import LogInUseCase
 from usecases.users_service import SignUpUseCase
 from domain.user import User
 from domain.metric import Metric
