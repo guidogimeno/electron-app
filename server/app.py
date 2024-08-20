@@ -174,5 +174,10 @@ def ping():
     return jsonify("pong"), 200
 
 
+@app.route("/migrations", methods=["POST"])
+def migrations():
+    return jsonify(""), 201
+
+
 if __name__ == "__main__":
     app.run(debug=True, host="localhost", port=8080)
