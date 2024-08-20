@@ -1,4 +1,4 @@
-# fly.toml app configuration file generated for hip-pal-server on 2024-08-18T15:30:19-03:00
+# fly.toml app configuration file generated for hip-pal-server on 2024-08-20T20:53:13-03:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
@@ -7,6 +7,10 @@ app = 'hip-pal-server'
 primary_region = 'eze'
 
 [build]
+
+[[mounts]]
+  source = 'hippalvolume'
+  destination = '/data'
 
 [http_service]
   internal_port = 8080

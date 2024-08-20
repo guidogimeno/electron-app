@@ -12,6 +12,4 @@ FROM python:3.12.3-slim
 WORKDIR /app
 COPY --from=builder /app/.venv .venv/
 COPY . .
-COPY migrations/migrate.sh /app/migrate.sh
-RUN chmod +x /app/migrate.sh
-CMD ["/app/migrate.sh", "&&", "/app/.venv/bin/flask", "run", "--host=0.0.0.0", "--port=8080"]
+CMD ["/app/.venv/bin/flask", "run", "--host=0.0.0.0", "--port=8080"]
