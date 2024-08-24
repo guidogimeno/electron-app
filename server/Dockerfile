@@ -5,7 +5,6 @@ ENV PYTHONUNBUFFERED=1 \
 WORKDIR /app
 
 
-RUN apt-get update && apt-get install libpq5 -y
 RUN python -m venv .venv
 COPY requirements.txt ./
 RUN .venv/bin/pip install -r requirements.txt
