@@ -8,14 +8,14 @@ from usecases.users_service import SignUpUseCase
 from domain.user import User
 from domain.metric import Metric
 from logger.logger import log_error, log_info
-from database.sqlite import MySqlite
+from database.postgres import Postgres
 
 AUTH_HEADER = "x-auth-token"
 
 app = Flask(__name__)
 
 log_info("Connecting to DB...")
-with MySqlite() as db:
+with Postgres() as db:
 
     log_info("Creating use cases...")
     login_use_case = LogInUseCase(db)
