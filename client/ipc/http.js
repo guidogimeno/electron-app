@@ -8,7 +8,7 @@ ipcMain.handle("fetch", async (_, req) => {
 })
 
 async function fetch(req) {
-    const res = await net.fetch("https://hip-pal-server.fly.dev" + req.path, {
+    const res = await net.fetch("http://localhost:8080" + req.path, {
         method: req.method,
         headers: {
             "Content-Type": "application/json",
