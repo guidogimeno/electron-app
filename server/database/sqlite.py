@@ -13,12 +13,13 @@ class MySqlite:
 
     def __init__(self):
         log_info(f"Host: {os.environ.get("DB_HOST")}, Database: {os.environ.get("DB_DATABASE")}, User: {os.environ.get("DB_USER")}, Password: {os.environ.get("DB_PASSWORD")}")
-        self.conn = psycopg2.connect(
-            host=os.environ.get("DB_HOST"),
-            database=os.environ.get("DB_DATABASE"),
-            user=os.environ.get("DB_USER"),
-            password=os.environ.get("DB_PASSWORD")
-        )
+        username = os.environ.get("DB_USERNAME")
+        password = os.environ.get("DB_PASSWORD")
+        hostname = os.environ.get("DB_HOSTNAME")
+        port = os.environ.get("DB_PORT")
+        database = os.environ.get("DB_DATABASE")
+        connection_string = f"postgres://{username}:{password}@{hostname}:{port}/{database}?options"
+        self.conn = psycopg2.connect(connection_string)
 
     def get_user(self, user_id):
         return self._get_user_by("id", user_id)
