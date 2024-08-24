@@ -6,12 +6,13 @@ import psycopg2
 from domain.user import User
 from errors.api_exception import InternalServerError
 from errors.error_types import ErrorType
-from logger.logger import log_error
+from logger.logger import log_error, log_info
 
 
 class MySqlite:
 
     def __init__(self):
+        log_info(f"Host: {os.environ.get("DB_HOST")}, Database: {os.environ.get("DB_DATABASE")}, User: {os.environ.get("DB_USER")}, Password: {os.environ.get("DB_PASSWORD")}")
         self.conn = psycopg2.connect(
             host=os.environ.get("DB_HOST"),
             database=os.environ.get("DB_DATABASE"),
