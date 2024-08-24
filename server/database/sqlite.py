@@ -229,3 +229,6 @@ class MySqlite:
         def close(self):
             with sqlite3.connect(self.database_file) as conn:
                 conn.close()
+
+        def __exit__(self, exc_type, exc_val, exc_tb):
+            self.close()
