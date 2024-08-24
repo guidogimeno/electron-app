@@ -1,0 +1,29 @@
+services:
+  server:
+    build: .
+    environment: 
+      DATABASE_URL: postgres://root:mysecretpassword@db:5432/database?options
+    ports:
+      - "8443:8080"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+    networks:
+      - la_red_hernardo
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: mysecretpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - la_red_hernardo
+
+networks:
+  la_red_hernardo:
+      
+volumes:
+  postgres_data:
