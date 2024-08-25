@@ -1,0 +1,21 @@
+app = "hippaldb"
+primary_region = "eze"
+
+[build]
+  image = "mysql:8"
+
+[env]
+  MYSQL_DATABASE = "hippaldb"
+  MYSQL_USER = "hippal_server"
+
+[processes]
+  app = "--datadir /data/hippal_mysql --mysql-native-password"
+
+[[mounts]]
+  source = "mysqldata"
+  destination = "/data"
+
+[[vm]]
+  memory = "2gb"
+  cpu_kind = "shared"
+  cpus = 1

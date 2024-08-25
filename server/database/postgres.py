@@ -1,6 +1,5 @@
 import csv
 import io
-import os
 import psycopg2
 
 from domain.user import User
@@ -12,7 +11,6 @@ from logger.logger import log_error
 class Postgres:
 
     def __init__(self):
-        # self.conn = psycopg2.connect(os.environ.get("DATABASE_URL"))
         self.conn = psycopg2.connect(
             "postgres://postgres:mysecretpassword@localhost:5432/")
 
