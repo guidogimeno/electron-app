@@ -8,7 +8,7 @@ from errors.error_types import ErrorType
 from logger.logger import log_error
 
 
-class MySqlite:
+class Sqlite:
     def __init__(self):
         self.database_file = "./.database.db"
 

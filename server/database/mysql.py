@@ -1,6 +1,6 @@
+import mysql.connector
 import csv
 import io
-import psycopg2
 
 from domain.user import User
 from errors.api_exception import InternalServerError
@@ -8,11 +8,15 @@ from errors.error_types import ErrorType
 from logger.logger import log_error
 
 
-class Postgres:
-
+class MySql:
     def __init__(self):
-        self.conn = psycopg2.connect(
-            "postgres://postgres:mysecretpassword@localhost:5432/")
+        print("asdf")
+        self.conn = mysql.connector.connect(
+            host="hippaldb.internal",
+            user="hippal_sv",
+            password="password",
+            database="hippaldb"
+        )
 
     def get_user(self, user_id):
         return self._get_user_by("id", user_id)
