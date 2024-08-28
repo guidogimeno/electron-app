@@ -10,7 +10,6 @@ from logger.logger import log_error
 
 class MySql:
     def __init__(self):
-        print("asdf")
         self.conn = mysql.connector.connect(
             host="hippaldb.internal",
             user="hippal_sv",
