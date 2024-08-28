@@ -28,7 +28,10 @@ class LogInUseCase:
         return self._create_token(db_user.id)
 
     def _check_password(self, password, hashed_password):
-        return bcrypt.checkpw(password.encode("utf-8"), hashed_password.encode("utf-8"))
+        return bcrypt.checkpw(
+            password.encode("utf-8"),
+            hashed_password.encode("utf-8")
+        )
 
     def validate_token(self, token):
         try:
