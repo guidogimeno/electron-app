@@ -6,7 +6,7 @@ import cv2
 
 
 #Detecta contornos circulares para acercarnos a la cabeza del femur
-def detectar(corte_segmentado):
+def detectar(corte_segmentado,min_value):
     #Flag de que hallo contorno
     existe_contorno_circular=False;
 
@@ -28,7 +28,7 @@ def detectar(corte_segmentado):
             circularidad = (4 * np.pi * area) / (perimetro ** 2)
            
             # Verificar si el contorno es suficientemente circular
-            if 0.80 <= circularidad <= 1:  # Puedes ajustar los umbrales según sea necesario
+            if min_value <= circularidad <= 1:  # Puedes ajustar los umbrales según sea necesario
                 existe_contorno_circular = True
             else:
                 existe_contorno_circular = False

@@ -1,0 +1,26 @@
+{
+    "proximal": {
+        "izquierdo": {
+            "aasa": 97,
+            "pasa": -105,
+            "hasa": 202
+        },
+        "derecho": {
+            "aasa": -85,
+            "pasa": 125,
+            "hasa": 210
+        }
+    },
+    "ecuatorial": {
+        "izquierdo": {
+            "aasa": 54,
+            "pasa": -101,
+            "hasa": 155
+        },
+        "derecho": {
+            "aasa": -53,
+            "pasa": 100,
+            "hasa": 153
+        }
+    }
+}

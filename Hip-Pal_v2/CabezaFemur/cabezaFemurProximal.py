@@ -90,21 +90,6 @@ def detectar(corte_segmentado, corte_segmentado_gris, contorno_mas_grande,tomogr
     if  radius > 12:
         flag_cabeza_femur = True
         circulo = (cX, cY, radius)
-        """"
-        tomografia_original = preprocesar.procesarCorte(tomografia_original) 
-        
-        # Dibujar el círculo en la imagen original
-        cv2.circle(tomografia_original, (cX, cY), radius, (0, 255, 0), 2)
-        
-        plt.figure(figsize=(18, 10))
-
-        plt.subplot(1, 1, 1)
-        plt.imshow(cv2.cvtColor(tomografia_original, cv2.COLOR_BGR2RGB), cmap='gray')
-        plt.title('Ecuador Axial')
-        plt.axis('off')
-
-        plt.show()  
-        """
         return flag_cabeza_femur, circulo
     else:
         return flag_cabeza_femur, None

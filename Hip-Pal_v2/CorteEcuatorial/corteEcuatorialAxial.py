@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 import PreprocesamientoDeCorte.preprocesar as preprocesar
-import SectorAcetabular.esContornoCircular as esContornoCircular
+import SectorAcetabular.Utils.esContornoCircular as esContornoCircular
 import CabezaFemur.cabezaFemurAxial as cabezaFemurAxial
 
 #Detecta el ecuador
@@ -46,8 +46,8 @@ def detectar(tomografia_segmentada,tomografia_original):
 
         
         #Tratamiento especifico para cada femur
-        existe_contorno_circular_derecho,contorno_mas_grande_derecho = esContornoCircular.detectar(femur_derecho_segmentado_gris)
-        existe_contorno_circular_izquierdo,contorno_mas_grande_izquierdo = esContornoCircular.detectar(femur_izquierdo_segmentado_gris)
+        existe_contorno_circular_derecho,contorno_mas_grande_derecho = esContornoCircular.detectar(femur_derecho_segmentado_gris,0.8)
+        existe_contorno_circular_izquierdo,contorno_mas_grande_izquierdo = esContornoCircular.detectar(femur_izquierdo_segmentado_gris,0.8)
 
 
         if existe_contorno_circular_izquierdo:
