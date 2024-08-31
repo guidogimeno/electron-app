@@ -4,8 +4,12 @@ import { FuseV1Options, FuseVersion } from '@electron/fuses'
 export default {
     packagerConfig: {
         asar: true,
+        extraResource: [
+            "../scripts"
+        ]
     },
     rebuildConfig: {},
+
     makers: [
         {
             name: '@electron-forge/maker-squirrel',
