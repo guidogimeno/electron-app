@@ -50,10 +50,6 @@ def detectar_2(corte_segmentado, corte_segmentado_gris,contorno_mas_grande,tomog
     else:
         return flag_cabeza_femur,None
 
-
-
-
-
 # Detecta círculo para identificar dónde está la cabeza del fémur
 def detectar(corte_segmentado, corte_segmentado_gris, contorno_mas_grande,tomografia_original):
     flag_cabeza_femur = False
@@ -88,12 +84,11 @@ def detectar(corte_segmentado, corte_segmentado_gris, contorno_mas_grande,tomogr
             min_dist = dist
     
     # Calcular el radio como el promedio de la distancia máxima y mínima
-    radius = int((max_dist+min_dist)/2)
+    radius = int(min_dist)
 
-    if  radius > 10:
+    if  radius > 5:
         flag_cabeza_femur = True
         circulo = (cX, cY, radius)
-
         return flag_cabeza_femur, circulo
     else:
         return flag_cabeza_femur, None

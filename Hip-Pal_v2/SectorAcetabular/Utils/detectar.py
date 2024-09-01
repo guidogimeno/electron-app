@@ -1,62 +1,74 @@
 import cv2
 from matplotlib import pyplot as plt
-import nibabel as nib
-import os
 import numpy as np
+from Excepciones.Excepciones import ErrorDetectandoAngulos
 from PreprocesamientoDeCorte import preprocesar
 from SectorAcetabular.Angulos import aasa, pasa
-import SectorAcetabular.sectorAcetabular as sectorAcetabular
+
 
 
 
 def detectar(json,tomografia_original,tomografia_segmentada):
 
-    angulos_proximal = calcularAngulos(tomografia_segmentada,json["proximal"]["izquierdo"]["coordenadas"],json["proximal"]["derecho"]["coordenadas"],json["proximal"]["izquierdo"]["numero_corte"],json["proximal"]["derecho"]["numero_corte"])
-    
-    composicion_proximal=obtenerCorteCombinado(tomografia_original,tomografia_segmentada,json["proximal"]["izquierdo"]["numero_corte"],json["proximal"]["derecho"]["numero_corte"])
+    try:
+        
+        angulos_proximal = calcularAngulos(tomografia_segmentada,json["proximal"]["izquierdo"]["coordenadas"],json["proximal"]["derecho"]["coordenadas"],json["proximal"]["izquierdo"]["numero_corte"],json["proximal"]["derecho"]["numero_corte"])
+        composicion_proximal=obtenerCorteCombinado(tomografia_original,tomografia_segmentada,json["proximal"]["izquierdo"]["numero_corte"],json["proximal"]["derecho"]["numero_corte"])
+        graficar(composicion_proximal,json["proximal"]["izquierdo"]["coordenadas"],json["proximal"]["derecho"]["coordenadas"],angulos_proximal,"Ecuador Proximal")
+
+        angulos_intermedial = calcularAngulos(tomografia_segmentada,json["intermedial"]["izquierdo"]["coordenadas"],json["intermedial"]["derecho"]["coordenadas"],json["intermedial"]["izquierdo"]["numero_corte"],json["intermedial"]["derecho"]["numero_corte"])
+        composicion_intermedial=obtenerCorteCombinado(tomografia_original,tomografia_segmentada,json["intermedial"]["izquierdo"]["numero_corte"],json["intermedial"]["derecho"]["numero_corte"])
+        graficar(composicion_intermedial,json["intermedial"]["izquierdo"]["coordenadas"],json["intermedial"]["derecho"]["coordenadas"],angulos_intermedial,"Intermedial Axial")
+
+        angulos_ecuatorial = calcularAngulos(tomografia_segmentada,json["ecuatorial"]["izquierdo"]["coordenadas"],json["ecuatorial"]["derecho"]["coordenadas"],json["ecuatorial"]["izquierdo"]["numero_corte"],json["ecuatorial"]["derecho"]["numero_corte"])
+        composicion_ecuatorial=obtenerCorteCombinado(tomografia_original,tomografia_segmentada,json["ecuatorial"]["izquierdo"]["numero_corte"],json["ecuatorial"]["derecho"]["numero_corte"])
+        graficar(composicion_ecuatorial,json["ecuatorial"]["izquierdo"]["coordenadas"],json["ecuatorial"]["derecho"]["coordenadas"],angulos_ecuatorial,"Ecuador Axial")
 
 
-    graficar(composicion_proximal,json["proximal"]["izquierdo"]["coordenadas"],json["proximal"]["derecho"]["coordenadas"],angulos_proximal,"Ecuador Proximal")
-
-    angulos_ecuatorial = calcularAngulos(tomografia_segmentada,json["ecuatorial"]["izquierdo"]["coordenadas"],json["ecuatorial"]["derecho"]["coordenadas"],json["ecuatorial"]["izquierdo"]["numero_corte"],json["ecuatorial"]["derecho"]["numero_corte"])
-    
-    composicion_ecuatorial=obtenerCorteCombinado(tomografia_original,tomografia_segmentada,json["ecuatorial"]["izquierdo"]["numero_corte"],json["ecuatorial"]["derecho"]["numero_corte"])
-
-    graficar(composicion_ecuatorial,json["ecuatorial"]["izquierdo"]["coordenadas"],json["ecuatorial"]["derecho"]["coordenadas"],angulos_ecuatorial,"Ecuador Axial")
-
-
-    angulos={
-        "proximal":{
-            "izquierdo":{
-                "aasa":angulos_proximal["izquierdo"]["aasa"],
-                "pasa":angulos_proximal["izquierdo"]["pasa"],
-                "hasa":angulos_proximal["izquierdo"]["hasa"],
+        angulos={
+            "Proximal":{
+                "izquierdo":{
+                    "aasa":angulos_proximal["izquierdo"]["aasa"],
+                    "pasa":angulos_proximal["izquierdo"]["pasa"],
+                    "hasa":angulos_proximal["izquierdo"]["hasa"],
+                },
+                "derecho":{
+                    "aasa":angulos_proximal["derecho"]["aasa"],
+                    "pasa":angulos_proximal["derecho"]["pasa"],
+                    "hasa":angulos_proximal["derecho"]["hasa"],
+                }
             },
-            "derecho":{
-                "aasa":angulos_proximal["derecho"]["aasa"],
-                "pasa":angulos_proximal["derecho"]["pasa"],
-                "hasa":angulos_proximal["derecho"]["hasa"],
-            }
-        },
-        "ecuatorial":{
-            "izquierdo":{
-                "aasa":angulos_ecuatorial["izquierdo"]["aasa"],
-                "pasa":angulos_ecuatorial["izquierdo"]["pasa"],
-                "hasa":angulos_ecuatorial["izquierdo"]["hasa"],
+            "Intermedial":{
+                "izquierdo":{
+                    "aasa":angulos_intermedial["izquierdo"]["aasa"],
+                    "pasa":angulos_intermedial["izquierdo"]["pasa"],
+                    "hasa":angulos_intermedial["izquierdo"]["hasa"],
+                },
+                "derecho":{
+                    "aasa":angulos_intermedial["derecho"]["aasa"],
+                    "pasa":angulos_intermedial["derecho"]["pasa"],
+                    "hasa":angulos_intermedial["derecho"]["hasa"],
+                }
             },
-            "derecho":{
-                "aasa":angulos_ecuatorial["derecho"]["aasa"],
-                "pasa":angulos_ecuatorial["derecho"]["pasa"],
-                "hasa":angulos_ecuatorial["derecho"]["hasa"],
+            "Ecuatorial":{
+                "izquierdo":{
+                    "aasa":angulos_ecuatorial["izquierdo"]["aasa"],
+                    "pasa":angulos_ecuatorial["izquierdo"]["pasa"],
+                    "hasa":angulos_ecuatorial["izquierdo"]["hasa"],
+                },
+                "derecho":{
+                    "aasa":angulos_ecuatorial["derecho"]["aasa"],
+                    "pasa":angulos_ecuatorial["derecho"]["pasa"],
+                    "hasa":angulos_ecuatorial["derecho"]["hasa"],
+                }
             }
         }
-    }
 
-    return angulos
+        return angulos
 
-    
-
-
+    except: 
+        raise ErrorDetectandoAngulos(
+            "Ocurrio un error inesperado en la deteccion de los angulos Sector Acetabular.")
 
 def obtenerCorteCombinado(tomografia_original,tomografia_segmentada,numero_corte_izquierdo,numero_corte_derecho):
     
@@ -123,10 +135,10 @@ def calcularAngulos(tomografia_segmentada,cabeza_izq,cabeza_der,numero_corte_izq
                 "hasa":angulo_hasa_izq
             },
         "derecho":{
-                "aasa":angulo_aasa_der,
+                "aasa":-1*angulo_aasa_der,
                 "x_aasa":x_aasa_der,
                 "y_aasa":y_aasa_der,
-                "pasa":angulo_pasa_der,
+                "pasa":-1*angulo_pasa_der,
                 "x_pasa":x_pasa_der,
                 "y_pasa":y_pasa_der,
                 "hasa":angulo_hasa_der

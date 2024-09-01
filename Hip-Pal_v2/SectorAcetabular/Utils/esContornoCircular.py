@@ -1,4 +1,3 @@
-from matplotlib import pyplot as plt
 import numpy as np
 import cv2
 
@@ -32,20 +31,7 @@ def detectar(corte_segmentado,min_value):
                 existe_contorno_circular = True
             else:
                 existe_contorno_circular = False
-
-            """"
-                    # Dibujar el contorno detectado en la imagen
-            if existe_contorno_circular:
-                # Crear una copia de la imagen original para dibujar el contorno
-                imagen_con_contorno = cv2.cvtColor(corte_segmentado, cv2.COLOR_GRAY2BGR)
-                cv2.drawContours(imagen_con_contorno, [contorno_mas_grande], -1, (0, 255, 0), 2)
                 
-                # Mostrar la imagen con el contorno detectado
-                plt.imshow(cv2.cvtColor(imagen_con_contorno, cv2.COLOR_BGR2RGB))
-                plt.title("Contorno Circular Detectado")
-                plt.axis("off")
-                plt.show()
-            """
         return existe_contorno_circular,contorno_mas_grande
     else:
         return existe_contorno_circular,0

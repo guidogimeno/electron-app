@@ -1,6 +1,7 @@
 import cv2
+from Excepciones.Excepciones import ErrorIntermedialNotFound, ErrorProximalEcuatorialNotFound
 import PreprocesamientoDeCorte.preprocesar as preprocesar
-from SectorAcetabular.Utils import esCorteEcuatorialAxial
+from SectorAcetabular.Utils import esCorteEcuatorialAxial, esCorteIntermedialAxial
 from SectorAcetabular.Utils import esCorteProximalAxial 
 
 
@@ -67,7 +68,7 @@ def detectar(tomografia_segmentada):
                 corte_cabeza_proximal_der=i
                 encontre_proximal_derecho=True
 
-
+##----------------------------------------------------------------------------------------------------------------------------
 
 
         if(sali_cabeza_ecuatorial_izq==10):
@@ -95,8 +96,16 @@ def detectar(tomografia_segmentada):
                 encontre_proximal_izquierdo=True
 
 
-
+    #Verifico que encontre resultados y calculo el intermedial
     if(encontre_ecuatorial_izquierdo and encontre_ecuatorial_derecho and encontre_proximal_derecho and encontre_proximal_izquierdo):
+
+        #Busco intermedial.
+        corte_cabeza_intermedial_izq = int((corte_cabeza_proximal_izq - corte_cabeza_ecuatorial_izq)/2) + corte_cabeza_ecuatorial_izq
+
+        corte_cabeza_intermedial_der = int((corte_cabeza_proximal_der - corte_cabeza_ecuatorial_der)/2) + corte_cabeza_ecuatorial_der
+
+        cabeza_intermedial_izq,cabeza_intermedial_der=buscarIntermedialAxial(tomografia_segmentada,corte_cabeza_ecuatorial_izq,corte_cabeza_ecuatorial_der)
+
 
         #Armo resultados
 
@@ -109,6 +118,16 @@ def detectar(tomografia_segmentada):
                 "derecho":{
                     "coordenadas":cabeza_proximal_der,
                     "numero_corte":corte_cabeza_proximal_der,
+                }
+            },
+            "intermedial":{
+                "izquierdo":{
+                    "coordenadas":cabeza_intermedial_izq,
+                    "numero_corte":corte_cabeza_intermedial_izq,
+                },
+                "derecho":{
+                    "coordenadas":cabeza_intermedial_der,
+                    "numero_corte":corte_cabeza_intermedial_der,
                 }
             },
             "ecuatorial":{
@@ -126,5 +145,32 @@ def detectar(tomografia_segmentada):
         return femurs
     
     else:
-        print("No encontre el ecuatorial de una o de ambas cabezas.")
+        raise ErrorProximalEcuatorialNotFound(
+            "No se pudo hallar uno o ambos cortes Proximales y Axiales.",
+            detalles=f"Encontre_ecuatorial_izquierdo: {encontre_ecuatorial_izquierdo}, Encontre_ecuatorial_derecho: {encontre_ecuatorial_derecho},Encontre_proximal_derecho:{encontre_proximal_derecho}, Encontre_proximal_izquierdo:{encontre_proximal_izquierdo}"
+        )
 
+
+def buscarIntermedialAxial(tomografia_segmentada,corte_cabeza_intermedial_izq,corte_cabeza_intermedial_der):
+    
+    #Obtengo corte del archivo segmentado
+    femur_derecho_segmentado = tomografia_segmentada[:, :, corte_cabeza_intermedial_der,6]
+    femur_izquierdo_segmentado = tomografia_segmentada[:, :, corte_cabeza_intermedial_izq,7]
+
+    femur_derecho_segmentado = preprocesar.procesarCorte(femur_derecho_segmentado)
+    femur_izquierdo_segmentado = preprocesar.procesarCorte(femur_izquierdo_segmentado)
+
+    # Convertir a escala de grises para la detección de contornos
+    femur_derecho_segmentado_gris = cv2.cvtColor(femur_derecho_segmentado, cv2.COLOR_RGB2GRAY)
+    femur_izquierdo_segmentado_gris = cv2.cvtColor(femur_izquierdo_segmentado, cv2.COLOR_RGB2GRAY)
+
+    cabeza_intermedial_der,flag_cabeza_der = esCorteIntermedialAxial.detectar(femur_derecho_segmentado,femur_derecho_segmentado_gris)
+
+    cabeza_intermedial_izq,flag_cabeza_izq = esCorteIntermedialAxial.detectar(femur_izquierdo_segmentado,femur_izquierdo_segmentado_gris)
+
+    if(flag_cabeza_der and flag_cabeza_izq):
+        return cabeza_intermedial_izq,cabeza_intermedial_der
+    else:
+        raise ErrorIntermedialNotFound("No se pudo hallar uno o ambos cortes Intermediales.",
+            detalles=f"Encontre_intermedial_izquierdo: {flag_cabeza_izq}, Encontre_intermedial_derecho: {flag_cabeza_der}"
+        )

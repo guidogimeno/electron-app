@@ -1,26 +1,38 @@
 {
-    "proximal": {
+    "Proximal": {
         "izquierdo": {
-            "aasa": 97,
-            "pasa": -105,
-            "hasa": 202
+            "aasa": 119,
+            "pasa": -121,
+            "hasa": 240
         },
         "derecho": {
-            "aasa": -85,
-            "pasa": 125,
-            "hasa": 210
+            "aasa": 106,
+            "pasa": -110,
+            "hasa": 216
         }
     },
-    "ecuatorial": {
+    "Intermedial": {
         "izquierdo": {
-            "aasa": 54,
-            "pasa": -101,
-            "hasa": 155
+            "aasa": 76,
+            "pasa": -106,
+            "hasa": 182
         },
         "derecho": {
-            "aasa": -53,
-            "pasa": 100,
-            "hasa": 153
+            "aasa": 92,
+            "pasa": -104,
+            "hasa": 196
+        }
+    },
+    "Ecuatorial": {
+        "izquierdo": {
+            "aasa": 63,
+            "pasa": -96,
+            "hasa": 159
+        },
+        "derecho": {
+            "aasa": 75,
+            "pasa": -100,
+            "hasa": 175
         }
     }
 }

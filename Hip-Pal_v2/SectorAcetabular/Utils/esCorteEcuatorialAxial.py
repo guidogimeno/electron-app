@@ -1,6 +1,3 @@
-import numpy as np
-import cv2
-import PreprocesamientoDeCorte.preprocesar as preprocesar
 import SectorAcetabular.Utils.esContornoCircular as esContornoCircular
 import CabezaFemur.cabezaFemurAxial as cabezaFemurAxial
 
