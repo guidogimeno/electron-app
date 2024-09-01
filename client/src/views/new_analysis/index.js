@@ -8,7 +8,7 @@ import { GlobalContext } from "../../context/index.js"
 import CustomError from "../../services/errors/index.js"
 import { track } from "../../services/metrics/index.js"
 import Spinner from "../../components/spinner/index.js"
-import { executePyScript } from "../../pyscripts/index.js"
+import { executeBin } from "../../pyscripts/index.js"
 
 const STATE = {
     start: 0,
@@ -68,7 +68,8 @@ function NewAnalysis() {
         setIsAnalyzing(true)
         try {
             // simulo la creacion
-            await executePyScript()
+            const result = await executeBin("sleep")
+            console.log(`result after executing binary: ${result}`)
             const generatedReport = {
                 id: generateId(),
                 name: files[0].name,

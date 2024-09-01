@@ -5,5 +5,6 @@
 
 int main() {
     sleep(2);
+    printf("foo\n");
     return 0;
 }

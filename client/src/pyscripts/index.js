@@ -1,7 +1,7 @@
-async function executePyScript() {
-    return window["py"].pyscript()
+async function executeBin(fileName) {
+    return window["executeBin"].executeBin(fileName)
 }
 
 export {
-    executePyScript
+    executeBin
 }

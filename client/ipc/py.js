@@ -1,24 +1,19 @@
 import { app, ipcMain } from "electron"
 import { spawn } from "child_process"
 
-ipcMain.handle("pyscript", async () => {
-    const python = spawn(`${app.getAppPath()}/bin/sleep`);
-    try {
-        console.log("ejecutando script")
-        python.stdout.on("data", (result) => {
-            console.log("stdout", result.toString())
+ipcMain.handle("executeBin", async (_, fileName) => {
+    console.log(`about to execute ${fileName}`)
+    return new Promise(function(resolve, reject) {
+        const binary = spawn(`${app.getAppPath()}/bin/${fileName}`);
+
+        console.log("executing binary")
+        binary.stdout.on("data", (result) => {
+            console.log(`binary execution stdout: ${result}`)
+            resolve(result)
         })
-        python.stderr.on("data", (result) => {
-            console.log("stderr", result.toString())
+        binary.stderr.on("data", (code) => {
+            console.log(`binary execution stderr: ${code}`)
+            reject(new Error(`process exited with code ${code}`))
         })
-        python.on("close", (result) => {
-            console.log("close", result)
-        })
-        python.on("open", (result) => {
-            console.log("open", result)
-        })
-        console.log("termino de ejecutar?")
-    } catch (err) {
-        console.log("error al ejecutar el script de python", err)
-    }
+    })
 })
