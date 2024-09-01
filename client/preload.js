@@ -31,6 +31,9 @@ contextBridge.exposeInMainWorld("fs", {
     },
     deleteDir: (dirPath) => {
         return ipcRenderer.invoke("deleteDir", dirPath)
+    },
+    getPath: () => {
+        return ipcRenderer.invoke("getPath")
     }
 })
 

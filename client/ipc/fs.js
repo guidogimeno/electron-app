@@ -4,6 +4,10 @@ import path from "node:path"
 
 const REPORTS_PATH = path.join(app.getPath("userData"), "reports")
 
+ipcMain.handle("getPath", () => {
+    return REPORTS_PATH
+})
+
 ipcMain.handle("mkdir", (_, dirName) => {
     const dirPath = path.join(REPORTS_PATH, dirName)
     fs.mkdirSync(dirPath, { recursive: true })

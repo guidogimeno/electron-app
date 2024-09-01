@@ -18,11 +18,17 @@ async function deleteDir(dirPath) {
     return window["fs"].deleteDir(dirPath)
 }
 
+async function getPath() {
+    return window["fs"].getPath()
+}
+
+
 export {
     mkdir,
     writeFile,
     readFile,
     readFiles,
-    deleteDir
+    deleteDir,
+    getPath
 }
 

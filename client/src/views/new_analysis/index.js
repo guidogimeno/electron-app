@@ -68,8 +68,10 @@ function NewAnalysis() {
         setIsAnalyzing(true)
         try {
             // simulo la creacion
-            const result = await executeBin("sleep")
-            console.log(`result after executing binary: ${result}`)
+            const analysisId = await executeBin("sleep")
+            console.log(`result after executing binary: ${analysisId}`)
+
+            // TODO: Esto ya no seria necesario.
             const generatedReport = {
                 id: generateId(),
                 name: files[0].name,
@@ -99,6 +101,7 @@ function NewAnalysis() {
         }
     }
 
+    // TODO: Aca falta algun tipo de loading
     async function handleSubmit(event) {
         event.preventDefault()
 
@@ -115,6 +118,7 @@ function NewAnalysis() {
             console.error("Failed to send metrics", error)
         }
 
+        // TODO: En teoria esto no existiria porque el bin ya crearia los archivos
         try {
             console.log("Este es el form data", formData)
             await saveReport(report)
