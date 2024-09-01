@@ -2,7 +2,7 @@ import { app, ipcMain } from "electron"
 import { spawn } from "child_process"
 
 ipcMain.handle("pyscript", async () => {
-    const python = spawn(`${app.getAppPath()}/../scripts/hello`);
+    const python = spawn(`${app.getAppPath()}/bin/sleep`);
     try {
         console.log("ejecutando script")
         python.stdout.on("data", (result) => {
