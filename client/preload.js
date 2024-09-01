@@ -31,11 +31,14 @@ contextBridge.exposeInMainWorld("fs", {
     },
     deleteDir: (dirPath) => {
         return ipcRenderer.invoke("deleteDir", dirPath)
+    },
+    getPath: () => {
+        return ipcRenderer.invoke("getPath")
     }
 })
 
-contextBridge.exposeInMainWorld("py", {
-    pyscript: () => {
-        return ipcRenderer.invoke("pyscript")
+contextBridge.exposeInMainWorld("bin", {
+    execute: (fileName) => {
+        return ipcRenderer.invoke("execute", fileName)
     }
 })

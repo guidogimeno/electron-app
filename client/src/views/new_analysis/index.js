@@ -8,7 +8,7 @@ import { GlobalContext } from "../../context/index.js"
 import CustomError from "../../services/errors/index.js"
 import { track } from "../../services/metrics/index.js"
 import Spinner from "../../components/spinner/index.js"
-import { executePyScript } from "../../pyscripts/index.js"
+import { executeBin } from "../../executables/index.js"
 
 const STATE = {
     start: 0,
@@ -68,7 +68,10 @@ function NewAnalysis() {
         setIsAnalyzing(true)
         try {
             // simulo la creacion
-            await executePyScript()
+            const analysisId = await executeBin("sleep")
+            console.log(`result after executing binary: ${analysisId}`)
+
+            // TODO: Esto ya no seria necesario.
             const generatedReport = {
                 id: generateId(),
                 name: files[0].name,
@@ -98,6 +101,7 @@ function NewAnalysis() {
         }
     }
 
+    // TODO: Aca falta algun tipo de loading
     async function handleSubmit(event) {
         event.preventDefault()
 
@@ -114,6 +118,7 @@ function NewAnalysis() {
             console.error("Failed to send metrics", error)
         }
 
+        // TODO: En teoria esto no existiria porque el bin ya crearia los archivos
         try {
             console.log("Este es el form data", formData)
             await saveReport(report)

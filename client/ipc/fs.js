@@ -4,6 +4,10 @@ import path from "node:path"
 
 const REPORTS_PATH = path.join(app.getPath("userData"), "reports")
 
+ipcMain.handle("getPath", () => {
+    return REPORTS_PATH
+})
+
 ipcMain.handle("mkdir", (_, dirName) => {
     const dirPath = path.join(REPORTS_PATH, dirName)
     fs.mkdirSync(dirPath, { recursive: true })
@@ -20,7 +24,11 @@ ipcMain.handle("writeFile", (_, filePath, file) => {
 })
 
 ipcMain.handle("readFiles", async (_, filePath) => {
-    const reportPaths = await fs.promises.readdir(REPORTS_PATH);
+    if (!fs.existsSync(REPORTS_PATH)) {
+        return []
+    }
+
+    const reportPaths = await fs.promises.readdir(REPORTS_PATH)
 
     const promises = []
     for (const reportPath of reportPaths) {

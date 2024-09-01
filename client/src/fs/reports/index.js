@@ -1,5 +1,5 @@
 import CustomError from "../../services/errors/index.js"
-import { deleteDir, mkdir, readFiles, writeFile } from "../index.js"
+import { deleteDir, mkdir, readFiles, readFile, writeFile } from "../index.js"
 
 const CONTENT_FILE = "content.json"
 
@@ -59,7 +59,24 @@ async function removeReport(id) {
     }
 }
 
+async function getReport(reportId) {
+    try {
+        const file = await readFile(filePath(CONTENT_FILE, reportId))
+        const report = JSON.parse(file)
+        return {
+            id: report.id,
+            name: report.name,
+            content: report.content,
+            date: new Date(report.created_date).toISOString().split("T")[0]
+        }
+    } catch (error) {
+        console.log(`Failed to get report: ${reportId} for the following reason: ${error}`)
+        throw new CustomError("Failed to get report")
+    }
+}
+
 export {
+    getReport,
     saveReport,
     getReports,
     removeReport
