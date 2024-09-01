@@ -1,0 +1,5 @@
+pydicom
+argparse
+nibabel
+numpy
+dcm2niix
