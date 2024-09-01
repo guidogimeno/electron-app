@@ -34,8 +34,8 @@ contextBridge.exposeInMainWorld("fs", {
     }
 })
 
-contextBridge.exposeInMainWorld("py", {
-    executeBin: (fileName) => {
-        return ipcRenderer.invoke("executeBin", fileName)
+contextBridge.exposeInMainWorld("bin", {
+    execute: (fileName) => {
+        return ipcRenderer.invoke("execute", fileName)
     }
 })

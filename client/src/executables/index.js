@@ -1,5 +1,5 @@
 async function executeBin(fileName) {
-    return window["executeBin"].executeBin(fileName)
+    return window["bin"].execute(fileName)
 }
 
 export {

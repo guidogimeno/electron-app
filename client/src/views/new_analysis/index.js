@@ -8,7 +8,7 @@ import { GlobalContext } from "../../context/index.js"
 import CustomError from "../../services/errors/index.js"
 import { track } from "../../services/metrics/index.js"
 import Spinner from "../../components/spinner/index.js"
-import { executeBin } from "../../pyscripts/index.js"
+import { executeBin } from "../../executables/index.js"
 
 const STATE = {
     start: 0,
