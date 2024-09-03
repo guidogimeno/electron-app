@@ -90,7 +90,7 @@ def convert_dcm_to_nii(dicom_folder, output_folder):
 #--------------------------------------------------------------------------------------------------
 
 # Función principal
-def main():
+def dcm_to_nii():
     parser = argparse.ArgumentParser(description="Script para encontrar el directorio de tomografía a partir de una ruta y luego convertirlo a .nii.gz")
     parser.add_argument("ruta", help="Ruta del directorio raíz para iniciar la búsqueda.")
     parser.add_argument("carpeta_de_salida", help="Ruta a la carpeta donde quedara el .nii.gz")
@@ -102,6 +102,3 @@ def main():
     dicom_folder = selectedPath
     output_folder = args.carpeta_de_salida
     convert_dcm_to_nii(dicom_folder, output_folder)
-
-if __name__ == "__main__":
-    main()

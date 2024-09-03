@@ -4,9 +4,11 @@ from Excepciones.Excepciones import ErrorDetectandoAngulos, ErrorIntermedialNotF
 import SectorAcetabular.sectorAcetabular as sectorAcetabular
 import SectorAcetabular.Utils.detectar as detectar
 import json
+from TCtoNiigz import dcm_to_nii
 
 
 def main():
+    dcm_to_nii()
     try:
         ruta_json_resultados = r'C:\Users\Usuario\anaconda3\envs\monailabel-env\pruebas\angulos.json'
 

@@ -1,0 +1,8 @@
+pydicom
+argparse
+nibabel
+numpy
+dcm2niix
+monai-weekly[gdown, nibabel, tqdm, ignite]
+matplotlib
+opencv-python
