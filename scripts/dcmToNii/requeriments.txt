@@ -1,0 +1,4 @@
+pydicom
+nibabel
+numpy
+dcm2niix
