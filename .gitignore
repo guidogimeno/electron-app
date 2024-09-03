@@ -4,6 +4,8 @@ build/
 out/
 dist/
 
+tomografias_input/
+
 .venv/
 .database.db
 __pycache__/
