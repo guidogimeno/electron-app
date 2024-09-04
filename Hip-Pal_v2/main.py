@@ -6,12 +6,36 @@ import SectorAcetabular.Utils.detectar as detectar
 import json
 from TCtoNiigz import dcm_to_nii
 from Inferencia import segmentar
-
+import numpy as np
 
 def main():
-    print("GUIDO DEBUG: empieza")
-    dcm_to_nii()
-    print("GUIDO DEBUG: sali de aca")
+  # print("GUIDO DEBUG: empieza")
+   # dcm_to_nii()
+    #print("GUIDO DEBUG: sali de aca")
+
+
+
+    # Load the NIfTI file
+    img = nib.load(r"C:\Users\Usuario\anaconda3\envs\monailabel-env\Hip-Pal_v2\Tomografia\Prediccion\CT_7_seg.nii.gz")
+
+    # Get the image data and affine matrix
+    data = img.get_fdata()
+    affine = img.affine
+
+    # Flip the axial slices (z-axis)
+    flipped_data = np.flip(data, axis=1)
+
+    # Get the affine matrix
+    affine = img.affine
+    # Example: Flip the y-axis
+    affine[1, 1] = -affine[1, 1]
+    affine[1, 3] = -affine[1, 3]
+        # Save the flipped image
+    flipped_img = nib.Nifti1Image(flipped_data, affine)
+    nib.save(flipped_img,  r"C:\Users\Usuario\anaconda3\envs\monailabel-env\Hip-Pal_v2\Tomografia\Prediccion\CT_7_seg_rotada.nii.gz")
+
+    print("Axial slices flipped and saved to 'flipped_image.nii.gz'")
+
 
     # predecimos
     print("GUIDO DEBUG: empieza la segmentacion")

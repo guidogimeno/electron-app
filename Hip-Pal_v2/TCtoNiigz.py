@@ -79,7 +79,7 @@ def convert_dcm_to_nii(dicom_folder, output_folder):
         os.makedirs(output_folder)
 
     # Comando para convertir de DICOM a NIfTI
-    command = f'dcm2niix -z y -o {output_folder} {dicom_folder}'
+    command = f'dcm2niix -o {output_folder} -z y -p n -m y -x n {dicom_folder}'
     
     # Ejecutar el comando
     subprocess.run(command, shell=True, check=True)
