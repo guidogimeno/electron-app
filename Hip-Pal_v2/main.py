@@ -8,15 +8,20 @@ from TCtoNiigz import dcm_to_nii
 from Inferencia import segmentar
 import numpy as np
 
+
 def main():
-  # print("GUIDO DEBUG: empieza")
-   # dcm_to_nii()
-    #print("GUIDO DEBUG: sali de aca")
+    print("GUIDO DEBUG: empieza")
+    dcm_to_nii()
+    print("GUIDO DEBUG: sali de aca")
+    ruta = os.getcwd()
 
-
+    # predecimos
+    print("GUIDO DEBUG: empieza la segmentacion")
+    segmentar()
 
     # Load the NIfTI file
-    img = nib.load(r"C:\Users\Usuario\anaconda3\envs\monailabel-env\Hip-Pal_v2\Tomografia\Prediccion\CT_7_seg.nii.gz")
+    img = nib.load(
+        f"{ruta}/tomografias_segmentadas/4_Pelvis_Osea_20230418192551_4/4_Pelvis_Osea_20230418192551_4_seg.nii.gz")
 
     # Get the image data and affine matrix
     data = img.get_fdata()
@@ -30,16 +35,12 @@ def main():
     # Example: Flip the y-axis
     affine[1, 1] = -affine[1, 1]
     affine[1, 3] = -affine[1, 3]
-        # Save the flipped image
+    # Save the flipped image
     flipped_img = nib.Nifti1Image(flipped_data, affine)
-    nib.save(flipped_img,  r"C:\Users\Usuario\anaconda3\envs\monailabel-env\Hip-Pal_v2\Tomografia\Prediccion\CT_7_seg_rotada.nii.gz")
+    nib.save(flipped_img,  f"{
+             ruta}/tomografias_segmentadas/4_Pelvis_Osea_20230418192551_4/4_Pelvis_Osea_20230418192551_4_seg_flipendo.nii.gz")
 
     print("Axial slices flipped and saved to 'flipped_image.nii.gz'")
-
-
-    # predecimos
-    print("GUIDO DEBUG: empieza la segmentacion")
-    segmentar()
     print("GUIDO DEBUG: segmentacion finalizada")
 
     # try:
@@ -96,8 +97,6 @@ def main():
     #     print(f"Error: {e}")
     #     print("Termino: 500")
     #     return 500
-
-
 
 
 if __name__ == "__main__":
