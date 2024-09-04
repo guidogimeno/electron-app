@@ -30,13 +30,15 @@ import shutil
 import os
 import glob
 
+
 def segmentar():
     base_path = "/home/ggimeno/Documents/electron-app"
 
 # data_dir = r"/content/drive/MyDrive"
     data_dir = f"{base_path}/Hip-Pal_v2"
 
-    test_images = sorted(glob.glob(os.path.join(r"/home/ggimeno/Documents/electron-app/Hip-Pal_v2", "tomografias_nii", "*.nii.gz")))
+    test_images = sorted(glob.glob(os.path.join(
+        r"/home/ggimeno/Documents/electron-app/Hip-Pal_v2", "tomografias_nii", "*.nii.gz")))
     print(f"que verga hay aca adentro: {len(test_images)}")
 
     test_data = [{"image": image} for image in test_images]
@@ -87,14 +89,16 @@ def segmentar():
                 to_tensor=True,
             ),
             AsDiscreted(keys="pred", argmax=True, to_onehot=8),
-            SaveImaged(keys="pred", meta_keys="pred_meta_dict", output_dir=r"/home/ggimeno/Documents/electron-app/Hip-Pal_v2/tomografias_segmentadas", output_postfix="seg", resample=False),
+            SaveImaged(keys="pred", meta_keys="pred_meta_dict",
+                       output_dir=r"/home/ggimeno/Documents/electron-app/Hip-Pal_v2/tomografias_segmentadas", output_postfix="seg", resample=False),
         ]
     )
 
     # root_dir=r"/content/drive/MyDrive"
     root_dir = r"/home/ggimeno/Documents/electron-app/Hip-Pal_v2"
 
-    model.load_state_dict(torch.load(os.path.join(r"/home/ggimeno/Documents/electron-app/Hip-Pal_v2", "best_metric_model.pth"), map_location=device))
+    model.load_state_dict(torch.load(os.path.join(
+        r"/home/ggimeno/Documents/electron-app/Hip-Pal_v2", "best_metric_model.pth"), map_location=device))
     model.eval()
     loader = LoadImage()
     with torch.no_grad():
@@ -102,9 +106,11 @@ def segmentar():
             test_inputs = test_data["image"].to(device)
             roi_size = (160, 160, 160)
             sw_batch_size = 4
-            test_data["pred"] = sliding_window_inference(test_inputs, roi_size, sw_batch_size, model)
+            test_data["pred"] = sliding_window_inference(
+                test_inputs, roi_size, sw_batch_size, model)
 
-            test_data = [post_transforms(i) for i in decollate_batch(test_data)]
+            test_data = [post_transforms(i)
+                         for i in decollate_batch(test_data)]
 
-             # uncomment the following lines to visualize the predicted results
+            # uncomment the following lines to visualize the predicted results
             test_output = from_engine(["pred"])(test_data)
