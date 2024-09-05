@@ -11,7 +11,16 @@ def detectar(corte_segmentado,min_value):
 
     # Detectar contornos
     contours, _ = cv2.findContours(corte_segmentado, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE);
-    
+
+    #Cuando se comienza a detectar el reborde del cuello frena para no pasarse.
+    if len(contours) > 1:
+            # Ordenar los contornos por área
+            sorted_contours = sorted(contours, key=cv2.contourArea, reverse=True)
+            segundo_contorno_mas_grande = sorted_contours[1]  # Segundo contorno más grande
+            if(cv2.contourArea(segundo_contorno_mas_grande) > 160):
+                 return False,0
+    else:
+            segundo_contorno_mas_grande = None  # No hay segundo contorno  
 
     if contours:
         # Encontrar el contorno con el área más grande
@@ -32,6 +41,8 @@ def detectar(corte_segmentado,min_value):
             else:
                 existe_contorno_circular = False
                 
+                 # Encontrar el segundo contorno más grande si hay más de uno
+     
         return existe_contorno_circular,contorno_mas_grande
     else:
         return existe_contorno_circular,0

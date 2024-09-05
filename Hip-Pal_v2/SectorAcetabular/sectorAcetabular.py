@@ -1,6 +1,6 @@
 import cv2
 from Excepciones.Excepciones import ErrorIntermedialNotFound, ErrorProximalEcuatorialNotFound
-import PreprocesamientoDeCorte.preprocesar as preprocesar
+import PreprocesamientoDeCorte.preprocesarAxial as preprocesarAxial
 from SectorAcetabular.Utils import esCorteEcuatorialAxial, esCorteIntermedialAxial
 from SectorAcetabular.Utils import esCorteProximalAxial 
 
@@ -37,8 +37,8 @@ def detectar(tomografia_segmentada):
         femur_derecho_segmentado = tomografia_segmentada[:, :, i,6]
         femur_izquierdo_segmentado = tomografia_segmentada[:, :, i,7]
     
-        femur_derecho_segmentado = preprocesar.procesarCorte(femur_derecho_segmentado)
-        femur_izquierdo_segmentado = preprocesar.procesarCorte(femur_izquierdo_segmentado)
+        femur_derecho_segmentado = preprocesarAxial.procesarCorte(femur_derecho_segmentado)
+        femur_izquierdo_segmentado = preprocesarAxial.procesarCorte(femur_izquierdo_segmentado)
 
         # Convertir a escala de grises para la detección de contornos
         femur_derecho_segmentado_gris = cv2.cvtColor(femur_derecho_segmentado, cv2.COLOR_RGB2GRAY)
@@ -157,8 +157,8 @@ def buscarIntermedialAxial(tomografia_segmentada,corte_cabeza_intermedial_izq,co
     femur_derecho_segmentado = tomografia_segmentada[:, :, corte_cabeza_intermedial_der,6]
     femur_izquierdo_segmentado = tomografia_segmentada[:, :, corte_cabeza_intermedial_izq,7]
 
-    femur_derecho_segmentado = preprocesar.procesarCorte(femur_derecho_segmentado)
-    femur_izquierdo_segmentado = preprocesar.procesarCorte(femur_izquierdo_segmentado)
+    femur_derecho_segmentado = preprocesarAxial.procesarCorte(femur_derecho_segmentado)
+    femur_izquierdo_segmentado = preprocesarAxial.procesarCorte(femur_izquierdo_segmentado)
 
     # Convertir a escala de grises para la detección de contornos
     femur_derecho_segmentado_gris = cv2.cvtColor(femur_derecho_segmentado, cv2.COLOR_RGB2GRAY)

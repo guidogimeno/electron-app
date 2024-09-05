@@ -1,5 +1,5 @@
 import SectorAcetabular.Utils.esContornoCircular as esContornoCircular
-import CabezaFemur.cabezaFemurAxial as cabezaFemurAxial
+import CabezaFemur.cabezaFemurEcuatorialAxial as cabezaFemurEcuatorialAxial
 
 
 
@@ -10,7 +10,7 @@ def detectar(femur_segmentado,femur_segmentado_gris,radio_maximo):
     existe_contorno_circular,contorno_mas_grande = esContornoCircular.detectar(femur_segmentado_gris,0.86)
 
     if existe_contorno_circular:
-        flag_cabeza_femur,coordenadas = cabezaFemurAxial.detectar(femur_segmentado,femur_segmentado_gris,contorno_mas_grande,None)
+        flag_cabeza_femur,coordenadas = cabezaFemurEcuatorialAxial.detectar(femur_segmentado,femur_segmentado_gris,contorno_mas_grande,None)
             
         if (flag_cabeza_femur):
             _,_,r=coordenadas

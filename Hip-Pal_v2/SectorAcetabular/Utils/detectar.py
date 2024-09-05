@@ -2,7 +2,7 @@ import cv2
 from matplotlib import pyplot as plt
 import numpy as np
 from Excepciones.Excepciones import ErrorDetectandoAngulos
-from PreprocesamientoDeCorte import preprocesar
+from PreprocesamientoDeCorte import preprocesarAxial
 from SectorAcetabular.Angulos import aasa, pasa
 
 
@@ -74,18 +74,18 @@ def obtenerCorteCombinado(tomografia_original,tomografia_segmentada,numero_corte
     
         #Original
         corte_original_acetabulo_izquierdo = tomografia_original[:,:,numero_corte_izquierdo]
-        corte_original_acetabulo_izquierdo= preprocesar.procesarCorte(corte_original_acetabulo_izquierdo) 
+        corte_original_acetabulo_izquierdo= preprocesarAxial.procesarCorte(corte_original_acetabulo_izquierdo) 
         
         corte_original_acetabulo_derecho = tomografia_original[:,:,numero_corte_derecho]
-        corte_original_acetabulo_derecho= preprocesar.procesarCorte(corte_original_acetabulo_derecho) 
+        corte_original_acetabulo_derecho= preprocesarAxial.procesarCorte(corte_original_acetabulo_derecho) 
 
 
         #Segmentado
         corte_segmentado_acetabulo_izquierdo = tomografia_segmentada[:,:,numero_corte_izquierdo,5]
-        corte_segmentado_acetabulo_izquierdo= preprocesar.procesarCorte(corte_segmentado_acetabulo_izquierdo) 
+        corte_segmentado_acetabulo_izquierdo= preprocesarAxial.procesarCorte(corte_segmentado_acetabulo_izquierdo) 
 
         corte_segmentado_acetabulo_derecho = tomografia_segmentada[:,:,numero_corte_derecho,4]
-        corte_segmentado_acetabulo_derecho= preprocesar.procesarCorte(corte_segmentado_acetabulo_derecho)   
+        corte_segmentado_acetabulo_derecho= preprocesarAxial.procesarCorte(corte_segmentado_acetabulo_derecho)   
 
 
 
@@ -105,10 +105,10 @@ def calcularAngulos(tomografia_segmentada,cabeza_izq,cabeza_der,numero_corte_izq
     
     #Segmentado
     corte_segmentado_acetabulo_izquierdo = tomografia_segmentada[:,:,numero_corte_izquierdo,5]
-    corte_segmentado_acetabulo_izquierdo= preprocesar.procesarCorte(corte_segmentado_acetabulo_izquierdo) 
+    corte_segmentado_acetabulo_izquierdo= preprocesarAxial.procesarCorte(corte_segmentado_acetabulo_izquierdo) 
 
     corte_segmentado_acetabulo_derecho = tomografia_segmentada[:,:,numero_corte_derecho,4]
-    corte_segmentado_acetabulo_derecho= preprocesar.procesarCorte(corte_segmentado_acetabulo_derecho)   
+    corte_segmentado_acetabulo_derecho= preprocesarAxial.procesarCorte(corte_segmentado_acetabulo_derecho)   
 
     x_der,y_der,r_der = cabeza_der
     x_izq,y_izq,r_izq =cabeza_izq
