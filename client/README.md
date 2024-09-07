@@ -1,5 +1,13 @@
 # Electron Tutorial
 
+# TODO
+1. Guardar porqueria en archivo temp dentro de reports/:reportId
+2. Que el script reciba path de la tomo y ruta en donde se encuentra el "reports"
+3. Que al terminar de ejecutar, se borre lo que esta en temp, falle o salga bien.
+4. Que guarde las imagenes 
+5. Que el json tenga formato para leerlo de forma dinamica
+6. Hacer el instalador para Windows
+
 ## Guia de Instalacion
 
 1. Instalar NVM - https://github.com/nvm-sh/nvm
@@ -17,7 +25,7 @@ nvm use
 ```
 Continuar con las indicaciones de nvm
 
-3. Instalar depencendias
+3. Instalar dependencias
 ```
 npm i
 ```

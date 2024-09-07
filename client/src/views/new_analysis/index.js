@@ -68,7 +68,7 @@ function NewAnalysis() {
         setIsAnalyzing(true)
         try {
             // simulo la creacion
-            const analysisId = await executeBin("sleep")
+            const analysisId = await executeBin(files[0].path)
             console.log(`result after executing binary: ${analysisId}`)
 
             // TODO: Esto ya no seria necesario.
