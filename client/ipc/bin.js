@@ -1,10 +1,10 @@
 import { app, ipcMain } from "electron"
 import { spawn } from "child_process"
 
-ipcMain.handle("execute", async (_, fileName) => {
-    console.log(`about to execute ${fileName}`)
+ipcMain.handle("execute", async (_, filePath) => {
+    console.log(`about to execute ${filePath}`)
     return new Promise(function(resolve, reject) {
-        const binary = spawn(`${app.getAppPath()}/bin/${fileName}`);
+        const binary = spawn(`${app.getAppPath()}/bin/ia`, [`${filePath}`, `${app.getAppPath()}/reports`]);
 
         console.log("executing binary")
         binary.stdout.on("data", (result) => {

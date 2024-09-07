@@ -14,7 +14,7 @@ def procesarCorte(corte):
     corte_color = cv2.cvtColor(corte_normalizado, cv2.COLOR_GRAY2RGB)
 
     # Rotar la imagen 90° a la derecha
-    corte_rotado = np.rot90(corte_color, k=-1)  # k=-1 rota 90° a la derecha
-    corte_espejado = cv2.flip(corte_rotado, 1)
+    # corte_rotado = np.rot90(corte_color, k=-1)  # k=-1 rota 90° a la derecha
+    corte_espejado = cv2.flip(corte_color, 1)
 
     return corte_espejado
