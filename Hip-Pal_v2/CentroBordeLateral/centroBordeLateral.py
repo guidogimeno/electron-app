@@ -1,5 +1,5 @@
 import numpy as np
-from PreprocesamientoDeCorte import preprocesarAxial, preprocesarCoronal
+from PreprocesamientoDeCorte import preprocesarCoronal
 from matplotlib import pyplot as plt
 
 def detectar(cabezas_femur_axiales,tomografia_original):

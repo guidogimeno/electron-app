@@ -1,9 +1,6 @@
 import numpy as np
 import cv2
 
-from PreprocesamientoDeCorte import preprocesarAxial
-
-
 
 #Detecta circulo para identificar donde esta la cabeza del femur
 def detectar_2(corte_segmentado, corte_segmentado_gris,contorno_mas_grande,tomografia_original):

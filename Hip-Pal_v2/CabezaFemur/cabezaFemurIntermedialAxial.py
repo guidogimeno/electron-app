@@ -1,8 +1,6 @@
 import numpy as np
 import cv2
 
-from PreprocesamientoDeCorte import preprocesarAxial
-
 
 
 #Detecta circulo para identificar donde esta la cabeza del femur
