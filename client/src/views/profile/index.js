@@ -21,8 +21,15 @@ function Profile() {
 
     async function handleSubmit(event) {
         event.preventDefault()
+
+        // Avoid password override
+        const data = {
+            ...formData,
+            password: formData.password === "******" ? "" : formData.password
+        }
+
         try {
-            await updateUser(formData)
+            await updateUser(data)
             context.setUser(formData)
             setIsEditing(false)
             context.showSuccess("account successfuly updated")
