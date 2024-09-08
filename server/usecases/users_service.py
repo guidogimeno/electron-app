@@ -39,13 +39,11 @@ class SignUpUseCase:
         db_user.last_name = updated_user.get("last_name", db_user.last_name)
         db_user.email = updated_user.get("email", db_user.email)
         db_user.job_title = updated_user.get("job_title", db_user.job_title)
-        db_user.academic_title = updated_user.get(
-            "academic_title", db_user.academic_title)
+        db_user.academic_title = updated_user.get("academic_title", db_user.academic_title)
         db_user.country = updated_user.get("country", db_user.country)
         db_user.state = updated_user.get("state", db_user.state)
         db_user.city = updated_user.get("city", db_user.city)
-        db_user.institution = updated_user.get(
-            "institution", db_user.institution)
+        db_user.institution = updated_user.get("institution", db_user.institution)
         password = updated_user.get("password", None)
         if password:
             db_user.password = self._hash_password(password)
