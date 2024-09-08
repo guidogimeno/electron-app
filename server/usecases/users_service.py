@@ -44,8 +44,8 @@ class SignUpUseCase:
         db_user.state = updated_user.get("state", db_user.state)
         db_user.city = updated_user.get("city", db_user.city)
         db_user.institution = updated_user.get("institution", db_user.institution)
-        password = updated_user.get("password", None)
-        if password:
+        password = updated_user.get("password", "")
+        if password != "":
             db_user.password = self._hash_password(password)
 
         self.db.update_user(user_id, db_user)
