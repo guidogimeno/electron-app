@@ -25,7 +25,9 @@ function Landing() {
 
     return (
         <Page hiddeSidebar>
-            <Spinner />
+            <div className="spinner-container">
+                <Spinner />
+            </div>
         </Page>
     )
 }

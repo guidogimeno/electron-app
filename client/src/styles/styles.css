@@ -14,6 +14,7 @@
 @import "../components/search/styles.css";
 
 /* Views */
+@import "../views/landing/styles.css";
 @import "../views/signup/styles.css";
 @import "../views/login/styles.css";
 @import "../views/hip/styles.css";
