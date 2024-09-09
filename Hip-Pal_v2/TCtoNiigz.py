@@ -96,6 +96,7 @@ def convert_dcm_to_nii(dicom_folder, output_folder):
         os.makedirs(output_folder)
 
     # Comando para convertir de DICOM a NIfTI
+    print(f"debug: {output_folder}")
     command = f'dcm2niix -o {output_folder} -z y -p n -m y -x n {dicom_folder}'
 
     # Ejecutar el comando
@@ -108,19 +109,22 @@ def convert_dcm_to_nii(dicom_folder, output_folder):
 
 # Función principal
 
+# falopaquenose/reports:
+#     123:
+#         angulos.json
+#         temp:
+#             basura1
+#             basura2
+#         foto1.png
+#         foto2.png
 
-def dcm_to_nii():
-    parser = argparse.ArgumentParser(
-        description="Script para encontrar el directorio de tomografía a partir de una ruta y luego convertirlo a .nii.gz")
-    parser.add_argument(
-        "ruta", help="Ruta del directorio raíz para iniciar la búsqueda.")
-    parser.add_argument("carpeta_de_salida",
-                        help="Ruta a la carpeta donde quedara el .nii.gz")
-    args = parser.parse_args()
 
-    selectedPath = get_final_path_CT(args.ruta)
+def dcm_to_nii(id, path_tomografia, path_base):
+    selectedPath = get_final_path_CT(path_tomografia)
     print(selectedPath)
 
     dicom_folder = selectedPath
-    output_folder = args.carpeta_de_salida
+    output_folder = f"{path_base}/reports/{id}/temp"
+    os.makedirs(output_folder)
+
     convert_dcm_to_nii(dicom_folder, output_folder)

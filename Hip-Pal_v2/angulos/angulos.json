@@ -6,32 +6,32 @@
             "hasa": 242
         },
         "derecho": {
-            "aasa": 123,
-            "pasa": -113,
+            "aasa": 113,
+            "pasa": -123,
             "hasa": 236
         }
     },
     "Intermedial": {
         "izquierdo": {
-            "aasa": 108,
-            "pasa": -109,
+            "aasa": 109,
+            "pasa": -108,
             "hasa": 217
         },
         "derecho": {
-            "aasa": 104,
-            "pasa": -106,
+            "aasa": 106,
+            "pasa": -104,
             "hasa": 210
         }
     },
     "Ecuatorial": {
         "izquierdo": {
-            "aasa": 105,
-            "pasa": -97,
+            "aasa": 97,
+            "pasa": -105,
             "hasa": 202
         },
         "derecho": {
-            "aasa": 101,
-            "pasa": -91,
+            "aasa": 91,
+            "pasa": -101,
             "hasa": 192
         }
     }

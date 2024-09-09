@@ -23,4 +23,4 @@ def detectar(cabezas_femur_axiales,tomografia_original):
     plt.imshow(corte_rotado, cmap="gray")
     plt.scatter(x, 280-numero_corte, color='red')  # Marcar el centro del círculo
     plt.title("Centroide del Círculo en la Vista Coronal")
-    plt.show()  
+    # plt.show()  
