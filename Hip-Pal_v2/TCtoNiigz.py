@@ -90,14 +90,14 @@ def get_final_path_CT(directorio):
 # Transforma un .dcm a un .nii.gz
 
 
-def convert_dcm_to_nii(dicom_folder, output_folder):
+def convert_dcm_to_nii(base_path, dicom_folder, output_folder):
     # Verifica que el directorio de salida exista
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
 
     # Comando para convertir de DICOM a NIfTI
     print(f"debug: {output_folder}")
-    command = f'dcm2niix -o {output_folder} -z y -p n -m y -x n {dicom_folder}'
+    command = f'{base_path}/bin/dcm2niix -o {output_folder} -z y -p n -m y -x n {dicom_folder}'
 
     # Ejecutar el comando
     subprocess.run(command, shell=True, check=True)
@@ -119,12 +119,12 @@ def convert_dcm_to_nii(dicom_folder, output_folder):
 #         foto2.png
 
 
-def dcm_to_nii(id, path_tomografia, path_base):
+def dcm_to_nii(id, path_tomografia, base_path):
     selectedPath = get_final_path_CT(path_tomografia)
     print(selectedPath)
 
     dicom_folder = selectedPath
-    output_folder = f"{path_base}/reports/{id}/temp"
+    output_folder = f"{base_path}/reports/{id}/temp"
     os.makedirs(output_folder)
 
-    convert_dcm_to_nii(dicom_folder, output_folder)
+    convert_dcm_to_nii(base_path, dicom_folder, output_folder)
