@@ -79,6 +79,7 @@ def main():
             json.dump(angulosSectorAcetabular, archivo, indent=4)
 
         print("Termino: 200")
+        print(f"id:${id}")
         return 200
     except ErrorCantidadEtiquetas as e:
         print(f"Error: {e}")
