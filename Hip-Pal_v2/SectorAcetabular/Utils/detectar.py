@@ -14,58 +14,61 @@ def detectar(id, base_path, json, tomografia_original, tomografia_segmentada):
                                            ["derecho"]["coordenadas"], json["proximal"]["izquierdo"]["numero_corte"], json["proximal"]["derecho"]["numero_corte"])
         composicion_proximal = obtenerCorteCombinado(
             tomografia_original, tomografia_segmentada, json["proximal"]["izquierdo"]["numero_corte"], json["proximal"]["derecho"]["numero_corte"])
-        graficar(id, base_path, composicion_proximal, json["proximal"]["izquierdo"]["coordenadas"],
-                 json["proximal"]["derecho"]["coordenadas"], angulos_proximal, "Ecuador Proximal")
+        path_proximal=graficar(id, base_path, composicion_proximal, json["proximal"]["izquierdo"]["coordenadas"],
+                 json["proximal"]["derecho"]["coordenadas"], angulos_proximal, "EcuadorProximal")
 
         angulos_intermedial = calcularAngulos(tomografia_segmentada, json["intermedial"]["izquierdo"]["coordenadas"], json["intermedial"]
                                               ["derecho"]["coordenadas"], json["intermedial"]["izquierdo"]["numero_corte"], json["intermedial"]["derecho"]["numero_corte"])
         composicion_intermedial = obtenerCorteCombinado(
             tomografia_original, tomografia_segmentada, json["intermedial"]["izquierdo"]["numero_corte"], json["intermedial"]["derecho"]["numero_corte"])
-        graficar(id, base_path, composicion_intermedial, json["intermedial"]["izquierdo"]["coordenadas"],
-                 json["intermedial"]["derecho"]["coordenadas"], angulos_intermedial, "Intermedial Axial")
+        path_intermedial=graficar(id, base_path, composicion_intermedial, json["intermedial"]["izquierdo"]["coordenadas"],
+                 json["intermedial"]["derecho"]["coordenadas"], angulos_intermedial, "IntermedialAxial")
 
         angulos_ecuatorial = calcularAngulos(tomografia_segmentada, json["ecuatorial"]["izquierdo"]["coordenadas"], json["ecuatorial"]
                                              ["derecho"]["coordenadas"], json["ecuatorial"]["izquierdo"]["numero_corte"], json["ecuatorial"]["derecho"]["numero_corte"])
         composicion_ecuatorial = obtenerCorteCombinado(
             tomografia_original, tomografia_segmentada, json["ecuatorial"]["izquierdo"]["numero_corte"], json["ecuatorial"]["derecho"]["numero_corte"])
-        graficar(id, base_path, composicion_ecuatorial, json["ecuatorial"]["izquierdo"]["coordenadas"],
-                 json["ecuatorial"]["derecho"]["coordenadas"], angulos_ecuatorial, "Ecuador Axial")
+        path_ecuatorial=graficar(id, base_path, composicion_ecuatorial, json["ecuatorial"]["izquierdo"]["coordenadas"],
+                 json["ecuatorial"]["derecho"]["coordenadas"], angulos_ecuatorial, "EcuadorAxial")
 
-        angulos = {
-            "Proximal": {
-                "izquierdo": {
-                    "aasa": angulos_proximal["izquierdo"]["aasa"],
-                    "pasa": angulos_proximal["izquierdo"]["pasa"],
-                    "hasa": angulos_proximal["izquierdo"]["hasa"],
+        angulos={
+            "Proximal":{
+                "path":path_proximal,
+                "izquierdo":{
+                    "aasa":angulos_proximal["izquierdo"]["aasa"],
+                    "pasa":angulos_proximal["izquierdo"]["pasa"],
+                    "hasa":angulos_proximal["izquierdo"]["hasa"],
                 },
-                "derecho": {
-                    "aasa": angulos_proximal["derecho"]["aasa"],
-                    "pasa": angulos_proximal["derecho"]["pasa"],
-                    "hasa": angulos_proximal["derecho"]["hasa"],
+                "derecho":{
+                    "aasa":angulos_proximal["derecho"]["aasa"],
+                    "pasa":angulos_proximal["derecho"]["pasa"],
+                    "hasa":angulos_proximal["derecho"]["hasa"],
                 }
             },
-            "Intermedial": {
-                "izquierdo": {
-                    "aasa": angulos_intermedial["izquierdo"]["aasa"],
-                    "pasa": angulos_intermedial["izquierdo"]["pasa"],
-                    "hasa": angulos_intermedial["izquierdo"]["hasa"],
+            "Intermedial":{
+                "path":path_intermedial,
+                "izquierdo":{
+                    "aasa":angulos_intermedial["izquierdo"]["aasa"],
+                    "pasa":angulos_intermedial["izquierdo"]["pasa"],
+                    "hasa":angulos_intermedial["izquierdo"]["hasa"],
                 },
-                "derecho": {
-                    "aasa": angulos_intermedial["derecho"]["aasa"],
-                    "pasa": angulos_intermedial["derecho"]["pasa"],
-                    "hasa": angulos_intermedial["derecho"]["hasa"],
+                "derecho":{
+                    "aasa":angulos_intermedial["derecho"]["aasa"],
+                    "pasa":angulos_intermedial["derecho"]["pasa"],
+                    "hasa":angulos_intermedial["derecho"]["hasa"],
                 }
             },
-            "Ecuatorial": {
-                "izquierdo": {
-                    "aasa": angulos_ecuatorial["izquierdo"]["aasa"],
-                    "pasa": angulos_ecuatorial["izquierdo"]["pasa"],
-                    "hasa": angulos_ecuatorial["izquierdo"]["hasa"],
+            "Ecuatorial":{
+                "path":path_ecuatorial,
+                "izquierdo":{
+                    "aasa":angulos_ecuatorial["izquierdo"]["aasa"],
+                    "pasa":angulos_ecuatorial["izquierdo"]["pasa"],
+                    "hasa":angulos_ecuatorial["izquierdo"]["hasa"],
                 },
-                "derecho": {
-                    "aasa": angulos_ecuatorial["derecho"]["aasa"],
-                    "pasa": angulos_ecuatorial["derecho"]["pasa"],
-                    "hasa": angulos_ecuatorial["derecho"]["hasa"],
+                "derecho":{
+                    "aasa":angulos_ecuatorial["derecho"]["aasa"],
+                    "pasa":angulos_ecuatorial["derecho"]["pasa"],
+                    "hasa":angulos_ecuatorial["derecho"]["hasa"],
                 }
             }
         }
@@ -204,3 +207,5 @@ def graficar(id, base_path, composicion, coordenadas_izq, coordenadas_der, angul
     plt.axis('off')
     output_path = f"{base_path}/reports/{id}/{title}.png"
     plt.savefig(output_path, bbox_inches='tight', pad_inches=0)
+
+    return output_path

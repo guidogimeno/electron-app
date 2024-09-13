@@ -71,12 +71,19 @@ def main():
             cabezas_femur_axiales, tomografia_original, tomografia_segmentada)
 
         # Buscar el centroide del femur izquierdo desde la vista coronal
-        # centroBordeLateral.detectar(cabezas_femur_axiales, tomografia_original)
+        angulosCentroBordeLateral = centroBordeLateral.detectar(id, args.carpeta_salida,cabezas_femur_axiales, tomografia_original,tomografia_segmentada)
+
+
+        angulos={
+            "SectorAcetabular":angulosSectorAcetabular,
+            "CentroBordeLateral":angulosCentroBordeLateral
+        }
+
 
         # Guardo el JSON en el archivo------------------------------------------------------
         with open(ruta_json_resultados, 'w') as archivo:
             # indent=4 para un formato legible
-            json.dump(angulosSectorAcetabular, archivo, indent=4)
+            json.dump(angulos, archivo, indent=4)
 
         print("Termino: 200")
         print(f"id:${id}")
