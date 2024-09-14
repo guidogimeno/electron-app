@@ -7,7 +7,7 @@ import CabezaFemur.cabezaFemurEcuatorialAxial as cabezaFemurEcuatorialAxial
 def detectar(femur_segmentado,femur_segmentado_gris,radio_maximo):
 
     #Tratamiento especifico para cada femur
-    existe_contorno_circular,contorno_mas_grande = esContornoCircular.detectar(femur_segmentado_gris,0.86)
+    existe_contorno_circular,contorno_mas_grande = esContornoCircular.detectar(femur_segmentado_gris,0.80)
 
     if existe_contorno_circular:
         flag_cabeza_femur,coordenadas = cabezaFemurEcuatorialAxial.detectar(femur_segmentado,femur_segmentado_gris,contorno_mas_grande,None)
