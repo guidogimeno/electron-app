@@ -58,8 +58,7 @@ def main():
         if tomografia_segmentada.ndim != 4 and tomografia_segmentada.shape[3] != 8:
             raise ErrorCantidadEtiquetas(
                 "La máscara no tiene el formato esperado de 8 etiquetas.",
-                detalles=f"Dimensiones: {tomografia_segmentada.ndim}, Shape: {
-                    tomografia_segmentada.shape}"
+                detalles=f"Dimensiones: {tomografia_segmentada.ndim}, Shape: {tomografia_segmentada.shape}"
             )
 
         # Detecto cabeza femur en el axial (Proximal, Intermedial y Ecuatorial)-------------
