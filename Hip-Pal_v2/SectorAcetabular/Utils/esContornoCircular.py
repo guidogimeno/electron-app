@@ -17,7 +17,7 @@ def detectar(corte_segmentado,min_value):
             # Ordenar los contornos por área
             sorted_contours = sorted(contours, key=cv2.contourArea, reverse=True)
             segundo_contorno_mas_grande = sorted_contours[1]  # Segundo contorno más grande
-            if(cv2.contourArea(segundo_contorno_mas_grande) > 100):
+            if(cv2.contourArea(segundo_contorno_mas_grande) > 160):
                  return False,0
     else:
             segundo_contorno_mas_grande = None  # No hay segundo contorno  
