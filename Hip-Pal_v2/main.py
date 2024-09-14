@@ -44,12 +44,12 @@ def main():
         # Cargar la tomografía y la máscara
         # tomografia_original_path = os.path.join(
         #     'Tomografia', 'Original', 'CT_8.nii.gz')
-        tomografia_original_path = os.path.join(args.carpeta_salida, 'reports', id, 'temp', '4_Pelvis_Osea_20230418192551_4.nii.gz')
+        tomografia_original_path = os.path.join(args.carpeta_salida, 'reports', id, 'temp', f'{id}.nii.gz')
         tomografia_original = nib.load(tomografia_original_path).get_fdata()
 
         # Cargar prediccion----------------------------------------------------------------------------------
         tomografia_segmentada_path = os.path.join(args.carpeta_salida, 'reports', id, 'temp',
-            'tomografias_segmentadas', '4_Pelvis_Osea_20230418192551_4', '4_Pelvis_Osea_20230418192551_4_seg_flipendo.nii.gz')
+            'tomografias_segmentadas', id, f'{id}_seg_flipendo.nii.gz')
         tomografia_segmentada = nib.load(
             tomografia_segmentada_path).get_fdata()
 
@@ -58,8 +58,7 @@ def main():
         if tomografia_segmentada.ndim != 4 and tomografia_segmentada.shape[3] != 8:
             raise ErrorCantidadEtiquetas(
                 "La máscara no tiene el formato esperado de 8 etiquetas.",
-                detalles=f"Dimensiones: {tomografia_segmentada.ndim}, Shape: {
-                    tomografia_segmentada.shape}"
+                detalles=f"Dimensiones: {tomografia_segmentada.ndim}, Shape: {tomografia_segmentada.shape}"
             )
 
         # Detecto cabeza femur en el axial (Proximal, Intermedial y Ecuatorial)-------------

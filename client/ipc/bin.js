@@ -6,23 +6,28 @@ const userDataPath = app.getPath("userData")
 ipcMain.handle("execute", async (_, filePath) => {
     console.log(`about to execute ${filePath}`)
     return new Promise(function(resolve, reject) {
-        const binary = spawn(`${userDataPath}/bin/sleep`, [`${filePath}`, `${userDataPath}`]);
+        const binary = spawn(`${userDataPath}/bin/main`, [`${filePath}`, `${userDataPath}`]);
 
         console.log("executing binary")
         binary.stdout.on("data", (result) => {
             console.log(`binary execution stdout: ${result}`)
-            if (String(result).startsWith("id:")) {
-                const index = result.indexOf(":");
-                if (index !== -1) { // Check if index is valid
-                    console.log(`el id es: ${result[index + 1]}`)
-                    resolve(result[index + 1]); // Extract the value starting from the character after the colon
-                }
+            console.log(`tiene los dos puntos: ${result.includes(":")}`)
+            console.log(`indexOf: ${result.indexOf(":")}`)
+            const id = String(result).split("id:$")[1]
+            console.log(`Este es el id: ${id}`)
+            if (id) {
+                console.log(`resuelvo con este id: ${id}`)
+                resolve(id)
             }
+        })
+
+        binary.on("close", (result) => {
+            console.log(`closing: ${result}`)
         })
 
         binary.stderr.on("data", (code) => {
             console.log(`binary execution stderr: ${code}`)
-            reject(new Error(`process exited with code ${code}`))
+            // reject(new Error(`process exited with code ${code}`))
         })
     })
 })
