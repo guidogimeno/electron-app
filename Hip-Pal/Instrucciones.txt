@@ -1,9 +1,0 @@
-Pasos:
-0_Instalen python (yo tengo la version 3.12.0)
-0.5_Verifiquen que se haya instalado python y pip. (pip viene en el paquete de python)
-1_Clonense el repo completo.
-2_Descarguen la carpeta "Tomografias" de aca:
-3_Metan el contenido de esa carpeta en la carpeta "Tomografias" del repo: electron-app\Hip-Pal\Tomografias
-4_Instalen dependencias.
-5_Para correr levanten una terminal dentro de la carpeta  Hip-Pal y corran con el comando:
-python ./main.py
