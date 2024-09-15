@@ -2,8 +2,6 @@ import React, { useContext, useState } from "react"
 import Page from "../../components/page/index.js"
 import { useNavigate } from "react-router-dom"
 import FileInput from "../../components/file_input/index.js"
-import { saveReport } from "../../fs/reports/index.js"
-import { generateId } from "../../utils/index.js"
 import { GlobalContext } from "../../context/index.js"
 import CustomError from "../../services/errors/index.js"
 import { track } from "../../services/metrics/index.js"
@@ -43,7 +41,7 @@ function NewAnalysis() {
     const navigate = useNavigate()
 
     const [formData, setFormData] = useState(emptyForm)
-    const [report, setReport] = useState(null)
+    const [reportId, setReportId] = useState(null)
     const [state, setState] = useState(STATE.start)
     const [isAnalyzing, setIsAnalyzing] = useState(false)
 
@@ -67,18 +65,9 @@ function NewAnalysis() {
         setState(STATE.in_progress)
         setIsAnalyzing(true)
         try {
-            // simulo la creacion
             const analysisId = await executeBin(files[0].path)
             console.log(`result after executing binary: ${analysisId}`)
-
-            // TODO: Esto ya no seria necesario.
-            const generatedReport = {
-                id: generateId(),
-                name: files[0].name,
-                images: [],
-                content: "este es el super contenido"
-            }
-            setReport(generatedReport)
+            setReportId(analysisId)
         } catch (error) {
             context.showFailure(error.message)
         } finally {
@@ -90,6 +79,7 @@ function NewAnalysis() {
         setFormData(emptyForm)
         setIsAnalyzing(false)
         // TODO: interrumpir proceso de generacion de reporte
+        // e incluso, eliminar las carpetas creadas que no debe
         setState(STATE.start)
     }
 
@@ -118,16 +108,7 @@ function NewAnalysis() {
             console.error("Failed to send metrics", error)
         }
 
-        // TODO: En teoria esto no existiria porque el bin ya crearia los archivos
-        try {
-            console.log("Este es el form data", formData)
-            await saveReport(report)
-        } catch (error) {
-            context.showFailure(error.message)
-            return
-        }
-
-        navigate(`/my_hips/${report.id}`)
+        navigate(`/my_hips/${reportId}`)
     }
 
     if (state === STATE.start) {

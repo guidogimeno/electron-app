@@ -1,6 +1,7 @@
 import nibabel as nib
 import uuid
 import os
+import datetime
 import argparse
 from CentroBordeLateral import centroBordeLateral
 from Excepciones.Excepciones import ErrorDetectandoAngulos, ErrorIntermedialNotFound, ErrorProximalEcuatorialNotFound, ErrorCantidadEtiquetas
@@ -37,19 +38,21 @@ def main():
     try:
         # CAMBIAR ESTA RUTA PARA GUARDAR EL JSON
         # ruta_json_resultados = r'C:\Users\Usuario\anaconda3\envs\monailabel-env\Hip-Pal_v2\angulos.json'
-        ruta_json_resultados = os.path.join(args.carpeta_salida, 'reports', id, 'angulos.json')
+        ruta_json_resultados = os.path.join(
+            args.carpeta_salida, 'reports', id, 'angulos.json')
 
         # CAMBIAR ESTAS RUTAS PARA TOMAR LA .NII NORMAL Y EL .NII SEGMENTADO
         # Deberia ir aca la Prediccion------------------------------------------------------------------------
         # Cargar la tomografía y la máscara
         # tomografia_original_path = os.path.join(
         #     'Tomografia', 'Original', 'CT_8.nii.gz')
-        tomografia_original_path = os.path.join(args.carpeta_salida, 'reports', id, 'temp', f'{id}.nii.gz')
+        tomografia_original_path = os.path.join(
+            args.carpeta_salida, 'reports', id, 'temp', f'{id}.nii.gz')
         tomografia_original = nib.load(tomografia_original_path).get_fdata()
 
         # Cargar prediccion----------------------------------------------------------------------------------
         tomografia_segmentada_path = os.path.join(args.carpeta_salida, 'reports', id, 'temp',
-            'tomografias_segmentadas', id, f'{id}_seg_flipendo.nii.gz')
+                                                  'tomografias_segmentadas', id, f'{id}_seg_flipendo.nii.gz')
         tomografia_segmentada = nib.load(
             tomografia_segmentada_path).get_fdata()
 
@@ -58,7 +61,8 @@ def main():
         if tomografia_segmentada.ndim != 4 and tomografia_segmentada.shape[3] != 8:
             raise ErrorCantidadEtiquetas(
                 "La máscara no tiene el formato esperado de 8 etiquetas.",
-                detalles=f"Dimensiones: {tomografia_segmentada.ndim}, Shape: {tomografia_segmentada.shape}"
+                detalles=f"Dimensiones: {tomografia_segmentada.ndim}, Shape: {
+                    tomografia_segmentada.shape}"
             )
 
         # Detecto cabeza femur en el axial (Proximal, Intermedial y Ecuatorial)-------------
@@ -67,17 +71,30 @@ def main():
 
         # Detecta angulos sector Acetabular-------------------------------------------------
         angulosSectorAcetabular = detectar.detectar(id, args.carpeta_salida,
-            cabezas_femur_axiales, tomografia_original, tomografia_segmentada)
+                                                    cabezas_femur_axiales, tomografia_original, tomografia_segmentada)
 
         # Buscar el centroide del femur izquierdo desde la vista coronal
-        angulosCentroBordeLateral = centroBordeLateral.detectar(id, args.carpeta_salida,cabezas_femur_axiales, tomografia_original,tomografia_segmentada)
+        angulosCentroBordeLateral = centroBordeLateral.detectar(
+            id, args.carpeta_salida, cabezas_femur_axiales, tomografia_original, tomografia_segmentada)
 
+        now = datetime.datetime.now()
+        timestamp_string = now.strftime("%Y-%m-%d %H:%M:%S")
 
-        angulos={
-            "SectorAcetabular":angulosSectorAcetabular,
-            "CentroBordeLateral":angulosCentroBordeLateral
+        angulos = {
+            "id": id,
+            "name": f"Informe {id}",
+            "createdDate": timestamp_string,
+            "mediciones": [
+                {
+                    "name": "Sector Acetabular",
+                    "angulos": angulosSectorAcetabular,
+                },
+                {
+                    "name": "Centro Borde Lateral",
+                    "angulos": angulosCentroBordeLateral,
+                }
+            ]
         }
-
 
         # Guardo el JSON en el archivo------------------------------------------------------
         with open(ruta_json_resultados, 'w') as archivo:

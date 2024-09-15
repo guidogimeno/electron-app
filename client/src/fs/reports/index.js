@@ -1,30 +1,7 @@
 import CustomError from "../../services/errors/index.js"
-import { deleteDir, mkdir, readFiles, readFile, writeFile } from "../index.js"
+import { deleteDir, readFiles, readFile } from "../index.js"
 
-const CONTENT_FILE = "content.json"
-
-async function saveReport(report) {
-    const reportFolder = report.id
-    try {
-        await mkdir(reportFolder)
-
-        const path = filePath(CONTENT_FILE, reportFolder)
-        await writeFile(path, JSON.stringify({
-            id: report.id,
-            name: report.name,
-            content: report.content,
-            created_date: Date.now()
-        }))
-
-        for (const image of report.images) {
-            const fileName = `${image.name}.png`
-            await writeFile(filePath(fileName, reportFolder), image.file);
-        }
-    } catch (error) {
-        console.log("Failed to save report for the following reason:", error)
-        throw new CustomError("Failed to save report")
-    }
-}
+const CONTENT_FILE = "angulos.json"
 
 function filePath(fileName, folder) {
     return `${folder}/${fileName}`
@@ -36,11 +13,10 @@ async function getReports() {
         const reports = []
         for (const file of files) {
             const report = JSON.parse(file)
+            console.log("a ver el archivo", report)
             reports.push({
-                id: report.id,
-                name: report.name,
-                description: "saraza saraza",
-                date: new Date(report.created_date).toISOString().split("T")[0]
+                ...report,
+                date: new Date(report.createdDate).toISOString().split("T")[0]
             })
         }
         return reports
@@ -64,10 +40,8 @@ async function getReport(reportId) {
         const file = await readFile(filePath(CONTENT_FILE, reportId))
         const report = JSON.parse(file)
         return {
-            id: report.id,
-            name: report.name,
-            content: report.content,
-            date: new Date(report.created_date).toISOString().split("T")[0]
+            ...report,
+            date: new Date(report.createdDate).toISOString().split("T")[0]
         }
     } catch (error) {
         console.log(`Failed to get report: ${reportId} for the following reason: ${error}`)
@@ -77,7 +51,6 @@ async function getReport(reportId) {
 
 export {
     getReport,
-    saveReport,
     getReports,
     removeReport
 }
