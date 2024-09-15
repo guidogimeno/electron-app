@@ -61,7 +61,7 @@ def detectar(id, base_path, cabezas_femur_axiales, tomografia_original, tomograf
         coronal_slice_izq_segmentado)
 
     # Forzado a mano - BORRAR
-    z_izq = z_izq+8
+    #z_izq = z_izq+8
     coronal_slice_izq = tomografia_original[:, z_izq, :]
     coronal_slice_izq = preprocesarCoronal.procesarCorte(coronal_slice_izq)
 
@@ -70,7 +70,7 @@ def detectar(id, base_path, cabezas_femur_axiales, tomografia_original, tomograf
     x_der, y_der, z_der = esCorteEcuatorialCoronal.obtenerCentroide(
         tomografia_original, coordenadas_der, numero_corte_der)
     # Forzado a mano - BORRAR
-    z_der = z_der+12
+    #z_der = z_der+12
     coronal_slice_der_segmentado = tomografia_segmentada_invertida[:, z_der, :, 4]
     coronal_slice_der_segmentado = preprocesarCoronalSegmentado.procesarCorte(
         coronal_slice_der_segmentado)

@@ -203,27 +203,26 @@ def calcularAngulos(tomografia_segmentada, cabeza_izq, cabeza_der, numero_corte_
     angulo_hasa_izq = angulo_aasa_izq + (angulo_pasa_izq*-1)
     angulo_hasa_der = (angulo_aasa_der*-1) + (angulo_pasa_der)
 
-    angulos = {
-        "izquierdo": {
-            "aasa": angulo_aasa_izq,
-            "x_aasa": x_aasa_izq,
-            "y_aasa": y_aasa_izq,
-            "pasa": angulo_pasa_izq,
-            "x_pasa": x_pasa_izq,
-            "y_pasa": y_pasa_izq,
-            "hasa": angulo_hasa_izq
-        },
-        "derecho": {
-            "aasa": -1*angulo_aasa_der,
-            "x_aasa": x_aasa_der,
-            "y_aasa": y_aasa_der,
-            "pasa": -1*angulo_pasa_der,
-            "x_pasa": x_pasa_der,
-            "y_pasa": y_pasa_der,
-            "hasa": angulo_hasa_der
-        }
+    angulos={
+        "izquierdo":{
+                "aasa":angulo_aasa_izq,
+                "x_aasa":x_aasa_izq,
+                "y_aasa":y_aasa_izq,
+                "pasa":-1*angulo_pasa_izq,
+                "x_pasa":x_pasa_izq,
+                "y_pasa":y_pasa_izq,
+                "hasa":angulo_hasa_izq
+            },
+        "derecho":{
+                "aasa":-1*angulo_aasa_der,
+                "x_aasa":x_aasa_der,
+                "y_aasa":y_aasa_der,
+                "pasa":angulo_pasa_der,
+                "x_pasa":x_pasa_der,
+                "y_pasa":y_pasa_der,
+                "hasa":angulo_hasa_der
+            }
     }
-
     return angulos
 
 
