@@ -14,64 +14,121 @@ def detectar(id, base_path, json, tomografia_original, tomografia_segmentada):
                                            ["derecho"]["coordenadas"], json["proximal"]["izquierdo"]["numero_corte"], json["proximal"]["derecho"]["numero_corte"])
         composicion_proximal = obtenerCorteCombinado(
             tomografia_original, tomografia_segmentada, json["proximal"]["izquierdo"]["numero_corte"], json["proximal"]["derecho"]["numero_corte"])
-        path_proximal=graficar(id, base_path, composicion_proximal, json["proximal"]["izquierdo"]["coordenadas"],
-                 json["proximal"]["derecho"]["coordenadas"], angulos_proximal, "EcuadorProximal")
+        path_proximal = graficar(id, base_path, composicion_proximal, json["proximal"]["izquierdo"]["coordenadas"],
+                                 json["proximal"]["derecho"]["coordenadas"], angulos_proximal, "EcuadorProximal")
 
         angulos_intermedial = calcularAngulos(tomografia_segmentada, json["intermedial"]["izquierdo"]["coordenadas"], json["intermedial"]
                                               ["derecho"]["coordenadas"], json["intermedial"]["izquierdo"]["numero_corte"], json["intermedial"]["derecho"]["numero_corte"])
         composicion_intermedial = obtenerCorteCombinado(
             tomografia_original, tomografia_segmentada, json["intermedial"]["izquierdo"]["numero_corte"], json["intermedial"]["derecho"]["numero_corte"])
-        path_intermedial=graficar(id, base_path, composicion_intermedial, json["intermedial"]["izquierdo"]["coordenadas"],
-                 json["intermedial"]["derecho"]["coordenadas"], angulos_intermedial, "IntermedialAxial")
+        path_intermedial = graficar(id, base_path, composicion_intermedial, json["intermedial"]["izquierdo"]["coordenadas"],
+                                    json["intermedial"]["derecho"]["coordenadas"], angulos_intermedial, "IntermedialAxial")
 
         angulos_ecuatorial = calcularAngulos(tomografia_segmentada, json["ecuatorial"]["izquierdo"]["coordenadas"], json["ecuatorial"]
                                              ["derecho"]["coordenadas"], json["ecuatorial"]["izquierdo"]["numero_corte"], json["ecuatorial"]["derecho"]["numero_corte"])
         composicion_ecuatorial = obtenerCorteCombinado(
             tomografia_original, tomografia_segmentada, json["ecuatorial"]["izquierdo"]["numero_corte"], json["ecuatorial"]["derecho"]["numero_corte"])
-        path_ecuatorial=graficar(id, base_path, composicion_ecuatorial, json["ecuatorial"]["izquierdo"]["coordenadas"],
-                 json["ecuatorial"]["derecho"]["coordenadas"], angulos_ecuatorial, "EcuadorAxial")
+        path_ecuatorial = graficar(id, base_path, composicion_ecuatorial, json["ecuatorial"]["izquierdo"]["coordenadas"],
+                                   json["ecuatorial"]["derecho"]["coordenadas"], angulos_ecuatorial, "EcuadorAxial")
 
-        angulos={
-            "Proximal":{
-                "path":path_proximal,
-                "izquierdo":{
-                    "aasa":angulos_proximal["izquierdo"]["aasa"],
-                    "pasa":angulos_proximal["izquierdo"]["pasa"],
-                    "hasa":angulos_proximal["izquierdo"]["hasa"],
-                },
-                "derecho":{
-                    "aasa":angulos_proximal["derecho"]["aasa"],
-                    "pasa":angulos_proximal["derecho"]["pasa"],
-                    "hasa":angulos_proximal["derecho"]["hasa"],
-                }
+        angulos = [
+            {
+                "name": "Proximal",
+                "path": path_proximal,
+                "izquierdo": [
+                    {
+                        "name": "aasa",
+                        "value":  angulos_proximal["izquierdo"]["aasa"],
+                    },
+                    {
+                        "name": "pasa",
+                        "value":  angulos_proximal["izquierdo"]["pasa"],
+                    },
+                    {
+                        "name": "hasa",
+                        "value":  angulos_proximal["izquierdo"]["hasa"],
+                    }
+                ],
+                "derecho": [
+                    {
+                        "name": "aasa",
+                        "value":  angulos_proximal["derecho"]["aasa"],
+                    },
+                    {
+                        "name": "pasa",
+                        "value":  angulos_proximal["derecho"]["pasa"],
+                    },
+                    {
+                        "name": "hasa",
+                        "value":  angulos_proximal["derecho"]["hasa"],
+                    }
+                ]
             },
-            "Intermedial":{
-                "path":path_intermedial,
-                "izquierdo":{
-                    "aasa":angulos_intermedial["izquierdo"]["aasa"],
-                    "pasa":angulos_intermedial["izquierdo"]["pasa"],
-                    "hasa":angulos_intermedial["izquierdo"]["hasa"],
-                },
-                "derecho":{
-                    "aasa":angulos_intermedial["derecho"]["aasa"],
-                    "pasa":angulos_intermedial["derecho"]["pasa"],
-                    "hasa":angulos_intermedial["derecho"]["hasa"],
-                }
+            {
+                "name": "Intermedial",
+                "path": path_intermedial,
+                "izquierdo": [
+                    {
+                        "name": "aasa",
+                        "value":  angulos_intermedial["izquierdo"]["aasa"],
+                    },
+                    {
+                        "name": "pasa",
+                        "value":  angulos_intermedial["izquierdo"]["pasa"],
+                    },
+                    {
+                        "name": "hasa",
+                        "value":  angulos_intermedial["izquierdo"]["hasa"],
+                    }
+                ],
+                "derecho": [
+                    {
+                        "name": "aasa",
+                        "value":  angulos_intermedial["derecho"]["aasa"],
+                    },
+                    {
+                        "name": "pasa",
+                        "value":  angulos_intermedial["derecho"]["pasa"],
+                    },
+                    {
+                        "name": "hasa",
+                        "value":  angulos_intermedial["derecho"]["hasa"],
+                    }
+                ]
             },
-            "Ecuatorial":{
-                "path":path_ecuatorial,
-                "izquierdo":{
-                    "aasa":angulos_ecuatorial["izquierdo"]["aasa"],
-                    "pasa":angulos_ecuatorial["izquierdo"]["pasa"],
-                    "hasa":angulos_ecuatorial["izquierdo"]["hasa"],
-                },
-                "derecho":{
-                    "aasa":angulos_ecuatorial["derecho"]["aasa"],
-                    "pasa":angulos_ecuatorial["derecho"]["pasa"],
-                    "hasa":angulos_ecuatorial["derecho"]["hasa"],
-                }
+            {
+                "name": "Ecuatorial",
+                "path": path_ecuatorial,
+                "izquierdo": [
+                    {
+                        "name": "aasa",
+                        "value":  angulos_ecuatorial["izquierdo"]["aasa"],
+                    },
+                    {
+                        "name": "pasa",
+                        "value":  angulos_ecuatorial["izquierdo"]["pasa"],
+                    },
+                    {
+                        "name": "hasa",
+                        "value":  angulos_ecuatorial["izquierdo"]["hasa"],
+                    }
+                ],
+                "derecho": [
+                    {
+                        "name": "aasa",
+                        "value":  angulos_ecuatorial["derecho"]["aasa"],
+                    },
+                    {
+                        "name": "pasa",
+                        "value":  angulos_ecuatorial["derecho"]["pasa"],
+                    },
+                    {
+                        "name": "hasa",
+                        "value":  angulos_ecuatorial["derecho"]["hasa"],
+                    }
+                ]
             }
-        }
+        ]
 
         return angulos
 
