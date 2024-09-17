@@ -4,23 +4,16 @@ import Page from "../../components/page/index.js"
 import { getReport } from "../../fs/reports/index.js"
 import { GlobalContext } from "../../context/index.js"
 import Spinner from "../../components/spinner/index.js"
-import { getPath } from "../../fs/index.js"
+import { Tabs, Tab } from "../../components/tabs/index.js"
 
 function Hip() {
     const context = useContext(GlobalContext)
     const params = useParams()
     const [report, setReport] = useState(null)
-    const [appPath, setAppPath] = useState("")
 
     useEffect(function() {
-        fetchAppPath()
         fetchReport()
     }, [])
-
-    async function fetchAppPath() {
-        const path = await getPath()
-        setAppPath(path)
-    }
 
     async function fetchReport() {
         try {
@@ -34,46 +27,57 @@ function Hip() {
     return (
         <Page>
             {report ?
-                <div>
-                    <div>{report.id}</div>
-                    <div>{report.name}</div>
+                <div className="report-container">
+                    <div className="card report_header">
+                        <div className="card_title">
+                            <h4>{report.name}</h4>
+                            <p>Fecha de creacion: {new Date(report.createdDate).toLocaleString()}</p>
+                        </div>
+                    </div>
                     {
                         report.mediciones.map(medicion => {
                             return (
-                                <div>
-                                    <span>{medicion.name}</span>
-                                    {
-                                        medicion.angulos.map(angulo => {
-                                            return (
-                                                <div>
-                                                    <span>{angulo.name}</span>
-                                                    <img src={angulo.path}></img>
-                                                    <div>
-                                                        {
-                                                            angulo.izquierdo.map(izq => {
-                                                                return (
-                                                                    <div>
-                                                                        <span>{izq.name}</span>
-                                                                        <span>{izq.value}</span>
-                                                                    </div>
-                                                                )
-                                                            })
-                                                        }
-                                                        {
-                                                            angulo.derecho.map(der => {
-                                                                return (
-                                                                    <div>
-                                                                        <span>{der.name}</span>
-                                                                        <span>{der.value}</span>
-                                                                    </div>
-                                                                )
-                                                            })
-                                                        }
-                                                    </div>
-                                                </div>
-                                            )
-                                        })
-                                    }
+                                <div className="card">
+                                    <div className="card_title medicion_title">
+                                        <h4>{medicion.name}</h4>
+                                    </div>
+                                    <div className="card_content">
+                                        <Tabs>
+                                            {
+                                                medicion.angulos.map(angulo => {
+                                                    return (
+                                                        <Tab label={angulo.name}>
+                                                            <div>
+                                                                <img className="medicion_img" src={angulo.path}></img>
+                                                                <div>
+                                                                    {
+                                                                        angulo.izquierdo.map(izq => {
+                                                                            return (
+                                                                                <div>
+                                                                                    <span>{izq.name}</span>
+                                                                                    <span>{izq.value}</span>
+                                                                                </div>
+                                                                            )
+                                                                        })
+                                                                    }
+                                                                    {
+                                                                        angulo.derecho.map(der => {
+                                                                            return (
+                                                                                <div>
+                                                                                    <span>{der.name}</span>
+                                                                                    <span>{der.value}</span>
+                                                                                </div>
+                                                                            )
+                                                                        })
+                                                                    }
+                                                                </div>
+                                                            </div>
+                                                        </Tab>
+                                                    )
+                                                })
+                                            }
+                                        </Tabs>
+                                    </div>
                                 </div>
                             )
                         })
