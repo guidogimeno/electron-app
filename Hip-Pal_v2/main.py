@@ -3,6 +3,7 @@ import uuid
 import os
 import datetime
 import argparse
+from CentroBordeAnterior import centroBordeAnterior
 from CentroBordeLateral import centroBordeLateral
 from Excepciones.Excepciones import ErrorDetectandoAngulos, ErrorIntermedialNotFound, ErrorProximalEcuatorialNotFound, ErrorCantidadEtiquetas
 import SectorAcetabular.sectorAcetabular as sectorAcetabular
@@ -73,9 +74,13 @@ def main():
         angulosSectorAcetabular = detectar.detectar(id, args.carpeta_salida,
                                                     cabezas_femur_axiales, tomografia_original, tomografia_segmentada)
 
-        # Buscar el centroide del femur izquierdo desde la vista coronal
+        # Detecta angulos Centro Borde Lateral-------------------------------------------------
         angulosCentroBordeLateral = centroBordeLateral.detectar(
             id, args.carpeta_salida, cabezas_femur_axiales, tomografia_original, tomografia_segmentada)
+
+        # Detecta angulos Centro Borde Anterior-------------------------------------------------
+        angulosCentroBordeAnterior=centroBordeAnterior.detectar(id, args.carpeta_salida,cabezas_femur_axiales, tomografia_original,tomografia_segmentada)
+
 
         now = datetime.datetime.now()
         timestamp_string = now.strftime("%Y-%m-%d %H:%M:%S")
@@ -92,6 +97,10 @@ def main():
                 {
                     "name": "Centro Borde Lateral",
                     "angulos": angulosCentroBordeLateral,
+                },
+                {
+                    "name": "Centro Borde Anterior",
+                    "angulos": angulosCentroBordeAnterior,
                 }
             ]
         }
