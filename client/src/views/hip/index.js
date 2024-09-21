@@ -47,30 +47,37 @@ function Hip() {
                                                 medicion.angulos.map(angulo => {
                                                     return (
                                                         <Tab label={angulo.name}>
-                                                            <div>
-                                                                <img className="medicion_img" src={angulo.path}></img>
-                                                                <div>
-                                                                    {
-                                                                        angulo.izquierdo.map(izq => {
-                                                                            return (
-                                                                                <div>
-                                                                                    <span>{izq.name}</span>
-                                                                                    <span>{izq.value}</span>
-                                                                                </div>
-                                                                            )
-                                                                        })
-                                                                    }
-                                                                    {
-                                                                        angulo.derecho.map(der => {
-                                                                            return (
-                                                                                <div>
-                                                                                    <span>{der.name}</span>
-                                                                                    <span>{der.value}</span>
-                                                                                </div>
-                                                                            )
-                                                                        })
-                                                                    }
-                                                                </div>
+                                                            <div className="angulos-container">
+                                                                <img className="angulo_img" src={angulo.path}></img>
+                                                                <table className="angulo_table">
+                                                                    <thead>
+                                                                        <tr>Medicion</tr>
+                                                                        <tr>Izquierda</tr>
+                                                                        <tr>Derecha</tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        {
+                                                                            angulo.izquierdo.map(izq => {
+                                                                                return (
+                                                                                    <div>
+                                                                                        <span>{izq.name}</span>
+                                                                                        <span>{izq.value}</span>
+                                                                                    </div>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                                        {
+                                                                            angulo.derecho.map(der => {
+                                                                                return (
+                                                                                    <div>
+                                                                                        <span>{der.name}</span>
+                                                                                        <span>{der.value}</span>
+                                                                                    </div>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                                    </tbody>
+                                                                </table>
                                                             </div>
                                                         </Tab>
                                                     )
