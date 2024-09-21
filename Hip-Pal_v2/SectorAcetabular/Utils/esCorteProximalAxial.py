@@ -1,5 +1,5 @@
 import SectorAcetabular.Utils.esContornoCircular as esContornoCircular
-import CabezaFemur.cabezaFemurProximalAxial as cabezaFemurProximalAxial
+import CabezaFemur.cabezaFemurProximalaxial as cabezaFemurProximalAxial
 
 
 
