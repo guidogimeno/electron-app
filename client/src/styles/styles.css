@@ -12,6 +12,7 @@
 @import "../components/spinner/styles.css";
 @import "../components/notification/sytles.css";
 @import "../components/search/styles.css";
+@import "../components/tabs/styles.css";
 
 /* Views */
 @import "../views/landing/styles.css";
