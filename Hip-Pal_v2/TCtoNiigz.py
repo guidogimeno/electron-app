@@ -124,7 +124,17 @@ def dcm_to_nii(id, path_tomografia, base_path):
     print(selectedPath)
 
     dicom_folder = selectedPath
+
+    # sacamos el nombre del nieri
+    archivos = [f for f in os.listdir(dicom_folder)]
+    dicom_data = pydicom.dcmread(f'{dicom_folder}/{archivos[0]}')
+    nombre_paciente = str(dicom_data.PatientName).replace("^", " ")
+
+    print(f'Nombre del paciente: {nombre_paciente}')
+
     output_folder = f"{base_path}/reports/{id}/temp"
     os.makedirs(output_folder)
 
     convert_dcm_to_nii(id, base_path, dicom_folder, output_folder)
+
+    return nombre_paciente
