@@ -17,9 +17,9 @@ def graficar(id, base_path,corte_ecuatorial_sagital,x,y,punto_inicio,punto_fin,x
     plt.figure(figsize=(10, 7))
     plt.imshow(corte_ecuatorial_sagital, cmap="gray", aspect='auto')
     plt.axis('off')  # Desactiva los ejes
-    output_path = f"{base_path}/reports/{id}/CentroBordeAnterio{lado}.png"
+    output_path = f"{base_path}/reports/{id}/CentroBordeAnterior{lado}.png"
     plt.savefig(output_path, bbox_inches='tight', pad_inches=0)
-
+    return output_path
 
 
 def detectar(id, base_path,cabezas_femur_axiales,tomografia_original,tomografia_segmentada):
@@ -43,7 +43,7 @@ def detectar(id, base_path,cabezas_femur_axiales,tomografia_original,tomografia_
     punto_inicio = (x_izq, y_izq)
     punto_fin = (x_izq, y_izq - longitud_recta)  # Restamos en y para que la línea sea hacia arriba
     angulo_CBA_izq=(-1*angulo_CBA_izq)-90
-    graficar(id, base_path,corte_ecuatorial_sagital_izq,x_izq,y_izq,punto_inicio,punto_fin,x_final_izq,y_final_izq,"Izquierdo")
+    output_path_izq=graficar(id, base_path,corte_ecuatorial_sagital_izq,x_izq,y_izq,punto_inicio,punto_fin,x_final_izq,y_final_izq,"Izquierdo")
 
 
     # Coordenadas del centro del círculo en la vista derecho
@@ -61,19 +61,30 @@ def detectar(id, base_path,cabezas_femur_axiales,tomografia_original,tomografia_
     punto_inicio = (x_der, y_der)
     punto_fin = (x_der, y_der - longitud_recta)  # Restamos en y para que la línea sea hacia arriba
     angulo_CBA_der=(-1*angulo_CBA_der)-90
-    graficar(id, base_path,corte_ecuatorial_sagital_der,x_der,y_der,punto_inicio,punto_fin,x_final_der,y_final_der,"Derecho")
+    output_path_der=graficar(id, base_path,corte_ecuatorial_sagital_der,x_der,y_der,punto_inicio,punto_fin,x_final_der,y_final_der,"Derecho")
 
 
-    angulos_CBA={
-                "izquierdo":{
-                    "path":"output_path",
-                    "cba":angulo_CBA_izq
-                },
-                "derecho":{
-                    "path":"output_path",
-                    "cba":angulo_CBA_der
-                }
-        }
+
+    angulos_CBA_izq=[{
+                "name": "Izquierdo",
+                "path":output_path_izq,
+                "izquierdo":[{
+                    "name":"cba_izq",
+                    "value":angulo_CBA_izq
+                }]
+        }]
+    
 
 
-    return angulos_CBA
+    angulos_CBA_der=[{
+                "name": "Derecho",
+                "path":output_path_der,
+                "izquierdo":[{
+                    "name":"cba_der",
+                    "value":angulo_CBA_der
+                }]
+        }]
+    
+
+
+    return angulos_CBA_izq,angulos_CBA_der

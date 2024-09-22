@@ -256,6 +256,8 @@ def graficar(id, base_path, composicion, coordenadas_izq, coordenadas_der, angul
              # Línea verd
              (angulos["izquierdo"]["x_aasa"], angulos["izquierdo"]["y_aasa"]), (0, 255, 0), 1)
 
+    print("Voy a guardar")
+
     plt.figure(figsize=(18, 10))
     plt.subplot(1, 1, 1)
     plt.imshow(composicion, cmap='gray')

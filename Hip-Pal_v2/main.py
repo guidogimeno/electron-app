@@ -23,6 +23,7 @@ def main():
     parser.add_argument("carpeta_salida",
                         help="Ruta a la carpeta donde quedara el .nii.gz")
     args = parser.parse_args()
+    
 
     print("\nDEBUG: comienza busqueda y conversión de tomografia.")
     dcm_to_nii(id, args.ruta, args.carpeta_salida)
@@ -79,7 +80,7 @@ def main():
             id, args.carpeta_salida, cabezas_femur_axiales, tomografia_original, tomografia_segmentada)
 
         # Detecta angulos Centro Borde Anterior-------------------------------------------------
-        angulosCentroBordeAnterior=centroBordeAnterior.detectar(id, args.carpeta_salida,cabezas_femur_axiales, tomografia_original,tomografia_segmentada)
+        angulosCentroBordeAnteriorIzquierdo,angulosCentroBordeAnteriorDerecho=centroBordeAnterior.detectar(id, args.carpeta_salida,cabezas_femur_axiales, tomografia_original,tomografia_segmentada)
 
 
         now = datetime.datetime.now()
@@ -99,8 +100,12 @@ def main():
                     "angulos": angulosCentroBordeLateral,
                 },
                 {
-                    "name": "Centro Borde Anterior",
-                    "angulos": angulosCentroBordeAnterior,
+                    "name": "Centro Borde Anterior Izquierdo",
+                    "angulos": angulosCentroBordeAnteriorIzquierdo,
+                },
+                {
+                    "name": "Centro Borde Anterior Derecho",
+                    "angulos": angulosCentroBordeAnteriorDerecho,
                 }
             ]
         }
