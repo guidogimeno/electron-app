@@ -423,7 +423,7 @@ function NewAnalysis() {
                             Submit and go to report
                         </button>
                     }
-                    <button className="tertiary-button" onClick={handleCancel}>Cancel</button>
+                    <button className="tertiary-button" onClick={handleCancel}>Cancelar</button>
                 </form>
             </div>
         </Page >

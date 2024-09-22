@@ -47,7 +47,7 @@ function Table(props) {
                     props.handleDelete(candidate)
                     setOpen(false)
                 }} >
-                Are you sure you want to delete this report?
+                Estas seguro que queres eliminar este reporte?
             </ConfirmationModal>
         </div>
     )
