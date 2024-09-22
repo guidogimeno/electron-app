@@ -14,9 +14,9 @@ function Table(props) {
             <table>
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Date</th>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Fecha de creacion</th>
                         <th></th>
                     </tr>
                 </thead>

@@ -3,7 +3,7 @@
     left: 0;
 
     height: 100%;
-    width: 15rem;
+    width: 16rem;
     z-index: var(--z-index-sidebar);
 
     display: flex;

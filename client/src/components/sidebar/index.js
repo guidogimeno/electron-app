@@ -4,7 +4,7 @@ import CirclePlusSvg from "../../assets/circle_plus_svg.js"
 import FolderSvg from "../../assets/folder_svg.js"
 
 const links = [
-    { label: "My Hips", to: "/my_hips", icon: <FolderSvg /> },
+    { label: "Mis Mediciones", to: "/my_hips", icon: <FolderSvg /> },
 ]
 
 function Sidebar() {
@@ -14,7 +14,7 @@ function Sidebar() {
         <div className="sidebar">
             <Link to="/analyze" className="sidebar-new-button">
                 <CirclePlusSvg />
-                New
+                Nuevo
             </Link>
             <div className="sidebar-secondary-buttons">
                 {
