@@ -10,7 +10,7 @@ function Table(props) {
     const [candidate, setCandidate] = useState(null)
 
     return (
-        <>
+        <div className="reports-table">
             <table>
                 <thead>
                     <tr>
@@ -49,7 +49,7 @@ function Table(props) {
                 }} >
                 Are you sure you want to delete this report?
             </ConfirmationModal>
-        </>
+        </div>
     )
 }
 

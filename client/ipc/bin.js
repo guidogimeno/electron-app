@@ -23,10 +23,12 @@ ipcMain.handle("execute", async (_, filePath) => {
 
         binary.on("close", (result) => {
             console.log(`closing: ${result}`)
+            // TODO: Esto quizas sirve tambien
         })
 
         binary.stderr.on("data", (code) => {
             console.log(`binary execution stderr: ${code}`)
+            // TODO: manejar bien los errores
             // reject(new Error(`process exited with code ${code}`))
         })
     })

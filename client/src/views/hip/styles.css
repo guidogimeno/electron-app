@@ -2,6 +2,10 @@
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xl);
+
+    li {
+        font: var(--big);
+    }
 }
 
 .card {
@@ -52,7 +56,47 @@
     display: flex;
     flex-direction: row;
     gap: 1rem;
-}
 
-.angulo_table {
+    table {
+        font: var(--big);
+        width: 25%;
+        border-collapse: collapse;
+        height: min-content;
+    }
+
+    thead {
+        display: table-header-group;
+        vertical-align: middle;
+        unicode-bidi: isolate;
+
+        tr {
+            border-bottom: 1px solid #dcdcdc;
+        }
+    }
+
+    th {
+        height: 3rem;
+        padding: 0 1rem;
+
+        vertical-align: middle;
+        text-align: left;
+        color: var(--dark-gray);
+    }
+
+    tbody tr:not(:last-child) {
+        border-bottom: 1px solid #dcdcdc;
+    }
+
+    tr:hover {
+        background-color: #eaeaea;
+    }
+
+    td {
+        height: 3rem;
+        padding: 0 1rem;
+
+        vertical-align: middle;
+        text-align: center;
+        color: var(--black);
+    }
 }
