@@ -43,7 +43,7 @@ function SignUp() {
         <Page hiddeSidebar >
             <div className="signup-container">
                 <div className="signup-content">
-                    <h1 className="signup-title">Sign Up</h1>
+                    <h1 className="signup-title">Registro</h1>
                     {inlineMessage && <p className="inline-message">{inlineMessage}</p>}
 
                     <form className="signup-form" onSubmit={handleSubmit}>

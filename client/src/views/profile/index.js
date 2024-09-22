@@ -32,9 +32,9 @@ function Profile() {
             await updateUser(data)
             context.setUser(formData)
             setIsEditing(false)
-            context.showSuccess("account successfuly updated")
+            context.showSuccess("cuenta actualizada con exito")
         } catch (error) {
-            context.showFailure("failed to update user")
+            context.showFailure("error al intentar actualizar la cuenta")
         }
     }
 
@@ -51,9 +51,9 @@ function Profile() {
             await setStoreValue("token", "")
             context.setUser(null)
             navigate("/login")
-            context.showSuccess("account successfuly deleted")
+            context.showSuccess("cuenta eliminada con exito")
         } catch (error) {
-            context.showFailure("failed to delete user")
+            context.showFailure("error al intentar borrar la cuenta")
         }
     }
 
