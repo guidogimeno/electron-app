@@ -10,13 +10,13 @@ function Table(props) {
     const [candidate, setCandidate] = useState(null)
 
     return (
-        <>
+        <div className="reports-table">
             <table>
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Date</th>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Fecha de creacion</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -47,9 +47,9 @@ function Table(props) {
                     props.handleDelete(candidate)
                     setOpen(false)
                 }} >
-                Are you sure you want to delete this report?
+                Estas seguro que queres eliminar este reporte?
             </ConfirmationModal>
-        </>
+        </div>
     )
 }
 

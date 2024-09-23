@@ -1,43 +1,46 @@
-table {
-    border: .1rem solid var(--blue);
-    border-radius: 1rem;
-    border-spacing: 0;
-    overflow: hidden;
-}
+.reports-table {
+    table {
+        width: 100%;
+        border: .1rem solid var(--blue);
+        border-radius: 1rem;
+        border-spacing: 0;
+        overflow: hidden;
+    }
 
-thead {
-    text-align: left;
-    background-color: var(--blue);
-    height: var(--spacing-xxxl);
-    color: var(--white);
-    font: bold var(--p);
-}
+    thead {
+        text-align: left;
+        background-color: var(--blue);
+        height: var(--spacing-xxxl);
+        color: var(--white);
+        font: bold var(--p);
+    }
 
-table thead tr th:first-child {
-    padding-left: var(--spacing-lg);
-}
+    table thead tr th:first-child {
+        padding-left: var(--spacing-lg);
+    }
 
-table tbody tr td:first-child {
-    padding-left: var(--spacing-lg);
-}
+    table tbody tr td:first-child {
+        padding-left: var(--spacing-lg);
+    }
 
-table tbody tr td {
-    height: var(--spacing-xxl);
-    border-bottom: .1rem solid var(--blue);
-    font: var(--p);
-    color: var(--black);
-}
+    table tbody tr td {
+        height: var(--spacing-xxl);
+        border-bottom: .1rem solid var(--blue);
+        font: var(--p);
+        color: var(--black);
+    }
 
-table tbody a {
-    text-decoration: none;
-    font: bold var(--p);
-    color: var(--black);
-}
+    table tbody a {
+        text-decoration: none;
+        font: bold var(--p);
+        color: var(--black);
+    }
 
-table tbody tr:last-child td {
-    border: none;
-}
+    table tbody tr:last-child td {
+        border: none;
+    }
 
-.trash-td>* {
-    cursor: pointer;
+    .trash-td>* {
+        cursor: pointer;
+    }
 }

@@ -37,7 +37,7 @@ function Hip() {
                     {
                         report.mediciones.map(medicion => {
                             return (
-                                <div className="card">
+                                <div key={medicion.name} className="card">
                                     <div className="card_title medicion_title">
                                         <h4>{medicion.name}</h4>
                                     </div>
@@ -46,33 +46,28 @@ function Hip() {
                                             {
                                                 medicion.angulos.map(angulo => {
                                                     return (
-                                                        <Tab label={angulo.name}>
+                                                        <Tab key={angulo.name} label={angulo.name}>
                                                             <div className="angulos-container">
                                                                 <img className="angulo_img" src={angulo.path}></img>
                                                                 <table className="angulo_table">
                                                                     <thead>
-                                                                        <tr>Medicion</tr>
-                                                                        <tr>Izquierda</tr>
-                                                                        <tr>Derecha</tr>
+                                                                        <tr>
+                                                                            <th>Medicion</th>
+                                                                            <th>Izquierda</th>
+                                                                            <th>Derecha</th>
+                                                                        </tr>
+
                                                                     </thead>
                                                                     <tbody>
                                                                         {
                                                                             angulo.izquierdo.map(izq => {
+                                                                                const der = angulo.derecho.find(elem => elem.name == izq.name)
                                                                                 return (
-                                                                                    <div>
-                                                                                        <span>{izq.name}</span>
-                                                                                        <span>{izq.value}</span>
-                                                                                    </div>
-                                                                                )
-                                                                            })
-                                                                        }
-                                                                        {
-                                                                            angulo.derecho.map(der => {
-                                                                                return (
-                                                                                    <div>
-                                                                                        <span>{der.name}</span>
-                                                                                        <span>{der.value}</span>
-                                                                                    </div>
+                                                                                    <tr key={izq.name}>
+                                                                                        <td>{izq.name.toUpperCase()}</td>
+                                                                                        <td>{izq.value}°</td>
+                                                                                        <td>{der.value}°</td>
+                                                                                    </tr>
                                                                                 )
                                                                             })
                                                                         }

@@ -32,9 +32,9 @@ function Profile() {
             await updateUser(data)
             context.setUser(formData)
             setIsEditing(false)
-            context.showSuccess("account successfuly updated")
+            context.showSuccess("cuenta actualizada con exito")
         } catch (error) {
-            context.showFailure("failed to update user")
+            context.showFailure("error al intentar actualizar la cuenta")
         }
     }
 
@@ -51,20 +51,20 @@ function Profile() {
             await setStoreValue("token", "")
             context.setUser(null)
             navigate("/login")
-            context.showSuccess("account successfuly deleted")
+            context.showSuccess("cuenta eliminada con exito")
         } catch (error) {
-            context.showFailure("failed to delete user")
+            context.showFailure("error al intentar borrar la cuenta")
         }
     }
 
     return (
         <Page>
             <div className="profile-container">
-                <h1>My Profile</h1>
+                <h1>Mi Perfil</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="inputs-container">
                         <div className="label-input">
-                            <label htmlFor="firstName">First Name</label>
+                            <label htmlFor="firstName">Nombre</label>
                             <input
                                 type="text"
                                 id="firstName"
@@ -76,7 +76,7 @@ function Profile() {
                             />
                         </div>
                         <div className="label-input">
-                            <label htmlFor="lastName">Last Name</label>
+                            <label htmlFor="lastName">Apellido</label>
                             <input
                                 type="text"
                                 id="lastName"
@@ -100,7 +100,7 @@ function Profile() {
                             />
                         </div>
                         <div className="label-input">
-                            <label htmlFor="password">Password</label>
+                            <label htmlFor="password">Contraseña</label>
                             <input
                                 type="text"
                                 id="password"
@@ -112,7 +112,7 @@ function Profile() {
                             />
                         </div>
                         <div className="label-input">
-                            <label htmlFor="jobTitle">Job Title</label>
+                            <label htmlFor="jobTitle">Posicion laboral</label>
                             <input
                                 type="text"
                                 id="jobTitle"
@@ -124,7 +124,7 @@ function Profile() {
                             />
                         </div>
                         <div className="label-input">
-                            <label htmlFor="academicTitle">Academic Title</label>
+                            <label htmlFor="academicTitle">Titulo academico</label>
                             <input
                                 type="text"
                                 id="academicTitle"
@@ -136,7 +136,7 @@ function Profile() {
                             />
                         </div>
                         <div className="label-input">
-                            <label htmlFor="country">Country</label>
+                            <label htmlFor="country">Pais</label>
                             <input
                                 type="text"
                                 id="country"
@@ -148,7 +148,7 @@ function Profile() {
                             />
                         </div>
                         <div className="label-input">
-                            <label htmlFor="state">State</label>
+                            <label htmlFor="state">Provincia</label>
                             <input
                                 type="text"
                                 id="state"
@@ -160,7 +160,7 @@ function Profile() {
                             />
                         </div>
                         <div className="label-input">
-                            <label htmlFor="city">City</label>
+                            <label htmlFor="city">Ciudad</label>
                             <input
                                 type="text"
                                 id="city"
@@ -172,7 +172,7 @@ function Profile() {
                             />
                         </div>
                         <div className="label-input">
-                            <label htmlFor="institution">Institution</label>
+                            <label htmlFor="institution">Institucion</label>
                             <input
                                 type="text"
                                 id="institution"
@@ -188,14 +188,14 @@ function Profile() {
                         <>
                             <button className="primary-button" type="submit">Submit</button>
                             <button className="tertiary-button" type="button" onClick={handleCancelClick}>
-                                Cancel
+                                Cancelar
                             </button>
                             <button className="danger-button" type="button" onClick={() => setOpen(true)}>
-                                Delete user
+                                Eliminar cuenta
                             </button>
                         </>
                     ) : (
-                        <button className="primary-button" type="button" onClick={() => setIsEditing(true)}>Edit</button>
+                        <button className="primary-button" type="button" onClick={() => setIsEditing(true)}>Editar</button>
                     )}
                 </form>
             </div>
@@ -206,7 +206,7 @@ function Profile() {
                     await handleDelete()
                     setOpen(false)
                 }} >
-                Are you sure you want to delete your account?
+                Esta seguro que desea eliminar su cuenta?
             </ConfirmationModal>
         </Page>
     )

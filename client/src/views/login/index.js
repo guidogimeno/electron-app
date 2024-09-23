@@ -54,19 +54,19 @@ function Login() {
                             value={formData.password}
                             onChange={handleChange}
                             className="input"
-                            placeholder="Password"
+                            placeholder="Contraseña"
                             required
                         />
                         <button type="submit" className="primary-button">
-                            Login
+                            Conectar
                         </button>
                     </form>
                     <div className="login-links">
                         <Link to="/my_hips" className="login-link">
-                            Forgot password?
+                            Recuperar contraseña
                         </Link>
                         <Link to="/signup" className="login-link">
-                            SignUp
+                            Registrarse
                         </Link>
                     </div>
                 </div>

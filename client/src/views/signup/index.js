@@ -35,7 +35,7 @@ function SignUp() {
             await createUser(formData)
             navigate("/")
         } catch (error) {
-            setInlineMessage("Failed to sign up. Please try again")
+            setInlineMessage("Error al intentar crear el perfil. Por favor intente de nuevo")
         }
     }
 
@@ -43,7 +43,7 @@ function SignUp() {
         <Page hiddeSidebar >
             <div className="signup-container">
                 <div className="signup-content">
-                    <h1 className="signup-title">Sign Up</h1>
+                    <h1 className="signup-title">Registro</h1>
                     {inlineMessage && <p className="inline-message">{inlineMessage}</p>}
 
                     <form className="signup-form" onSubmit={handleSubmit}>
@@ -55,7 +55,7 @@ function SignUp() {
                                 value={formData.firstName}
                                 onChange={handleChange}
                                 className="input"
-                                placeholder="First Name"
+                                placeholder="Nombre"
                                 required
                             />
                             <input
@@ -65,7 +65,7 @@ function SignUp() {
                                 value={formData.lastName}
                                 onChange={handleChange}
                                 className="input"
-                                placeholder="Last Name"
+                                placeholder="Apellido"
                                 required
                             />
                             <input
@@ -75,7 +75,7 @@ function SignUp() {
                                 value={formData.password}
                                 onChange={handleChange}
                                 className="input"
-                                placeholder="Password"
+                                placeholder="Contraseña"
                                 required
                             />
                             <input
@@ -95,7 +95,7 @@ function SignUp() {
                                 value={formData.jobTitle}
                                 onChange={handleChange}
                                 className="input"
-                                placeholder="Job Title"
+                                placeholder="Posicion laboral"
                                 required
                             />
                             <input
@@ -105,7 +105,7 @@ function SignUp() {
                                 value={formData.academicTitle}
                                 onChange={handleChange}
                                 className="input"
-                                placeholder="Academic Title"
+                                placeholder="Titulo academico"
                                 required
                             />
                             <input
@@ -115,7 +115,7 @@ function SignUp() {
                                 value={formData.country}
                                 onChange={handleChange}
                                 className="input"
-                                placeholder="Country"
+                                placeholder="Pais"
                                 required
                             />
                             <input
@@ -125,7 +125,7 @@ function SignUp() {
                                 value={formData.state}
                                 onChange={handleChange}
                                 className="input"
-                                placeholder="State"
+                                placeholder="Provincia"
                                 required
                             />
                             <input
@@ -135,7 +135,7 @@ function SignUp() {
                                 value={formData.city}
                                 onChange={handleChange}
                                 className="input"
-                                placeholder="City"
+                                placeholder="Ciudad"
                                 required
                             />
                             <input
@@ -145,17 +145,17 @@ function SignUp() {
                                 value={formData.institution}
                                 onChange={handleChange}
                                 className="input"
-                                placeholder="Institution"
+                                placeholder="Institucion"
                                 required
                             />
                         </div>
                         <button type="submit" className="primary-button">
-                            Sign Up
+                            Registrarse
                         </button>
                     </form>
                     <div className="signup-links">
                         <Link to="/login" className="login-link">
-                            Log In
+                            Conectarse
                         </Link>
                     </div>
                 </div>

@@ -8,7 +8,7 @@ function Search(props) {
             <SearchSvg className="search-icon" />
             <input
                 type="text"
-                placeholder="Search in Hip Pal"
+                placeholder="Buscar en HipPal"
                 onChange={(event) => props.onChange(event.target.value)}
             />
         </div>
