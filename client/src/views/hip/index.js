@@ -40,7 +40,7 @@ function Hip() {
 
         if (obj.izquierdo) {
             obj.izquierdo.forEach(obj => {
-                keyValueMap.set(obj.name, obj.value);
+                keyValueMap.set(obj.name, [obj.name, obj.value]);
             });
         }
 
@@ -49,7 +49,7 @@ function Hip() {
                 if (keyValueMap.has(obj.name)) {
                     keyValueMap.get(obj.name).push(obj.value);
                 } else {
-                    keyValueMap.set(obj.name, [obj.value]);
+                    keyValueMap.set(obj.name, [obj.name, obj.value]);
                 }
             });
         }
@@ -88,7 +88,6 @@ function Hip() {
                                                                 <table className="angulo_table">
                                                                     <thead>
                                                                         <tr>
-                                                                            <th>Medicion</th>
                                                                             {tableFormat(angulo).headers.map(header => <th>{header}</th>)}
                                                                         </tr>
 
