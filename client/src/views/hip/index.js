@@ -24,6 +24,42 @@ function Hip() {
         }
     }
 
+    function tableFormat(obj) {
+        const tableInfo = {
+            headers: ["Medicion"]
+        }
+        if (obj.izquierdo) {
+            tableInfo.headers.push("Izquierdo")
+        }
+        if (obj.derecho) {
+            tableInfo.headers.push("Derecho")
+        }
+
+        const combinedArray = [];
+        const keyValueMap = new Map();
+
+        if (obj.izquierdo) {
+            obj.izquierdo.forEach(obj => {
+                keyValueMap.set(obj.name, obj.value);
+            });
+        }
+
+        if (obj.derecho) {
+            obj.derecho.forEach(obj => {
+                if (keyValueMap.has(obj.name)) {
+                    keyValueMap.get(obj.name).push(obj.value);
+                } else {
+                    keyValueMap.set(obj.name, [obj.value]);
+                }
+            });
+        }
+
+        combinedArray.push(...keyValueMap.values());
+        tableInfo.data = combinedArray
+
+        return tableInfo
+    }
+
     return (
         <Page>
             {report ?
@@ -53,20 +89,20 @@ function Hip() {
                                                                     <thead>
                                                                         <tr>
                                                                             <th>Medicion</th>
-                                                                            <th>Izquierda</th>
-                                                                            <th>Derecha</th>
+                                                                            {tableFormat(angulo).headers.map(header => <th>{header}</th>)}
                                                                         </tr>
 
                                                                     </thead>
                                                                     <tbody>
                                                                         {
-                                                                            angulo.izquierdo.map(izq => {
-                                                                                const der = angulo.derecho.find(elem => elem.name == izq.name)
+                                                                            tableFormat(angulo).data.map(row => {
                                                                                 return (
-                                                                                    <tr key={izq.name}>
-                                                                                        <td>{izq.name.toUpperCase()}</td>
-                                                                                        <td>{izq.value}°</td>
-                                                                                        <td>{der.value}°</td>
+                                                                                    <tr>
+                                                                                        {row.map(cell => {
+                                                                                            return (
+                                                                                                <td>{cell}°</td>
+                                                                                            )
+                                                                                        })}
                                                                                     </tr>
                                                                                 )
                                                                             })

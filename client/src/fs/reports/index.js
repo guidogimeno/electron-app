@@ -13,7 +13,6 @@ async function getReports() {
         const reports = []
         for (const file of files) {
             const report = JSON.parse(file)
-            console.log("a ver el archivo", report)
             reports.push({
                 ...report,
                 date: new Date(report.createdDate).toISOString().split("T")[0]
