@@ -40,7 +40,7 @@ function Hip() {
 
         if (obj.izquierdo) {
             obj.izquierdo.forEach(obj => {
-                keyValueMap.set(obj.name, [obj.name, obj.value]);
+                keyValueMap.set(obj.name, [obj.name.toUpperCase(), `${obj.value}°`]);
             });
         }
 
@@ -49,7 +49,7 @@ function Hip() {
                 if (keyValueMap.has(obj.name)) {
                     keyValueMap.get(obj.name).push(obj.value);
                 } else {
-                    keyValueMap.set(obj.name, [obj.name, obj.value]);
+                    keyValueMap.set(obj.name, [obj.name.toUpperCase(), `${obj.value}°`]);
                 }
             });
         }
@@ -99,7 +99,7 @@ function Hip() {
                                                                                     <tr>
                                                                                         {row.map(cell => {
                                                                                             return (
-                                                                                                <td>{cell}°</td>
+                                                                                                <td>{cell}</td>
                                                                                             )
                                                                                         })}
                                                                                     </tr>
