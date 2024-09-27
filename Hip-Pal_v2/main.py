@@ -6,6 +6,7 @@ import argparse
 from CentroBordeAnterior import centroBordeAnterior
 from CentroBordeLateral import centroBordeLateral
 from Excepciones.Excepciones import ErrorDetectandoAngulos, ErrorIntermedialNotFound, ErrorProximalEcuatorialNotFound, ErrorCantidadEtiquetas
+from PendienteDelSacro import pendienteDelSacro
 import SectorAcetabular.sectorAcetabular as sectorAcetabular
 import SectorAcetabular.Utils.detectar as detectar
 import json
@@ -82,6 +83,9 @@ def main():
         # Detecta angulos Centro Borde Anterior-------------------------------------------------
         angulosCentroBordeAnteriorIzquierdo,angulosCentroBordeAnteriorDerecho=centroBordeAnterior.detectar(id, args.carpeta_salida,cabezas_femur_axiales, tomografia_original,tomografia_segmentada)
 
+        # Detecta angulos del Sacro-------------------------------------------------
+        anguloSacralSlope,anguloPelvicTilt,anguloPelvicIncidence=pendienteDelSacro.detectar(id, args.carpeta_salida,cabezas_femur_axiales, tomografia_original,tomografia_segmentada)
+
 
         now = datetime.datetime.now()
         timestamp_string = now.strftime("%Y-%m-%d %H:%M:%S")
@@ -106,6 +110,18 @@ def main():
                 {
                     "name": "Centro Borde Anterior Derecho",
                     "angulos": angulosCentroBordeAnteriorDerecho,
+                },
+                {
+                    "name": "Pendiente Sacra",
+                    "angulos": anguloSacralSlope,
+                },
+                {
+                    "name": "Inclinacion Pelvica",
+                    "angulos": anguloPelvicTilt,
+                },
+                {
+                    "name": "Incidencia Pelvica",
+                    "angulos": anguloPelvicIncidence,
                 }
             ]
         }
