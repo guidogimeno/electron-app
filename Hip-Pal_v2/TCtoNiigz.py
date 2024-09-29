@@ -98,7 +98,7 @@ def convert_dcm_to_nii(id, base_path, dicom_folder, output_folder):
     # Comando para convertir de DICOM a NIfTI
     print(f"debug: {output_folder}")
     # command = f'{base_path}/bin/dcm2niix -f {id} -o {prueba} -z y -p n -m y -x n {dicom_folder}'
-    command2 = [f"{base_path}/bin/dcm2niix", "-f", id, "-o", prueba, "-z",  "y", "-p", "n", "-m", "y", "-x", "n", dicom_folder]
+    command2 = [f"{base_path}/bin/dcm2niix", "-f", id, "-o", output_folder, "-z",  "y", "-p", "n", "-m", "y", "-x", "n", dicom_folder]
 
     # Ejecutar el comando
     subprocess.run(command2, shell=True, check=True)
@@ -107,18 +107,6 @@ def convert_dcm_to_nii(id, base_path, dicom_folder, output_folder):
     # -o: specify the output directory
 
 # --------------------------------------------------------------------------------------------------
-
-# Función principal
-
-# falopaquenose/reports:
-#     123:
-#         angulos.json
-#         temp:
-#             basura1
-#             basura2
-#         foto1.png
-#         foto2.png
-
 
 def dcm_to_nii(id, path_tomografia, base_path):
     selectedPath = get_final_path_CT(path_tomografia)
