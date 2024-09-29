@@ -91,6 +91,9 @@ def get_final_path_CT(directorio):
 
 
 def convert_dcm_to_nii(id, base_path, dicom_folder, output_folder):
+    print(f"base_path: {base_path}")
+    print(f"output_folder: {output_folder}")
+
     # Verifica que el directorio de salida exista
     if not os.path.exists(output_folder):
         os.makedirs(output_folder)
