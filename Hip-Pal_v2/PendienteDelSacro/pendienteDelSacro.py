@@ -53,30 +53,30 @@ def detectar(id, base_path, cabezas_femur_axiales, tomografia_original, tomograf
 
 
     angulo_SS=[{
-                "name": "Sacral_Slope",
+                "name": "Sacral Slope",
                 "path":output_path_ss,
                 "izquierdo":[{
-                    "name":"sacralSlope",
+                    "name":"Sacral Slope",
                     "value":SacralSlopeAngle
                 }]
         }]
  
  
     angulo_PT=[{
-                "name": "Pelvic_Tilt",
+                "name": "Pelvic Tilt",
                 "path":output_path_pt,
                 "izquierdo":[{
-                    "name":"pelvicTilt",
+                    "name":"Pelvic Tilt",
                     "value":PelvicTiltAngle
                 }]
         }]
  
      
     angulo_PI=[{
-                "name": "Pelvic_Incidence",
+                "name": "Pelvic Incidence",
                 "path":output_path_pi,
                 "izquierdo":[{
-                    "name":"pelvicIncidence",
+                    "name":"Pelvic Incidence",
                     "value":PelvicIncidenceAngle
                 }]
         }]

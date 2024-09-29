@@ -1,12 +1,14 @@
 # Electron Tutorial
 
 # TODO
-1. Guardar porqueria en archivo temp dentro de reports/:reportId
-2. Que el script reciba path de la tomo y ruta en donde se encuentra el "reports"
-3. Que al terminar de ejecutar, se borre lo que esta en temp, falle o salga bien.
-4. Que guarde las imagenes 
-5. Que el json tenga formato para leerlo de forma dinamica
-6. Hacer el instalador para Windows
+1. Que se guarde todo en una carpeta temporal, para que al darle Submit al reporte pase a una carpeta donde esten los "terminados". Borrar la "basura" no importa, solo tiene que servir para la demo.
+2. Poder exportar a PDF.
+3. Cambiar el disenio de algunos botones.
+4. Arreglar el loading en MacOS.
+5. Cambiar el color de los mensajes de error, son muy rojos.
+6. Quizas achicar la letra.
+7. Poner un nombre por defecto a los angulos que no tienen nombre.
+8. Cuando el usuario hace el analisis tiene que poder agregarle un nombre al reporte o algo con una descripcion. No podemos usar ese ID horrendo.
 
 ## Guia de Instalacion
 

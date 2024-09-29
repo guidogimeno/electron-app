@@ -8,28 +8,23 @@ ipcMain.handle("execute", async (_, filePath) => {
     return new Promise(function(resolve, reject) {
         const binary = spawn(`${userDataPath}/bin/main`, [`${filePath}`, `${userDataPath}`]);
 
-        console.log("executing binary")
         binary.stdout.on("data", (result) => {
-            console.log(`binary execution stdout: ${result}`)
-            console.log(`tiene los dos puntos: ${result.includes(":")}`)
-            console.log(`indexOf: ${result.indexOf(":")}`)
-            const id = String(result).split("id:$")[1]
-            console.log(`Este es el id: ${id}`)
+            const id = String(result).split("hippal_stdout:$")[1]
             if (id) {
-                console.log(`resuelvo con este id: ${id}`)
+                console.log(`Id generado: ${id}`)
                 resolve(id)
             }
         })
 
         binary.on("close", (result) => {
-            console.log(`closing: ${result}`)
-            // TODO: Esto quizas sirve tambien
+            console.log(`Cerrando ejecutable: ${result}`)
         })
 
-        binary.stderr.on("data", (code) => {
-            console.log(`binary execution stderr: ${code}`)
-            // TODO: manejar bien los errores
-            // reject(new Error(`process exited with code ${code}`))
+        binary.stderr.on("data", (data) => {
+            const errorMessage = String(data).split("hippal_stderr:$")[1]
+            if (errorMessage) {
+                reject(new Error(`process exited with code ${errorMessage}`))
+            }
         })
     })
 })
