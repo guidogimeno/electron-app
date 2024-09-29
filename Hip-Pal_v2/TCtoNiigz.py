@@ -120,7 +120,10 @@ def convert_dcm_to_nii(id, base_path, dicom_folder, output_folder):
 
 
 def dcm_to_nii(id, path_tomografia, base_path):
-    selectedPath = get_final_path_CT(path_tomografia)
+    path_tomografia_sin_espacios = path_tomografia.replace(" ", "\\ ")
+    base_path_sin_espacios = base_path.replace(" ", "\\ ")
+
+    selectedPath = get_final_path_CT(path_tomografia_sin_espacios)
     print(selectedPath)
 
     dicom_folder = selectedPath
@@ -132,7 +135,7 @@ def dcm_to_nii(id, path_tomografia, base_path):
 
     print(f'Nombre del paciente: {nombre_paciente}')
 
-    output_folder = f"{base_path}/reports/{id}/temp"
+    output_folder = f"{base_path_sin_espacios}/reports/{id}/temp"
     os.makedirs(output_folder)
 
     convert_dcm_to_nii(id, base_path, dicom_folder, output_folder)

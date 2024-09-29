@@ -18,11 +18,11 @@ from preprocesarSegmentacion import preprocesar
 
 def main():
     try:
-        run()
+        foo()
     except Exception as e:
         sys.stderr.write(f"hippal_stderr:{e.__str__()}")
 
-def run():
+def foo():
     id = str(uuid.uuid4())
     parser = argparse.ArgumentParser(
         description="Script para encontrar el directorio de tomografía a partir de una ruta y luego convertirlo a .nii.gz")
@@ -32,26 +32,24 @@ def run():
                         help="Ruta a la carpeta donde quedara el .nii.gz")
     args = parser.parse_args()
     
-    path_tomografia = args.ruta.replace(" ", "\\ ")
-    path_user_data = args.carpeta_salida.replace(" ", "\\ ")
 
     print("\nDEBUG: comienza busqueda y conversión de tomografia.")
-    dcm_to_nii(id, path_tomografia, path_user_data)
+    dcm_to_nii(id, args.ruta, args.carpeta_salida)
     print("\nDEBUG: termina conversión de tomografia.")
 
     print("\nDEBUG: comienza la prediccion/segmentacion")
-    segmentar(id, path_user_data)
+    segmentar(id, args.carpeta_salida)
     print("\nDEBUG: comienza la prediccion/segmentacion")
 
     print("\nDEBUG: aplicamos preprocesamiento del segmentado")
-    preprocesar(id, path_user_data)
+    preprocesar(id, args.carpeta_salida)
     print("\nDEBUG: termina preprocesado")
 
     try:
         # CAMBIAR ESTA RUTA PARA GUARDAR EL JSON
         # ruta_json_resultados = r'C:\Users\Usuario\anaconda3\envs\monailabel-env\Hip-Pal_v2\angulos.json'
         ruta_json_resultados = os.path.join(
-            path_user_data, 'reports', id, 'angulos.json')
+            args.carpeta_salida, 'reports', id, 'angulos.json')
 
         # CAMBIAR ESTAS RUTAS PARA TOMAR LA .NII NORMAL Y EL .NII SEGMENTADO
         # Deberia ir aca la Prediccion------------------------------------------------------------------------
@@ -59,11 +57,11 @@ def run():
         # tomografia_original_path = os.path.join(
         #     'Tomografia', 'Original', 'CT_8.nii.gz')
         tomografia_original_path = os.path.join(
-            path_user_data, 'reports', id, 'temp', f'{id}.nii.gz')
+            args.carpeta_salida, 'reports', id, 'temp', f'{id}.nii.gz')
         tomografia_original = nib.load(tomografia_original_path).get_fdata()
 
         # Cargar prediccion----------------------------------------------------------------------------------
-        tomografia_segmentada_path = os.path.join(path_user_data, 'reports', id, 'temp',
+        tomografia_segmentada_path = os.path.join(args.carpeta_salida, 'reports', id, 'temp',
                                                   'tomografias_segmentadas', id, f'{id}_seg_flipendo.nii.gz')
         tomografia_segmentada = nib.load(
             tomografia_segmentada_path).get_fdata()
@@ -81,18 +79,18 @@ def run():
             tomografia_segmentada)
 
         # Detecta angulos sector Acetabular-------------------------------------------------
-        angulosSectorAcetabular = detectar.detectar(id, path_user_data,
+        angulosSectorAcetabular = detectar.detectar(id, args.carpeta_salida,
                                                     cabezas_femur_axiales, tomografia_original, tomografia_segmentada)
 
         # Detecta angulos Centro Borde Lateral-------------------------------------------------
         angulosCentroBordeLateral = centroBordeLateral.detectar(
-            id, path_user_data, cabezas_femur_axiales, tomografia_original, tomografia_segmentada)
+            id, args.carpeta_salida, cabezas_femur_axiales, tomografia_original, tomografia_segmentada)
 
         # Detecta angulos Centro Borde Anterior-------------------------------------------------
-        angulosCentroBordeAnteriorIzquierdo,angulosCentroBordeAnteriorDerecho=centroBordeAnterior.detectar(id, path_user_data,cabezas_femur_axiales, tomografia_original,tomografia_segmentada)
+        angulosCentroBordeAnteriorIzquierdo,angulosCentroBordeAnteriorDerecho=centroBordeAnterior.detectar(id, args.carpeta_salida,cabezas_femur_axiales, tomografia_original,tomografia_segmentada)
 
         # Detecta angulos del Sacro-------------------------------------------------
-        anguloSacralSlope,anguloPelvicTilt,anguloPelvicIncidence=pendienteDelSacro.detectar(id, path_user_data,cabezas_femur_axiales, tomografia_original,tomografia_segmentada)
+        anguloSacralSlope,anguloPelvicTilt,anguloPelvicIncidence=pendienteDelSacro.detectar(id, args.carpeta_salida,cabezas_femur_axiales, tomografia_original,tomografia_segmentada)
 
 
         now = datetime.datetime.now()
