@@ -1,14 +1,17 @@
 # Electron Tutorial
 
 # TODO
-1. Que se guarde todo en una carpeta temporal, para que al darle Submit al reporte pase a una carpeta donde esten los "terminados". Borrar la "basura" no importa, solo tiene que servir para la demo.
+0. Hacerlo andar bien en MacOS
 2. Poder exportar a PDF.
+1. Que se guarde todo en una carpeta temporal, para que al darle Submit al reporte pase a una carpeta donde esten los "terminados". Borrar la "basura" no importa, solo tiene que servir para la demo.
+8. Cuando el usuario hace el analisis tiene que poder agregarle un nombre al reporte o algo con una descripcion. No podemos usar ese ID horrendo.
+
 3. Cambiar el disenio de algunos botones.
 4. Arreglar el loading en MacOS.
 5. Cambiar el color de los mensajes de error, son muy rojos.
 6. Quizas achicar la letra.
 7. Poner un nombre por defecto a los angulos que no tienen nombre.
-8. Cuando el usuario hace el analisis tiene que poder agregarle un nombre al reporte o algo con una descripcion. No podemos usar ese ID horrendo.
+9. Alinear el header
 
 ## Guia de Instalacion
 
