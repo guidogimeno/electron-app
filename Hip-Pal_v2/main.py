@@ -32,12 +32,8 @@ def foo():
                         help="Ruta a la carpeta donde quedara el .nii.gz")
     args = parser.parse_args()
 
-    path_tomografia = os.path.join(args.ruta.replace(" ", "\\ "))
-    base_path = os.path.join(args.carpeta_salida.replace(" ", "\\ "))
-    
-
     print("\nDEBUG: comienza busqueda y conversión de tomografia.")
-    dcm_to_nii(id, path_tomografia, base_path)
+    dcm_to_nii(id, args.ruta, args.carpeta_salida)
     print("\nDEBUG: termina conversión de tomografia.")
 
     print("\nDEBUG: comienza la prediccion/segmentacion")

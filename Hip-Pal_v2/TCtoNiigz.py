@@ -101,7 +101,7 @@ def convert_dcm_to_nii(id, base_path, dicom_folder, output_folder):
     command2 = [f"{base_path}/bin/dcm2niix", "-f", id, "-o", output_folder, "-z",  "y", "-p", "n", "-m", "y", "-x", "n", dicom_folder]
 
     # Ejecutar el comando
-    subprocess.run(command2, shell=True, check=True)
+    subprocess.run(command2, shell=False, check=True)
 
     # -z y: compress the output NIfTI file into .nii.gz
     # -o: specify the output directory
