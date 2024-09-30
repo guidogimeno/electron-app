@@ -1,6 +1,7 @@
 import nibabel as nib
 import uuid
 import os
+import sys
 import datetime
 import argparse
 from CentroBordeAnterior import centroBordeAnterior
@@ -16,6 +17,12 @@ from preprocesarSegmentacion import preprocesar
 
 
 def main():
+    try:
+        foo()
+    except Exception as e:
+        sys.stderr.write(f"hippal_stderr:{e.__str__()}")
+
+def foo():
     id = str(uuid.uuid4())
     parser = argparse.ArgumentParser(
         description="Script para encontrar el directorio de tomografía a partir de una ruta y luego convertirlo a .nii.gz")
@@ -24,7 +31,6 @@ def main():
     parser.add_argument("carpeta_salida",
                         help="Ruta a la carpeta donde quedara el .nii.gz")
     args = parser.parse_args()
-    
 
     print("\nDEBUG: comienza busqueda y conversión de tomografia.")
     dcm_to_nii(id, args.ruta, args.carpeta_salida)
@@ -64,8 +70,7 @@ def main():
         if tomografia_segmentada.ndim != 4 and tomografia_segmentada.shape[3] != 8:
             raise ErrorCantidadEtiquetas(
                 "La máscara no tiene el formato esperado de 8 etiquetas.",
-                detalles=f"Dimensiones: {tomografia_segmentada.ndim}, Shape: {
-                    tomografia_segmentada.shape}"
+                detalles=f"Dimensiones: {tomografia_segmentada.ndim}, Shape: { tomografia_segmentada.shape}"
             )
 
         # Detecto cabeza femur en el axial (Proximal, Intermedial y Ecuatorial)-------------
@@ -132,29 +137,27 @@ def main():
             json.dump(angulos, archivo, indent=4)
 
         print("Termino: 200")
-        print(f"id:${id}")
-        return 200
+        sys.stdout.write(f"hippal_stdout:${id}")
     except ErrorCantidadEtiquetas as e:
         print(f"Error: {e}")
         print(f"Detalles adicionales: {e.detalles}")
         print("Termino: 404")
-        return 404
+        raise e
     except ErrorProximalEcuatorialNotFound as e:
         print(f"Error: {e}")
         print(f"Detalles adicionales: {e.detalles}")
         print("Termino: 500")
-        return 500
+        raise e
     except ErrorIntermedialNotFound as e:
         print(f"Error: {e}")
         print(f"Detalles adicionales: {e.detalles}")
         print("Termino: 500")
-        return 500
+        raise e
     except ErrorDetectandoAngulos as e:
         print(f"Error: {e}")
         print(f"Detalles adicionales: {e.detalles}")
         print("Termino: 500")
-        return 500
-
+        raise e
 
 if __name__ == "__main__":
     main()

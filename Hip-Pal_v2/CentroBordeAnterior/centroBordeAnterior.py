@@ -17,7 +17,7 @@ def graficar(id, base_path,corte_ecuatorial_sagital,x,y,punto_inicio,punto_fin,x
     plt.figure(figsize=(10, 7))
     plt.imshow(corte_ecuatorial_sagital, cmap="gray", aspect='auto')
     plt.axis('off')  # Desactiva los ejes
-    output_path = f"{base_path}reports/{id}/CentroBordeAnterior{lado}.png"
+    output_path = f"{base_path}/reports/{id}/CentroBordeAnterior{lado}.png"
     plt.savefig(output_path, bbox_inches='tight', pad_inches=0)
     return output_path
 

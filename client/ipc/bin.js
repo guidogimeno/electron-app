@@ -4,32 +4,30 @@ import { spawn } from "child_process"
 const userDataPath = app.getPath("userData")
 
 ipcMain.handle("execute", async (_, filePath) => {
-    console.log(`about to execute ${filePath}`)
+    console.log(`FILEPATH ${filePath}`)
+    console.log(`USERDATAPATH ${userDataPath}`)
     return new Promise(function(resolve, reject) {
         const binary = spawn(`${userDataPath}/bin/main`, [`${filePath}`, `${userDataPath}`]);
 
-        console.log("executing binary")
-        binary.stdout.on("data", (result) => {
-            console.log(`binary execution stdout: ${result}`)
-            console.log(`tiene los dos puntos: ${result.includes(":")}`)
-            console.log(`indexOf: ${result.indexOf(":")}`)
-            const id = String(result).split("id:$")[1]
-            console.log(`Este es el id: ${id}`)
+        binary.stdout.on("data", (data) => {
+            console.log(`LOG INFO - stdout: ${data}`)
+            const id = String(data).split("hippal_stdout:$")[1]
             if (id) {
-                console.log(`resuelvo con este id: ${id}`)
+                console.log(`Id generado: ${id}`)
                 resolve(id)
             }
         })
 
-        binary.on("close", (result) => {
-            console.log(`closing: ${result}`)
-            // TODO: Esto quizas sirve tambien
+        binary.on("close", (data) => {
+            console.log(`LOG INFO - close: ${data}`)
         })
 
-        binary.stderr.on("data", (code) => {
-            console.log(`binary execution stderr: ${code}`)
-            // TODO: manejar bien los errores
-            // reject(new Error(`process exited with code ${code}`))
+        binary.stderr.on("data", (data) => {
+            console.log(`LOG INFO - stderr: ${data}`)
+            const errorMessage = String(data).split("hippal_stderr:$")[1]
+            if (errorMessage) {
+                reject(new Error(`process exited with code ${errorMessage}`))
+            }
         })
     })
 })

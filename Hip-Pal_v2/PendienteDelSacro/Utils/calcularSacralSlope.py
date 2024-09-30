@@ -27,7 +27,7 @@ def detectar(id,base_path,corte_sagital, filo_superior_izq, filo_superior_der):
     plt.figure(figsize=(10, 7))
     plt.imshow(corte_sagital_copia, cmap="gray", aspect='auto')
     plt.axis('off')  # Desactiva los ejes
-    output_path = f"{base_path}/SacralSlope.png"
+    output_path = f"{base_path}/reports/{id}/SacralSlope.png"
     plt.savefig(output_path, bbox_inches='tight', pad_inches=0)
 
     return abs(SacralSlopeAngle),output_path
