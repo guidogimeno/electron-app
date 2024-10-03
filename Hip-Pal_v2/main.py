@@ -13,6 +13,7 @@ import SectorAcetabular.Utils.detectar as detectar
 import json
 from TCtoNiigz import dcm_to_nii
 from Inferencia import segmentar
+from VersionAcetabular import versionAcetabular
 from preprocesarSegmentacion import preprocesar
 
 
@@ -81,6 +82,9 @@ def foo():
         angulosSectorAcetabular = detectar.detectar(id, args.carpeta_salida,
                                                     cabezas_femur_axiales, tomografia_original, tomografia_segmentada)
 
+        angulosVersionAcetabularIzquierdo,angulosVersionAcetabularDerecho=versionAcetabular.detectar(id, args.carpeta_salida,cabezas_femur_axiales, tomografia_original,tomografia_segmentada)
+
+
         # Detecta angulos Centro Borde Lateral-------------------------------------------------
         angulosCentroBordeLateral = centroBordeLateral.detectar(
             id, args.carpeta_salida, cabezas_femur_axiales, tomografia_original, tomografia_segmentada)
@@ -127,7 +131,15 @@ def foo():
                 {
                     "name": "Incidencia Pelvica",
                     "angulos": anguloPelvicIncidence,
-                }
+                },
+                {
+                    "name": "Version Acetabular Izquierdo",
+                    "angulos": angulosVersionAcetabularIzquierdo,
+                },
+                {
+                    "name": "Version Acetabular Derecho",
+                    "angulos": angulosVersionAcetabularDerecho,
+                },
             ]
         }
 
