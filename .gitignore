@@ -12,5 +12,5 @@ tomografias_segmentadas/
 .database.db
 __pycache__/
 
-client/ipc/bin.js
+# client/ipc/bin.js
 
