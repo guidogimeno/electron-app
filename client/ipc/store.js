@@ -1,4 +1,4 @@
-import { ipcMain } from "electron"
+import {app,ipcMain } from "electron"
 import Store from "electron-store"
 
 const schema = {
@@ -11,6 +11,8 @@ const schema = {
 const store = new Store({schema})
 
 ipcMain.handle("getStoreValue", (_, key) => {
+
+    console.log(app.getPath("userData"))
     return store.get(key)
 })
 
