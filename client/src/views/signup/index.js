@@ -43,7 +43,7 @@ function SignUp() {
         <Page hiddeSidebar >
             <div className="signup-container">
                 <div className="signup-content">
-                    <h1 className="signup-title">Registro</h1>
+                    <h1 className="signup-title">Nuevo Usuario</h1>
                     {inlineMessage && <p className="inline-message">{inlineMessage}</p>}
 
                     <form className="signup-form" onSubmit={handleSubmit}>
@@ -150,12 +150,12 @@ function SignUp() {
                             />
                         </div>
                         <button type="submit" className="primary-button">
-                            Registrarse
+                            Registrarme
                         </button>
                     </form>
                     <div className="signup-links">
                         <Link to="/login" className="login-link">
-                            Conectarse
+                            Ya tengo una cuenta de Hip-Pal
                         </Link>
                     </div>
                 </div>
