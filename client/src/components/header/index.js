@@ -52,10 +52,10 @@ function Header() {
                             :
                             <>
                                 <button className="user-button-container" onClick={() => navigate("/login")}>
-                                    Conectarse
+                                    Ingresar
                                 </button>
                                 <button className="user-button-container" onClick={() => navigate("/signup")}>
-                                    Registrarse
+                                    Registrarme
                                 </button>
                             </>
                     }

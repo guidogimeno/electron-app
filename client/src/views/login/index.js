@@ -34,7 +34,7 @@ function Login() {
         <Page hiddeSidebar>
             <div className="login-container">
                 <div className="login-content">
-                    <h1 className="login-title">Login</h1>
+                    <h1 className="login-title">Inicio de Sesión</h1>
                     <p className="inline-message">{inlineMessage}</p>
                     <form className="login-form" onSubmit={handleSubmit}>
                         <input
@@ -58,19 +58,20 @@ function Login() {
                             required
                         />
                         <button type="submit" className="primary-button">
-                            Conectar
+                            Ingresar
                         </button>
                     </form>
                     <div className="login-links">
-                        <Link to="/my_hips" className="login-link">
-                            Recuperar contraseña
+                        <Link className="login-link">
+                            Olvidé mi Contraseña
                         </Link>
                         <Link to="/signup" className="login-link">
-                            Registrarse
+                            Crear una Cuenta
                         </Link>
                     </div>
                 </div>
             </div>
+            <p class="version-text">Versión 1.0 / oct 2024</p>
         </Page>
     )
 }
