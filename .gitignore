@@ -11,3 +11,5 @@ tomografias_segmentadas/
 .venv/
 .database.db
 __pycache__/
+
+client\ipc\bin.js
