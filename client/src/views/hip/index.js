@@ -1,19 +1,26 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useState, useRef } from "react"
 import { useParams } from "react-router-dom"
 import Page from "../../components/page/index.js"
 import { getReport } from "../../fs/reports/index.js"
 import { GlobalContext } from "../../context/index.js"
 import Spinner from "../../components/spinner/index.js"
 import { Tabs, Tab } from "../../components/tabs/index.js"
+import { generatePDF } from "../../pdf/index.js"
 
 function Hip() {
     const context = useContext(GlobalContext)
+    const ref = useRef(null)
     const params = useParams()
     const [report, setReport] = useState(null)
 
     useEffect(function() {
         fetchReport()
     }, [])
+
+    async function handleDownload() {
+        const content = ref.current.outerHTML
+        await generatePDF(content)
+    }
 
     async function fetchReport() {
         try {
@@ -63,7 +70,7 @@ function Hip() {
     return (
         <Page>
             {report ?
-                <div className="report-container">
+                <div className="report-container" ref={ref}>
                     <div className="card report_header">
                         <div className="card_title">
                             <h4>{report.name}</h4>
@@ -88,7 +95,7 @@ function Hip() {
                                                                 <table className="angulo_table">
                                                                     <thead>
                                                                         <tr>
-                                                                            {tableFormat(angulo).headers.map(header => <th>{header}</th>)}
+                                                                            {tableFormat(angulo).headers.map(header => <th key={header}>{header}</th>)}
                                                                         </tr>
 
                                                                     </thead>
@@ -96,10 +103,10 @@ function Hip() {
                                                                         {
                                                                             tableFormat(angulo).data.map(row => {
                                                                                 return (
-                                                                                    <tr>
+                                                                                    <tr key={row.reduce((acc, cell) => `${acc}+${cell}`, "")}>
                                                                                         {row.map(cell => {
                                                                                             return (
-                                                                                                <td>{cell}</td>
+                                                                                                <td key={cell}>{cell}</td>
                                                                                             )
                                                                                         })}
                                                                                     </tr>
@@ -119,6 +126,7 @@ function Hip() {
                             )
                         })
                     }
+                    <button onClick={handleDownload} style={{ height: "100px"}}/>
                 </div> : <Spinner />
             }
         </Page>
