@@ -46,7 +46,7 @@ function Header() {
                                     context.setUser(null)
                                     navigate("/login")
                                 }}>
-                                    Desconectar
+                                    Cerrar Sesión
                                 </button>
                             </>
                             :
