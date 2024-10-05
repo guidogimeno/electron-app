@@ -15,6 +15,8 @@ function Table(props) {
                 <thead>
                     <tr>
                         <th>Nombre</th>
+                        <th>Id Paciente</th>
+                        <th>Edad</th>
                         <th>Descripcion</th>
                         <th>Fecha de creacion</th>
                         <th></th>
@@ -28,6 +30,8 @@ function Table(props) {
                                     {item.name}
                                 </Link>
                             </td>
+                            <td>{item.idPatient}</td>
+                            <td>{item.age}</td>
                             <td>{item.description}</td>
                             <td>{item.date}</td>
                             <td className="trash-td">

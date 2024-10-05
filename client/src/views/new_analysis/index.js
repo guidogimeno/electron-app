@@ -7,6 +7,7 @@ import CustomError from "../../services/errors/index.js"
 import { track } from "../../services/metrics/index.js"
 import Spinner from "../../components/spinner/index.js"
 import { executeBin } from "../../executables/index.js"
+import { updateReport } from "../../fs/reports/index.js"
 
 const STATE = {
     start: 0,
@@ -108,6 +109,12 @@ function NewAnalysis() {
             console.error("Failed to send metrics", error)
         }
 
+        try {
+            await updateReport(reportId, formData.idPatient, formData.age)
+        } catch(error) {
+            console.error("Failed to modify angulos.json", error)
+        }
+
         navigate(`/my_hips/${reportId}`)
     }
 
@@ -130,6 +137,18 @@ function NewAnalysis() {
                     <div className="sections-container">
                         <section>
                             <h3>Personal Information</h3>
+                            <div className="label-input">
+                                <label htmlFor="idPatient">Id Patient</label>
+                                <input
+                                    id="idPatient"
+                                    name="idPatient"
+                                    type="number"
+                                    value={formData.idPatient}
+                                    onChange={handleChange}
+                                    className="input"
+                                    required
+                                />
+                            </div>
                             <div className="label-select">
                                 <label htmlFor="sex">Sex</label>
                                 <select
