@@ -189,15 +189,15 @@ def calcularAngulos(tomografia_segmentada, cabeza_izq, cabeza_der, numero_corte_
     x_izq, y_izq, r_izq = cabeza_izq
 
     # Detecto PASA
-    x_pasa_der, y_pasa_der, angulo_pasa_der = pasa.detectar(
+    x_pasa_der, y_pasa_der, angulo_pasa_der,_ = pasa.detectar(
         corte_segmentado_acetabulo_derecho, x_der, y_der, x_izq, y_izq, r_der, "derecho")
-    x_pasa_izq, y_pasa_izq, angulo_pasa_izq = pasa.detectar(
+    x_pasa_izq, y_pasa_izq, angulo_pasa_izq,_ = pasa.detectar(
         corte_segmentado_acetabulo_izquierdo, x_izq, y_izq, x_der, y_der, r_izq, "izquierdo")
 
     # Detecto AASA
-    x_aasa_der, y_aasa_der, angulo_aasa_der = aasa.detectar(
+    x_aasa_der, y_aasa_der, angulo_aasa_der,_ = aasa.detectar(
         corte_segmentado_acetabulo_derecho, x_der, y_der, x_izq, y_izq, r_der, "derecho")
-    x_aasa_izq, y_aasa_izq, angulo_aasa_izq = aasa.detectar(
+    x_aasa_izq, y_aasa_izq, angulo_aasa_izq,_ = aasa.detectar(
         corte_segmentado_acetabulo_izquierdo, x_izq, y_izq, x_der, y_der, r_izq, "izquierdo")
 
     angulo_hasa_izq = angulo_aasa_izq + (angulo_pasa_izq*-1)
