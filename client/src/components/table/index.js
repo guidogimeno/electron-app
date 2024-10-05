@@ -14,9 +14,10 @@ function Table(props) {
             <table>
                 <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Descripcion</th>
-                        <th>Fecha de creacion</th>
+                        <th>Paciente</th>
+                        <th>Id</th>
+                        <th>Edad</th>
+                        <th>Fecha de Creación</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -25,10 +26,11 @@ function Table(props) {
                         <tr key={item.id}>
                             <td className="name-td">
                                 <Link to={`/my_hips/${item.id}`}>
-                                    {item.name}
+                                    {"Romina Mengel"}
                                 </Link>
                             </td>
-                            <td>{item.description}</td>
+                            <td>144231</td>
+                            <td>21</td>
                             <td>{item.date}</td>
                             <td className="trash-td">
                                 <TrashSvg onClick={() => {
@@ -47,7 +49,7 @@ function Table(props) {
                     props.handleDelete(candidate)
                     setOpen(false)
                 }} >
-                Estas seguro que queres eliminar este reporte?
+                ¿Desea eliminar este reporte?
             </ConfirmationModal>
         </div>
     )

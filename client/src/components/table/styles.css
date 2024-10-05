@@ -8,7 +8,7 @@
     }
 
     thead {
-        text-align: left;
+        text-align: center; /* Centrar los encabezados */
         background-color: var(--blue);
         height: var(--spacing-xxxl);
         color: var(--white);
@@ -24,6 +24,7 @@
     }
 
     table tbody tr td {
+        text-align: center; /* Centrar el contenido de las celdas */
         height: var(--spacing-xxl);
         border-bottom: .1rem solid var(--blue);
         font: var(--p);
@@ -40,7 +41,19 @@
         border: none;
     }
 
-    .trash-td>* {
+    .trash-td {
+        text-align: center; /* Centrar el ícono de eliminar */
         cursor: pointer;
+    }
+    
+    .trash-td svg {
+        fill: #e74c3c; /* Color del ícono de eliminar */
+        width: 20px;
+        height: 20px;
+        transition: fill 0.3s ease;
+    }
+    
+    .trash-td svg:hover {
+        fill: #c0392b; /* Cambia de color al pasar el mouse */
     }
 }

@@ -58,9 +58,10 @@ function MyHips() {
         <Page>
             {false ? <Spinner /> :
                 <>
-                    <h2>Bienvenid@ a HipPal!</h2>
-                    <Search onChange={handleSearch} />
-                    <Table data={tableData} handleDelete={handleDelete} />
+                    <div>
+                        <Search onChange={handleSearch} />
+                        <Table data={tableData} handleDelete={handleDelete} />
+                    </div>
                 </>
             }
         </Page>
