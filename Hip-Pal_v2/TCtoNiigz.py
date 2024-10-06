@@ -118,7 +118,7 @@ def dcm_to_nii(id, path_tomografia, base_path):
 
     print(f'Nombre del paciente: {nombre_paciente}')
 
-    output_folder = f"{base_path}/reports/{id}/temp"
+    output_folder = f"{base_path}/temp-reports/{id}/temp"
     os.makedirs(output_folder)
 
     convert_dcm_to_nii(id, base_path, dicom_folder, output_folder)

@@ -262,7 +262,8 @@ def graficar(id, base_path, composicion, coordenadas_izq, coordenadas_der, angul
     plt.subplot(1, 1, 1)
     plt.imshow(composicion, cmap='gray')
     plt.axis('off')
-    output_path = f"{base_path}/reports/{id}/{title}.png"
+    output_path = f"{base_path}/temp-reports/{id}/{title}.png"
     plt.savefig(output_path, bbox_inches='tight', pad_inches=0)
 
-    return output_path
+    return output_path.replace("temp-reports", "reports")
+ 

@@ -1,5 +1,5 @@
 import CustomError from "../../services/errors/index.js"
-import { deleteDir, readFiles, readFile, writeFile } from "../index.js"
+import { deleteDir, readFiles, readFile, writeFile, deleteTempDir } from "../index.js"
 
 const CONTENT_FILE = "angulos.json"
 
@@ -21,7 +21,7 @@ async function getReports() {
         return reports
     } catch (error) {
         console.log("Failed to get reports", error)
-        throw new CustomError("Failed to get reports")
+        throw new CustomError("Error al buscar los reportes.")
     }
 }
 
@@ -30,9 +30,19 @@ async function removeReport(id) {
         await deleteDir(id)
     } catch (error) {
         console.log("Failed to delete report", error)
-        throw new CustomError("Failed to delete report")
+        throw new CustomError("Error al borrar reporte.")
     }
 }
+
+async function removeTempReport(id) {
+    try {
+        await deleteTempDir(id)
+    } catch (error) {
+        console.log("Error al intentar borrar reporte temporal", error)
+        throw new CustomError("Error al borrar archivos temporales")
+    }
+}
+
 
 async function getReport(reportId) {
     try {
@@ -44,7 +54,16 @@ async function getReport(reportId) {
         }
     } catch (error) {
         console.log(`Failed to get report: ${reportId} for the following reason: ${error}`)
-        throw new CustomError("Failed to get report")
+        throw new CustomError("Error al buscar el reporte")
+    }
+}
+
+async function moveReport(id) {
+    try {
+        await moveDir(id)
+    } catch (error) {
+        console.log("Error al mover el reporte", error)
+        throw new CustomError("Error al cargar el reporte.")
     }
 }
 
@@ -62,7 +81,7 @@ async function updateReport(reportId, idPatient, age) {
         await writeFile(filePath(CONTENT_FILE, reportId), JSON.stringify(report, null, 4));
     } catch (error) {
         console.log(`Failed to update report: ${reportId} for the following reason: ${error}`)
-        throw new CustomError("Failed to update report")
+        throw new CustomError("Error al actualizar el reporte")
     } 
 }
 
@@ -70,5 +89,7 @@ export {
     getReport,
     getReports,
     removeReport,
-    updateReport
+    updateReport,
+    removeTempReport,
+    moveReport
 }

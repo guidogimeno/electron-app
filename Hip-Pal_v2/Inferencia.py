@@ -26,7 +26,7 @@ import glob
 
 def segmentar(id, base_path):
     test_images = sorted(glob.glob(os.path.join(
-        f"{base_path}", "reports", id, "temp", "*.nii.gz")))
+        f"{base_path}", "temp-reports", id, "temp", "*.nii.gz")))
 
     test_data = [{"image": image} for image in test_images]
 
@@ -77,7 +77,7 @@ def segmentar(id, base_path):
             ),
             AsDiscreted(keys="pred", argmax=True, to_onehot=8),
             SaveImaged(keys="pred", meta_keys="pred_meta_dict",
-                       output_dir=f"{base_path}/reports/{id}/temp/tomografias_segmentadas", output_postfix="seg", resample=False),
+                       output_dir=f"{base_path}/temp-reports/{id}/temp/tomografias_segmentadas", output_postfix="seg", resample=False),
         ]
     )
 

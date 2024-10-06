@@ -49,7 +49,7 @@ def foo():
         # CAMBIAR ESTA RUTA PARA GUARDAR EL JSON
         # ruta_json_resultados = r'C:\Users\Usuario\anaconda3\envs\monailabel-env\Hip-Pal_v2\angulos.json'
         ruta_json_resultados = os.path.join(
-            args.carpeta_salida, 'reports', id, 'angulos.json')
+            args.carpeta_salida, 'temp-reports', id, 'angulos.json')
 
         # CAMBIAR ESTAS RUTAS PARA TOMAR LA .NII NORMAL Y EL .NII SEGMENTADO
         # Deberia ir aca la Prediccion------------------------------------------------------------------------
@@ -57,11 +57,11 @@ def foo():
         # tomografia_original_path = os.path.join(
         #     'Tomografia', 'Original', 'CT_8.nii.gz')
         tomografia_original_path = os.path.join(
-            args.carpeta_salida, 'reports', id, 'temp', f'{id}.nii.gz')
+            args.carpeta_salida, 'temp-reports', id, 'temp', f'{id}.nii.gz')
         tomografia_original = nib.load(tomografia_original_path).get_fdata()
 
         # Cargar prediccion----------------------------------------------------------------------------------
-        tomografia_segmentada_path = os.path.join(args.carpeta_salida, 'reports', id, 'temp',
+        tomografia_segmentada_path = os.path.join(args.carpeta_salida, 'temp-reports', id, 'temp',
                                                   'tomografias_segmentadas', id, f'{id}_seg_flipendo.nii.gz')
         tomografia_segmentada = nib.load(
             tomografia_segmentada_path).get_fdata()
