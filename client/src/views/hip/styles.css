@@ -27,6 +27,8 @@
 
     p {
         font: var(--p);
+        color: var(--white);
+        text-align: left;
     }
 }
 

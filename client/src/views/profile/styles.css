@@ -60,8 +60,6 @@ label {
 .button-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 20px; /* Espacio entre los elementos */
 }
 
 .top-buttons {
@@ -69,6 +67,7 @@ label {
     justify-content: space-between; /* Colocar botones en extremos opuestos */
     width: 100%;
     max-width: 500px; /* Ajusta según sea necesario */
+    gap: 8rem;
 }
 
 .danger-button {
@@ -78,8 +77,4 @@ label {
 
 .tertiary-button {
     margin-right: auto; /* Para alinear a la izquierda */
-}
-
-.primary-button {
-    margin-left: auto; /* Para alinear a la derecha */
 }

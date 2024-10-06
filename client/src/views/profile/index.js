@@ -195,12 +195,17 @@ function Profile() {
                                         Modificar
                                     </button>
                                 </div>
-                                <button className="danger-button" type="button" onClick={() => setOpen(true)}>
-                                    Eliminar Cuenta
-                                </button>
+                                
                             </>
                         ) : (
-                            <button className="primary-button" type="button" onClick={() => setIsEditing(true)}>Editar</button>
+                            <>
+                            <button className="primary-button" type="button" onClick={() => setIsEditing(true)}>
+                                Editar
+                            </button>
+                            <button className="danger-button" type="button" onClick={() => setOpen(true)}>
+                                Eliminar Cuenta
+                            </button>
+                            </>
                         )}
                     </div>
                 </form>
