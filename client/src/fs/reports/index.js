@@ -1,5 +1,5 @@
 import CustomError from "../../services/errors/index.js"
-import { deleteDir, readFiles, readFile, writeFile, deleteTempDir } from "../index.js"
+import { deleteDir, readFiles, readFile, moveDir, writeFile, deleteTempDir } from "../index.js"
 
 const CONTENT_FILE = "angulos.json"
 

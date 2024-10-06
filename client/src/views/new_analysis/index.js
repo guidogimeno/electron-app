@@ -126,7 +126,7 @@ function NewAnalysis() {
 
         // mover caperta de temp-reports a reports
         try {
-            await moveDir(reportId)
+            await moveReport(reportId)
         } catch (error) {
             context.showFailure(error.message)
         }
