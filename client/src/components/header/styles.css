@@ -50,6 +50,7 @@ header {
 .user p {
     font: var(--p);
     text-transform: capitalize;
+    margin-top: 0px;
 }
 
 .user-popup.active {
