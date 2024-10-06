@@ -152,9 +152,9 @@ function NewAnalysis() {
                 <form id="metrics-form">
                     <div className="sections-container">
                         <section>
-                            <h3>Personal Information</h3>
-                            <div className="label-input">
-                                <label htmlFor="idPatient">Id Patient</label>
+                            <h3>Informaci&oacute;n Personal</h3>
+                            <div className="label-select">
+                                <label htmlFor="idPatient">Id del Paciente</label>
                                 <input
                                     id="idPatient"
                                     name="idPatient"
@@ -166,7 +166,7 @@ function NewAnalysis() {
                                 />
                             </div>
                             <div className="label-select">
-                                <label htmlFor="sex">Sex</label>
+                                <label htmlFor="sex">Sexo</label>
                                 <select
                                     id="sex"
                                     name="sex"
@@ -176,12 +176,12 @@ function NewAnalysis() {
                                     className="select"
                                     required
                                 >
-                                    <option value="female">Female</option>
-                                    <option value="male">Male</option>
+                                    <option value="female">Femenino</option>
+                                    <option value="male">Masculino</option>
                                 </select>
                             </div>
-                            <div className="label-input">
-                                <label htmlFor="age">Age</label>
+                            <div className="label-select">
+                                <label htmlFor="age">Edad</label>
                                 <input
                                     id="age"
                                     name="age"
@@ -193,7 +193,7 @@ function NewAnalysis() {
                                 />
                             </div>
                             <div className="label-select">
-                                <label htmlFor="country">Country of origin</label>
+                                <label htmlFor="country">Pais de Nacimiento</label>
                                 <select
                                     id="country"
                                     name="country"
@@ -207,7 +207,7 @@ function NewAnalysis() {
                                 </select>
                             </div>
                             <div className="label-select">
-                                <label htmlFor="painLevel">Pain</label>
+                                <label htmlFor="painLevel">Grado de dolor</label>
                                 <select
                                     id="painLevel"
                                     name="painLevel"
@@ -231,7 +231,7 @@ function NewAnalysis() {
                                 </select>
                             </div>
                             <div className="label-select">
-                                <label htmlFor="siteOfPain">Site of pain</label>
+                                <label htmlFor="siteOfPain">Sitio del dolor</label>
                                 <select
                                     id="siteOfPain"
                                     name="siteOfPain"
@@ -242,17 +242,17 @@ function NewAnalysis() {
                                     required
                                 >
                                     <option value="no_data">N/D</option>
-                                    <option value="groin">Groin</option>
-                                    <option value="buttock">Buttock</option>
+                                    <option value="groin">Ingle</option>
+                                    <option value="buttock">Nalga</option>
                                     <option value="lateral">Lateral</option>
-                                    <option value="thigh">Thigh</option>
-                                    <option value="c_shapedPain">"C"-shaped pain</option>
+                                    <option value="thigh">Muslo</option>
+                                    <option value="c_shapedPain">Dolor en forma de "C"</option>
                                     <option value="lumbar">Lumbar</option>
-                                    <option value="other">Other</option>
+                                    <option value="other">Otro</option>
                                 </select>
                             </div>
-                            <div className="label-input">
-                                <label htmlFor="mosSinceSymp">Months since symptoms</label>
+                            <div className="label-select">
+                                <label htmlFor="mosSinceSymp">Meses desde el inicio de s&iacute;ntomas</label>
                                 <input
                                     id="mosSinceSymp"
                                     name="mosSinceSymp"
@@ -264,7 +264,7 @@ function NewAnalysis() {
                                 />
                             </div>
                             <div className="label-select">
-                                <label htmlFor="sport">Sport</label>
+                                <label htmlFor="sport">Deporte que practica</label>
                                 <select
                                     id="sport"
                                     name="sport"
@@ -275,30 +275,30 @@ function NewAnalysis() {
                                     required
                                 >
                                     <option value="no_data">N/D</option>
-                                    <option value="soccer">Soccer</option>
-                                    <option value="field_hockey">Field Hockey</option>
-                                    <option value="tennis">Tennis</option>
-                                    <option value="volleyball">Volleyball</option>
-                                    <option value="table_tennis">Table Tennis</option>
+                                    <option value="soccer">Futbol</option>
+                                    <option value="field_hockey">Hockey</option>
+                                    <option value="tennis">Tenis</option>
+                                    <option value="volleyball">Voleybol</option>
+                                    <option value="table_tennis">Tenis de mesa</option>
                                     <option value="basketball">Basketball</option>
                                     <option value="baseball">Baseball</option>
                                     <option value="rugby">Rugby</option>
                                     <option value="golf">Golf</option>
                                     <option value="badminton">Badminton</option>
                                     <option value="football">Football</option>
-                                    <option value="boxing">Boxing</option>
-                                    <option value="athletics">Athletics</option>
-                                    <option value="swimming">Swimming</option>
-                                    <option value="cycling">Cycling</option>
+                                    <option value="boxing">Boxeo</option>
+                                    <option value="athletics">Atletismo</option>
+                                    <option value="swimming">Nataci&oacute;n</option>
+                                    <option value="cycling">Ciclismo</option>
                                     <option value="handball">Handball</option>
-                                    <option value="skiing">Skiing</option>
-                                    <option value="gymnastics">Gymnastics</option>
-                                    <option value="martial_arts">Martial Arts</option>
-                                    <option value="other">Other</option>
+                                    <option value="skiing">Esqu&iacute;</option>
+                                    <option value="gymnastics">Gimnasia</option>
+                                    <option value="martial_arts">Artes marciales</option>
+                                    <option value="other">Otros</option>
                                 </select>
                             </div>
                             <div className="label-select">
-                                <label htmlFor="sportLevel">Sport level</label>
+                                <label htmlFor="sportLevel">Nivel de deporte</label>
                                 <select
                                     id="sportLevel"
                                     name="sportLevel"
@@ -309,19 +309,19 @@ function NewAnalysis() {
                                     required
                                 >
                                     <option value="no_data">N/D</option>
-                                    <option value="recreational">Recreational</option>
+                                    <option value="recreational">Recreacional</option>
                                     <option value="amateur">Amateur</option>
-                                    <option value="professional">Professional</option>
+                                    <option value="professional">Profesional</option>
                                 </select>
                             </div>
                         </section>
                         <section>
-                            <h3>Physical Examination</h3>
+                            <h3>Examen f&iacute;sico</h3>
                             <div>
-                                <h4>Range of motion</h4>
+                                <h4>Rango de movimiento</h4>
                             </div>
-                            <div className="label-input">
-                                <label htmlFor="flexion">Flexion</label>
+                            <div className="label-select">
+                                <label htmlFor="flexion">Flexi&oacute;n</label>
                                 <input
                                     id="flexion"
                                     name="flexion"
@@ -332,8 +332,8 @@ function NewAnalysis() {
                                     required
                                 />
                             </div>
-                            <div className="label-input">
-                                <label htmlFor="extension">Extension</label>
+                            <div className="label-select">
+                                <label htmlFor="extension">Extensi&oacute;n</label>
                                 <input
                                     id="extension"
                                     name="extension"
@@ -344,8 +344,8 @@ function NewAnalysis() {
                                     required
                                 />
                             </div>
-                            <div className="label-input">
-                                <label htmlFor="internalRotation">Internal rotation (at 90° hip flexion)</label>
+                            <div className="label-select">
+                                <label htmlFor="internalRotation">Rotaci&oacute;n interna (con flexi&oacute;n de cadera a 90°)</label>
                                 <input
                                     id="internalRotation"
                                     name="internalRotation"
@@ -356,8 +356,8 @@ function NewAnalysis() {
                                     required
                                 />
                             </div>
-                            <div className="label-input">
-                                <label htmlFor="externalRotation">External rotation (at 90° hip flexion)</label>
+                            <div className="label-select">
+                                <label htmlFor="externalRotation">Rotaci&oacute;n externa (con flexi&oacute;n de cadera a 90°)</label>
                                 <input
                                     id="externalRotation"
                                     name="externalRotation"
@@ -368,8 +368,8 @@ function NewAnalysis() {
                                     required
                                 />
                             </div>
-                            <div className="label-input">
-                                <label htmlFor="craigTest">Craig test</label>
+                            <div className="label-select">
+                                <label htmlFor="craigTest">Prueba de Craig</label>
                                 <input
                                     id="craigTest"
                                     name="craigTest"
@@ -381,7 +381,7 @@ function NewAnalysis() {
                                 />
                             </div>
                             <div>
-                                <h4>Tests</h4>
+                                <h4>Pruebas</h4>
                             </div>
                             <div className="label-select">
                                 <label htmlFor="fadir">Fadir</label>
@@ -394,10 +394,10 @@ function NewAnalysis() {
                                     className="select"
                                     required
                                 >
-                                    <option value="positive">Positive</option>
-                                    <option value="negative">Negative</option>
-                                    <option value="not_evaluated">Not evaluated</option>
-                                    <option value="unknown">Unknown</option>
+                                    <option value="positive">Positivo</option>
+                                    <option value="negative">Negativo</option>
+                                    <option value="not_evaluated">No evaluado</option>
+                                    <option value="unknown">Desconocido</option>
                                 </select>
                             </div>
                             <div className="label-select">
@@ -411,10 +411,10 @@ function NewAnalysis() {
                                     className="select"
                                     required
                                 >
-                                    <option value="positive">Positive</option>
-                                    <option value="negative">Negative</option>
-                                    <option value="not_evaluated">Not evaluated</option>
-                                    <option value="unknown">Unknown</option>
+                                    <option value="positive">Positivo</option>
+                                    <option value="negative">Negativo</option>
+                                    <option value="not_evaluated">No evaluado</option>
+                                    <option value="unknown">Desconocido</option>
                                 </select>
                             </div>
                             <div className="label-select">
@@ -428,10 +428,10 @@ function NewAnalysis() {
                                     className="select"
                                     required
                                 >
-                                    <option value="positive">Positive</option>
-                                    <option value="negative">Negative</option>
-                                    <option value="not_evaluated">Not evaluated</option>
-                                    <option value="unknown">Unknown</option>
+                                    <option value="positive">Positivo</option>
+                                    <option value="negative">Negativo</option>
+                                    <option value="not_evaluated">No evaluado</option>
+                                    <option value="unknown">Desconocido</option>
                                 </select>
                             </div>
                             <div className="label-select">
@@ -445,17 +445,17 @@ function NewAnalysis() {
                                     className="select"
                                     required
                                 >
-                                    <option value="positive">Positive</option>
-                                    <option value="negative">Negative</option>
-                                    <option value="not_evaluated">Not evaluated</option>
-                                    <option value="unknown">Unknown</option>
+                                    <option value="positive">Positivo</option>
+                                    <option value="negative">Negativo</option>
+                                    <option value="not_evaluated">No evaluado</option>
+                                    <option value="unknown">Desconocido</option>
                                 </select>
                             </div>
                         </section>
                     </div>
                     {isAnalyzing ? <Spinner /> :
                         <button className="primary-button" type="submit" onClick={handleSubmit}>
-                            Submit and go to report
+                            Confirmar y ver el reporte
                         </button>
                     }
                     <button className="tertiary-button" onClick={handleCancel}>Cancelar</button>
