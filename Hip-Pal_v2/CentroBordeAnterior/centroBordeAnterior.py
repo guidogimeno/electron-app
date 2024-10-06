@@ -17,9 +17,9 @@ def graficar(id, base_path,corte_ecuatorial_sagital,x,y,punto_inicio,punto_fin,x
     plt.figure(figsize=(10, 7))
     plt.imshow(corte_ecuatorial_sagital, cmap="gray", aspect='auto')
     plt.axis('off')  # Desactiva los ejes
-    output_path = f"{base_path}/reports/{id}/CentroBordeAnterior{lado}.png"
+    output_path = f"{base_path}/temp-reports/{id}/CentroBordeAnterior{lado}.png"
     plt.savefig(output_path, bbox_inches='tight', pad_inches=0)
-    return output_path
+    return output_path.replace("temp-reports", "reports")
 
 
 def detectar(id, base_path,cabezas_femur_axiales,tomografia_original,tomografia_segmentada):

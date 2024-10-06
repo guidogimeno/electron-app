@@ -1,7 +1,6 @@
 import os
 import pydicom
 from pydicom.multival import MultiValue
-import argparse
 import subprocess
 
 # Devuelve el top x de carpetas con más archivos
@@ -96,12 +95,10 @@ def convert_dcm_to_nii(id, base_path, dicom_folder, output_folder):
         os.makedirs(output_folder)
 
     # Comando para convertir de DICOM a NIfTI
-    print(f"debug: {output_folder}")
-    # command = f'{base_path}/bin/dcm2niix -f {id} -o {prueba} -z y -p n -m y -x n {dicom_folder}'
-    command2 = [f"{base_path}/bin/dcm2niix", "-f", id, "-o", output_folder, "-z",  "y", "-p", "n", "-m", "y", "-x", "n", dicom_folder]
+    command = [f"{base_path}/bin/dcm2niix", "-f", id, "-o", output_folder, "-z",  "y", "-p", "n", "-m", "y", "-x", "n", dicom_folder]
 
     # Ejecutar el comando
-    subprocess.run(command2, shell=False, check=True)
+    subprocess.run(command, shell=False, check=True)
 
     # -z y: compress the output NIfTI file into .nii.gz
     # -o: specify the output directory
@@ -121,7 +118,7 @@ def dcm_to_nii(id, path_tomografia, base_path):
 
     print(f'Nombre del paciente: {nombre_paciente}')
 
-    output_folder = f"{base_path}/reports/{id}/temp"
+    output_folder = f"{base_path}/temp-reports/{id}/temp"
     os.makedirs(output_folder)
 
     convert_dcm_to_nii(id, base_path, dicom_folder, output_folder)
