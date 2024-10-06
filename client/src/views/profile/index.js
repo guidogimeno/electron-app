@@ -60,8 +60,8 @@ function Profile() {
     return (
         <Page>
             <div className="profile-container">
-                <h1>Mi Perfil</h1>
-                <form onSubmit={handleSubmit}>
+                <h1 className="profile-title">Mi Perfil</h1>
+                <form onSubmit={handleSubmit} className="profile-form">
                     <div className="inputs-container">
                         <div className="label-input">
                             <label htmlFor="firstName">Nombre</label>
@@ -184,29 +184,35 @@ function Profile() {
                             />
                         </div>
                     </div>
-                    {isEditing ? (
-                        <>
-                            <button className="primary-button" type="submit">Submit</button>
-                            <button className="tertiary-button" type="button" onClick={handleCancelClick}>
-                                Cancelar
-                            </button>
-                            <button className="danger-button" type="button" onClick={() => setOpen(true)}>
-                                Eliminar cuenta
-                            </button>
-                        </>
-                    ) : (
-                        <button className="primary-button" type="button" onClick={() => setIsEditing(true)}>Editar</button>
-                    )}
+                    <div className="button-container">
+                        {isEditing ? (
+                            <>
+                                <div className="top-buttons">
+                                    <button className="tertiary-button" type="button" onClick={handleCancelClick}>
+                                        Cancelar
+                                    </button>
+                                    <button className="primary-button" type="submit">
+                                        Modificar
+                                    </button>
+                                </div>
+                                <button className="danger-button" type="button" onClick={() => setOpen(true)}>
+                                    Eliminar Cuenta
+                                </button>
+                            </>
+                        ) : (
+                            <button className="primary-button" type="button" onClick={() => setIsEditing(true)}>Editar</button>
+                        )}
+                    </div>
                 </form>
             </div>
             <ConfirmationModal
                 open={open}
                 onCancel={() => setOpen(false)}
                 onConfirmation={async () => {
-                    await handleDelete()
-                    setOpen(false)
+                    await handleDelete();
+                    setOpen(false);
                 }} >
-                Esta seguro que desea eliminar su cuenta?
+                ¿Seguro que quieres eliminar esta cuenta?
             </ConfirmationModal>
         </Page>
     )
