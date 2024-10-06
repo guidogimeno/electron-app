@@ -7,7 +7,7 @@ ipcMain.handle("execute", async (_, filePath) => {
     console.log(`FILEPATH ${filePath}`)
     console.log(`USERDATAPATH ${userDataPath}`)
     return new Promise(function(resolve, reject) {
-        const binary = spawn("python", ["D:\\Usuarios\\Usuario\\Desktop\\electron-app\\Hip-Pal_v2\\main.py", `${filePath}`, `${userDataPath}`]);
+        const binary = spawn("python", ["ruta de c/u al main.py", `${filePath}`, `${userDataPath}`]);
 
         binary.stdout.on("data", (data) => {
             console.log(`LOG INFO - stdout: ${data}`)

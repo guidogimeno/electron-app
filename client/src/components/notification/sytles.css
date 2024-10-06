@@ -16,7 +16,7 @@
 
     width: 24rem;
     min-height: 4rem;
-    color: var(--light-gray);
+    color: var(--light-gray); /* Cambia el color de texto aquí si quieres cambiar el color del mensaje */
     font: var(--p);
     border-radius: .25rem;
     align-content: center;
@@ -55,6 +55,9 @@
     p {
         text-transform: capitalize;
         font: var(--big);
+        color: black; /* Cambia el color a negro */
+        margin: 0; /* Asegúrate de que no haya margen por defecto */
+        text-align: left; /* Alinea el texto a la izquierda */
     }
 }
 

@@ -2,9 +2,10 @@ import React from "react"
 import { Link, useLocation } from "react-router-dom"
 import CirclePlusSvg from "../../assets/circle_plus_svg.js"
 import FolderSvg from "../../assets/folder_svg.js"
-
+import ProfileSvg from "../../assets/profile_svg.js"
 const links = [
     { label: "Mis Mediciones", to: "/my_hips", icon: <FolderSvg /> },
+    { label: "Mi Perfil", to: "/profile", icon: <ProfileSvg /> }
 ]
 
 function Sidebar() {
