@@ -1,7 +1,6 @@
 # Electron Tutorial
 
 # TODO
-0. Hacerlo andar bien en MacOS el loading
 2. Poder exportar a PDF.
 1. Que se guarde todo en una carpeta temporal, para que al darle Submit al reporte pase a una carpeta donde esten los "terminados". Borrar la "basura" no importa, solo tiene que servir para la demo.
 8. Cuando el usuario hace el analisis tiene que poder agregarle un nombre al reporte o algo con una descripcion. No podemos usar ese ID horrendo.

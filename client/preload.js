@@ -32,9 +32,15 @@ contextBridge.exposeInMainWorld("fs", {
     deleteDir: (dirPath) => {
         return ipcRenderer.invoke("deleteDir", dirPath)
     },
+    deleteTempDir: (dirPath) => {
+        return ipcRenderer.invoke("deleteTempDir", dirPath)
+    },
     getPath: () => {
         return ipcRenderer.invoke("getPath")
-    }
+    },
+    moveDir: (dirPath) => {
+        return ipcRenderer.invoke("moveDir", dirPath)
+    },
 })
 
 contextBridge.exposeInMainWorld("bin", {

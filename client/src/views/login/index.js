@@ -26,7 +26,7 @@ function Login() {
             await setStoreValue("token", res.token)
             navigate("/")
         } catch (error) {
-            setInlineMessage("Failed to login. Please try again")
+            setInlineMessage("Credenciales incorrectas. Verifica tu nombre de usuario y contraseña e inténtalo nuevamente")
         }
     }
 

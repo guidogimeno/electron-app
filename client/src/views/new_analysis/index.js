@@ -7,11 +7,11 @@ import CustomError from "../../services/errors/index.js"
 import { track } from "../../services/metrics/index.js"
 import Spinner from "../../components/spinner/index.js"
 import { executeBin } from "../../executables/index.js"
-import { updateReport } from "../../fs/reports/index.js"
+import { updateReport, moveReport, removeTempReport } from "../../fs/reports/index.js"
 
 const STATE = {
     start: 0,
-    in_progress: 1
+    in_progress: 1,
 }
 
 // Los numeros tambien son strings por defecto, null no se puede
@@ -76,11 +76,20 @@ function NewAnalysis() {
         }
     }
 
-    function handleCancel() {
+    async function handleCancel() {
         setFormData(emptyForm)
         setIsAnalyzing(false)
         // TODO: interrumpir proceso de generacion de reporte
         // e incluso, eliminar las carpetas creadas que no debe
+
+        if (reportId) {
+            try {
+                await removeTempReport(reportId)
+            } catch (error) {
+                context.showFailure(error.message)
+            }
+        }
+
         setState(STATE.start)
     }
 
@@ -113,6 +122,13 @@ function NewAnalysis() {
             await updateReport(reportId, formData.idPatient, formData.age)
         } catch(error) {
             console.error("Failed to modify angulos.json", error)
+        }
+
+        // mover caperta de temp-reports a reports
+        try {
+            await moveReport(reportId)
+        } catch (error) {
+            context.showFailure(error.message)
         }
 
         navigate(`/my_hips/${reportId}`)

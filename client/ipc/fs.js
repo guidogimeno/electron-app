@@ -3,6 +3,7 @@ import fs from "fs"
 import path from "node:path"
 
 const REPORTS_PATH = path.join(app.getPath("userData"), "reports")
+const TEMP_REPORTS_PATH = path.join(app.getPath("userData"), "temp-reports")
 
 ipcMain.handle("getPath", () => {
     return REPORTS_PATH
@@ -45,6 +46,17 @@ ipcMain.handle("readFile", async (_, filePath) => {
 ipcMain.handle("deleteDir", async (_, dirPath) => {
     const dir = path.join(REPORTS_PATH, dirPath)
     fs.rmSync(dir, { recursive: true, force: true })
+})
+
+ipcMain.handle("deleteTempDir", async (_, dirPath) => {
+    const dir = path.join(TEMP_REPORTS_PATH, dirPath)
+    fs.rmSync(dir, { recursive: true, force: true })
+})
+
+ipcMain.handle("moveDir", async (_, dirPath) => {
+    const oldDir = path.join(TEMP_REPORTS_PATH, dirPath)
+    const newDir = path.join(REPORTS_PATH, dirPath)
+    fs.renameSync(oldDir, newDir)
 })
 
 function readFile(filePath) {

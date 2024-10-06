@@ -100,7 +100,7 @@ def detectar(id, base_path, cabezas_femur_axiales, tomografia_original, tomograf
     plt.figure(figsize=(10, 7))
     plt.imshow(composicion, cmap="gray", aspect='auto')
     plt.axis('off')  # Desactiva los ejes
-    output_path = f"{base_path}/reports/{id}/CentroBordeLateral.png"
+    output_path = f"{base_path}/temp-reports/{id}/CentroBordeLateral.png"
     plt.savefig(output_path, bbox_inches='tight', pad_inches=0)
 
     # Resto 90 porque el CentroBordeLateral se mide contra la perpendicular de la plomada.
@@ -109,7 +109,7 @@ def detectar(id, base_path, cabezas_femur_axiales, tomografia_original, tomograf
     angulos_CBL = [
         {
             "name": "View",
-            "path": output_path,
+            "path": output_path.replace("temp-reports", "reports"),
             "izquierdo": [
                 {
                     "name": "cbl",

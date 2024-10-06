@@ -18,10 +18,18 @@ async function deleteDir(dirPath) {
     return window["fs"].deleteDir(dirPath)
 }
 
+async function deleteTempDir(dirPath) {
+    return window["fs"].deleteTempDir(dirPath)
+}
+
+
 async function getPath() {
     return window["fs"].getPath()
 }
 
+async function moveDir(dirPath) {
+    return window["fs"].moveDir(dirPath)
+}
 
 export {
     mkdir,
@@ -29,6 +37,8 @@ export {
     readFile,
     readFiles,
     deleteDir,
-    getPath
+    deleteTempDir,
+    getPath,
+    moveDir
 }
 

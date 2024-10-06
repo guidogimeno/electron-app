@@ -75,10 +75,11 @@ def graficar(id, base_path, corte_original_acetabulo_derecho, corte_original_ace
     plt.subplot(1, 1, 1)
     plt.imshow(composicion, cmap='gray')
     plt.axis('off')
-    output_path = f"{base_path}/reports/{id}/VersionAcetabular{lado}.png"
+    output_path = f"{base_path}/temp-reports/{id}/VersionAcetabular{lado}.png"
     plt.savefig(output_path, bbox_inches='tight', pad_inches=0)
 
-    return round(angulo_grados),output_path
+    return round(angulo_grados), output_path.replace("temp-reports", "reports")
+
 
 
 def detectar(id,base_path,cabezas_femur_axiales,tomografia_original,tomografia_segmentada):
