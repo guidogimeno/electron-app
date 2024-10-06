@@ -1,16 +1,17 @@
 # Electron Tutorial
 
 # TODO
-2. Poder exportar a PDF.
-1. Que se guarde todo en una carpeta temporal, para que al darle Submit al reporte pase a una carpeta donde esten los "terminados". Borrar la "basura" no importa, solo tiene que servir para la demo.
-8. Cuando el usuario hace el analisis tiene que poder agregarle un nombre al reporte o algo con una descripcion. No podemos usar ese ID horrendo.
-
-3. Cambiar el disenio de algunos botones.
-4. Arreglar el loading en MacOS.
-5. Cambiar el color de los mensajes de error, son muy rojos.
-6. Quizas achicar la letra.
-7. Poner un nombre por defecto a los angulos que no tienen nombre.
-9. Alinear el header
+- Poder exportar a PDF.
+- Cambiar el color de los mensajes de error, son muy rojos.
+- Mejorar el header de alguna forma
+- Cambiar --> Angulos Sectoriales Acetabulares
+- Agregar --> Agregar IdHospital paciente cuando se va a segmentar.
+- Agregar --> Una pestaña que englobe todas las mediciones. (prioridad alta)
+- Cambiar --> En los campos que se completan poner la opcion de texto libre (prioridad baja)
+- Agregar --> al reporte agregar datos completados ademas de angulos e imagenes.
+- Agregar --> Nombre Paciente, Id y Edad al cuadro de reportes.
+- Agregar --> Cuando estoy segmentando tomografia, si quiero salir e ir a "Mis Estudios" preguntar si estoy seguro de abortar.
+- Agregar --> "esta procesando en segundo plano" al loading
 
 ## Guia de Instalacion
 
