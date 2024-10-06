@@ -40,7 +40,6 @@ function Header() {
                         context.user ?
                             <>
                                 <h4>Hola {context.user.firstName}!</h4>
-                                <Link className="user-button-container" to="/profile">Mi Perfil</Link>
                                 <button className="user-button-container" onClick={async () => {
                                     await setStoreValue("token", "")
                                     context.setUser(null)
