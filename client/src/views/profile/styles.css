@@ -1,34 +1,85 @@
 .profile-container {
-    h1 {
-        font: var(--h2);
-        text-align: left;
-    }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    flex-direction: column;
+    padding-top: 5px; /* Reducido el padding superior */
 }
 
-.profile-container>form {
+.profile-container h1 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 10px; /* Espacio más pequeño entre el título y el formulario */
+    color: #003366;
+}
+
+.profile-container > form {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-lg);
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    padding: 30px; /* Reducido el padding general del formulario */
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+}
+
+.inputs-container {
+    display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
-    padding: var(--spacing-lg) 0;
+    gap: 20px;
+    width: 100%;
+}
 
-    .inputs-container {
-        display: flex;
-        flex-flow: row wrap;
-        justify-content: space-between;
-        gap: var(--spacing-xl);
-        max-width: 70rem;
-    }
+.label-input {
+    display: flex;
+    flex-direction: column;
+    width: calc(50% - 20px);
+    min-width: 200px;
+}
 
-    .label-input {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        gap: var(--spacing-sm);
-        width: 28rem;
+label {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 5px;
+}
 
-        label {
-            align-content: center;
-        }
-    }
+.input {
+    font-size: 1rem;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Espacio entre los elementos */
+}
+
+.top-buttons {
+    display: flex;
+    justify-content: space-between; /* Colocar botones en extremos opuestos */
+    width: 100%;
+    max-width: 500px; /* Ajusta según sea necesario */
+}
+
+.danger-button {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.tertiary-button {
+    margin-right: auto; /* Para alinear a la izquierda */
+}
+
+.primary-button {
+    margin-left: auto; /* Para alinear a la derecha */
 }
