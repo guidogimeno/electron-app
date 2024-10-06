@@ -34,7 +34,7 @@ def foo():
     args = parser.parse_args()
 
     print("\nDEBUG: comienza busqueda y conversión de tomografia.")
-    dcm_to_nii(id, args.ruta, args.carpeta_salida)
+    nombre_paciente = dcm_to_nii(id, args.ruta, args.carpeta_salida)
     print("\nDEBUG: termina conversión de tomografia.")
 
     print("\nDEBUG: comienza la prediccion/segmentacion")
@@ -101,7 +101,7 @@ def foo():
 
         angulos = {
             "id": id,
-            "name": f"Informe {id}",
+            "name": nombre_paciente,
             "createdDate": timestamp_string,
             "mediciones": [
                 {

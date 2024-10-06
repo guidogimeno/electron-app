@@ -26,11 +26,11 @@ function Table(props) {
                         <tr key={item.id}>
                             <td className="name-td">
                                 <Link to={`/my_hips/${item.id}`}>
-                                    {"Romina Mengel"}
+                                    {item.name}
                                 </Link>
                             </td>
-                            <td>144231</td>
-                            <td>21</td>
+                            <td>{item.idPatient}</td>
+                            <td>{item.age}</td>
                             <td>{item.date}</td>
                             <td className="trash-td">
                                 <TrashSvg onClick={() => {

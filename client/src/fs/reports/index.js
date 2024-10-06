@@ -1,5 +1,5 @@
 import CustomError from "../../services/errors/index.js"
-import { deleteDir, readFiles, readFile } from "../index.js"
+import { deleteDir, readFiles, readFile, writeFile } from "../index.js"
 
 const CONTENT_FILE = "angulos.json"
 
@@ -48,8 +48,27 @@ async function getReport(reportId) {
     }
 }
 
+async function updateReport(reportId, idPatient, age) {
+    try{
+        const file = await readFile(filePath(CONTENT_FILE, reportId));
+        const report = JSON.parse(file);
+        
+        const newInfo = {"idPatient": idPatient, "age": age};
+        
+        // Agregar la nueva información al objeto report
+        Object.assign(report, newInfo);
+
+        // Guardar el archivo JSON actualizado
+        await writeFile(filePath(CONTENT_FILE, reportId), JSON.stringify(report, null, 4));
+    } catch (error) {
+        console.log(`Failed to update report: ${reportId} for the following reason: ${error}`)
+        throw new CustomError("Failed to update report")
+    } 
+}
+
 export {
     getReport,
     getReports,
-    removeReport
+    removeReport,
+    updateReport
 }
