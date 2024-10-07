@@ -18,6 +18,7 @@ const STATE = {
 // porque son inputs con valores "controlados". En el back 
 // despues se castean a Ints.
 const emptyForm = {
+    idPatient: "",
     sex: "female",
     age: "",
     country: "argentina",
@@ -94,44 +95,61 @@ function NewAnalysis() {
     }
 
     function validateForm() {
+        const errorElements = document.querySelectorAll('.error');
+        errorElements.forEach(element => {
+            element.classList.remove('error');
+        });
+
+        const errorMessages = document.querySelectorAll('.error-message');
+        errorMessages.forEach(message => {
+            message.remove();
+        });
+
+        let validateForm = true;
+
         for (const key of Object.keys(formData)) {
             if (String(formData[key]).length == 0) {
-                throw new CustomError(`The ${key} field cannot be empty`)
+                validateForm = false;
+                const element = document.getElementById(key);
+                if (element) {
+                    element.classList.add('error');
+                    const errorParagraph = document.createElement('p');
+                    errorParagraph.textContent = "Este campo es obligatorio";
+                    errorParagraph.className = 'error-message';
+                    element.parentNode.insertBefore(errorParagraph, element.nextSibling);
+                }
             }
         }
+
+        return validateForm
     }
 
     // TODO: Aca falta algun tipo de loading
     async function handleSubmit(event) {
         event.preventDefault()
 
-        try {
-            validateForm()
-        } catch (error) {
-            context.showFailure(error.message)
-            return
-        }
+        if(validateForm()){
+            try {
+                await track(formData)
+            } catch (error) {
+                console.error("Failed to send metrics", error)
+            }
 
-        try {
-            await track(formData)
-        } catch (error) {
-            console.error("Failed to send metrics", error)
-        }
+            try {
+                await updateReport(reportId, formData.idPatient, formData.age)
+            } catch(error) {
+                console.error("Failed to modify angulos.json", error)
+            }
 
-        try {
-            await updateReport(reportId, formData.idPatient, formData.age)
-        } catch(error) {
-            console.error("Failed to modify angulos.json", error)
-        }
+            // mover caperta de temp-reports a reports
+            try {
+                await moveReport(reportId)
+            } catch (error) {
+                context.showFailure(error.message)
+            }
 
-        // mover caperta de temp-reports a reports
-        try {
-            await moveReport(reportId)
-        } catch (error) {
-            context.showFailure(error.message)
+            navigate(`/my_hips/${reportId}`)
         }
-
-        navigate(`/my_hips/${reportId}`)
     }
 
     if (state === STATE.start) {

@@ -69,3 +69,14 @@ select option {
     padding: .5rem 0;
     font: var(--p);
 }
+
+.error {
+    border: 1px solid red !important;
+    margin-bottom: 0 !important;
+}
+
+.error-message {
+    margin: 0;
+    align-self: self-start;
+    color: red;
+}
