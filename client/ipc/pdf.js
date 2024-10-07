@@ -1,11 +1,12 @@
 import { ipcMain } from "electron"
-import puppeteer from "puppeteer"
+import { jsPDF } from "jspdf"
 
 ipcMain.handle("generate-pdf", async (_, content) => {
-    const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
-    const page = await browser.newPage();
-    await page.setContent(content);
-    await page.pdf({ path: 'example.pdf', format: 'A4' });
-    await browser.close();
+    console.log("entre al ipc")
+    const doc = new jsPDF()
+    console.log("este es el doc", doc)
+    console.log("este es el content", content)
+    doc.html(content)
+    doc.save("output.pdf")
 })
 

@@ -36,6 +36,10 @@ export default {
             }
         ]
     },
+    externals: {
+        html2canvas: "html2canvas",
+        dompurify: "dompurify"
+    },
     resolve: {
         extensions: [".js"],
     },
