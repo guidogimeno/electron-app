@@ -12,14 +12,23 @@ function Hip() {
     const ref = useRef(null)
     const params = useParams()
     const [report, setReport] = useState(null)
+    const [loadingPDF, setLoadingPDF] = useState(false)
 
     useEffect(function() {
         fetchReport()
     }, [])
 
     async function handleDownload() {
+        setLoadingPDF(true)
         const content = ref.current.outerHTML
-        await generatePDF(content)
+        try {
+            await generatePDF(content)
+        } catch (error) {
+            context.showFailure("Error al intentar generar el PDF.")
+        } finally {
+            setLoadingPDF(false)
+            context.showSuccess("Reporte descargado en ~/Descargas")
+        }
     }
 
     async function fetchReport() {
@@ -126,7 +135,9 @@ function Hip() {
                             )
                         })
                     }
-                    <button onClick={handleDownload} style={{ height: "100px"}}/>
+                    <button disabled={loadingPDF} className="download-button" onClick={handleDownload}>
+                        {loadingPDF ? <Spinner /> : "Descargar Reporte"}
+                    </button>
                 </div> : <Spinner />
             }
         </Page>
