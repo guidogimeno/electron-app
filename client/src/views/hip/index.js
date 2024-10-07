@@ -23,11 +23,11 @@ function Hip() {
         const content = ref.current.outerHTML
         try {
             await generatePDF(content)
+            context.showSuccess("Reporte descargado en ~/Descargas")
         } catch (error) {
             context.showFailure("Error al intentar generar el PDF.")
         } finally {
             setLoadingPDF(false)
-            context.showSuccess("Reporte descargado en ~/Descargas")
         }
     }
 
