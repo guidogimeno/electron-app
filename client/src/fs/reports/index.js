@@ -70,32 +70,34 @@ async function moveReport(id) {
 }
 
 async function updateReport(reportId, idPatient, age, metrics) {
-    try{
+    try {
         const file = await readFile(`${TEMP_REPORTS_PATH}/${reportId}/${CONTENT_FILE}`);
         const report = JSON.parse(file);
-        
+
         const newInfo = {
             idPatient: idPatient,
             age: age,
-            sex: metrics.sex,
-            age: metrics.age,
-            country: metrics.country,
-            pain_level: metrics.painLevel,
-            site_of_pain: metrics.siteOfPain,
-            mos_since_symp: metrics.mosSinceSymp,
-            sport: metrics.sport,
-            sport_level: metrics.sportLevel,
-            flexion: metrics.flexion,
-            extension: metrics.extension,
-            internal_rotation: metrics.internalRotation,
-            external_rotation: metrics.externalRotation,
-            craig_test: metrics.craigTest,
-            fadir: metrics.fadir,
-            faber: metrics.faber,
-            log_roll: metrics.logRoll,
-            ab_heer: metrics.abHeer
+            metrics: [
+                { key: "Sexo", value: metrics.sex },
+                { key: "Edad", value: metrics.age },
+                { key: "Pais", value: metrics.country },
+                { key: "Grado de dolor", value: metrics.painLevel },
+                { key: "Sitio de dolor", value: metrics.siteOfPain },
+                { key: "Meses desde el inicio de sintomas", value: metrics.mosSinceSymp },
+                { key: "Deporte", value: metrics.sport },
+                { key: "Nivel de deporte", value: metrics.sportLevel },
+                { key: "Flexion", value: metrics.flexion },
+                { key: "Extension", value: metrics.extension },
+                { key: "Rotacion interna", value: metrics.internalRotation },
+                { key: "Rotacion externa", value: metrics.externalRotation },
+                { key: "Prueba de CRAIG", value: metrics.craigTest },
+                { key: "FADIR", value: metrics.fadir },
+                { key: "FABER", value: metrics.faber },
+                { key: "Log Roll", value: metrics.logRoll },
+                { key: "AB HEER", value: metrics.abHee },
+            ]
         };
-        
+
         // Agregar la nueva información al objeto report
         Object.assign(report, newInfo);
 
@@ -104,7 +106,7 @@ async function updateReport(reportId, idPatient, age, metrics) {
     } catch (error) {
         console.log(`Failed to update report: ${reportId} for the following reason: ${error}`)
         throw new CustomError("Error al actualizar el reporte")
-    } 
+    }
 }
 
 export {

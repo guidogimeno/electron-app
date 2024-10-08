@@ -117,3 +117,8 @@
     padding: 10px 20px;
     cursor: pointer;
 }
+
+.report_metrics {
+    display: flex;
+    flex-direction: row;
+}
