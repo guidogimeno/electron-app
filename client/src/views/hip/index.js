@@ -50,6 +50,9 @@ function Hip() {
         if (obj.derecho) {
             tableInfo.headers.push("Derecho")
         }
+        if (obj.valor) {
+            tableInfo.headers.push("Valor")
+        }
 
         const combinedArray = [];
         const keyValueMap = new Map();
@@ -63,10 +66,16 @@ function Hip() {
         if (obj.derecho) {
             obj.derecho.forEach(obj => {
                 if (keyValueMap.has(obj.name)) {
-                    keyValueMap.get(obj.name).push(obj.value);
+                    keyValueMap.get(obj.name).push(`${obj.value}°`);
                 } else {
                     keyValueMap.set(obj.name, [obj.name.toUpperCase(), `${obj.value}°`]);
                 }
+            });
+        }
+
+        if (obj.valor) {
+            obj.valor.forEach(obj => {
+                keyValueMap.set(obj.name, [obj.name.toUpperCase(), `${obj.value}°`]);
             });
         }
 

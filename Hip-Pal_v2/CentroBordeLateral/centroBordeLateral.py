@@ -108,7 +108,7 @@ def detectar(id, base_path, cabezas_femur_axiales, tomografia_original, tomograf
     angulo_CBL_der = (-1*angulo_CBL_der) - 90
     angulos_CBL = [
         {
-            "name": "View",
+            "name": "Vista",
             "path": output_path.replace("temp-reports", "reports"),
             "izquierdo": [
                 {

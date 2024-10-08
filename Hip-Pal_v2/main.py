@@ -82,7 +82,7 @@ def foo():
         angulosSectorAcetabular = detectar.detectar(id, args.carpeta_salida,
                                                     cabezas_femur_axiales, tomografia_original, tomografia_segmentada)
 
-        angulosVersionAcetabularIzquierdo,angulosVersionAcetabularDerecho=versionAcetabular.detectar(id, args.carpeta_salida,cabezas_femur_axiales, tomografia_original,tomografia_segmentada)
+        angulosVersionAcetabular=versionAcetabular.detectar(id, args.carpeta_salida,cabezas_femur_axiales, tomografia_original,tomografia_segmentada)
 
 
         # Detecta angulos Centro Borde Lateral-------------------------------------------------
@@ -90,7 +90,7 @@ def foo():
             id, args.carpeta_salida, cabezas_femur_axiales, tomografia_original, tomografia_segmentada)
 
         # Detecta angulos Centro Borde Anterior-------------------------------------------------
-        angulosCentroBordeAnteriorIzquierdo,angulosCentroBordeAnteriorDerecho=centroBordeAnterior.detectar(id, args.carpeta_salida,cabezas_femur_axiales, tomografia_original,tomografia_segmentada)
+        angulosCentroBordeAnterior=centroBordeAnterior.detectar(id, args.carpeta_salida,cabezas_femur_axiales, tomografia_original,tomografia_segmentada)
 
         # Detecta angulos del Sacro-------------------------------------------------
         anguloSacralSlope,anguloPelvicTilt,anguloPelvicIncidence=pendienteDelSacro.detectar(id, args.carpeta_salida,cabezas_femur_axiales, tomografia_original,tomografia_segmentada)
@@ -105,7 +105,7 @@ def foo():
             "createdDate": timestamp_string,
             "mediciones": [
                 {
-                    "name": "Sector Acetabular",
+                    "name": "Sectoriales Acetabulares",
                     "angulos": angulosSectorAcetabular,
                 },
                 {
@@ -113,12 +113,8 @@ def foo():
                     "angulos": angulosCentroBordeLateral,
                 },
                 {
-                    "name": "Centro Borde Anterior Izquierdo",
-                    "angulos": angulosCentroBordeAnteriorIzquierdo,
-                },
-                {
-                    "name": "Centro Borde Anterior Derecho",
-                    "angulos": angulosCentroBordeAnteriorDerecho,
+                    "name": "Centro Borde Anterior",
+                    "angulos": angulosCentroBordeAnterior,
                 },
                 {
                     "name": "Pendiente Sacra",
@@ -133,13 +129,9 @@ def foo():
                     "angulos": anguloPelvicIncidence,
                 },
                 {
-                    "name": "Version Acetabular Izquierdo",
-                    "angulos": angulosVersionAcetabularIzquierdo,
-                },
-                {
-                    "name": "Version Acetabular Derecho",
-                    "angulos": angulosVersionAcetabularDerecho,
-                },
+                    "name": "Version Acetabular",
+                    "angulos": angulosVersionAcetabular,
+                }
             ]
         }
 

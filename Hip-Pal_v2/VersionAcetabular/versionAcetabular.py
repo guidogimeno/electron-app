@@ -124,23 +124,26 @@ def detectar(id,base_path,cabezas_femur_axiales,tomografia_original,tomografia_s
     angulo_VA_izq,output_path_izq = graficar(id, base_path,corte_original_acetabulo_derecho,corte_original_acetabulo_izquierdo,filo_sup_izq,filo_inf_izq,filo_inf_der,"Izquierdo")
     angulo_VA_der,output_path_der= graficar(id, base_path,corte_original_acetabulo_derecho,corte_original_acetabulo_izquierdo,filo_sup_der,filo_inf_der,filo_inf_izq,"Derecho")
 
-    angulo_VA_izq=[{
+    angulo_VA_izq=(90-angulo_VA_izq)
+    angulo_VA_der=(90-angulo_VA_der)
+
+    VA=[
+        {
                 "name": "Izquierdo",
                 "path":output_path_izq,
                 "izquierdo":[{
-                    "name":"va_izq",
+                    "name":"va",
                     "value":angulo_VA_izq
                 }]
-        }]
-    
-
-    angulo_VA_der=[{
+        },
+        {
                 "name": "Derecho",
                 "path":output_path_der,
-                "izquierdo":[{
-                    "name":"va_der",
+                "derecho":[{
+                    "name":"va",
                     "value":angulo_VA_der
                 }]
-        }]
+        }
+    ]
 
-    return angulo_VA_izq,angulo_VA_der
+    return VA
