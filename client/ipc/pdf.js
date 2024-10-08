@@ -1,31 +1,25 @@
-import { ipcMain } from "electron"
+import { ipcMain, dialog } from "electron"
 import puppeteer from "puppeteer"
-import os from "os"
 import path from "path"
 import fs from "fs"
 
-const DOWNLOADS_PATH = path.join(os.homedir(), "Downloads")
-
 const IMG_TAG_REGEX = /<img\s+[^>]*src="([^"]+)"[^>]*>/g;
 
-ipcMain.handle("generate-pdf", async (_, content) => {
-    const htmlWithImages = imgSrcToBase64(content)
-
-    const browser = await puppeteer.launch()
-    const page = await browser.newPage()
-    await page.setContent(htmlWithImages, { waitUntil: "domcontentloaded" })
-    await page.pdf({
-        format: "A4",
-        path: `${DOWNLOADS_PATH}/hippal_report-${Date.now().toString()}.pdf`,
-        printBackground: true,
-        margin: {
-            top: "20px",
-            bottom: "20px",
-            left: "20px",
-            right: "20px"
-        }
+ipcMain.handle("generate-pdf", async (_, html) => {
+    const { canceled, filePaths } = await dialog.showOpenDialog({
+        properties: ['openDirectory']
     })
-    await browser.close()
+
+    if (canceled || filePaths.length == 0) {
+        return
+    }
+
+    const downloadPath = filePaths[0]
+    const htmlWithImages = imgSrcToBase64(html)
+
+    await toPDF(htmlWithImages, downloadPath)
+
+    return downloadPath
 })
 
 function imgSrcToBase64(html) {
@@ -38,7 +32,6 @@ function imgSrcToBase64(html) {
 
             // Create the Base64 data URL
             const base64Image = `data:image/${fileExtension};base64,${imageData}`
-            console.log("resultado", base64Image)
 
             // Replace the original src with the Base64 data
             return match.replace(src, base64Image)
@@ -48,4 +41,23 @@ function imgSrcToBase64(html) {
         }
     })
     return htmlString
+}
+
+async function toPDF(html, downloadPath) {
+    const browser = await puppeteer.launch()
+    const page = await browser.newPage()
+    await page.setContent(html, { waitUntil: "domcontentloaded" })
+    await page.addStyleTag({ path: "./src/views/hip/styles.css" })
+    await page.pdf({
+        format: "A4",
+        path: `${downloadPath}/hippal_report-${Date.now().toString()}.pdf`,
+        printBackground: true,
+        margin: {
+            top: "20px",
+            bottom: "20px",
+            left: "20px",
+            right: "20px"
+        }
+    })
+    await browser.close()
 }
