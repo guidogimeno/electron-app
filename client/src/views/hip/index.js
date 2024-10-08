@@ -90,6 +90,48 @@ function Hip() {
                             <p>Fecha de creacion: {new Date(report.createdDate).toLocaleString()}</p>
                         </div>
                     </div>
+                    <div className="card report_metrics">
+                        <table>
+                            <tbody>
+                                {
+                                    report.metrics.slice(0,
+                                        Math.ceil(report.metrics.length / 2))
+                                        .map(metric => {
+                                            return (
+                                                <tr>
+                                                    <td>
+                                                        {metric.key}
+                                                    </td>
+                                                    <td>
+                                                        {metric.value}
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                }
+                            </tbody>
+                        </table>
+                        <table>
+                            <tbody>
+                                {
+                                    report.metrics.slice(
+                                        Math.ceil(report.metrics.length / 2),
+                                        report.metrics.lenght).map(metric => {
+                                            return (
+                                                <tr>
+                                                    <td>
+                                                        {metric.key}
+                                                    </td>
+                                                    <td>
+                                                        {metric.value}
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                     {
                         report.mediciones.map(medicion => {
                             return (
@@ -144,7 +186,7 @@ function Hip() {
                     </button>
                 </div> : <Spinner />
             }
-        </Page>
+        </Page >
     )
 }
 
