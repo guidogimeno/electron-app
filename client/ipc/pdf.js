@@ -11,7 +11,7 @@ ipcMain.handle("generate-pdf", async (_, html) => {
     })
 
     if (canceled || filePaths.length == 0) {
-        return
+        return ""
     }
 
     const downloadPath = filePaths[0]
