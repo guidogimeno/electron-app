@@ -23,9 +23,8 @@ ipcMain.handle("execute", async (_, filePath) => {
             // Cerrar con 0 es que finalizo sin errores
             if (data === 0) {
                 resolve(data)
-            } else {
-                reject(data)
             }
+            reject(data)
         })
 
         binary.stderr.on("data", (data) => {
