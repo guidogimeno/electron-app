@@ -22,8 +22,8 @@ function Hip() {
         setLoadingPDF(true)
         const content = ref.current.outerHTML
         try {
-            await generatePDF(content)
-            context.showSuccess("Reporte descargado en ~/Descargas")
+            const downloadPath = await generatePDF(content)
+            context.showSuccess(`Reporte descargado en ${downloadPath}`)
         } catch (error) {
             context.showFailure("Error al intentar generar el PDF.")
         } finally {
