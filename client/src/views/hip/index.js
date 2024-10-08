@@ -23,6 +23,10 @@ function Hip() {
         const content = ref.current.outerHTML
         try {
             const downloadPath = await generatePDF(content)
+            if (downloadPath === "") {
+                // apreto cancelar
+                return
+            }
             context.showSuccess(`Reporte descargado en ${downloadPath}`)
         } catch (error) {
             context.showFailure("Error al intentar generar el PDF.")
