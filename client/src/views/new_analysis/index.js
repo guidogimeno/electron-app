@@ -18,6 +18,7 @@ const STATE = {
 // porque son inputs con valores "controlados". En el back 
 // despues se castean a Ints.
 const emptyForm = {
+    idPatient: "",
     sex: "female",
     age: "",
     country: "argentina",
@@ -113,14 +114,11 @@ function NewAnalysis() {
         }
 
         try {
-            await track(formData)
+            await Promise.all([
+                track(formData),
+                updateReport(reportId, formData.idPatient, formData.age, formData)
+            ])
         } catch (error) {
-            console.error("Failed to send metrics", error)
-        }
-
-        try {
-            await updateReport(reportId, formData.idPatient, formData.age)
-        } catch(error) {
             console.error("Failed to modify angulos.json", error)
         }
 
