@@ -2,11 +2,13 @@
     h1 {
         font: var(--h3);
         text-align: left;
+        color: #003366;
     }
 
     h2 {
         font: var(--p);
         text-align: left;
+        color: #003366;
     }
 
     h3 {

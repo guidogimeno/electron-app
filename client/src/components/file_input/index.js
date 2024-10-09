@@ -46,10 +46,10 @@ const FileInput = ({ onFileDrop }) => {
                 />
                 <button className="select-file" onClick={triggerFileInput}>
                     {isDragging ?
-                        <p className="p1">Suelta los archivos aqui para subirlos</p> :
+                        <p className="p1">Soltá la tomografía acá</p> :
                         <div>
-                            <p className="p1">Arrastra aqui los archivos</p>
-                            <p className="p2">o tan solo haz click aqui</p>
+                            <p className="p1">Arrastrá la tomografía</p>
+                            <p className="p2">o buscala haciendo click acá</p>
                         </div>}
                 </button>
             </div>
