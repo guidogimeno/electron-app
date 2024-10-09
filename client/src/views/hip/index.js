@@ -14,7 +14,7 @@ function Hip() {
     const [report, setReport] = useState(null)
     const [loadingPDF, setLoadingPDF] = useState(false)
 
-    useEffect(function() {
+    useEffect(function () {
         fetchReport()
     }, [])
 
@@ -40,7 +40,7 @@ function Hip() {
             const report = await getReport(params.id)
             setReport(report)
         } catch (error) {
-            context.showFailure("Failed to load report")
+            context.showFailure("Error al cargar el reporte.")
         }
     }
 
@@ -193,8 +193,11 @@ function Hip() {
                     <button disabled={loadingPDF} className="download-button" onClick={handleDownload}>
                         {loadingPDF ? <Spinner /> : "Descargar Reporte"}
                     </button>
-                </div> : <Spinner />
-            }
+                </div> : (
+                    <div className="spinner-container">
+                        <Spinner />
+                    </div>
+                )}
         </Page >
     )
 }

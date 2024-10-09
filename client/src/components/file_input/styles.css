@@ -31,11 +31,11 @@
 .p1 {
     font: var(--h3);
     text-align: center;
-    color: var(--medium-gray);
+    color: #003366;
 }
 
 .p2 {
     font: var(--h4);
     text-align: center;
-    color: var(--medium-gray);
+    color: #003366;
 }
