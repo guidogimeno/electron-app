@@ -100,18 +100,17 @@ function Hip() {
                         </div>
                     </div>
                     <div className="card report_metrics">
-                        <table>
+                        <table className="metrics-table ">
                             <tbody>
                                 {
-                                    report.metrics.slice(0,
-                                        Math.ceil(report.metrics.length / 2))
+                                    report.metrics.slice(0, Math.ceil(report.metrics.length / 2))
                                         .map(metric => {
                                             return (
-                                                <tr>
-                                                    <td>
+                                                <tr key={metric.key}>
+                                                    <td className="metric-key">
                                                         {metric.key}
                                                     </td>
-                                                    <td>
+                                                    <td className="metric-value">
                                                         {metric.value}
                                                     </td>
                                                 </tr>
@@ -120,23 +119,21 @@ function Hip() {
                                 }
                             </tbody>
                         </table>
-                        <table>
+                        <table className="metrics-table">
                             <tbody>
                                 {
-                                    report.metrics.slice(
-                                        Math.ceil(report.metrics.length / 2),
-                                        report.metrics.lenght).map(metric => {
-                                            return (
-                                                <tr>
-                                                    <td>
-                                                        {metric.key}
-                                                    </td>
-                                                    <td>
-                                                        {metric.value}
-                                                    </td>
-                                                </tr>
-                                            )
-                                        })
+                                    report.metrics.slice(Math.ceil(report.metrics.length / 2), report.metrics.length).map(metric => {
+                                        return (
+                                            <tr key={metric.key}>
+                                                <td className="metric-key">
+                                                    {metric.key}
+                                                </td>
+                                                <td className="metric-value">
+                                                    {metric.value}
+                                                </td>
+                                            </tr>
+                                        )
+                                    })
                                 }
                             </tbody>
                         </table>
@@ -144,7 +141,7 @@ function Hip() {
                     {
                         report.mediciones.map(medicion => {
                             return (
-                                <div key={medicion.name} className="card">
+                                <div key={medicion.name} className="card_reporte">
                                     <div className="card_title medicion_title">
                                         <h4>{medicion.name}</h4>
                                     </div>
