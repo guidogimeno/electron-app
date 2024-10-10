@@ -138,6 +138,11 @@ function Hip() {
                             </tbody>
                         </table>
                     </div>
+                    <div className="button-container">
+                        <button disabled={loadingPDF} className="download-button" onClick={handleDownload}>
+                            {loadingPDF ? <Spinner /> : <><i className="fas fa-download"></i> Descargar Reporte</>}
+                        </button>
+                    </div>
                     {
                         report.mediciones.map(medicion => {
                             return (
@@ -187,9 +192,11 @@ function Hip() {
                             )
                         })
                     }
-                    <button disabled={loadingPDF} className="download-button" onClick={handleDownload}>
-                        {loadingPDF ? <Spinner /> : "Descargar Reporte"}
-                    </button>
+                    <div className="button-container">
+                        <button disabled={loadingPDF} className="download-button" onClick={handleDownload}>
+                            {loadingPDF ? <Spinner /> : <><i className="fas fa-download"></i> Descargar Reporte</>}
+                        </button>
+                    </div>
                 </div> : (
                     <div className="spinner-container">
                         <Spinner />
