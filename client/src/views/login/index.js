@@ -22,8 +22,13 @@ function Login() {
     }
 
     function validate() {
+        setFormErrors({})
+        const customMessages = {
+            email: "Por favor, ingrese su email",
+            password: "Por favor, ingrese su contraseña"
+        };
         setInlineMessage("")
-        const errors = validateFormData(formData, ["email", "password"])
+        const errors = validateFormData(formData, Object.keys(customMessages), customMessages)
         setFormErrors(errors)
         return Object.keys(errors).length === 0
     }

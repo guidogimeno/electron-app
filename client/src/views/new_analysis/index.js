@@ -97,7 +97,8 @@ function NewAnalysis() {
     }
 
     function validate(){
-        const errors = validateFormData(formData, Object.keys(formData))
+        setFormErrors({})
+        const errors = validateFormData(formData, Object.keys(formData), {})
         setFormErrors(errors)
         return Object.keys(errors).length === 0
     }
