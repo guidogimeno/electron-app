@@ -237,3 +237,28 @@ tr:hover {
     background-color: #e0e0e0; /* Color de fondo al pasar el mouse */
 }
 
+
+
+.angles-table {
+    width: auto; /* Ajusta el tamaño de la tabla al contenido */
+    border-collapse: collapse; /* Elimina los espacios entre celdas */
+    margin: 10px 0; /* Un poco de espacio alrededor */
+    font-size: 16px; /* Ajusta el tamaño de la fuente para que sea más compacta */
+}
+
+.angles-table th,
+.angles-table td {
+    border: none; /* Elimina los bordes de las celdas */
+    padding: 5px 10px; /* Espaciado interno para que no quede muy amontonado */
+    text-align: left; /* Alineación de texto a la izquierda */
+}
+
+.angles-table th {
+    font-weight: bold; /* El encabezado se ve más destacado */
+    background-color: #f4f4f4; /* Color de fondo para distinguir el encabezado */
+}
+
+.angles-table td {
+    background-color: #f4f4f4; /* Color de fondo para las celdas */
+}
+
