@@ -65,26 +65,27 @@ def detectar(id, base_path,cabezas_femur_axiales,tomografia_original,tomografia_
 
 
 
-    angulos_CBA_izq=[{
+    angulos_CBA= [
+            {
                 "name": "Izquierdo",
                 "path":output_path_izq,
                 "izquierdo":[{
-                    "name":"cba_izq",
-                    "value":angulo_CBA_izq
+                    "name":"cba",
+                    "value":angulo_CBA_izq,
+                    "valorNormal": "25° a 39°"
                 }]
-        }]
-    
-
-
-    angulos_CBA_der=[{
+            },
+            {
                 "name": "Derecho",
                 "path":output_path_der,
-                "izquierdo":[{
-                    "name":"cba_der",
-                    "value":angulo_CBA_der
+                "derecho":[{
+                    "name":"cba",
+                    "value":angulo_CBA_der,
+                    "valorNormal": "25° a 39°"
                 }]
-        }]
-    
+                
+            }
+    ]
 
 
-    return angulos_CBA_izq,angulos_CBA_der
+    return angulos_CBA

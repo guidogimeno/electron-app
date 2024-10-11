@@ -36,7 +36,6 @@ function TabTrigger({ tab, selected, onClick }) {
 
 
 function TabContent({ tabs, selectedTab }) {
-    console.log(tabs)
     return (
         <div className="tab-content">
             {tabs.map((tab, index) => (

@@ -51,11 +51,6 @@ contextBridge.exposeInMainWorld("bin", {
 
 contextBridge.exposeInMainWorld("pdf", {
     generatePDF: (content) => {
-        console.log("estoy en el context bridge", content)
-        try {
-            return ipcRenderer.invoke("generate-pdf", content)
-        } catch (e) {
-            console.log("wtf", e)
-        }
+        return ipcRenderer.invoke("generate-pdf", content)
     }
 })

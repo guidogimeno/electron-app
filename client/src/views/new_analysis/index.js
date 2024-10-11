@@ -108,14 +108,11 @@ function NewAnalysis() {
 
         if(validate()){
             try {
-                await track(formData)
+                await Promise.all([
+                    track(formData),
+                    updateReport(reportId, formData.idPatient, formData.age, formData)
+                ])
             } catch (error) {
-                console.error("Failed to send metrics", error)
-            }
-
-            try {
-                await updateReport(reportId, formData.idPatient, formData.age)
-            } catch(error) {
                 console.error("Failed to modify angulos.json", error)
             }
 
@@ -141,9 +138,9 @@ function NewAnalysis() {
     return (
         <Page>
             <div className="metrics-form-container">
-                <h1>Form</h1>
+                <h1>La tomografía se está procesando... </h1>
                 <h2>
-                    Please complete the following questions with accurate data. Help us improve the AI model to suggest more accurate diagnoses and further functionalities. Your collaboration is vital (all information must be anonymous).
+                    Por favor, completá el siguiente formulario de forma precisa. Esta información se utilizará para futuras estadísticas y análisis de pacientes. Tu colaboración es de suma importancia.
                 </h2>
                 <form id="metrics-form">
                     <div className="sections-container">

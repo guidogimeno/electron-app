@@ -9,7 +9,7 @@
     }
 }
 
-.card {
+.card_reporte {
     display: flex;
     flex-direction: column;
 
@@ -17,6 +17,18 @@
     border-radius: 0.5rem;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
+
+.card {
+    border: 1px solid #ccc; /* Borde de la tarjeta */
+    border-radius: 8px; /* Esquinas redondeadas */
+    padding: 16px; /* Espaciado interno */
+    background-color: #f9f9f9; /* Color de fondo */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra */
+    display: flex; /* Usar flexbox para alinear tablas */
+    flex-direction: column; /* Cambiar a columna para apilar tablas */
+}
+
+
 
 .card_title {
     padding: 1.5rem;
@@ -103,3 +115,150 @@
         color: var(--black);
     }
 }
+
+.download-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light-gray);
+    border: 1px solid var(--light-gray);
+    border-radius: 0.5rem;
+    color: var(--blue);
+    font-size: 1rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+}
+
+.full-width {
+    width: 100%; /* El botón ocupará todo el ancho del div */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 10px;
+}
+
+.download-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--light-gray);
+    border: 1px solid var(--light-gray);
+    border-radius: 0.5rem;
+    color: var(--blue);
+    font-size: 1rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.download-button i {
+    margin-right: 8px;
+}
+
+.download-button:hover:not(:disabled) {
+    background-color: var(--blue);
+    color: white;
+    border-color: var(--blue);
+    transform: scale(1.05);
+}
+
+.download-button:disabled {
+    background-color: var(--gray);
+    color: var(--dark-gray);
+    cursor: not-allowed;
+    transform: none;
+    border: 1px solid var(--dark-gray); /* Borde más marcado */
+    box-shadow: inset 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra interna y externa */
+    opacity: 0.8; /* Un poco más opaco */
+}
+
+.report_metrics {
+    display: flex;
+    flex-direction: row; /* Mantén la dirección como fila */
+    gap: 20px; /* Ajusta este valor para el espacio entre las tablas */
+    width: 100%; /* Asegúrate de que el contenedor ocupe todo el ancho */
+}
+
+.spinner-container {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.metrics-table {
+    width: 100%; /* Asegura que las tablas ocupen el ancho completo */
+    border-collapse: collapse; /* Colapsar los bordes para que las celdas estén juntas */
+    margin-bottom: 20px; /* Espacio entre tablas */
+    table-layout: fixed; /* Establece el layout de la tabla como fijo */
+}
+
+.metrics-table th, 
+.metrics-table td {
+    padding: 5px; /* Espaciado interno en celdas */
+    text-align: left; /* Alinear texto a la izquierda */
+    border: 1px solid #ddd; /* Bordes suaves para celdas */
+    overflow: hidden; /* Oculta el desbordamiento de contenido */
+    text-overflow: ellipsis; /* Agrega puntos suspensivos para texto largo */
+    white-space: nowrap; /* Evita el salto de línea en las celdas */
+}
+
+.metrics-table tr {
+    height: 50px; /* Altura fija para las filas */
+}
+
+.metric-key {
+    font-weight: bold; /* Negrita para las claves */
+    color: #333; /* Color del texto */
+    
+}
+
+.metric-value {
+    color: #666; /* Color más suave para los valores */
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Color de fondo alterno para filas */
+}
+
+tr:hover {
+    background-color: #e0e0e0; /* Color de fondo al pasar el mouse */
+}
+
+
+
+.angles-table {
+    width: auto; /* Ajusta el tamaño de la tabla al contenido */
+    border-collapse: collapse; /* Elimina los espacios entre celdas */
+    margin: 10px 0; /* Un poco de espacio alrededor */
+    font-size: 16px; /* Ajusta el tamaño de la fuente para que sea más compacta */
+}
+
+.angles-table th,
+.angles-table td {
+    border: none; /* Elimina los bordes de las celdas */
+    padding: 5px 10px; /* Espaciado interno para que no quede muy amontonado */
+    text-align: left; /* Alineación de texto a la izquierda */
+}
+
+.angles-table th {
+    font-weight: bold; /* El encabezado se ve más destacado */
+    background-color: #f4f4f4; /* Color de fondo para distinguir el encabezado */
+}
+
+.angles-table td {
+    background-color: #f4f4f4; /* Color de fondo para las celdas */
+}
+

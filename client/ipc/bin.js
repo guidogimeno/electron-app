@@ -7,7 +7,7 @@ ipcMain.handle("execute", async (_, filePath) => {
     console.log(`FILEPATH ${filePath}`)
     console.log(`USERDATAPATH ${userDataPath}`)
     return new Promise(function(resolve, reject) {
-        const binary = spawn("python3", ["/Users/ggimeno/Documents/personal/electron-app/Hip-Pal_v2/main.py", `${filePath}`, `${userDataPath}`]);
+        const binary = spawn("python", ["D:\\Usuarios\\Usuario\\Desktop\\electron-app\\Hip-Pal_v2\\main.py", `${filePath}`, `${userDataPath}`]);
 
         binary.stdout.on("data", (data) => {
             console.log(`LOG INFO - stdout: ${data}`)
@@ -23,9 +23,8 @@ ipcMain.handle("execute", async (_, filePath) => {
             // Cerrar con 0 es que finalizo sin errores
             if (data === 0) {
                 resolve(data)
-            } else {
-                reject(data)
             }
+            reject(data)
         })
 
         binary.stderr.on("data", (data) => {
