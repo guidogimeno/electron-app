@@ -1,0 +1,15 @@
+.error {
+    border: 1px solid red !important;
+    margin-bottom: 0 !important;
+}
+
+.error-message {
+    margin: 0;
+    margin-bottom: 15px;
+    align-self: self-start;
+    color: red;
+}
+
+.metrics-form-container .error-message{
+    margin-bottom: 0;
+}
