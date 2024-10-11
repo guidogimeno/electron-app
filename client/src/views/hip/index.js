@@ -99,7 +99,7 @@ function Hip() {
                             <p>Fecha de creacion: {new Date(report.createdDate).toLocaleString()}</p>
                         </div>
                     </div>
-                    <div className="card report_metrics">
+                    {/*                     <div className="card report_metrics">
                         <table className="metrics-table ">
                             <tbody>
                                 {
@@ -135,6 +135,88 @@ function Hip() {
                                         )
                                     })
                                 }
+                            </tbody>
+                        </table>
+                    </div> */}
+                    <div className="card report_metrics">
+                        <table className="angles-table ">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Izquierdo</th>
+                                    <th>Derecho</th>
+                                    <th>Valor Límite/Normal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{report.mediciones[0].angulos[0].izquierdo[0].name + " " + report.mediciones[0].angulos[0].name}</td>
+                                    <td>{report.mediciones[0].angulos[0].izquierdo[0].value + "°"}</td>
+                                    <td>{report.mediciones[0].angulos[0].derecho[0].value + "°"}</td>
+                                    <td>{report.mediciones[0].angulos[0].derecho[0].valorLimite}</td>
+                                </tr>
+                                <tr>
+                                    <td>{report.mediciones[0].angulos[1].izquierdo[0].name + " " + report.mediciones[0].angulos[1].name}</td>
+                                    <td>{report.mediciones[0].angulos[1].izquierdo[0].value + "°"}</td>
+                                    <td>{report.mediciones[0].angulos[1].derecho[0].value + "°"}</td>
+                                    <td>{report.mediciones[0].angulos[1].derecho[0].valorLimite}</td>
+                                </tr>
+                                <tr>
+                                    <td>{report.mediciones[0].angulos[2].izquierdo[0].name + " " + report.mediciones[0].angulos[2].name}</td>
+                                    <td>{report.mediciones[0].angulos[2].izquierdo[0].value + "°"}</td>
+                                    <td>{report.mediciones[0].angulos[2].derecho[0].value + "°"}</td>
+                                    <td>{report.mediciones[0].angulos[2].derecho[0].valorLimite}</td>
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>{report.mediciones[0].angulos[0].izquierdo[1].name + " " + report.mediciones[0].angulos[0].name}</td>
+                                    <td>{report.mediciones[0].angulos[0].izquierdo[1].value + "°"}</td>
+                                    <td>{report.mediciones[0].angulos[0].derecho[1].value + "°"}</td>
+                                    <td>{report.mediciones[0].angulos[0].derecho[1].valorLimite}</td>
+                                </tr>
+                                <tr>
+                                    <td>{report.mediciones[0].angulos[1].izquierdo[1].name + " " + report.mediciones[0].angulos[1].name}</td>
+                                    <td>{report.mediciones[0].angulos[1].izquierdo[1].value + "°"}</td>
+                                    <td>{report.mediciones[0].angulos[1].derecho[1].value + "°"}</td>
+                                    <td>{report.mediciones[0].angulos[1].derecho[1].valorLimite}</td>
+                                </tr>
+                                <tr>
+                                    <td>{report.mediciones[0].angulos[2].izquierdo[1].name + " " + report.mediciones[0].angulos[2].name}</td>
+                                    <td>{report.mediciones[0].angulos[2].izquierdo[1].value + "°"}</td>
+                                    <td>{report.mediciones[0].angulos[2].derecho[1].value + "°"}</td>
+                                    <td>{report.mediciones[0].angulos[2].derecho[1].valorLimite}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table className="angles-table ">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Valor</th>
+                                    <th>Valor Normal</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{report.mediciones[3].name}</td>
+                                    <td>{report.mediciones[3].angulos[0].valor[0].value + "°"}</td>
+                                    <td>{report.mediciones[3].angulos[0].valor[0].valorNormal}</td>
+                                </tr>
+                                <tr>
+                                    <td>{report.mediciones[4].name}</td>
+                                    <td>{report.mediciones[4].angulos[0].valor[0].value + "°"}</td>
+                                    <td>{report.mediciones[4].angulos[0].valor[0].valorNormal}</td>
+                                </tr>
+                                <tr>
+                                    <td>{report.mediciones[5].name}</td>
+                                    <td>{report.mediciones[5].angulos[0].valor[0].value + "°"}</td>
+                                    <td>{report.mediciones[5].angulos[0].valor[0].valorNormal}</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
