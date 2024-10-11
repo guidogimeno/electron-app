@@ -37,30 +37,36 @@ def detectar(id, base_path, json, tomografia_original, tomografia_segmentada):
                 "path": path_proximal,
                 "izquierdo": [
                     {
-                        "name": "aasa",
+                        "name": "AASA",
                         "value":  angulos_proximal["izquierdo"]["aasa"],
+                        "valorLimite": "120.9°"
                     },
                     {
-                        "name": "pasa",
+                        "name": "PASA",
                         "value":  angulos_proximal["izquierdo"]["pasa"],
+                        "valorLimite": "120.5°"                 
                     },
                     {
-                        "name": "hasa",
+                        "name": "HASA",
                         "value":  angulos_proximal["izquierdo"]["hasa"],
+                        "valorLimite": "241.4°"  
                     }
                 ],
                 "derecho": [
                     {
-                        "name": "aasa",
+                        "name": "AASA",
                         "value":  angulos_proximal["derecho"]["aasa"],
+                        "valorLimite": "120.9°"
                     },
                     {
-                        "name": "pasa",
+                        "name": "PASA",
                         "value":  angulos_proximal["derecho"]["pasa"],
+                        "valorLimite": "120.5°"   
                     },
                     {
-                        "name": "hasa",
+                        "name": "HASA",
                         "value":  angulos_proximal["derecho"]["hasa"],
+                        "valorLimite": "241.4°" 
                     }
                 ]
             },
@@ -69,30 +75,36 @@ def detectar(id, base_path, json, tomografia_original, tomografia_segmentada):
                 "path": path_intermedial,
                 "izquierdo": [
                     {
-                        "name": "aasa",
+                        "name": "AASA",
                         "value":  angulos_intermedial["izquierdo"]["aasa"],
+                        "valorLimite": "67.7°" 
                     },
                     {
-                        "name": "pasa",
+                        "name": "PASA",
                         "value":  angulos_intermedial["izquierdo"]["pasa"],
+                        "valorLimite": "101.5°" 
                     },
                     {
-                        "name": "hasa",
+                        "name": "HASA",
                         "value":  angulos_intermedial["izquierdo"]["hasa"],
+                        "valorLimite": "169.2°" 
                     }
                 ],
                 "derecho": [
                     {
-                        "name": "aasa",
+                        "name": "AASA",
                         "value":  angulos_intermedial["derecho"]["aasa"],
+                        "valorLimite": "67.7°" 
                     },
                     {
-                        "name": "pasa",
+                        "name": "PASA",
                         "value":  angulos_intermedial["derecho"]["pasa"],
+                        "valorLimite": "101.5°" 
                     },
                     {
-                        "name": "hasa",
+                        "name": "HASA",
                         "value":  angulos_intermedial["derecho"]["hasa"],
+                        "valorLimite": "169.2°" 
                     }
                 ]
             },
@@ -101,30 +113,36 @@ def detectar(id, base_path, json, tomografia_original, tomografia_segmentada):
                 "path": path_ecuatorial,
                 "izquierdo": [
                     {
-                        "name": "aasa",
+                        "name": "AASA",
                         "value":  angulos_ecuatorial["izquierdo"]["aasa"],
+                        "valorLimite": "50.3°" 
                     },
                     {
-                        "name": "pasa",
+                        "name": "PASA",
                         "value":  angulos_ecuatorial["izquierdo"]["pasa"],
+                        "valorLimite": "91.4°" 
                     },
                     {
-                        "name": "hasa",
+                        "name": "HASA",
                         "value":  angulos_ecuatorial["izquierdo"]["hasa"],
+                        "valorLimite": "141.7°" 
                     }
                 ],
                 "derecho": [
                     {
-                        "name": "aasa",
+                        "name": "AASA",
                         "value":  angulos_ecuatorial["derecho"]["aasa"],
+                        "valorLimite": "50.3°" 
                     },
                     {
-                        "name": "pasa",
+                        "name": "PASA",
                         "value":  angulos_ecuatorial["derecho"]["pasa"],
+                        "valorLimite": "91.4°" 
                     },
                     {
-                        "name": "hasa",
+                        "name": "HASA",
                         "value":  angulos_ecuatorial["derecho"]["hasa"],
+                        "valorLimite": "141.7°" 
                     }
                 ]
             }

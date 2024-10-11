@@ -113,13 +113,15 @@ def detectar(id, base_path, cabezas_femur_axiales, tomografia_original, tomograf
             "izquierdo": [
                 {
                     "name": "cbl",
-                    "value": angulo_CBL_izq
+                    "value": angulo_CBL_izq,
+                    "valorNormal": "25° a 39°"
                 }
             ],
             "derecho": [
                 {
                     "name": "cbl",
-                    "value": angulo_CBL_der
+                    "value": angulo_CBL_der,
+                    "valorNormal": "25° a 39°"
                 }
             ]
         }
