@@ -13,6 +13,7 @@
 @import "../components/notification/sytles.css";
 @import "../components/search/styles.css";
 @import "../components/tabs/styles.css";
+@import "../components/validation/styles.css";
 
 /* Views */
 @import "../views/landing/styles.css";

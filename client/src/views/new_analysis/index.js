@@ -8,6 +8,7 @@ import { track } from "../../services/metrics/index.js"
 import Spinner from "../../components/spinner/index.js"
 import { executeBin } from "../../executables/index.js"
 import { updateReport, moveReport, removeTempReport } from "../../fs/reports/index.js"
+import { validateFormData } from "../../components/validation/index.js";
 
 const STATE = {
     start: 0,
@@ -46,6 +47,7 @@ function NewAnalysis() {
     const [reportId, setReportId] = useState(null)
     const [state, setState] = useState(STATE.start)
     const [isAnalyzing, setIsAnalyzing] = useState(false)
+    const [formErrors, setFormErrors] = useState({})
 
     function handleChange(event) {
         setFormData(prevData => ({
@@ -94,41 +96,17 @@ function NewAnalysis() {
         setState(STATE.start)
     }
 
-    function validateForm() {
-        const errorElements = document.querySelectorAll('.error');
-        errorElements.forEach(element => {
-            element.classList.remove('error');
-        });
-
-        const errorMessages = document.querySelectorAll('.error-message');
-        errorMessages.forEach(message => {
-            message.remove();
-        });
-
-        let validateForm = true;
-
-        for (const key of Object.keys(formData)) {
-            if (String(formData[key]).length == 0) {
-                validateForm = false;
-                const element = document.getElementById(key);
-                if (element) {
-                    element.classList.add('error');
-                    const errorParagraph = document.createElement('p');
-                    errorParagraph.textContent = "Este campo es obligatorio";
-                    errorParagraph.className = 'error-message';
-                    element.parentNode.insertBefore(errorParagraph, element.nextSibling);
-                }
-            }
-        }
-
-        return validateForm
+    function validate(){
+        const errors = validateFormData(formData, Object.keys(formData))
+        setFormErrors(errors)
+        return Object.keys(errors).length === 0
     }
 
     // TODO: Aca falta algun tipo de loading
     async function handleSubmit(event) {
         event.preventDefault()
 
-        if(validateForm()){
+        if(validate()){
             try {
                 await track(formData)
             } catch (error) {
@@ -179,9 +157,10 @@ function NewAnalysis() {
                                     type="number"
                                     value={formData.idPatient}
                                     onChange={handleChange}
-                                    className="input"
+                                    className={`input ${formErrors.idPatient ? 'error' : ''}`}
                                     required
                                 />
+                                {formErrors.idPatient && <p className="error-message">{formErrors.idPatient}</p>}
                             </div>
                             <div className="label-select">
                                 <label htmlFor="sex">Sexo</label>
@@ -191,12 +170,13 @@ function NewAnalysis() {
                                     form="metrics-form"
                                     value={formData.sex}
                                     onChange={handleChange}
-                                    className="select"
+                                    className={`select ${formErrors.sex ? 'error' : ''}`}
                                     required
                                 >
                                     <option value="female">Femenino</option>
                                     <option value="male">Masculino</option>
                                 </select>
+                                {formErrors.sex && <p className="error-message">{formErrors.sex}</p>}
                             </div>
                             <div className="label-select">
                                 <label htmlFor="age">Edad</label>
@@ -206,9 +186,10 @@ function NewAnalysis() {
                                     type="number"
                                     value={formData.age}
                                     onChange={handleChange}
-                                    className="input"
+                                    className={`input ${formErrors.age ? 'error' : ''}`}
                                     required
                                 />
+                                {formErrors.age && <p className="error-message">{formErrors.age}</p>}
                             </div>
                             <div className="label-select">
                                 <label htmlFor="country">Pais de Nacimiento</label>
@@ -218,11 +199,12 @@ function NewAnalysis() {
                                     form="metrics-form"
                                     value={formData.country}
                                     onChange={handleChange}
-                                    className="select"
+                                    className={`select ${formErrors.country ? 'error' : ''}`}
                                     required
                                 >
                                     <option value="argentina">Argentina</option>
                                 </select>
+                                {formErrors.country && <p className="error-message">{formErrors.country}</p>}
                             </div>
                             <div className="label-select">
                                 <label htmlFor="painLevel">Grado de dolor</label>
@@ -232,7 +214,7 @@ function NewAnalysis() {
                                     form="metrics-form"
                                     value={formData.painLevel}
                                     onChange={handleChange}
-                                    className="select"
+                                    className={`select ${formErrors.painLevel ? 'error' : ''}`}
                                     required
                                 >
                                     <option value="no_data">N/D</option>
@@ -247,6 +229,7 @@ function NewAnalysis() {
                                     <option value="9">9</option>
                                     <option value="10">10</option>
                                 </select>
+                                {formErrors.painLevel && <p className="error-message">{formErrors.painLevel}</p>}
                             </div>
                             <div className="label-select">
                                 <label htmlFor="siteOfPain">Sitio del dolor</label>
@@ -256,7 +239,7 @@ function NewAnalysis() {
                                     form="metrics-form"
                                     value={formData.siteOfPain}
                                     onChange={handleChange}
-                                    className="select"
+                                    className={`select ${formErrors.siteOfPain ? 'error' : ''}`}
                                     required
                                 >
                                     <option value="no_data">N/D</option>
@@ -268,6 +251,7 @@ function NewAnalysis() {
                                     <option value="lumbar">Lumbar</option>
                                     <option value="other">Otro</option>
                                 </select>
+                                {formErrors.siteOfPain && <p className="error-message">{formErrors.siteOfPain}</p>}
                             </div>
                             <div className="label-select">
                                 <label htmlFor="mosSinceSymp">Meses desde el inicio de s&iacute;ntomas</label>
@@ -277,9 +261,10 @@ function NewAnalysis() {
                                     type="number"
                                     value={formData.mosSinceSymp}
                                     onChange={handleChange}
-                                    className="input"
+                                    className={`input ${formErrors.mosSinceSymp ? 'error' : ''}`}
                                     required
                                 />
+                                {formErrors.mosSinceSymp && <p className="error-message">{formErrors.mosSinceSymp}</p>}
                             </div>
                             <div className="label-select">
                                 <label htmlFor="sport">Deporte que practica</label>
@@ -289,7 +274,7 @@ function NewAnalysis() {
                                     form="metrics-form"
                                     value={formData.sport}
                                     onChange={handleChange}
-                                    className="select"
+                                    className={`select ${formErrors.sport ? 'error' : ''}`}
                                     required
                                 >
                                     <option value="no_data">N/D</option>
@@ -314,6 +299,7 @@ function NewAnalysis() {
                                     <option value="martial_arts">Artes marciales</option>
                                     <option value="other">Otros</option>
                                 </select>
+                                {formErrors.sport && <p className="error-message">{formErrors.sport}</p>}
                             </div>
                             <div className="label-select">
                                 <label htmlFor="sportLevel">Nivel de deporte</label>
@@ -323,7 +309,7 @@ function NewAnalysis() {
                                     form="metrics-form"
                                     value={formData.sportLevel}
                                     onChange={handleChange}
-                                    className="select"
+                                    className={`select ${formErrors.sportLevel ? 'error' : ''}`}
                                     required
                                 >
                                     <option value="no_data">N/D</option>
@@ -331,6 +317,7 @@ function NewAnalysis() {
                                     <option value="amateur">Amateur</option>
                                     <option value="professional">Profesional</option>
                                 </select>
+                                {formErrors.sportLevel && <p className="error-message">{formErrors.sportLevel}</p>}
                             </div>
                         </section>
                         <section>
@@ -346,9 +333,10 @@ function NewAnalysis() {
                                     type="number"
                                     value={formData.flexion}
                                     onChange={handleChange}
-                                    className="input"
+                                    className={`input ${formErrors.flexion ? 'error' : ''}`}
                                     required
                                 />
+                                {formErrors.flexion && <p className="error-message">{formErrors.flexion}</p>}
                             </div>
                             <div className="label-select">
                                 <label htmlFor="extension">Extensi&oacute;n</label>
@@ -358,9 +346,10 @@ function NewAnalysis() {
                                     type="number"
                                     value={formData.extension}
                                     onChange={handleChange}
-                                    className="input"
+                                    className={`input ${formErrors.extension ? 'error' : ''}`}
                                     required
                                 />
+                                {formErrors.extension && <p className="error-message">{formErrors.extension}</p>}
                             </div>
                             <div className="label-select">
                                 <label htmlFor="internalRotation">Rotaci&oacute;n interna (con flexi&oacute;n de cadera a 90°)</label>
@@ -370,9 +359,10 @@ function NewAnalysis() {
                                     type="number"
                                     value={formData.internalRotation}
                                     onChange={handleChange}
-                                    className="input"
+                                    className={`input ${formErrors.internalRotation ? 'error' : ''}`}
                                     required
                                 />
+                                {formErrors.internalRotation && <p className="error-message">{formErrors.internalRotation}</p>}
                             </div>
                             <div className="label-select">
                                 <label htmlFor="externalRotation">Rotaci&oacute;n externa (con flexi&oacute;n de cadera a 90°)</label>
@@ -382,9 +372,10 @@ function NewAnalysis() {
                                     type="number"
                                     value={formData.externalRotation}
                                     onChange={handleChange}
-                                    className="input"
+                                    className={`input ${formErrors.externalRotation ? 'error' : ''}`}
                                     required
                                 />
+                                {formErrors.externalRotation && <p className="error-message">{formErrors.externalRotation}</p>}
                             </div>
                             <div className="label-select">
                                 <label htmlFor="craigTest">Prueba de Craig</label>
@@ -394,9 +385,10 @@ function NewAnalysis() {
                                     type="number"
                                     value={formData.craigTest}
                                     onChange={handleChange}
-                                    className="input"
+                                    className={`input ${formErrors.craigTest ? 'error' : ''}`}
                                     required
                                 />
+                                {formErrors.craigTest && <p className="error-message">{formErrors.craigTest}</p>}
                             </div>
                             <div>
                                 <h4>Pruebas</h4>
@@ -409,7 +401,7 @@ function NewAnalysis() {
                                     form="metrics-form"
                                     value={formData.fadir}
                                     onChange={handleChange}
-                                    className="select"
+                                    className={`select ${formErrors.fadir ? 'error' : ''}`}
                                     required
                                 >
                                     <option value="positive">Positivo</option>
@@ -417,6 +409,7 @@ function NewAnalysis() {
                                     <option value="not_evaluated">No evaluado</option>
                                     <option value="unknown">Desconocido</option>
                                 </select>
+                                {formErrors.fadir && <p className="error-message">{formErrors.fadir}</p>}
                             </div>
                             <div className="label-select">
                                 <label htmlFor="faber">Faber</label>
@@ -426,7 +419,7 @@ function NewAnalysis() {
                                     form="metrics-form"
                                     value={formData.faber}
                                     onChange={handleChange}
-                                    className="select"
+                                    className={`select ${formErrors.faber ? 'error' : ''}`}
                                     required
                                 >
                                     <option value="positive">Positivo</option>
@@ -434,6 +427,7 @@ function NewAnalysis() {
                                     <option value="not_evaluated">No evaluado</option>
                                     <option value="unknown">Desconocido</option>
                                 </select>
+                                {formErrors.faber && <p className="error-message">{formErrors.faber}</p>}
                             </div>
                             <div className="label-select">
                                 <label htmlFor="logRoll">Log Roll</label>
@@ -443,7 +437,7 @@ function NewAnalysis() {
                                     form="metrics-form"
                                     value={formData.logRoll}
                                     onChange={handleChange}
-                                    className="select"
+                                    className={`select ${formErrors.logRoll ? 'error' : ''}`}
                                     required
                                 >
                                     <option value="positive">Positivo</option>
@@ -451,6 +445,7 @@ function NewAnalysis() {
                                     <option value="not_evaluated">No evaluado</option>
                                     <option value="unknown">Desconocido</option>
                                 </select>
+                                {formErrors.logRoll && <p className="error-message">{formErrors.logRoll}</p>}
                             </div>
                             <div className="label-select">
                                 <label htmlFor="abHeer">AB Heer</label>
@@ -460,7 +455,7 @@ function NewAnalysis() {
                                     form="metrics-form"
                                     value={formData.abHeer}
                                     onChange={handleChange}
-                                    className="select"
+                                    className={`select ${formErrors.abHeer ? 'error' : ''}`}
                                     required
                                 >
                                     <option value="positive">Positivo</option>
@@ -468,6 +463,7 @@ function NewAnalysis() {
                                     <option value="not_evaluated">No evaluado</option>
                                     <option value="unknown">Desconocido</option>
                                 </select>
+                                {formErrors.abHeer && <p className="error-message">{formErrors.abHeer}</p>}
                             </div>
                         </section>
                     </div>

@@ -5,10 +5,12 @@ import { login } from "../../services/login/index.js"
 import { setStoreValue } from "../../store/index.js"
 import { useNavigate } from "react-router-dom"
 import Page from "../../components/page/index.js"
+import { validateFormData } from "../../components/validation/index.js";
 
 function Login() {
     const [formData, setFormData] = useState({ email: "", password: "" })
     const [inlineMessage, setInlineMessage] = useState("")
+    const [formErrors, setFormErrors] = useState({})
 
     const navigate = useNavigate()
 
@@ -19,14 +21,23 @@ function Login() {
         }))
     }
 
+    function validate() {
+        setInlineMessage("")
+        const errors = validateFormData(formData, ["email", "password"])
+        setFormErrors(errors)
+        return Object.keys(errors).length === 0
+    }
+
     async function handleSubmit(event) {
         event.preventDefault()
-        try {
-            const res = await login(formData)
-            await setStoreValue("token", res.token)
-            navigate("/")
-        } catch (error) {
-            setInlineMessage("Credenciales incorrectas. Verifica tu nombre de usuario y contraseña e inténtalo nuevamente")
+        if(validate()){
+            try {
+                const res = await login(formData)
+                await setStoreValue("token", res.token)
+                navigate("/")
+            } catch (error) {
+                setInlineMessage("Credenciales incorrectas. Verifica tu nombre de usuario y contraseña e inténtalo nuevamente")
+            }
         }
     }
 
@@ -43,20 +54,20 @@ function Login() {
                             type="text"
                             value={formData.email}
                             onChange={handleChange}
-                            className="input"
+                            className={`input ${formErrors.email ? 'error' : ''}`}
                             placeholder="Email"
-                            required
                         />
+                        {formErrors.email && <p className="error-message">{formErrors.email}</p>}
                         <input
                             id="password"
                             name="password"
                             type="password"
                             value={formData.password}
                             onChange={handleChange}
-                            className="input"
+                            className={`input ${formErrors.password ? 'error' : ''}`}
                             placeholder="Contraseña"
-                            required
                         />
+                        {formErrors.password && <p className="error-message">{formErrors.password}</p>}
                         <button type="submit" className="primary-button">
                             Ingresar
                         </button>
@@ -71,7 +82,7 @@ function Login() {
                     </div>
                 </div>
             </div>
-            <p class="version-text">Versión 1.0 / oct 2024</p>
+            <p className="version-text">Versión 1.0 / oct 2024</p>
         </Page>
     )
 }
