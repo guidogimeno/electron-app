@@ -1,7 +1,6 @@
 # Electron Tutorial
 
 # TODO
-- Poder exportar a PDF.
 - Cambiar el color de los mensajes de error, son muy rojos.
 - Mejorar el header de alguna forma
 - Cambiar --> Angulos Sectoriales Acetabulares

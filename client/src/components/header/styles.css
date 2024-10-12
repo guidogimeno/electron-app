@@ -1,7 +1,7 @@
 header {
     position: fixed;
 
-    height: 8rem;
+    height: var(--header-hight);
     width: 100%;
     z-index: var(--z-index-header);
 

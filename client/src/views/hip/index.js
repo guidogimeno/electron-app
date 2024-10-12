@@ -274,11 +274,6 @@ function Hip() {
                             )
                         })
                     }
-                    <div className="button-container">
-                        <button disabled={loadingPDF} className="download-button" onClick={handleDownload}>
-                            {loadingPDF ? <Spinner /> : <><i className="fas fa-download"></i> Descargar Reporte</>}
-                        </button>
-                    </div>
                 </div> : (
                     <div className="spinner-container">
                         <Spinner />
