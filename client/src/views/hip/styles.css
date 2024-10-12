@@ -136,7 +136,8 @@
 .download-button {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: end;
+    gap: 0.5rem;
     background-color: var(--light-gray);
     border: 1px solid var(--light-gray);
     border-radius: 0.5rem;
@@ -157,7 +158,6 @@
     background-color: var(--blue);
     color: white;
     border-color: var(--blue);
-    transform: scale(1.05);
 }
 
 .download-button:disabled {

@@ -14,50 +14,50 @@
     position: relative;
     z-index: var(--z-index-notification);
 
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: 1rem;
+
     width: 24rem;
     min-height: 4rem;
-    color: var(--light-gray); /* Cambia el color de texto aquí si quieres cambiar el color del mensaje */
+    background-color: var(--light-gray);
     font: var(--p);
     border-radius: .25rem;
     align-content: center;
     padding: var(--spacing-sm) var(--spacing-lg);
 
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
 
     transform: translateX(-110%);
     animation: notificationSlide 250ms ease-in-out;
 
     &.info {
-        background-color: var(--blue);
+        color: var(--blue);
     }
 
     &.success {
-        background-color: var(--green);
+        color: var(--green);
     }
 
     &.warning {
-        background-color: var(--yellow);
+        color: var(--yellow);
     }
 
     &.failure {
-        background-color: var(--red);
+        color: var(--red);
     }
 
-    &:hover {
-        height: 100%;
-        overflow: visible;
-        overflow-wrap: break-word;
-        white-space: normal;
+    svg {
+        min-height: 50px;
+        min-width: 50px;
     }
 
-    p {
-        text-transform: capitalize;
-        font: var(--big);
-        color: black; /* Cambia el color a negro */
-        margin: 0; /* Asegúrate de que no haya margen por defecto */
-        text-align: left; /* Alinea el texto a la izquierda */
+    span {
+        white-space: pre-wrap;
+        word-break: normal;
+        display: inline-block;
     }
 }
 
