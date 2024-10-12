@@ -1,10 +1,10 @@
 main {
-    margin-top: 8rem;
+    margin-top: var(--header-hight);
 
     display: flex;
     flex-direction: row;
 
-    height: 100%;
+    height: calc(100% - var(--header-hight));
 }
 
 .content {
@@ -20,5 +20,6 @@ main {
 }
 
 .content--with-sidebar {
-    margin-left: 16rem;
+    margin-left: var(--sidebar-width);
+    overflow-y: scroll;
 }
