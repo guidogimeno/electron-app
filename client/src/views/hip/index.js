@@ -6,6 +6,7 @@ import { GlobalContext } from "../../context/index.js"
 import Spinner from "../../components/spinner/index.js"
 import { Tabs, Tab } from "../../components/tabs/index.js"
 import { generatePDF } from "../../pdf/index.js"
+import DownloadSvg from "../../assets/download_svg.js"
 
 function Hip() {
     const context = useContext(GlobalContext)
@@ -99,45 +100,6 @@ function Hip() {
                             <p>Fecha de creacion: {new Date(report.createdDate).toLocaleString()}</p>
                         </div>
                     </div>
-                    {/*                     <div className="card report_metrics">
-                        <table className="metrics-table ">
-                            <tbody>
-                                {
-                                    report.metrics.slice(0, Math.ceil(report.metrics.length / 2))
-                                        .map(metric => {
-                                            return (
-                                                <tr key={metric.key}>
-                                                    <td className="metric-key">
-                                                        {metric.key}
-                                                    </td>
-                                                    <td className="metric-value">
-                                                        {metric.value}
-                                                    </td>
-                                                </tr>
-                                            )
-                                        })
-                                }
-                            </tbody>
-                        </table>
-                        <table className="metrics-table">
-                            <tbody>
-                                {
-                                    report.metrics.slice(Math.ceil(report.metrics.length / 2), report.metrics.length).map(metric => {
-                                        return (
-                                            <tr key={metric.key}>
-                                                <td className="metric-key">
-                                                    {metric.key}
-                                                </td>
-                                                <td className="metric-value">
-                                                    {metric.value}
-                                                </td>
-                                            </tr>
-                                        )
-                                    })
-                                }
-                            </tbody>
-                        </table>
-                    </div> */}
                     <div className="card report_metrics">
                         <table className="angles-table ">
                             <thead>
@@ -222,7 +184,7 @@ function Hip() {
                     </div>
                     <div className="button-container">
                         <button disabled={loadingPDF} className="download-button" onClick={handleDownload}>
-                            {loadingPDF ? <Spinner /> : <><i className="fas fa-download"></i> Descargar Reporte</>}
+                            {loadingPDF ? <Spinner /> : <><i className="fas fa-download"></i> Descargar Reporte <DownloadSvg /></>}
                         </button>
                     </div>
                     {
