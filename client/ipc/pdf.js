@@ -7,7 +7,7 @@ const IMG_TAG_REGEX = /<img\s+[^>]*src="([^"]+)"[^>]*>/g;
 
 ipcMain.handle("generate-pdf", async (_, html) => {
     const { canceled, filePaths } = await dialog.showOpenDialog({
-        properties: ['openDirectory']
+        properties: ["openDirectory"]
     })
 
     if (canceled || filePaths.length == 0) {
@@ -43,6 +43,10 @@ function imgSrcToBase64(html) {
     return htmlString
 }
 
+/**
+ * @param {string} html 
+ * @param {string} downloadPath 
+ */
 async function toPDF(html, downloadPath) {
     const browser = await puppeteer.launch()
     const page = await browser.newPage()

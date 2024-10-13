@@ -7,6 +7,7 @@ import Spinner from "../../components/spinner/index.js"
 import { Tabs, Tab } from "../../components/tabs/index.js"
 import { generatePDF } from "../../pdf/index.js"
 import DownloadSvg from "../../assets/download_svg.js"
+import ForwardDiv from "./template.js"
 
 function Hip() {
     const context = useContext(GlobalContext)
@@ -15,13 +16,16 @@ function Hip() {
     const [report, setReport] = useState(null)
     const [loadingPDF, setLoadingPDF] = useState(false)
 
-    useEffect(function () {
+    useEffect(function() {
         fetchReport()
     }, [])
 
     async function handleDownload() {
         setLoadingPDF(true)
-        const content = ref.current.outerHTML
+        // Esto es porque el componente se renderiza de forma "invisible" 
+        // Quizas lo ideal seria hacer / usar una lib de templates para armar
+        // el html con la informacion del reporte
+        const content = ref.current.outerHTML.replace("none", "block")
         try {
             const downloadPath = await generatePDF(content)
             if (downloadPath === "") {
@@ -93,7 +97,7 @@ function Hip() {
     return (
         <Page>
             {report ?
-                <div className="report-container" ref={ref}>
+                <div className="report-container">
                     <div className="card report_header">
                         <div className="card_title">
                             <h4>{report.name}</h4>
@@ -155,7 +159,7 @@ function Hip() {
                                 </tr>
                             </tbody>
                         </table>
-                        <table className="angles-table ">
+                        <table className="angles-table">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
@@ -241,6 +245,7 @@ function Hip() {
                         <Spinner />
                     </div>
                 )}
+            <ForwardDiv ref={ref} report={report} />
         </Page >
     )
 }

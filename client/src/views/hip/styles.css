@@ -28,8 +28,6 @@
     flex-direction: column; /* Cambiar a columna para apilar tablas */
 }
 
-
-
 .card_title {
     padding: 1.5rem;
 
@@ -161,13 +159,11 @@
 }
 
 .download-button:disabled {
-    background-color: var(--gray);
-    color: var(--dark-gray);
+    background-color: var(--light-gray);
     cursor: not-allowed;
+    color: var(--dark-gray);
     transform: none;
-    border: 1px solid var(--dark-gray); /* Borde más marcado */
-    box-shadow: inset 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 4px 6px rgba(0, 0, 0, 0.2); /* Sombra interna y externa */
-    opacity: 0.8; /* Un poco más opaco */
+    box-shadow: inset 0px 4px 6px rgba(0, 0, 0, 0.1), 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 .report_metrics {
@@ -250,5 +246,10 @@ tr:hover {
 
 .angles-table td {
     background-color: #f4f4f4; /* Color de fondo para las celdas */
+    text-align: center;
+}
+
+.angles-table td:first-child {
+    text-align: left;
 }
 
