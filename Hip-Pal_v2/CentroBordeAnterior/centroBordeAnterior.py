@@ -70,7 +70,7 @@ def detectar(id, base_path,cabezas_femur_axiales,tomografia_original,tomografia_
                 "name": "Izquierdo",
                 "path":output_path_izq,
                 "izquierdo":[{
-                    "name":"cba",
+                    "name":"CBA",
                     "value":angulo_CBA_izq,
                     "valorNormal": "25° a 39°"
                 }]
@@ -79,7 +79,7 @@ def detectar(id, base_path,cabezas_femur_axiales,tomografia_original,tomografia_
                 "name": "Derecho",
                 "path":output_path_der,
                 "derecho":[{
-                    "name":"cba",
+                    "name":"CBA",
                     "value":angulo_CBA_der,
                     "valorNormal": "25° a 39°"
                 }]

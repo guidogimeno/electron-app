@@ -121,15 +121,15 @@ def foo():
                     "angulos": anguloSacralSlope,
                 },
                 {
-                    "name": "Inclinacion Pelvica",
+                    "name": "Inclinación Pélvica",
                     "angulos": anguloPelvicTilt,
                 },
                 {
-                    "name": "Incidencia Pelvica",
+                    "name": "Incidencia Pélvica",
                     "angulos": anguloPelvicIncidence,
                 },
                 {
-                    "name": "Version Acetabular",
+                    "name": "Versión Acetabular",
                     "angulos": angulosVersionAcetabular,
                 }
             ]

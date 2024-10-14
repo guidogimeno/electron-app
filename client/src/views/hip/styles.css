@@ -90,10 +90,12 @@
     th {
         height: 3rem;
         padding: 0 1rem;
-
         vertical-align: middle;
-        text-align: left;
+        text-align: center;
         color: var(--dark-gray);
+    }
+    th:first-child {
+        text-align: left;
     }
 
     tbody tr:not(:last-child) {
@@ -107,10 +109,12 @@
     td {
         height: 3rem;
         padding: 0 1rem;
-
         vertical-align: middle;
         text-align: center;
         color: var(--black);
+    }
+    td:first-child{
+        text-align: left;
     }
 }
 
@@ -177,7 +181,6 @@
 .spinner-container {
     height: 100%;
     width: 100%;
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -236,7 +239,7 @@ tr:hover {
 .angles-table td {
     border: none; /* Elimina los bordes de las celdas */
     padding: 5px 10px; /* Espaciado interno para que no quede muy amontonado */
-    text-align: left; /* Alineación de texto a la izquierda */
+    text-align: center; /* Alineación de texto a la izquierda */
 }
 
 .angles-table th {
@@ -253,3 +256,6 @@ tr:hover {
     text-align: left;
 }
 
+.angles-table th:first-child {
+    text-align: left;
+}
