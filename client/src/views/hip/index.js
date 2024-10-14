@@ -16,7 +16,7 @@ function Hip() {
     const [report, setReport] = useState(null)
     const [loadingPDF, setLoadingPDF] = useState(false)
 
-    useEffect(function() {
+    useEffect(function () {
         fetchReport()
     }, [])
 
@@ -157,13 +157,67 @@ function Hip() {
                                     <td>{report.mediciones[0].angulos[2].derecho[1].value + "°"}</td>
                                     <td>{report.mediciones[0].angulos[2].derecho[1].valorLimite}</td>
                                 </tr>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>{report.mediciones[0].angulos[0].izquierdo[2].name + " " + report.mediciones[0].angulos[0].name}</td>
+                                    <td>{report.mediciones[0].angulos[0].izquierdo[2].value + "°"}</td>
+                                    <td>{report.mediciones[0].angulos[0].derecho[2].value + "°"}</td>
+                                    <td>{report.mediciones[0].angulos[0].derecho[2].valorLimite}</td>
+                                </tr>
+                                <tr>
+                                    <td>{report.mediciones[0].angulos[1].izquierdo[2].name + " " + report.mediciones[0].angulos[1].name}</td>
+                                    <td>{report.mediciones[0].angulos[1].izquierdo[2].value + "°"}</td>
+                                    <td>{report.mediciones[0].angulos[1].derecho[2].value + "°"}</td>
+                                    <td>{report.mediciones[0].angulos[1].derecho[2].valorLimite}</td>
+                                </tr>
+                                <tr>
+                                    <td>{report.mediciones[0].angulos[2].izquierdo[2].name + " " + report.mediciones[0].angulos[2].name}</td>
+                                    <td>{report.mediciones[0].angulos[2].izquierdo[2].value + "°"}</td>
+                                    <td>{report.mediciones[0].angulos[2].derecho[2].value + "°"}</td>
+                                    <td>{report.mediciones[0].angulos[2].derecho[2].valorLimite}</td>
+                                </tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <tr>
+                                    <td>{report.mediciones[1].name}</td>
+                                    <td>{report.mediciones[1].angulos[0].izquierdo[0].value}</td>
+                                    <td>{report.mediciones[1].angulos[0].derecho[0].value}</td>
+                                    <td>{report.mediciones[1].angulos[0].derecho[0].valorNormal}</td>
+                                </tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <tr>
+                                    <td>{report.mediciones[2].name}</td>
+                                    <td>{report.mediciones[2].angulos[0].izquierdo[0].value}</td>
+                                    <td>{report.mediciones[2].angulos[1].derecho[0].value}</td>
+                                    <td>{report.mediciones[2].angulos[1].derecho[0].valorNormal}</td>
+                                </tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <tr>
+                                    <td>{report.mediciones[6].name}</td>
+                                    <td>{report.mediciones[6].angulos[0].izquierdo[0].value}</td>
+                                    <td>{report.mediciones[6].angulos[1].derecho[0].value}</td>
+                                    <td>{report.mediciones[6].angulos[1].derecho[0].valorNormal}</td>
+                                </tr>
                             </tbody>
                         </table>
                         <table className="angles-table">
                             <thead>
                                 <tr>
                                     <th>Nombre</th>
-                                    <th>Valor</th>
+                                    <th>Medición</th>
                                     <th>Valor Normal</th>
                                 </tr>
                             </thead>
