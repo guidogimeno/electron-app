@@ -51,7 +51,6 @@ async function toPDF(html, downloadPath) {
     const browser = await puppeteer.launch()
     const page = await browser.newPage()
     await page.setContent(html, { waitUntil: "domcontentloaded" })
-    await page.addStyleTag({ path: "./src/views/hip/styles.css" })
     await page.pdf({
         format: "A4",
         path: `${downloadPath}/hippal_report-${Date.now().toString()}.pdf`,
