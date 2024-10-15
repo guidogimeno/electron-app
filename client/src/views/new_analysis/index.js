@@ -3,7 +3,6 @@ import Page from "../../components/page/index.js"
 import { useNavigate } from "react-router-dom"
 import FileInput from "../../components/file_input/index.js"
 import { GlobalContext } from "../../context/index.js"
-import CustomError from "../../services/errors/index.js"
 import { track } from "../../services/metrics/index.js"
 import Spinner from "../../components/spinner/index.js"
 import { executeBin } from "../../executables/index.js"
@@ -20,23 +19,23 @@ const STATE = {
 // despues se castean a Ints.
 const emptyForm = {
     idPatient: "",
-    sex: "female",
+    sex: "femenino",
     age: "",
     country: "argentina",
-    painLevel: "no_data",
-    siteOfPain: "no_data",
+    painLevel: "sin datos",
+    siteOfPain: "sin datos",
     mosSinceSymp: "",
-    sport: "no_data",
-    sportLevel: "no_data",
+    sport: "sin datos",
+    sportLevel: "sin datos",
     flexion: "",
     extension: "",
     internalRotation: "",
     externalRotation: "",
     craigTest: "",
-    fadir: "unknown",
-    faber: "unknown",
-    logRoll: "unknown",
-    abHeer: "unknown",
+    fadir: "desconocido",
+    faber: "desconocido",
+    logRoll: "desconocido",
+    abHeer: "desconocido",
 }
 
 function NewAnalysis() {
@@ -60,12 +59,6 @@ function NewAnalysis() {
     * @param {FileList} files 
     * */
     async function handleFiles(files) {
-        console.log("files length", files.length)
-        console.log("file name", files[0].name)
-        console.log("file size", files[0].size)
-        console.log("file type", files[0].type)
-        console.log("file path", files[0].path)
-
         setState(STATE.in_progress)
         setIsAnalyzing(true)
         try {
@@ -96,7 +89,7 @@ function NewAnalysis() {
         setState(STATE.start)
     }
 
-    function validate(){
+    function validate() {
         setFormErrors({})
         const errors = validateFormData(formData, Object.keys(formData), {})
         setFormErrors(errors)
@@ -107,7 +100,7 @@ function NewAnalysis() {
     async function handleSubmit(event) {
         event.preventDefault()
 
-        if(validate()){
+        if (validate()) {
             try {
                 await Promise.all([
                     track(formData),
@@ -171,8 +164,8 @@ function NewAnalysis() {
                                     className={`select ${formErrors.sex ? 'error' : ''}`}
                                     required
                                 >
-                                    <option value="female">Femenino</option>
-                                    <option value="male">Masculino</option>
+                                    <option value="femenino">Femenino</option>
+                                    <option value="masculino">Masculino</option>
                                 </select>
                                 {formErrors.sex && <p className="error-message">{formErrors.sex}</p>}
                             </div>
@@ -215,7 +208,7 @@ function NewAnalysis() {
                                     className={`select ${formErrors.painLevel ? 'error' : ''}`}
                                     required
                                 >
-                                    <option value="no_data">N/D</option>
+                                    <option value="sin datos">N/D</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -240,14 +233,14 @@ function NewAnalysis() {
                                     className={`select ${formErrors.siteOfPain ? 'error' : ''}`}
                                     required
                                 >
-                                    <option value="no_data">N/D</option>
-                                    <option value="groin">Ingle</option>
-                                    <option value="buttock">Nalga</option>
+                                    <option value="sin datos">N/D</option>
+                                    <option value="ingle">Ingle</option>
+                                    <option value="nalga">Nalga</option>
                                     <option value="lateral">Lateral</option>
-                                    <option value="thigh">Muslo</option>
-                                    <option value="c_shapedPain">Dolor en forma de "C"</option>
+                                    <option value="muslo">Muslo</option>
+                                    <option value="dolor en forma de c">Dolor en forma de "C"</option>
                                     <option value="lumbar">Lumbar</option>
-                                    <option value="other">Otro</option>
+                                    <option value="otro">Otro</option>
                                 </select>
                                 {formErrors.siteOfPain && <p className="error-message">{formErrors.siteOfPain}</p>}
                             </div>
@@ -275,27 +268,27 @@ function NewAnalysis() {
                                     className={`select ${formErrors.sport ? 'error' : ''}`}
                                     required
                                 >
-                                    <option value="no_data">N/D</option>
-                                    <option value="soccer">Futbol</option>
-                                    <option value="field_hockey">Hockey</option>
-                                    <option value="tennis">Tenis</option>
-                                    <option value="volleyball">Voleybol</option>
-                                    <option value="table_tennis">Tenis de mesa</option>
-                                    <option value="basketball">Basketball</option>
+                                    <option value="sin datos">N/D</option>
+                                    <option value="futbol">Futbol</option>
+                                    <option value="hockey">Hockey</option>
+                                    <option value="tenis">Tenis</option>
+                                    <option value="voleybol">Voleybol</option>
+                                    <option value="tenis de mesa">Tenis de mesa</option>
+                                    <option value="basketl">Basketball</option>
                                     <option value="baseball">Baseball</option>
                                     <option value="rugby">Rugby</option>
                                     <option value="golf">Golf</option>
                                     <option value="badminton">Badminton</option>
                                     <option value="football">Football</option>
                                     <option value="boxing">Boxeo</option>
-                                    <option value="athletics">Atletismo</option>
-                                    <option value="swimming">Nataci&oacute;n</option>
-                                    <option value="cycling">Ciclismo</option>
+                                    <option value="atletismo">Atletismo</option>
+                                    <option value="natacion">Nataci&oacute;n</option>
+                                    <option value="ciclismo">Ciclismo</option>
                                     <option value="handball">Handball</option>
-                                    <option value="skiing">Esqu&iacute;</option>
-                                    <option value="gymnastics">Gimnasia</option>
-                                    <option value="martial_arts">Artes marciales</option>
-                                    <option value="other">Otros</option>
+                                    <option value="esquiar">Esqu&iacute;</option>
+                                    <option value="gimnasia">Gimnasia</option>
+                                    <option value="artes marciales">Artes marciales</option>
+                                    <option value="otros">Otros</option>
                                 </select>
                                 {formErrors.sport && <p className="error-message">{formErrors.sport}</p>}
                             </div>
@@ -310,10 +303,10 @@ function NewAnalysis() {
                                     className={`select ${formErrors.sportLevel ? 'error' : ''}`}
                                     required
                                 >
-                                    <option value="no_data">N/D</option>
-                                    <option value="recreational">Recreacional</option>
+                                    <option value="sin datos">N/D</option>
+                                    <option value="recreacional">Recreacional</option>
                                     <option value="amateur">Amateur</option>
-                                    <option value="professional">Profesional</option>
+                                    <option value="profesional">Profesional</option>
                                 </select>
                                 {formErrors.sportLevel && <p className="error-message">{formErrors.sportLevel}</p>}
                             </div>
@@ -402,10 +395,10 @@ function NewAnalysis() {
                                     className={`select ${formErrors.fadir ? 'error' : ''}`}
                                     required
                                 >
-                                    <option value="positive">Positivo</option>
-                                    <option value="negative">Negativo</option>
-                                    <option value="not_evaluated">No evaluado</option>
-                                    <option value="unknown">Desconocido</option>
+                                    <option value="positivo">Positivo</option>
+                                    <option value="negativo">Negativo</option>
+                                    <option value="no evaluado">No evaluado</option>
+                                    <option value="desconocido">Desconocido</option>
                                 </select>
                                 {formErrors.fadir && <p className="error-message">{formErrors.fadir}</p>}
                             </div>
@@ -420,10 +413,10 @@ function NewAnalysis() {
                                     className={`select ${formErrors.faber ? 'error' : ''}`}
                                     required
                                 >
-                                    <option value="positive">Positivo</option>
-                                    <option value="negative">Negativo</option>
-                                    <option value="not_evaluated">No evaluado</option>
-                                    <option value="unknown">Desconocido</option>
+                                    <option value="positivo">Positivo</option>
+                                    <option value="negativo">Negativo</option>
+                                    <option value="no evaluado">No evaluado</option>
+                                    <option value="desconocido">Desconocido</option>
                                 </select>
                                 {formErrors.faber && <p className="error-message">{formErrors.faber}</p>}
                             </div>
@@ -438,10 +431,10 @@ function NewAnalysis() {
                                     className={`select ${formErrors.logRoll ? 'error' : ''}`}
                                     required
                                 >
-                                    <option value="positive">Positivo</option>
-                                    <option value="negative">Negativo</option>
-                                    <option value="not_evaluated">No evaluado</option>
-                                    <option value="unknown">Desconocido</option>
+                                    <option value="positivo">Positivo</option>
+                                    <option value="negativo">Negativo</option>
+                                    <option value="no evaluado">No evaluado</option>
+                                    <option value="desconocido">Desconocido</option>
                                 </select>
                                 {formErrors.logRoll && <p className="error-message">{formErrors.logRoll}</p>}
                             </div>
@@ -456,10 +449,10 @@ function NewAnalysis() {
                                     className={`select ${formErrors.abHeer ? 'error' : ''}`}
                                     required
                                 >
-                                    <option value="positive">Positivo</option>
-                                    <option value="negative">Negativo</option>
-                                    <option value="not_evaluated">No evaluado</option>
-                                    <option value="unknown">Desconocido</option>
+                                    <option value="positivo">Positivo</option>
+                                    <option value="negativo">Negativo</option>
+                                    <option value="no evaluado">No evaluado</option>
+                                    <option value="desconocido">Desconocido</option>
                                 </select>
                                 {formErrors.abHeer && <p className="error-message">{formErrors.abHeer}</p>}
                             </div>
