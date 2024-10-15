@@ -7,126 +7,172 @@ function PDFReport(props, ref) {
     if (!report) return null
 
     return (
-        <div ref={ref} style={{ display: "none", minHeight: "100vh", backgroundColor: "#fff", padding: "3rem", fontFamily: "sans-serif" }}>
+        <div ref={ref} style={{ display: "block", minHeight: "100vh", backgroundColor: "#fff", padding: "3rem", fontFamily: "sans-serif" }}>
             <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
                 <div style={{ display: "flex", alignItems: "center" }}>
                     <img src="src/assets/logo-hippal.jpeg" alt="Hippal Logo" width={100} height={100} style={{ marginRight: "2.5rem" }} />
                     <div>
-                        <h1 style={{ fontSize: "1.875rem", fontWeight: "bold" }}>Laboratorio de Examenes HIP-PAL</h1>
+                        <h1 style={{ fontSize: "1.875rem", fontWeight: "bold" }}>HIP-PAL Análisis Automático</h1>
                         <p style={{ fontSize: "1rem" }}>Precisión | Cuidado | Inmediato</p>
                     </div>
                 </div>
                 <div style={{ textAlign: "right" }}>
                     <p>0123456789 | 0912345678</p>
                     <p>hippallab@hippal.com</p>
+                    <p>Todos los derechos reservados</p>
                 </div>
             </header>
 
-            <div style={{ backgroundColor: "#e0f2f1", padding: "1rem", marginBottom: "1.5rem" }}>
-                <p style={{ fontSize: "0.875rem" }}>TTE. GRAL. JUAN DOMINGO PERÓN 4190, C1199 CDAD. AUTÓNOMA DE BUENOS AIRES</p>
-            </div>
-
-            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "1.5rem" }}>
+            <div style={{ display: "flex", flexDirection: "column", marginBottom: "1.5rem" }}>
                 <div>
-                    <h2 style={{ fontSize: "1.25rem", fontWeight: "bold" }}>{report.name}</h2>
-                    <p>Edad: {report.age} Años</p>
-                    <p>Sexo: {report.metrics.find(m => m.key === "Sexo")?.value}</p>
-                    <p>ID del paciente: {report.idPatient}</p>
+                    <div>
+                        <span>Usuario: </span><span>{report.name}</span>
+                    </div>
+                    <div>
+                        <span>Area: </span><span>Cirugia de Cadera</span>
+                    </div>
+                    <div>
+                        <span>Fecha de estudio: </span><span>{new Date(report.createdDate).toISOString().split("T")[0]}</span>
+                    </div>
                 </div>
-                <div style={{ textAlign: "right" }}>
-                    <p>Muestra tomada en: Hospital Italiano</p>
-                    <p>Referido por: Dr. Hip Specialist</p>
-                    <p>Registrado el: {report.createdDate}</p>
-                </div>
-            </div>
 
-            <h2 style={{ fontSize: "1rem", fontWeight: "bold", marginBottom: "0.75rem" }}>Resultados del Examen de Cadera</h2>
-
-            {report.mediciones.map((medicion, index) => (
-                <div key={index} style={{ marginBottom: "2.25rem" }}>
-                    <h3 style={{ fontSize: "1.125rem", fontWeight: "semibold", marginBottom: "0.75rem" }}>{medicion.name}</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Investigacion</th>
-                                <th>Izquierda</th>
-                                <th>Derecha</th>
-                                <th>Valor de referencia</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {medicion.angulos.flatMap(angulo =>
-                                angulo.izquierdo ?
-                                    angulo.izquierdo.map((item, i) => (
-                                        <tr key={Object.values(item).reduce((acc, val) => `${acc}${val}`, "")}>
-                                            <td>{item.name}</td>
-                                            <td style={{ textAlign: "center" }}>{item.value}°</td>
-                                            <td style={{ textAlign: "center" }}>{angulo.derecho?.[i]?.value ? `${angulo.derecho?.[i]?.value}°` : "N/A"}</td>
-                                            <td style={{ textAlign: "center" }}>{item.valorLimite || item.valorNormal || "N/A"}</td>
-                                        </tr>
-                                    ))
-                                    :
-                                    angulo.valor?.map(item => (
-                                        <tr key={Object.values(item).reduce((acc, val) => `${acc}${val}`, "")}>
-                                            <td>{item.name}</td>
-                                            <td style={{ textAlign: "center" }} colSpan={2}>{item.value}°</td>
-                                            <td style={{ textAlign: "center" }}>{item.valorNormal || "N/A"}</td>
-                                        </tr>
-                                    ))
-                            )}
-                        </tbody>
-                    </table>
-                </div>
-            ))}
-            <div style={{ marginTop: "3rem" }}>
-                <h3 style={{ fontSize: "1.125rem", fontWeight: "semibold", marginBottom: "0.75rem" }}>Métricas Adicionales</h3>
-                <table>
+                <table style={{ padding: '20px 0' }}>
                     <thead>
                         <tr>
-                            <th>Metric</th>
-                            <th>Value</th>
+                            <th colSpan={2}>Datos del paciente</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {report.metrics.map((metric, index) => (
-                            <tr key={index}>
-                                <td>{metric.key}</td>
-                                <td>{metric.value || "N/A"}</td>
-                            </tr>
-                        ))}
+                        {report.metrics.map(metric => {
+                            return (
+                                <tr key={metric.key}>
+                                    <td>{metric.key}</td>
+                                    <td>{metric.value || "N/A"}</td>
+                                </tr>
+                            )
+                        })}
                     </tbody>
                 </table>
-            </div>
 
-            <div>
-                {
-                    report.mediciones.map(medicion => {
-                        return medicion.angulos.map(angulo => {
-                            return (
-                                <img key={angulo.path} src={angulo.path}></img>
-                            )
+                <table style={{ padding: '20px 0' }}>
+                    <thead>
+                        <tr>
+                            <th colSpan={4}>Mediciones Automáticas</th>
+                        </tr>
+                        <tr>
+                            <th style={{ textAlign: 'left' }}>Angulos acetabulartes sectoriales</th>
+                            <th>Izquierdo</th>
+                            <th>Derecho</th>
+                            <th>Valor de referencia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {report.mediciones.map(medicion => {
+                            return medicion.angulos.map(angulo => {
+                                return tableFormat(angulo).data.map(row => {
+                                    return (
+                                        <tr key={row.reduce((acc, cell) => `${acc}+${cell}`, "")}>
+                                            {
+                                                row.map((cell, cellIndex) => {
+                                                    return (
+                                                        <td
+                                                            key={cell}
+                                                            style={{ textAlign: `${cellIndex === 0 ? "left" : "center"}` }}
+                                                            colSpan={`${cellIndex === 1 && row.length === 3 ? "2" : "1"}`}
+                                                        >
+                                                            {
+                                                                cellIndex === 0
+                                                                    ? `${cell} ${angulo.name}`
+                                                                    : cell
+                                                            }
+                                                        </td>
+                                                    )
+                                                })
+                                            }
+                                        </tr>
+                                    )
+                                })
+                            })
+                        })}
+                    </tbody>
+                </table>
+
+                <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%', padding: '20px 0' }}>
+                    {
+                        report.mediciones.map(medicion => {
+                            return medicion.angulos.map((angulo) => {
+                                return (
+                                    <div style={{ width: '33.33%', height: 'auto', padding: '20px 0' }}>
+                                        <p style={{ color: 'black' }}>{medicion.name}</p>
+                                        <p style={{ color: 'black' }}>{angulo.name}</p>
+                                        <img
+                                            key={angulo.path}
+                                            src={angulo.path}
+                                            style={{ width: '100%', height: 'auto' }}
+                                        >
+                                        </img>
+                                    </div>
+                                )
+                            })
                         })
-                    })
-                }
-            </div>
-
-            <div style={{ marginTop: "3rem", display: "flex", justifyContent: "space-between" }}>
-                <div>
-                    <p style={{ fontWeight: "semibold" }}>Técnico de Laboratorio Médico</p>
-                    <p>(DMLT, BMLT)</p>
-                </div>
-                <div>
-                    <p style={{ fontWeight: "semibold" }}>Dr. Hip Specialist</p>
-                    <p>(MD, Ortopedista)</p>
+                    }
                 </div>
             </div>
-
-            <footer style={{ marginTop: "3rem", textAlign: "center", fontSize: "0.875rem" }}>
-                <p>Generado el: {new Date().toLocaleString()}</p>
-                <p>Página 1 de 1</p>
-            </footer>
-        </div>
+        </div >
     )
+}
+
+/**
+ * @typedef Angulo
+ * @type {object}
+ * @property {Array.<Array.<string>>} data - contenido de la tabla: lista de filas
+ */
+
+/**
+  * @param {object} obj 
+  * @returns {Angulo}
+  */
+function tableFormat(obj) {
+    const combinedArray = [];
+    const keyValueMap = new Map();
+
+    if (obj.izquierdo) {
+        obj.izquierdo.forEach(obj => {
+            keyValueMap.set(obj.name, [
+                obj.name.toUpperCase(),
+                `${obj.value}°`,
+                "N/A",
+                obj.valorLimite ? `${obj.valorLimite}` : "N/A"
+            ]);
+        });
+    }
+
+    if (obj.derecho) {
+        obj.derecho.forEach(obj => {
+            if (keyValueMap.has(obj.name)) {
+                keyValueMap.get(obj.name)[2] = `${obj.value}°`
+            } else {
+                keyValueMap.set(obj.name, [
+                    obj.name.toUpperCase(),
+                    "N/A",
+                    `${obj.value}°`,
+                    obj.valorLimite ? `${obj.valorLimite}` : "N/A"
+                ]);
+            }
+        });
+    }
+
+    if (obj.valor) {
+        obj.valor.forEach(obj => {
+            keyValueMap.set(obj.name, [obj.name.toUpperCase(), `valor ${obj.value}°`, `valor ${obj.valorNormal}`]);
+        });
+    }
+
+    combinedArray.push(...keyValueMap.values());
+
+    return {
+        data: combinedArray
+    }
 }
 
 const ForwardDiv = forwardRef(PDFReport)
