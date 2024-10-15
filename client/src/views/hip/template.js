@@ -7,7 +7,7 @@ function PDFReport(props, ref) {
     if (!report) return null
 
     return (
-        <div ref={ref} style={{ display: "block", minHeight: "100vh", backgroundColor: "#fff", padding: "3rem", fontFamily: "sans-serif" }}>
+        <div ref={ref} style={{ display: "none", minHeight: "100vh", backgroundColor: "#fff", padding: "3rem", fontFamily: "sans-serif" }}>
             <header style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1.5rem" }}>
                 <div style={{ display: "flex", alignItems: "center" }}>
                     <img src="src/assets/logo-hippal.jpeg" alt="Hippal Logo" width={100} height={100} style={{ marginRight: "2.5rem" }} />
