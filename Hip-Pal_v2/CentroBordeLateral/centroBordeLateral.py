@@ -112,14 +112,14 @@ def detectar(id, base_path, cabezas_femur_axiales, tomografia_original, tomograf
             "path": output_path.replace("temp-reports", "reports"),
             "izquierdo": [
                 {
-                    "name": "CBA",
+                    "name": "CBL",
                     "value": angulo_CBL_izq,
                     "valorNormal": "25° a 39°"
                 }
             ],
             "derecho": [
                 {
-                    "name": "CBA",
+                    "name": "CBL",
                     "value": angulo_CBL_der,
                     "valorNormal": "25° a 39°"
                 }

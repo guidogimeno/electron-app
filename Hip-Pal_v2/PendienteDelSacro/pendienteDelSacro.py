@@ -56,7 +56,7 @@ def detectar(id, base_path, cabezas_femur_axiales, tomografia_original, tomograf
                 "name": "Pendiente Sacra",
                 "path":output_path_ss,
                 "valor":[{
-                    "name":"PS",
+                    "name":"Pendiente Sacra",
                     "value":SacralSlopeAngle,
                     "valorNormal": "30.5° a 43.9°"
                 }]

@@ -53,7 +53,23 @@ function PDFReport(props, ref) {
                         })}
                     </tbody>
                 </table>
-
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
                 <table style={{ padding: '20px 0' }}>
                     <thead>
                         <tr>
@@ -96,7 +112,6 @@ function PDFReport(props, ref) {
                         })}
                     </tbody>
                 </table>
-
                 <div style={{ display: 'flex', flexWrap: 'wrap', width: '100%', padding: '20px 0' }}>
                     {
                         report.mediciones.map(medicion => {
@@ -138,12 +153,23 @@ function tableFormat(obj) {
 
     if (obj.izquierdo) {
         obj.izquierdo.forEach(obj => {
+
+            if(obj.name=="CBL"){
+                
             keyValueMap.set(obj.name, [
-                obj.name.toUpperCase(),
+                "",
                 `${obj.value}°`,
                 "N/A",
-                obj.valorLimite ? `${obj.valorLimite}` : "N/A"
+                obj.valorLimite ? obj.valorLimite: obj.valorNormal
             ]);
+            }else{
+                keyValueMap.set(obj.name, [
+                    obj.name.toUpperCase(),
+                    `${obj.value}°`,
+                    "N/A",
+                    obj.valorLimite ? obj.valorLimite: obj.valorNormal
+                ]);
+            }
         });
     }
 
@@ -156,7 +182,7 @@ function tableFormat(obj) {
                     obj.name.toUpperCase(),
                     "N/A",
                     `${obj.value}°`,
-                    obj.valorLimite ? `${obj.valorLimite}` : "N/A"
+                    obj.valorLimite ? obj.valorLimite: obj.valorNormal
                 ]);
             }
         });
@@ -164,7 +190,7 @@ function tableFormat(obj) {
 
     if (obj.valor) {
         obj.valor.forEach(obj => {
-            keyValueMap.set(obj.name, [obj.name.toUpperCase(), `valor ${obj.value}°`, `valor ${obj.valorNormal}`]);
+            keyValueMap.set(obj.name, ["", `${obj.value}°`, `${obj.valorNormal}`]);
         });
     }
 
