@@ -132,7 +132,7 @@ def detectar(id,base_path,cabezas_femur_axiales,tomografia_original,tomografia_s
                 "name": "Izquierdo",
                 "path":output_path_izq,
                 "izquierdo":[{
-                    "name":"va",
+                    "name":"VA",
                     "value":angulo_VA_izq,
                     "valorNormal": "13° a 27°"
                 }]
@@ -141,7 +141,7 @@ def detectar(id,base_path,cabezas_femur_axiales,tomografia_original,tomografia_s
                 "name": "Derecho",
                 "path":output_path_der,
                 "derecho":[{
-                    "name":"va",
+                    "name":"VA",
                     "value":angulo_VA_der,
                     "valorNormal": "13° a 27°"
                 }]

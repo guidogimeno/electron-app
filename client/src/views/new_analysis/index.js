@@ -47,6 +47,7 @@ function NewAnalysis() {
     const [state, setState] = useState(STATE.start)
     const [isAnalyzing, setIsAnalyzing] = useState(false)
     const [formErrors, setFormErrors] = useState({})
+    const [submiting,setSubmiting] = useState(false)
 
     function handleChange(event) {
         setFormData(prevData => ({
@@ -101,6 +102,7 @@ function NewAnalysis() {
         event.preventDefault()
 
         if (validate()) {
+            setSubmiting(true)
             try {
                 await Promise.all([
                     track(formData),
@@ -116,8 +118,9 @@ function NewAnalysis() {
             } catch (error) {
                 context.showFailure(error.message)
             }
-
+            setSubmiting(false)
             navigate(`/my_hips/${reportId}`)
+            
         }
     }
 
@@ -458,9 +461,9 @@ function NewAnalysis() {
                             </div>
                         </section>
                     </div>
-                    {isAnalyzing ? <Spinner /> :
+                    { isAnalyzing? <Spinner /> :
                         <button className="primary-button" type="submit" onClick={handleSubmit}>
-                            Confirmar y ver el reporte
+                           {submiting? <Spinner />: "Confirmar y ver el reporte"}
                         </button>
                     }
                     <button className="tertiary-button" onClick={handleCancel}>Cancelar</button>
