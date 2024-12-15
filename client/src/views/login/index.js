@@ -35,7 +35,7 @@ function Login() {
 
     async function handleSubmit(event) {
         event.preventDefault()
-        if(validate()){
+        if (validate()) {
             try {
                 const res = await login(formData)
                 await setStoreValue("token", res.token)
